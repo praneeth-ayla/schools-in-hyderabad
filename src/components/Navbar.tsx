@@ -16,6 +16,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface UserDetails {
 	name?: string | null;
@@ -36,17 +37,17 @@ export default function Navbar() {
 	const pathname = usePathname();
 
 	function isActive(href: string) {
-		return pathname === href ? "border-b-2" : "";
+		return pathname === href ? "border-b-4" : "";
 	}
 
 	return (
-		<div className="flex  w-full flex-col bg-primary text-primary-foreground">
-			<header className="sticky bg-primary text-primary-foreground top-0 flex h-16 items-center gap-4 border-b px-4 md:px-6">
+		<div className="flex  w-full flex-col text-primary-foreground">
+			<header className="sticky bg-blue-primary text-primary-foreground top-0 flex h-16 items-center gap-4  px-4 md:px-6">
 				<Sheet>
 					<SheetTrigger asChild>
 						<Button
 							size="icon"
-							className="shrink-0 md:hidden bg-primary">
+							className="shrink-0 md:hidden bg-blue-primary">
 							<Menu className="h-5 w-5" />
 							<span className="sr-only">
 								Toggle navigation menu
@@ -55,21 +56,29 @@ export default function Navbar() {
 					</SheetTrigger>
 					<SheetContent
 						side="left"
-						className="bg-primary">
-						<nav className="grid gap-6 text-lg font-medium bg-primary  text-primary-foreground">
+						className="bg">
+						<nav className="grid gap-6 text-lg font-medium text--foreground">
 							<Link
 								href="/"
 								className="flex items-center gap-2 text-lg font-semibold">
-								<span className="text-2xl font-extrabold text-primary-foreground ">
-									Schools In Hyderabad
-								</span>
+								<div className="flex justify-center items-center">
+									<Image
+										src={"/logo.png"}
+										alt="logo"
+										width={100}
+										height={100}
+									/>
+									<span className="text-xl font-extrabold ">
+										Schools In Hyderabad
+									</span>
+								</div>
 								<span className="sr-only">
 									Schools In Hyderabad
 								</span>
 							</Link>
 							<Link
 								href="/"
-								className={`transition-colors text-green-50  text-primary-foreground hover:text- ${isActive(
+								className={`transition-colors   text hover:text- ${isActive(
 									"/"
 								)}`}>
 								Home
@@ -90,9 +99,17 @@ export default function Navbar() {
 							<Link
 								href="/"
 								className="flex items-center gap-2 text-lg font-semibold md:text-base">
-								<span className="text-2xl font-extrabold text-primary-foreground">
-									Schools In Hyderabad
-								</span>
+								<div className="flex justify-center items-center">
+									<Image
+										src={"/logo.png"}
+										alt="logo"
+										width={100}
+										height={100}
+									/>
+									<span className="text-xl font-extrabold text-primary-foreground">
+										Schools In Hyderabad
+									</span>
+								</div>
 								<span className="sr-only">
 									Schools In Hyderabad
 								</span>
@@ -114,7 +131,6 @@ export default function Navbar() {
 						</Link>
 					</nav>
 					<div className="ml-auto "></div>
-
 					{userDetails ? (
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
