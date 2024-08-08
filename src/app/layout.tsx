@@ -8,6 +8,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
 	title: "Schools In Hyderabad",
 	description: "Find the best schools in Hyderabad",
+	icons: {
+		icon: ["/favicon.ico"],
+		apple: ["/apple-touch-icon.png?v=4"],
+		shortcut: ["/apple-touch-icon"],
+	},
 };
 
 export default function RootLayout({
