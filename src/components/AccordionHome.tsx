@@ -9,7 +9,7 @@ import React from "react";
 export default function AccordionHome() {
 	return (
 		<div className="md:flex flex-col justify-center items-center ">
-			<div className="text-center">
+			<div className="md:text-center ">
 				<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 					Why Choose SchoolsInHyderabad.co.in?
 				</h1>
@@ -56,14 +56,14 @@ export default function AccordionHome() {
 					</AccordionItem>
 				</Accordion>
 			</div>
-			<div className="pt-10 text-sm ">
+			<div className="pt-4 text-left text-sm ">
 				Explore{" "}
 				<a
 					className="text-blue-400 hover:text-blue-600"
 					href="https://SchoolsInHyderabad.co.in">
 					SchoolsInHyderabad.co.in
 				</a>{" "}
-				today and make the best choice for your child's future.
+				today and make the best choice for your child&apos;s future.
 			</div>
 		</div>
 	);
