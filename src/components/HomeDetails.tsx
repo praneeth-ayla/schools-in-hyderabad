@@ -8,7 +8,7 @@ export default function HomeDetails() {
 					<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 						Heritage of Hyderabad
 					</h1>
-					<p className="text-sm text-muted-foreground">
+					<p className="text-sm md:text-lg text-muted-foreground">
 						Hyderabad, the “City of Pearls,” blends modernity with
 						its rich cultural heritage. With landmarks like Birla
 						Mandir and Golconda Fort, the city&apos;s historical
@@ -22,7 +22,7 @@ export default function HomeDetails() {
 					<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 						Education in Hyderabad
 					</h1>
-					<p className="text-sm text-muted-foreground">
+					<p className="text-sm md:text-lg text-muted-foreground">
 						Hyderabad is home to some of India&apos;s top
 						educational institutions. The city offers a range of
 						schools from state and central boards to international
@@ -35,7 +35,7 @@ export default function HomeDetails() {
 				</div>
 			</div>
 			<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 text-center border-y-4">
-				<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
+				<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl">
 					&quot;Swadese pujyate raja, Vidvan sarvatra pujyate&quot;
 				</p>
 				<p className="text-sm sm:text-lg text-muted-foreground pt-4">

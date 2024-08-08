@@ -41,7 +41,7 @@ export default function Navbar() {
 	}
 
 	return (
-		<div className="flex  w-full flex-col text-primary-foreground">
+		<div className="flex w-full flex-col">
 			<header className="sticky bg-blue-primary text-primary-foreground top-0 flex h-16 items-center gap-4  px-4 md:px-6">
 				<Sheet>
 					<SheetTrigger asChild>
@@ -55,10 +55,10 @@ export default function Navbar() {
 						</Button>
 					</SheetTrigger>
 					<SheetContent side="right">
-						<nav className="grid gap-6 text-lg font-medium text--foreground">
+						<nav className="grid gap-6 font-medium text--foreground">
 							<Link
 								href="/"
-								className="text-lg font-semibold">
+								className="text-sm font-semibold">
 								<div>
 									<Image
 										src={"/logo.png"}
@@ -66,7 +66,7 @@ export default function Navbar() {
 										width={100}
 										height={100}
 									/>
-									<span className="font-extrabold text-nowrap">
+									<span className="font-extrabold text-xl">
 										Schools In Hyderabad
 									</span>
 								</div>
@@ -76,27 +76,27 @@ export default function Navbar() {
 							</Link>
 							<Link
 								href="/"
-								className={`transition-colors   text hover:text- ${isActive(
+								className={`transition-colors hover:text-blue-400 ${isActive(
 									"/"
 								)}`}>
 								Home
 							</Link>
 							<Link
-								href="/test"
-								className={`transition-colors hover:text-foreground ${isActive(
-									"/test"
+								href="/about-us"
+								className={`transition-colors hover:text-blue-400 ${isActive(
+									"/about-us"
 								)}`}>
-								test
+								About Us
 							</Link>
 						</nav>
 					</SheetContent>
 				</Sheet>
 				<div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-10">
-					<nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+					<nav className="hidden flex-col gap-6 text-sm font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
 						<div className="pr-10">
 							<Link
 								href="/"
-								className="flex items-center gap-2 text-lg font-semibold md:text-base">
+								className="flex items-center gap-2 font-semibold">
 								<div className="flex justify-center items-center">
 									<Image
 										src={"/logo.png"}
@@ -115,17 +115,17 @@ export default function Navbar() {
 						</div>
 						<Link
 							href="/"
-							className={`transition-colors hover:text-foreground ${isActive(
+							className={`transition-colors text-sm hover:text-blue-400 ${isActive(
 								"/"
 							)}`}>
 							Home
 						</Link>
 						<Link
-							href="/test"
-							className={`transition-colors hover:text-foreground ${isActive(
-								"/test"
+							href="/about-us"
+							className={`transition-colors text-sm hover:text-blue-400 ${isActive(
+								"/about-us"
 							)}`}>
-							test
+							About Us
 						</Link>
 					</nav>
 					<div className="ml-auto "></div>

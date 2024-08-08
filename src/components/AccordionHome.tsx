@@ -13,13 +13,13 @@ export default function AccordionHome() {
 				<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 					Why Choose SchoolsInHyderabad.co.in?
 				</h1>
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm md:text-lg text-muted-foreground">
 					Our portal simplifies the process of finding the best
 					schools in Hyderabad by offering comprehensive details,
 					including:
 				</p>
 			</div>
-			<div className="text-sm md:w-3/4 lg:w-2/3">
+			<div className="text-sm md:text-lg md:w-3/4 lg:w-2/3">
 				<Accordion
 					type="single"
 					collapsible
@@ -56,7 +56,7 @@ export default function AccordionHome() {
 					</AccordionItem>
 				</Accordion>
 			</div>
-			<div className="pt-4 text-left text-sm text-muted-foreground ">
+			<div className="pt-4 text-left text-xs sm:text-sm md:text-lg text-muted-foreground ">
 				Explore{" "}
 				<a
 					className="text-blue-400 hover:text-blue-500"

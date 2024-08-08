@@ -3,7 +3,7 @@ export default function Footer() {
 
 	return (
 		<>
-			<div className="mt-10 flex gap-1 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-[#112B3C] text-gray-300 text-xs">
+			<div className="mt-10 flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-[#112B3C] text-gray-300 text-xs md:text-sm">
 				<a
 					className="hover:text-white"
 					href="/about-us">
@@ -27,11 +27,9 @@ export default function Footer() {
 			</div>
 			<div className="py-4 sm:px-20  px-4 flex gap-5 flex-col text-center bg-[#16212c] text-muted-foreground text-xs">
 				<div className="flex gap-2 sm:gap-4 flex-col sm:flex-row justify-center">
-					<span>Copyright © {currentYear}</span>
+					<span>Copyright © {currentYear} Edu Infonence</span>
 					<span className="hidden sm:block">&#x2022;</span>
-					<span>
-						Edu InfonenceFlat B 501, Essen Marvella, Hyderabad 67
-					</span>
+					<span>Flat B 501, Essen Marvella, Hyderabad 67</span>
 					<span className="hidden sm:block">&#x2022;</span>
 					<span>Tel +91 7993340799</span>
 				</div>
