@@ -28,8 +28,8 @@ export default function HeroSection() {
 				<Image
 					src="/logo.png"
 					alt="logo"
-					width={300}
-					height={300}
+					width={150}
+					height={150}
 				/>
 				<form
 					action=""

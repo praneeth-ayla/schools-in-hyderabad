@@ -54,21 +54,19 @@ export default function Navbar() {
 							</span>
 						</Button>
 					</SheetTrigger>
-					<SheetContent
-						side="left"
-						className="bg">
+					<SheetContent side="right">
 						<nav className="grid gap-6 text-lg font-medium text--foreground">
 							<Link
 								href="/"
-								className="flex items-center gap-2 text-lg font-semibold">
-								<div className="flex justify-center items-center">
+								className="text-lg font-semibold">
+								<div>
 									<Image
 										src={"/logo.png"}
 										alt="logo"
 										width={100}
 										height={100}
 									/>
-									<span className="text-xl font-extrabold ">
+									<span className="font-extrabold text-nowrap">
 										Schools In Hyderabad
 									</span>
 								</div>
@@ -103,8 +101,8 @@ export default function Navbar() {
 									<Image
 										src={"/logo.png"}
 										alt="logo"
-										width={100}
-										height={100}
+										width={70}
+										height={70}
 									/>
 									<span className="text-xl font-extrabold text-primary-foreground">
 										Schools In Hyderabad
