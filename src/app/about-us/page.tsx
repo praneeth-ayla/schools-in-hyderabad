@@ -5,8 +5,8 @@ export default function page() {
 		<div>
 			<HeroStart text="About Us" />
 			<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left ">
-				<div className="flex flex-col gap-6">
-					<div className="">
+				<div className="flex flex-col gap-6 md:gap-10">
+					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1">
 							Welcome to Edu Infonence
 						</h1>
@@ -19,7 +19,6 @@ export default function page() {
 							seamless and informed as possible.
 						</p>
 					</div>
-					<span className="border" />
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1">
 							Our Mission
@@ -31,7 +30,6 @@ export default function page() {
 							images and up-to-date data.
 						</p>
 					</div>
-					<span className="border" />
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1">
 							Our Story
@@ -44,7 +42,6 @@ export default function page() {
 							that bridges this gap.
 						</p>
 					</div>
-					<span className="border" />
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1 ">
 							Why Choose Us?
@@ -66,7 +63,6 @@ export default function page() {
 							</li>
 						</div>
 					</div>
-					<span className="border" />
 					<span className="text-sm md:text-lg text-muted-foreground">
 						<b className="text-black">Please Note:</b> As we strive
 						to provide detailed information school by school, it may
@@ -74,7 +70,6 @@ export default function page() {
 						appreciate your patience as we work diligently to ensure
 						every school profile is accurate and up-to-date.
 					</span>
-					<span className="border" />
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1 ">
 							Join Our Launch Promotion!
@@ -87,7 +82,6 @@ export default function page() {
 							the first to know.
 						</p>
 					</div>
-					<span className="border" />
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1 ">
 							Get in Touch
@@ -101,7 +95,7 @@ export default function page() {
 						</p>
 					</div>
 				</div>
-				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 text-center border-y-4">
+				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 md:text-center border-y-4">
 					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
 						&quot;The journey begins at school, where you gain
 						wisdom and knowledge to help the less fortunate and grow
