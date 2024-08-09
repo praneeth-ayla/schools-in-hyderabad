@@ -2,7 +2,7 @@ import AccordionHome from "./AccordionHome";
 
 export default function HomeDetails() {
 	return (
-		<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left">
+		<div className="pt-10 mx-4 lg:mx-14 xl:mx-28 sm:p-10  sm:text-left">
 			<div className="grid md:grid-cols-2 gap-8 sm:gap-10">
 				<div>
 					<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">

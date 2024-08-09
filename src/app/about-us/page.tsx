@@ -1,56 +1,9 @@
-import BreadCrumbLink from "@/components/BreadCrumbLink";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import Image from "next/image";
-import React from "react";
+import HeroStart from "@/components/HeroStart";
 
-export default function test() {
+export default function page() {
 	return (
 		<div>
-			<Navbar />
-			<div
-				className="h-[150px] sm:h-[300px]"
-				style={{
-					position: "relative",
-					width: "100%",
-					overflow: "hidden",
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					backgroundColor: "black",
-				}}>
-				<Image
-					src="/hero.webp"
-					alt="Home Img"
-					layout="fill"
-					objectFit="cover"
-					style={{ objectPosition: "center" }}
-				/>
-				{/* Dark Overlay */}
-				<div className="text-white text-center flex justify-center items-center sm:gap-4 flex-col z-10 relative ">
-					<div className="flex justify-center items-center flex-col">
-						<Image
-							src="/logo.png"
-							alt="logo"
-							width={80}
-							height={80}
-						/>
-						<span className="text-2xl font-semibold">About Us</span>
-					</div>
-					<BreadCrumbLink text="About us" />
-				</div>
-				<div
-					style={{
-						position: "absolute",
-						top: 0,
-						left: 0,
-						width: "100%",
-						height: "100%",
-						backgroundColor: "rgba(0, 0, 0, 0.7)",
-						zIndex: 1,
-					}}
-				/>
-			</div>
+			<HeroStart text="About Us" />
 			<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left ">
 				<div className="flex flex-col gap-6">
 					<div className="">
@@ -161,7 +114,6 @@ export default function test() {
 					</p>
 				</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }
