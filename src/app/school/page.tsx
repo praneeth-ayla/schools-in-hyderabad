@@ -1,16 +1,13 @@
+"use client";
 import { CarouselSpacing } from "@/components/Carousel";
 import { CarouselYoutube } from "@/components/CarouselYoutube";
+import ReviewForm from "@/components/ReviewForm";
 import StarRating from "@/components/StarRating";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { AvatarImage } from "@radix-ui/react-avatar";
-import { Divide, MoonStar, Star, StarIcon, StarOff, Stars } from "lucide-react";
+import { CardDescription, CardTitle } from "@/components/ui/card";
 
 export default function page({ searchParams }: any) {
-	interface Review {
-		name: string;
-	}
 	const schoolId = searchParams.id;
 
 	const details = {
@@ -127,16 +124,14 @@ export default function page({ searchParams }: any) {
 					<div>
 						<p className="text-lg md:text-xl">Reviews</p>
 						<div className="py-2 grid gap-1">
-							<div className="text-sm font-light">
-								Average Rating
-							</div>
+							<p className="text-sm font-light">Average Rating</p>
 							<div className="font-light text-sm">
 								{details.rating} / 5
 							</div>
 							<StarRating rating={details.rating} />
 						</div>
 
-						<div className="text-muted-foreground text-sm pt-3 border-t">
+						<div className="text-muted-foreground text-sm pt-3 border-y">
 							<div className="flex flex-col gap-2">
 								{details.reviews.map(
 									({ message, name, date, rating }, i) => (
@@ -167,11 +162,12 @@ export default function page({ searchParams }: any) {
 								)}
 							</div>
 						</div>
+						<ReviewForm />
 					</div>
 				</div>
-			</div>
-			<div className="lg:row-start-1 lg:col-span-3 bg-green-400">
-				<div>details</div>
+				<div className="lg:row-start-1 lg:col-span-3 bg-green-400 mt-10">
+					<div>details</div>
+				</div>
 			</div>
 		</div>
 	);
