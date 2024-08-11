@@ -1,8 +1,16 @@
 import { CarouselSpacing } from "@/components/Carousel";
 import { CarouselYoutube } from "@/components/CarouselYoutube";
+import StarRating from "@/components/StarRating";
+import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { AvatarImage } from "@radix-ui/react-avatar";
+import { Divide, MoonStar, Star, StarIcon, StarOff, Stars } from "lucide-react";
 
 export default function page({ searchParams }: any) {
+	interface Review {
+		name: string;
+	}
 	const schoolId = searchParams.id;
 
 	const details = {
@@ -37,6 +45,32 @@ export default function page({ searchParams }: any) {
 				title: "history video for testing",
 			},
 		],
+		rating: 4.5,
+		reviews: [
+			{
+				name: "user 1",
+				message:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut autem,error natus non magnam sed illum. Exercitationem nisi molestias sed!Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugitrepellendus quidem laudantium! Deleniti rerum expedita omnismollitia accusamus placeat, ipsa delectus ab numquam, nobis dolorquisquam fugiat amet illum facilis ratione harum laudantium facereodio! Alias quaerat praesentium nisi provident?ood school with good facilities",
+				date: "11 aug 2024",
+				rating: 4,
+			},
+			{
+				name: "user 2",
+				message:
+					"Fees is little high	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi laudantium, perspiciatis pariatur sit recusandae tempora saepe aut vel fugiat sed eveniet totam velit repellat necessitatibus sunt cum consequuntur dolores labore!	",
+				date: "11 aug 2024",
+				rating: 3,
+			},
+		],
+		events: [
+			{
+				title: "anual day",
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi laudantium, perspiciatis pariatur sit recusandae tempora saepe aut vel fugiat sed eveniet totam velit repellat necessitatibus sunt cum consequuntur dolores labore!	",
+			},
+			{ title: "lorem", description: "lorem" },
+			{},
+		],
 	};
 	return (
 		<div className="grid lg:grid-cols-12 sm:px-4 md:px-10 lg:px-40 xl:px-60 pt-4 lg:pt-8">
@@ -47,18 +81,11 @@ export default function page({ searchParams }: any) {
 				<CarouselSpacing images={details.images}></CarouselSpacing>
 				<div className="px-2 pt-3  flex flex-col gap-6 md:gap-10">
 					<div className="pt-10">
-						<p className="text-lg md:text-xl">About us</p>
+						<p className="text-lg md:text-xl">About</p>
 						<div className="text-muted-foreground text-sm">
 							{details.aboutUs}
 						</div>
 					</div>
-					<div>
-						<p className="text-lg md:text-xl">Toppers</p>
-						<div className="text-muted-foreground text-sm">
-							{details.toppers}
-						</div>
-					</div>
-
 					<div>
 						<p className="text-lg md:text-xl">Facilities</p>
 						<div className="flex flex-wrap gap-1 text-sm">
@@ -67,16 +94,78 @@ export default function page({ searchParams }: any) {
 							))}
 						</div>
 					</div>
-					<div>
-						<p className="text-lg md:text-xl">Videos</p>
+					{details.videos && (
 						<div>
 							<CarouselYoutube videos={details.videos} />
 						</div>
+					)}
+					<div>
+						<p className="text-lg md:text-xl pb-2">Events</p>
+						{details.events && (
+							<div className="grid gap-2">
+								{details.events.map((event, i) => (
+									<div
+										key={i}
+										className="text-">
+										<p className="text-sm">{event.title}</p>
+										<p className="text-xs text-muted-foreground">
+											{event.description}
+										</p>
+									</div>
+								))}
+							</div>
+						)}
 					</div>
+					{details.toppers && (
+						<div>
+							<p className="text-lg md:text-xl">Toppers</p>
+							<div className="text-muted-foreground text-sm">
+								{details.toppers}
+							</div>
+						</div>
+					)}
 					<div>
 						<p className="text-lg md:text-xl">Reviews</p>
-						<div className="text-muted-foreground text-sm">
-							{details.toppers}
+						<div className="py-2 grid gap-1">
+							<div className="text-sm font-light">
+								Average Rating
+							</div>
+							<div className="font-light text-sm">
+								{details.rating} / 5
+							</div>
+							<StarRating rating={details.rating} />
+						</div>
+
+						<div className="text-muted-foreground text-sm pt-3 border-t">
+							<div className="flex flex-col gap-2">
+								{details.reviews.map(
+									({ message, name, date, rating }, i) => (
+										<div
+											className="p-1"
+											key={i}>
+											<CardTitle className="font-normal text-base flex justify-between items-center">
+												<div className="flex gap-2 items-center">
+													<Avatar className="border flex justify-center items-center">
+														<div>
+															{name
+																.charAt(0)
+																.toUpperCase()}
+														</div>
+													</Avatar>
+													<div>{name}</div>
+												</div>
+												<div className="text-muted-foreground text-xs md:text-sm">
+													{date}
+												</div>
+											</CardTitle>
+											<StarRating rating={rating} />
+											<CardDescription className="py-2 text-xs ">
+												{message}
+											</CardDescription>
+										</div>
+									)
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
