@@ -41,6 +41,30 @@ export default function page({ searchParams }: any) {
 				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
 				title: "history video for testing",
 			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
+			{
+				src: "https://www.youtube.com/watch?v=Yocja_N5s1I",
+				title: "history video for testing",
+			},
 		],
 		rating: 4.5,
 		reviews: [
@@ -68,105 +92,168 @@ export default function page({ searchParams }: any) {
 			{ title: "lorem", description: "lorem" },
 			{},
 		],
+		contact: {
+			number: "9213192381",
+			email: "schoolemail@email.xyz",
+			location: "sadjfldsj",
+		},
+		logo: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAMAAzAMBEQACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAQIEBQYDB//EAEYQAAEDAwIDBAYFCgUCBwAAAAEAAgMEBRESIQYxQRNRYXEUIjKBobEjQlKRwQcVFjNicpLR4fAkNENTgsLTJVRzk5Wi0v/EABkBAQADAQEAAAAAAAAAAAAAAAACAwQBBf/EADQRAAICAQQAAwYFAwQDAAAAAAABAgMRBBIhMRNBURQVIjJhkQWBobHwI0JxJFLR4TPB8f/aAAwDAQACEQMRAD8A9xQAgBACAEAIAQAgBACATKAVACAEAhQChACAEAIAQAgBACAEAIAQAgBACAEAIAQAgBACA5yyCON73bNYMlRbwm2Fy8FHY66W4XCd8ziGtaNEedmjPzWPTXSsseTRdWoRRoFuM4IAQHCtGaWX1i31DuDghQn8rOx7RVcOXOWra+CodmRjQQ7qR4rNpL3NbZdl19e3lF2OS2FAqAEAIAQAgBACAEAIAQAgBACAEAICC+4RtuTKIZL3NLic7BUu1eIoE1BuLkTRyVxAVAR6yLtqSeLrIwtHvChNbotHYvDyY601RoK5ksgwPYeB3H+S8imzZPLN9sVKBt2uBAI3B5FeyueUeeOXQIUBT8SVgp6Iwh30k3q4HRvUrHq7dkNvqXUx3SyV/CcTjVTSn2Ws0+87/gqdFD4my3UvjBqByXpGQVARq+p9DpZJyNQYPZzzVdk9kNxKMd0sD6edlRBHNGcteMhShJSipI5JYeGdlI4CAEAIAQAgBACAEAIAQCHmgMffe1pL06oGckh7D02GPw+K8nUZrt3G2nEq8Gjtlxir4Q9mzx7TDzavQpuVkfqZbIODJyuIAgMlxFbuwmNVH+qkPrD7J/qvL1dO17kbKLMrayz4arDPS9g/d8XI97ei06S3fHHoU3w2yyXS1lI2QhrS48huUHZh62aS53AujbqL3aY2+HcvFtk7bOD0IRVcMs11ro20VI2Ibu5vd3lerTWq47TFObm8kxWkBriG5JOBjmeQXH6sGUv90bVu9HpzmJpy532ivM1N+97I9Gyivb8TLyxRPitUDX+1gu+85/FbdNFxrSZnueZvBYq8rBACAEAIAQAgBACAi3KrbRUjp3DVggAd5KrtsVcdzJQi5PCO0MjZY2yRkFjhlpUoyTWURaw8HRSBButvjuEOh2z27sd3FUX0q2OCcLHB5Mk+OrtlWNTXRyA7OHJ3l3heY4zollm1ONseDUWe5Nr4SHYbOz22fiPBelp71YvqY7K3D/BZrQVkG8MbJa6oO6RF48wMj5KnULNUidbxNFFwpq9Olx7OhYtF/wCRmnUfKjVr0zGR7gCaGfTz0HH3KFnyMlD5kZfhdrX3PU76kRcPA7D5FeZolmZr1LxE14XrGIR5a0FziAAMknoFxtJZYMjebw6rcYackQA4Pe7+i8vUalz+GPRtqpUeZHay2R8rm1FYwsjG7WEbu/kFOjStvdLo5bd5RNUF6RjEPJAQpa+KKvgpCRrlB68u5VStSmoepNQbi5E0HKtICoAQAgBACAEBAvVI6st8kTPbGHN8wqdRXvraJ1y2yTM1bbtPbyYnDVEDgxuOC3yXm1aiVXDNc6VNbkaahulLW7RvxJ1Y7YhelXfCzoySrlEm5CuIHCtpI6yB0UrctcPuPeoWVqccMlGTi8oyNA6S3XkRk+y/Q7xC8qtum7abZ4srybZewYCn4jq209A+IfrJhpA8Oqy6qzbXj1LqIbp59CPwnGwQzTZGtztOOoCr0UVtb8yWpbykaDK3GcbIA5pa7kRghcaygY23TMt949oGMOMZIOxBXk1SVVxumt9Zs2kEAjkV6y+hhKniaodBbi1jsOkdp93VZtXNxr48y2mO6RX8M2+N4dVytDiHaY89PFUaSlP42W6ix/KjTAr0TKNkljjY58j2ta3mXHAC45JLLCWSir+IYmgto2l7uWs7AeXesVusiuImiGnb7INihnrbm2qly4Rkl7j1ONlRpoyts3vyLLmoR2o1oC9UxioAQAgBAISBzQBlABQFdcbNT1x1uGiTHtt6+feqLdPGznoshbKJn6yxVdGDIwCVg6x7Fq8+zSThyjVG6MuGTbFeHukbTVbiQdo3nnnuPer9NqG3skV3UrGUaQcl6BlMbfXtbfJHNOdLmEgdMBeRqGlfk3Vc14NXSVkFXHrgkDu8dQvUhZGa4McouLwwqqaGqiMczA9p7xyScFNYYjJxeUZP6ayXTS0ktH/3aV5bzp7ODZxbA10MrZoWSs9l7Q4e9eqnuSaMLWG0U3ElwdA0UsRw+RuXuHRvcsesu2rYvM0UV7nlicO2tjYW1UzAXu3YCNmhNLQkt8hdZl4RfZAC3dGczPFFbBUNjhgkD3MJLtPJedrLIvCTNeng08steHy02mn0dAc+eStOlx4SwUXczZIuFYyipXTP3xyb3lTtsVcckYQ3ywZF8lbeZ9O8hHJg2axeW3ZfI24hWslvR8NAYdWSZ/YZ/NaoaL/cymeofkX0ELII2xxNDGN5ALbGKisIztt8s6clI4JqA96AVACAEBBvLJH22cQ+3pyMKm9N1vBOtrcslTbuI2BoZWtdkD9Y0c/MLLVrEltmXz0/nEuILnRVABiqIz4E4WuN1cumUSrlHtEsOBGQQR3hW5ICHdAZPiOhbR1TKiAaWyHO31XDfZeVqqlXJSibaZ71tZo7dWR1dJFI14Ly31m53B6r0KrFKKMkouLwNrLdS1gPbRDUfrt2d96WUwn2jsbJR6MvXUtRZ6sPieQOccg+I/ovMshPTzyjXGStXJprVXtr6QSYAeNnt8V6NNviQyZJw2SwU3FgHpEBGx0H5rJrktyL9N0yz4ccXWmHV9UkDyytOlbdSZVcvjZnL6S+7VGonYhvuACwanLuaZqpWIGzgw2GMDZoYML1o42rBhfZmL9dJKmU0sDj2QOCG/XPcvN1F8pPZE1U1JLdIl2ywRtjbLWjU879n9UeferaNJFcz5ZCy9vhF4xrIWYY1rGDu2C2pKKM+cszHE1V6RWQ08Tmva0Z2OfWJx/fmvN1k901GJsojti5M0FtomUVK2JgGrm8/aK301quOEZZycpZZLyrSJzlqIoRmWRrP3nYUXOMe2dSb6IFTfqGEHTJ2ju5gyqJ6quJZGmb8ivttdUXK8CTBbDE0nQOXv8AFUVWzusz5IssrjXDHmaML0DMKgBAB3CAprhw/BUudJA7sXk5IAy0nyWS3SRm8rguhc49lTJw7WsPq9k/u0ux81leis8i9aiJH/8AErVIHkPj6d7Sq/6tLJf07DTWi5sr4jkBsrfbbn5L0aL1YvqZLK3Bj7pb23KFsbpDHpdkHGVK6nxVg5XPY8lFVcPVNPmSmmbLp6YLXe5YpaOcOYM0rURlw0Mt97qKWQQ1mqSMHBz7TP5rlWpnCW2fQnSpLMS4vjI6qzyvbhwa3tGOHgteoSnU2UVNxmU/C83Z17ouTZm7b9Rv/NZNHPE2vU0aiOY5G8UPJuYb0bGMe/K5rH/UwNOvhL6wN02mn8QXfeStumWKkZrn8bM5xEzTd5v2g0/AfyXn6tYtZroeYF+yqMXDrZ3e0INvE8gt8bMUKX0Mu3+rgoOH4WzXSLX6zWAv37xy+awaWO63k1XtqGDQXi6st7dDQHzuHqt6DxK336jwlx2ZaqnNlBDHcby8nWXNzuScNCwxVt77NUnCpFpScNtikjkkqS4tIdgMwPmtMNHtabfRRLUbljBelwY0ucQANyVtbwZzL3O9zVEjoKEubHyDm+0/yXm36qU3tga66UlmRGjs1xqMSOjxnrI7dVLTXT5Ju6uPBMp+GJC4ekTtaOoYCVdDQt/Myt6n0NBR0cNHEI4G4HUnmfNbq641rETNKTk8skKw4CAYZGtwHEAu5Z6rjeOwOBPgugCgDAKYBznijmjMcrQ5h5gqMoqSwwm1yjI1UUtluYfDuw7sB6t7ivKmnp7eOjbF+LDDJzeKHAjVSDxHacvgrlrn/tIPTL1LCivlLVPEbtUMh5B/I+9X16qE3joqnTKJB4noAWNrImjWDiTy7/771TrKvhU4lmnm09px4eqxLHLbZs4e09nnu6hR0tm5Otkr4Ye9FVA51vuLHP5wyDUPDr8Fli3Xas+Rc8TgWXE8OZo6tu8UrAA4cv7wtGsj8SmumVad8bWXdjlbJaqbT9Vmk+Y2W3TyUq00Z7libM9xC7tru5se7gGswOp/s4Xn6p7rsI1UcV8ku+P9FtVLQg5cQC7yH9fkrdS/DqjWV1LfNyGcPMbSxVNfNtG1ulp7+/HwCab4U7Wdv+J7UVrBLdLiN/Xld/CP6BZlm6xL1LuK4GvfLS2ylaHubHE3YDqf5r1m4VR5ZhSlYyrl4njacQ0r3D7T3Bvw3WaWtS6iXLTS8yDcL9JWUxgbG2IE7u18ws9urc44SwWRoUXllrYLYyngbUStBnkGcn6o7gtemoUFufZRdY5PHkXOFrKQwgAoBHPDRkkAd5XG8BcjgugrrxRPraXERxKw6mHON1RfW5x+Hssrmoy5M+bldqF3ZTF4I+23PxWB3X18M0quuXKD9ILifrs97E9st/iO+BAdHxFXsOZBG4dxZj5KS1dq7RF0R8i5tt7grXCJ/wBFMRs0nZ3kVrq1MbOOiidMolhJBFK4Okja9w5Fzc4V7imVp4Oc1DSzNIkp43D93CjKqEu0dU5LpmcvVl9FZ29LqdEPaady3xXn6jTbFvgjVVdniQ60XVjozQV51ROGlr3fI+Hiu6fUZXhzOW1Y+KJDr6GotlS141dmHZjkHLyPiqbK5UyTLITjYuSVJJR3drTLI2mrdhkj1X/3/eVa3DUdvEiHxVfVFnb6CqjhNLWmCWm+qMnI+C01VTjHbNpopssjKW6JMorfHRdoIHSBr99BdkDyVtdMa+IkJWOXLOUNqipS+aBuuoO4dMc7qMaFDLj2ddrfD6KirtknbOqrtWRRtJz6pyT4BZbKG5b7ZYRdG1JbYIiXGuFU2KlpGFtPGfUaBkvPkqbbd/wQXBZCva90nyWFFDHZKY1VZj0h4wyMHfyWiuK08d8+yqTd0tsSrc+qu9cN8vcdh9VoWVud8y/Ea4mkobLSUzWlzBLKObn7/BehXpoQ+rMk7pSJrqWne3DoIyPFgV+2PoV7n6jpZYqaJ0kr2sY0bk9ElJQWWEm3wUNXxMdWKSIaftv6+5Yp63nEEaY6fzkQzxDcM84x4aFV7ZaT9ngB4ir8bOiz4MyntlvkPZ4Ls70MVwulTHJVueIGHVuMA+QU6422yTl0iM3CCwuzUBekZAwEAha1ww4AjuK5hAQQxA5EbAfBoTavQ7lhLFHI3TIxrmno4ZXHFPtBNoz95sbWxmooW6XN3MY6+XisV+mSW6BoqufUiPFBe6toOuVkeNtbtH9VVGOpmuybdMWcpaC80wMjXSPA6xyl3wXJVaiHOTqsqlxgfR36eM9nWN7VnJ2diu16uS4mclQnzAbUW2KrDqi0vbI3m6AnDm+S5OiM/irZ2Nji8THUNRdqdvozqOSaPlplYcffywu1zuj8O3K+pyca5cpmho6djGtkdTQxSnmGAbe9b4QwsyXJllJ9ZJeArSIqAMIBkjGPaWva1zTzDhsVxpPsZwU9wdUUDnOoLfERj9YxuSPcFktlKt/BEuglP5mUvoNyuU4fKyQftyt0gLH4dt0sv9TRvrguCeysorNG6OBwqKk7ucDtnzV6sr06xHllbjO15fRD9OutyeWwF5HdFsB71V4t1vylmyuC5OzKC+sblsr9XcZcqSq1K6ZDfT6HN9Pc7hWMpqztG43y4YaB37c1xwusnskS3VwWYmgorTS0oGI2vf1e8ZK3V0Vw8uTNK2UuyaYoyMGNpHcQrdsfQhljW00DXamwxg94aE2x9BlnTCkcFQFay80RLmSTdnI0kOa8bghZ1qK+m8FnhS7XI2W+UEf+sXHua0lHqql5nVTN+RCm4njB+hp3uHe44VEtdHyRYtM/NjY+J2l30lOQ3va7JXI67nlB6Z+TLWiuVLWfqJG5xktOxC1wuhPplMoSj2cai90UDi3tDI4fYGR96hPU1x4ydjTOXPRFbxLTF3rQygd+yqWth6E/Z5epzqfzVdvXEwhmO2ojGfPvUZeBfynhko+LX5ZRDdYa6N4dTPY7B2e1+MKr2SxPMWT8eD4ZZW6iuDZGmtrX4buIg/OrzPctFNdqfxyKbJQa+FF4thSCAEAIAQEaujfLCRFMYXjcPHTzULIuUeHg7FpPlGdqaC9TZZLK6Zh7n4B9y8+dWplw3lGqM6lyJDZYoPWuVTHE0b6A7crkdKo82M672+IInNvdto4xDTMcWt2Aa3APjkq/2mmtYiVOmyXMh8fElI7aRkrPdldWtr8w9PLyLCGtpZoy+OaPSBk74wFfG2EllMqcJLjBX1fENLC7TCHSkd2wVFmshF4XJZGiT74Io4ndq3phj9/dVe3c9Fns31JcPEdG/wDWB8Z8RkK6OsrffBB6ea6JQvNvIz6UwferPaKv9xX4U/QSK6RzhzqeKaVgONQG2UjfGXyrJ11NdjLhZaWtf2p1Ry9XN6+YUbdNCx5fZ2Fso8EIcMRdap/8IVXsK85FntL9CbT2Oggx9CJXDrJ63w5K6GlqjzjJVK6b8zvJbaKQYfSQ+5gB+9TdFb/tRHxJLzKmv4cGoOonYyd2POw8QVls0a/seC+Gof8AcSaXh2jjZicPlf1JJA+4KyGjrXzcsjK+Xkd32K3PBAp9PiHH+anLS1NdEFdNeZV1PDMgz6NOHDuk2KzS0TXysvjqV5o4RWO5sOGODG9SJMZ+5QWlu/x+Z13VvyLy02xtC1z5HmWd/tOPTwC2UU+GuXlmeyzeyyWgrBACAEAIBkjWvaWuGQRgjvC41ngGcqbFVxOd6DOeyJ2YZC0hefPSzz8D4NUb44+JEePh2tkdmQsZ4l2VXHR2Pvgk9RBdFlScOU0YBqXOmd1HstWmGjgvm5KpaiT64JLrHbnD/Laf3XuH4qx6ap+RFXWLzKyp4aPat9Fk9QnDg/m0d+eqzy0TT+BlsdRxyWVJZKOnYA6ITO6ulGr4clor01cF1kqldOR3ktlDI3DqSH3MAPwU3TW/7UQ8SS6ZAm4bpHnMLpIh3Z1D4qiWirfTwWx1El2Mj4aga7MlRI9vcNlFaKHmyT1MvIuqaCOnhbFCwMY3kAtcYKCwkZ223lnGsnlp2CVkRkYPbDR6wHeFC2bgt2MrzJ1wU3tzgdS1lPVND4JWuB54O4Pku1XV2xzBnLKp1vEkSMhWkBUAIAQCZCAaZYxzkYPNwUd0V5klGT8hvpEH+9H/ABBN8fU74c/QcJojykYfJwRTi/M44yXkOyCMhSIhkIBcoBMjvQBkIBC9jfacB5lcbS7CTfQ3t4Rzlj/iCjvh6ktkvQBPCeUrP4gniQ9Rsl6Dg9rvZcD5FSyiOBy6BMhAKgBANc4NGSQB3lcbS7BXuuUclT6NSfTSZ9Yj2WeZWZ6mMpbK+WaPZ3GO6zhFi3ktJnAjZdBlr1FRRXGNkj3UEs/6qflHI/q09x+fivL1WjrlPdF7Zevl+Zqr/EHU1CxZQxzb/RcnPmZ0c3Dx/NZGtfR08r7m9S0N3PX6HI3y7N2cNx3xKv3hq48P9ixaHSy5T/UQXu7yezkeUX9E9v1cuv2O+xaWPf7h29+n9kVOO8NwEc9fP1+w2aKHeA/NV6nOZO083zAfiuex62fefzZz2rRw+X9h44auD/bkgHm9xPyXfdOol8zX3f8AwPedK6T/AEF/RWq/3oPj/Jd9zWeqOe9K/RiHhmvb7EtP7nuH4I/wnUL5Wv5+R33nQ+0/5+Yw2y80o1RiTPeyXPw/oueya6vlZ/Jj2nRz+bH5oVt3u1EQ2oa4+ErOfvRa3V0/OvuPZNLdzB/YnwcUwGP6eCRrv2CHA/Ja6/xeDXxxf5fxGaf4XYn8Elj6kao4mqJHaaSBsY6avWP3Kiz8Wsk8Vx/5LYfhsIrNkjgPz5WnP+I0+egfgq/9fd6/sWZ0VXp+4rbBdJt3vY3wfIT8sp7u1cu2vuPb9NHpP7D/ANFqs85qfPvP4Lvue19tfz8jnvSvyTA8L1Y9ianz5kfgnue5dNfz8h70q84v+fmMdYLrF7DmO/clI+eFz3bq4/K/szvt+mn8y+6ENPfacbek/wDBwd8iueHr6+s/fJ3xNFZ3j9g/ON7g9vtf+UX9E9q1se8/Yez6OXX7h+fbpnHX/wBNd946pf8Awewab+Mey5Xup2iEhz9mID4rq1Wus+VfoRlptHD5n+oythlp4BNfa4sa44bAx2uSRx5NA6lWrR3T51E/yRlu/ENNQv6UeTTWuljpqSNscAhy0FzM5IPieq9emmFUUorBgnbO17psmDluriAqAiXC301xpJKWuhbLDIMOa7dRlFSWGRlCM1iSMJXWbivhpzn8PVkldQjJFPL674x3YPte7fwWOULquYPK9DDKq+l5qeV6FdH+Uu7Ux0V9th7QbEODo3fcVV7bOPEolPvCceJxOx/KrNja1Mz4zLvt/wBDvvJf7SLN+VG5P2ioaRhPI5c4qL18n0iHvGXkiG7jbiuu9Sm1ZPIU9MXH4ZUfab5dIj7XqJdL9Aa3j6vb7N1IPR7RF88Ln+qkd/1cvUP0a45fv2VcM99wZ/8Atd8HVfX7nPA1f1+//YN4e46h3bHX+6uY7/rXPC1K9fuPB1a9fv8A9h6bx3bXfSMumkd8PaN95APzTfqYjfq4ev7kij/KReIHGO40tPUNBwWuYWOUlrJricScfxCyHzr/ANFzTcWcKXBhkroZaGZgyWBpcHeALfxwoyho7Hmawz1KfxtxjhvH+eSFWflEpaPLLFamNb0ln2J9w3+KktRXUsVRMeo/Fpzfr/kq3cX8XXT/ACYnwf8AylKT8QCuPUaifCRkep1U+k/sBt3HlcNTmXPf7UzY/mQubdTL1Hh6uXqIOGOOP9uu/wDkG/8AcXfB1P1+48DV/X7/APYv5m47pN2x3IAfZqmP/wCop4WpiPC1cfUQXnji3E9uLkANvpqUuH34wueJqYeRzxdVDvP2O8H5SL9B/mIaaX9+Is+SmtbYu0SWvtXaJsX5VKv/AFbbTu/ckKl7w9UWL8Rf90f1Fk/KnU6fo7ZCHftSk/JPb/RB/iXpH9QpuJOM+IjotVG2CJ2xmbHpa3/m78Mrqu1FnEVgK/U28RWDU8OcIi3zi4XSpdcLmf8AWkJLY/BoPLzWmuja90nlmynT7Pim8yNQ0YC0GkcgBACAbp8kBxqaGlqhiqp4ZgOXaRh3zUXGL7RFxT7RC/RyzZz+bKT/ANoKPhQ9CPhQ9DvFaLdCcw0FKw94hbn5KShFdIkoRXkSwNOzdvALuDuMAh0PNALjbYIMHMv+k0YdyyTjZM84GODlW0NJWx6Kyminby+kYHKLhGXaIuEZdoyly/JtZquZslO6ejGfWZEctPuPJZ56OuTyuDJPQ1SeVwW9q4SslrDfR6CN7xzklbrcfvVsKK49Iuq09Va4ReNAaPV2A5AK7ouwL7kOh7lwAgE966BktNDMMTRRyfvtB+a40mcaT7IctgtEvt2yjPlC0KHhQ9CLqg/IWGx2qAgw26kaR17FuV1VxXSOKqC8ieG45clP/BYuBQEAqAEAIAQAgBACAEA0rgKB1Ix07NccQd2+l0fZkbHJG+d1jde6XPqX7mlwOpKdraylcWMacv1Rtj06XALsILemjkn8LJNypmy1TB2cQL27PczVqcOngp2xy+iMXhHK2QGOrJfD2bxECdsDJJzhRphifXODs2muBLlSaZnzmJjmPdHl5OC31gDt4pdDEstHYSb4OJtgjr2AxRmB8jiNyeY2GFDwNs+uGzviZizvS0Toa+AyxwglrziNhABGMdVOFeLFk5KWY4HXcF0rCIXGRpBjcMnPe0Y5Hx7kvWX10RrZD9B/w8kzKdjiBI0tzjG+xCr8LEW8epZvWcZOnobckQ04ceziJ2zseePFS8NLpehzdwc20Impy+CnDyHyswXYI6D7lBVqUcpep1z5wyytMLIZKprB7MjW7HbZjfxytFMVFtFU3ks1oIAgBACAEAIAQAgBACAa92kZQFZQXaSe5VtDVQCCSBwdEdWRNERs8e/II6YXMk5Qwk0WYd5LvBApLzc7hDdKW3WuOkMs0T5tdS5wbhpHqjHXf3KLZZGKxmRIslzbdqEzPiME8cjop4HHPZyMOCM9R1B6ghdTTRGcHFkx8YfLHIHlrm52DtnA9D9wXHFOSZzLSwQL/dZLZDStpoWz1VXUNp4GPdpbqILsuODgANPwCPglXByOFLeqiG4R0N5pY6aSc4gnik1xTH7OSAQ7wPPoil6ndmY7o8lrUQRVTGNectDg4Yx+K5KKksMim4joI44ImxM9lo2z0XYpRWDj5CWNr3xv1ODmHIwefgUaT5GWdcjGxXeDgmQEHJzqIRNE+MnAe0tJHTZcksrATaINfLLbrb/hqaerk1NaG04Y1wyee+2AoqKjHaTXMiXS07YNbtRc+TdxwB8Auxgo5fqRbySdXkp5OBrHeEAagUA5ACAEAIAQAgBAVvEUNPPZattXTGpiawyGFriC8t9YDI35hcfRKGdyweWxW6KuuVmZR0lpqKqqo5ZpIo6mVkUTct06jkuJGcdMk52wq8G3c1GWW8ZLGgFDXxUL6Xg6Sf0undLqbXEMBacOaCTv4d6LHoQeVnM/0IVttlFdHWe5Vv5koqOpnwymjlmM5yCOxLi7GrPPYbhEk8EpScFKKyzt+bbRQ2/ieomtk04huz6aHspXNMQcyPSSdQw0F2SfwXOOQ5Sk4LOOCfw3aqOn4xtdOexkqIbMZp+xmLmduJGDVjPcSpJLdghObdbf1Ln8odupKttkfUQh7zdaeEnJHqOd6w2712ZXp5Nbv8GK4rp7a2235zaa30bqF4ipozJI6pMmWkPGXYAILtgCcdVB4wzTVu3Ry3yW14sVOeJ3Wimp46WB0cckRipZZ5HN1YcS4SAM6DJB5rrjzhFcZvw977+xFvdqtbKfjN9E0f4CniNO5kzj2T9GTjfmjS5JwlPdBPzJ90t1JHcJ6O02Ojm9Co46qqNTPK10gfqw2MNzv6p35b4XcLPBVGTaTk+yDbaSjbV8Q1d1sEscdHR0s8dBBUOkfGHCQnqBqOAT5LiXeUWSb+GMZd55C2WqhbdeEYZBCZqmapkmjZUGQ6BG58QcQd8YHnhMcoSk9s+OseRuuMKQVFnklFtZcZaf6RkDpXMLh9bBHM4zgKx9GSr5ks4yebx2+nfw9SV7LdOY7hd2PhqO3B7OnfOA2Nw1c9JxjB81V/bk3Z/qOOel6eZfVfD9COLamlFrqIqKK3Oe15kd2cknPUCHcxy36j3qTitxQpvwlJvnJAtlvp5LPw3TUttpai53KlfM6etnlawBgbnIaclx1DA81xJcFk21OTb4R2jtdJaLbXenWgXa40lSO3ipZpGiOOTduC7mBsPj0TCwRc90lh4X3J/Ctuji47qWy2s0Bp6NkkUJqe1DXOLmlwwcbhdiviI2S/ornPPoeiKwyggBACAEAIAQCO5csoCll4atb65tU2nbG7sZYXMiAa17ZMas467LmET8SWMFnS00FHTRU1NE2OGJoYxjBgNaOQC6RbcuWUb+D7W68fnXSRWioE4kDWjGBjTjHLc56+K5tXZZ48tu3yLC3WiloTcHR6n+n1LqiYSesNRaGkAd2GhMIhKbePoc6fh+hpb026UrOwkbTOpuyjaGsLXODiSMc8gJjk67G47TvdbZBdGUragvHo1THUsLTj12HIz4I1kjGTj0cb9YaC+UFRS1cQb6Q0MdLG0CQAEHY+5GkzsJuDyhLvw9bbxNHNWwydtGNLZIpXRux3ZaRkeCYydjOUevMhng+1NornRQMfBTXGJsUscZADQBjLdue+65tR3xp8N+RPqbLSz19HXl0sdVSjS2SN2kuZ9h3ePBdx5kVN4a9TpTWuCG7V1xaXGasZEyQEjSBHqxj+I5TAc3tUfQjT8N2512t9yhiFPNQvke0Qta0SF7Cw6tsnYrm06rJbXEuABzKkV4KSbhe2vppKZgkiikrWVpax+B2jXB2w5AEjJx4rm1Fisknkt5YmywyRuO0jC0keK6QXBT/ovbTZqO2SNlfHR47CXtC2SMjqHDBBwcKO1YwWeLLe5epLtFnpbTHM2n7Rz5n65ZZZC97zjG5PgupYIym5djorVBHepLqHP9IlgbC4Z9XSCSNvemOcje9igWK6RBACAEAIAQAgBACAEAIAQBgIAQAgBACAEAIAQBhACAEAYQAgBACAEAIAQAgBACAEAIAQAgBACAEAIAQAgBACAEAIAQAgBACAEAIAQAgBAf/9k=",
 	};
 	return (
-		<div className="grid lg:grid-cols-12 sm:px-4 md:px-10 lg:px-40 xl:px-60 pt-4 lg:pt-8">
-			<div className="row-start-1 lg:col-start-4 lg:col-span-full">
-				<h1 className="text-center font-semibold text-muted-foreground text-2xl pb-4">
-					{details.name}
-				</h1>
-				<CarouselSpacing images={details.images}></CarouselSpacing>
-				<div className="px-2 pt-3  flex flex-col gap-6 md:gap-10">
-					<div className="pt-10">
-						<p className="text-lg md:text-xl">About</p>
-						<div className="text-muted-foreground text-sm">
-							{details.aboutUs}
-						</div>
+		<div className="sm:px-4 md:px-10 lg:px-40 xl:px-60 pt-4 lg:pt-8">
+			<p className="text-center pb-3 font-bold text-muted-foreground text-lg md:text-xl">
+				{details.name}
+			</p>
+			<div className="grid lg:flex lg:flex-row">
+				<div className="lg:row-start-1 lg:col-span-3 mt-10 lg:mt-0 px-5">
+					<div className="flex justify-center items-center h-auto w-[400] ">
+						<img
+							alt="school logo"
+							src={details.logo}
+						/>
 					</div>
-					<div>
-						<p className="text-lg md:text-xl">Facilities</p>
-						<div className="flex flex-wrap gap-1 text-sm">
-							{details.facilities.map((item, i) => (
-								<Badge key={i}>{item}</Badge>
-							))}
-						</div>
-					</div>
-					{details.videos && (
-						<div>
-							<CarouselYoutube videos={details.videos} />
-						</div>
-					)}
-					<div>
-						<p className="text-lg md:text-xl pb-2">Events</p>
-						{details.events && (
-							<div className="grid gap-2">
-								{details.events.map((event, i) => (
-									<div
-										key={i}
-										className="text-">
-										<p className="text-sm">{event.title}</p>
-										<p className="text-xs text-muted-foreground">
-											{event.description}
-										</p>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
-					{details.toppers && (
-						<div>
-							<p className="text-lg md:text-xl">Toppers</p>
-							<div className="text-muted-foreground text-sm">
-								{details.toppers}
-							</div>
-						</div>
-					)}
-					<div>
-						<p className="text-lg md:text-xl">Reviews</p>
-						<div className="py-2 grid gap-1">
-							<p className="text-sm font-light">Average Rating</p>
-							<div className="font-light text-sm">
-								{details.rating} / 5
-							</div>
-							<StarRating rating={details.rating} />
-						</div>
+					<div className="grid gap-5">
+						<div className="pt-5">
+							<p className="text-lg">Contact Info</p>
+							<div className="flex text-muted-foreground flex-col gap-2 text-xs md:text-sm ">
+								<div className="flex items-center gap-1">
+									<svg
+										className="h-5"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24">
+										<title>map-marker</title>
+										<path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
+									</svg>
+									<p>{details.contact.location}</p>
+								</div>
+								<div className="flex items-center gap-1">
+									<svg
+										className="h-5"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24">
+										<title>phone</title>
+										<path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
+									</svg>
+									<p>{details.contact.number}</p>
+								</div>
+								<div className="flex items-center gap-1">
+									<svg
+										className="h-5"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24">
+										<title>email</title>
+										<path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+									</svg>
 
-						<div className="text-muted-foreground text-sm pt-3 border-y">
-							<div className="flex flex-col gap-2">
-								{details.reviews.map(
-									({ message, name, date, rating }, i) => (
-										<div
-											className="p-1"
-											key={i}>
-											<CardTitle className="font-normal text-base flex justify-between items-center">
-												<div className="flex gap-2 items-center">
-													<Avatar className="border flex justify-center items-center">
-														<div>
-															{name
-																.charAt(0)
-																.toUpperCase()}
-														</div>
-													</Avatar>
-													<div>{name}</div>
-												</div>
-												<div className="text-muted-foreground text-xs md:text-sm">
-													{date}
-												</div>
-											</CardTitle>
-											<StarRating rating={rating} />
-											<CardDescription className="py-2 text-xs ">
-												{message}
-											</CardDescription>
-										</div>
-									)
-								)}
+									<p>{details.contact.email}</p>
+								</div>
 							</div>
 						</div>
-						<ReviewForm />
+						<div>Social Profile</div>
+						{/* <div>Map</div> */}
 					</div>
 				</div>
-				<div className="lg:row-start-1 lg:col-span-3 bg-green-400 mt-10">
-					<div>details</div>
+				<div className="row-start-1 lg:col-start-4 lg:col-span-full">
+					<CarouselSpacing images={details.images}></CarouselSpacing>
+					<div className="px-2 pt-3  flex flex-col gap-6 md:gap-10">
+						<div className="pt-10">
+							<p className="text-lg md:text-xl">About</p>
+							<div className="text-muted-foreground text-sm">
+								{details.aboutUs}
+							</div>
+						</div>
+						<div>
+							<p className="text-lg md:text-xl">Facilities</p>
+							<div className="flex flex-wrap gap-1 text-sm">
+								{details.facilities.map((item, i) => (
+									<Badge key={i}>{item}</Badge>
+								))}
+							</div>
+						</div>
+						{details.videos && (
+							<div>
+								<CarouselYoutube videos={details.videos} />
+							</div>
+						)}
+						<div>
+							<p className="text-lg md:text-xl pb-2">Events</p>
+							{details.events && (
+								<div className="grid gap-2">
+									{details.events.map((event, i) => (
+										<div
+											key={i}
+											className="text-">
+											<p className="text-sm">
+												{event.title}
+											</p>
+											<p className="text-xs text-muted-foreground">
+												{event.description}
+											</p>
+										</div>
+									))}
+								</div>
+							)}
+						</div>
+						{details.toppers && (
+							<div>
+								<p className="text-lg md:text-xl">Toppers</p>
+								<div className="text-muted-foreground text-sm">
+									{details.toppers}
+								</div>
+							</div>
+						)}
+						<div>
+							<p className="text-lg md:text-xl">Reviews</p>
+							<div className="py-2 grid gap-1">
+								<p className="text-sm font-light">
+									Average Rating
+								</p>
+								<div className="font-light text-sm">
+									{details.rating} / 5
+								</div>
+								<StarRating rating={details.rating} />
+							</div>
+
+							<div className="text-muted-foreground text-sm pt-3 border-y">
+								<div className="flex flex-col gap-2">
+									{details.reviews.map(
+										(
+											{ message, name, date, rating },
+											i
+										) => (
+											<div
+												className="p-1"
+												key={i}>
+												<CardTitle className="font-normal text-base flex justify-between items-center">
+													<div className="flex gap-2 items-center">
+														<Avatar className="border flex justify-center items-center">
+															<div>
+																{name
+																	.charAt(0)
+																	.toUpperCase()}
+															</div>
+														</Avatar>
+														<div>{name}</div>
+													</div>
+													<div className="text-muted-foreground text-xs md:text-sm">
+														{date}
+													</div>
+												</CardTitle>
+												<StarRating rating={rating} />
+												<CardDescription className="py-2 text-xs ">
+													{message}
+												</CardDescription>
+											</div>
+										)
+									)}
+								</div>
+							</div>
+							<ReviewForm />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
