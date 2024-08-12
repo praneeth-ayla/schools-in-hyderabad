@@ -1,7 +1,13 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
-import { Place, SchoolCategory, SchoolDetails, Video } from "./types";
+import {
+	Place,
+	SchoolCategory,
+	SchoolDetails,
+	SchoolPartialData,
+	Video,
+} from "./types";
 import axios from "axios";
 
 export function useSchoolDetails(schoolId: string) {
@@ -55,7 +61,7 @@ interface UseSchoolListParams {
 }
 
 export function useSchoolList({ name, area, board }: UseSchoolListParams) {
-	const [details, setDetails] = useState<SchoolDetails[] | null>(null); // Set initial state to null or an empty array if preferred
+	const [details, setDetails] = useState<SchoolPartialData[] | null>(null); // Set initial state to null or an empty array if preferred
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 
@@ -64,7 +70,7 @@ export function useSchoolList({ name, area, board }: UseSchoolListParams) {
 	useEffect(() => {
 		async function getDetails() {
 			try {
-				const { data } = await axios.get<SchoolDetails[]>(
+				const { data } = await axios.get<SchoolPartialData[]>(
 					"/api/schoolList",
 					{
 						params: { name, area, board },

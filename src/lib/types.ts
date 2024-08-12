@@ -84,3 +84,36 @@ export enum SchoolCategory {
 	ResidentialIGCSE = "ResidentialIGCSE",
 	PreSchoolDayCare = "PreSchoolDayCare",
 }
+
+export type SchoolPartialData = {
+	id: number;
+	name: string;
+	aboutUs: string;
+	logo: string;
+	rating: number;
+	toppers: string;
+	area: Place;
+	category: SchoolCategory;
+};
+
+export const SchoolCategoryNames: { [key in SchoolCategory]: string } = {
+	[SchoolCategory.PlaySchool]: "Play School",
+	[SchoolCategory.PrimaryStateBoard]: "Primary School - State Board",
+	[SchoolCategory.HighStateBoard]: "High School - State Board",
+	[SchoolCategory.InternationalStateBoard]:
+		"International School - State Board",
+	[SchoolCategory.ResidentialStateBoard]: "Residential School - State Board",
+	[SchoolCategory.PrimaryCBSE]: "Primary School - CBSE",
+	[SchoolCategory.HighCBSE]: "High School - CBSE",
+	[SchoolCategory.InternationalCBSE]: "International School - CBSE",
+	[SchoolCategory.ResidentialCBSE]: "Residential School - CBSE",
+	[SchoolCategory.PrimaryICSE]: "Primary School - ICSE",
+	[SchoolCategory.HighICSE]: "High School - ICSE",
+	[SchoolCategory.InternationalICSE]: "International School - ICSE",
+	[SchoolCategory.ResidentialICSE]: "Residential School - ICSE",
+	[SchoolCategory.PrimaryIGCSE]: "Primary School - IGCSE",
+	[SchoolCategory.HighIGCSE]: "High School - IGCSE",
+	[SchoolCategory.InternationalIGCSE]: "International School - IGCSE",
+	[SchoolCategory.ResidentialIGCSE]: "Residential School - IGCSE",
+	[SchoolCategory.PreSchoolDayCare]: "PreSchool & Day Care",
+};
