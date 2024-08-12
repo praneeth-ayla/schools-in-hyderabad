@@ -13,8 +13,66 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          String @id @default(uuid())
-  email       String @unique
-  name        String 
-  }
+model School {
+  id        Int       @id @default(autoincrement())
+  name      String
+  aboutUs   String
+  logo      String
+  rating    Float
+  toppers   String
+  contact   Contact?  // One-to-one relation
+  facilities Facility[]
+  events     Event[]
+  images     Image[]
+  videos     Video[]
+  reviews    Review[]
+}
+
+model Contact {
+  id        Int     @id @default(autoincrement())
+  email     String
+  location  String
+  number    String
+  schoolId  Int     @unique
+  school    School  @relation(fields: [schoolId], references: [id])
+}
+
+model Image {
+  id       Int     @id @default(autoincrement())
+  url      String
+  schoolId Int
+  school   School  @relation(fields: [schoolId], references: [id])
+}
+
+model Video {
+  id       Int     @id @default(autoincrement())
+  src      String
+  title    String
+  schoolId Int
+  school   School  @relation(fields: [schoolId], references: [id])
+}
+
+model Review {
+  id       Int     @id @default(autoincrement())
+  name     String
+  message  String
+  date     DateTime
+  rating   Int
+  schoolId Int
+  school   School  @relation(fields: [schoolId], references: [id])
+}
+
+model Event {
+  id       Int     @id @default(autoincrement())
+  title    String
+  description String
+  schoolId Int
+  school   School  @relation(fields: [schoolId], references: [id])
+}
+
+model Facility {
+  id       Int     @id @default(autoincrement())
+  name     String
+  schoolId Int
+  school   School  @relation(fields: [schoolId], references: [id])
+}

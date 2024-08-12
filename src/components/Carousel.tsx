@@ -7,6 +7,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 export function CarouselSpacing({ images }: { images: string[] }) {
+	console.log(images);
 	return (
 		<Carousel
 			plugins={[
@@ -15,7 +16,7 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 				}),
 			]}>
 			<CarouselContent className="w-full h-[150px] sm:h-[250px] md:h-[350px] lg:h-[500px]">
-				{images.map((e, i) => (
+				{images.map((e: any, i) => (
 					<CarouselItem
 						key={i}
 						className="w-full h-full">
@@ -31,7 +32,7 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 							}}>
 							<img
 								className="w-full h-full object-cover"
-								src={e}
+								src={e.url}
 								alt={`image ${i + 1}`}
 								style={{
 									objectPosition: "center",
