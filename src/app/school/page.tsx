@@ -5,15 +5,19 @@ import ReviewForm from "@/components/ReviewForm";
 import StarRating from "@/components/StarRating";
 import { Avatar } from "@/components/ui/avatar";
 import { CardDescription, CardTitle } from "@/components/ui/card";
-
 import { useSchoolDetails } from "../../lib/hooks";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function Page({ searchParams }: any) {
+export default function page({ searchParams }: any) {
 	const schoolId = searchParams.id;
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
 	const router = useRouter();
-	if (failed) router.back();
+
+	useEffect(() => {
+		if (failed) router.back();
+	}, [failed]);
+
 	if (isLoading)
 		return (
 			<div className="flex justify-center items-center h-screen">

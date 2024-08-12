@@ -18,9 +18,9 @@ model School {
   name      String
   aboutUs   String
   logo      String
-  rating    Float
+  rating    Float     @default(0)    
   toppers   String
-  contact   Contact?  // One-to-one relation
+  contact   Contact?  
   facilities Facility[]
   events     Event[]
   images     Image[]
@@ -57,7 +57,7 @@ model Review {
   name     String
   message  String
   date     DateTime
-  rating   Int
+  rating   Int    
   schoolId Int
   school   School  @relation(fields: [schoolId], references: [id])
 }

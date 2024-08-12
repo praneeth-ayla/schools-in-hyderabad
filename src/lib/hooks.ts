@@ -33,6 +33,7 @@ export function useSchoolDetails(schoolId: string) {
 			toast({
 				title: "Something went wrong!",
 				description: "Redirecting back",
+				duration: 1000,
 			});
 			setTimeout(() => {
 				setFailed(true);
