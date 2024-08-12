@@ -1,7 +1,21 @@
+"use client";
+
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { useSchoolList } from "@/lib/hooks";
 import Link from "next/link";
 
-export default function page() {
+export default function page({ searchParams }: any) {
+	const board = searchParams.board;
+	const area = searchParams.area;
+	const name = searchParams.name;
+
+	const { details, isLoading, failed } = useSchoolList({
+		board,
+		area,
+		name,
+	});
+
+	console.log(details);
 	return (
 		<div className="mt-10 grid md:grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 px-2  sm:px-4 md:px-10 lg:px-40 xl:px-60">
 			<Link href={`/school?name=${"randomidhere"}`}>

@@ -1,7 +1,7 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
-import { SchoolDetails, Video } from "./types";
+import { Place, SchoolCategory, SchoolDetails, Video } from "./types";
 import axios from "axios";
 
 export function useSchoolDetails(schoolId: string) {
@@ -46,4 +46,46 @@ export function useSchoolDetails(schoolId: string) {
 	}, [schoolId]);
 
 	return { isLoading, details, failed };
+}
+
+interface UseSchoolListParams {
+	name?: string;
+	area?: Place;
+	board?: SchoolCategory;
+}
+
+export function useSchoolList({ name, area, board }: UseSchoolListParams) {
+	const [details, setDetails] = useState<SchoolDetails[] | null>(null); // Set initial state to null or an empty array if preferred
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<SchoolDetails[]>(
+					"/api/schoolList",
+					{
+						params: { name, area, board },
+					}
+				);
+				setDetails(data);
+			} catch (error: any) {
+				console.error("Error fetching school details:", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [name, area, board, toast]);
+
+	return { details, isLoading, failed };
 }

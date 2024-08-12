@@ -26,6 +26,8 @@ model School {
   images     Image[]
   videos     Video[]
   reviews    Review[]
+  area       Place    
+  category   SchoolCategory 
 }
 
 model Contact {
@@ -75,4 +77,41 @@ model Facility {
   name     String
   schoolId Int
   school   School  @relation(fields: [schoolId], references: [id])
+}
+
+enum Place {
+  Abids
+  Ameerpet
+  Bachupally
+  Banjara_Hills
+  Begumpet
+  Charminar
+  Gachibowli
+  Hitech_City
+  Kondapur
+  Madhapur
+  Mehdipatnam
+  Miyapur
+  Somajiguda
+}
+
+enum SchoolCategory {
+  PlaySchool
+  PrimaryStateBoard
+  HighStateBoard
+  InternationalStateBoard
+  ResidentialStateBoard
+  PrimaryCBSE
+  HighCBSE
+  InternationalCBSE
+  ResidentialCBSE
+  PrimaryICSE
+  HighICSE
+  InternationalICSE
+  ResidentialICSE
+  PrimaryIGCSE
+  HighIGCSE
+  InternationalIGCSE
+  ResidentialIGCSE
+  PreSchoolDayCare
 }
