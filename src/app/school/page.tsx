@@ -1,7 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { SchoolDetails, Video } from "@/lib/types";
 import { CarouselSpacing } from "@/components/Carousel";
 import { CarouselYoutube } from "@/components/CarouselYoutube";
 import ReviewForm from "@/components/ReviewForm";
@@ -9,40 +6,107 @@ import StarRating from "@/components/StarRating";
 import { Avatar } from "@/components/ui/avatar";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 
+import { useSchoolDetails } from "../../lib/hooks";
+import { useRouter } from "next/navigation";
+
 export default function Page({ searchParams }: any) {
 	const schoolId = searchParams.id;
-	const [details, setDetails] = useState<SchoolDetails | undefined>();
-
-	async function getDetails(schoolId: string) {
-		try {
-			const res = await axios.get(`/api/schoolDetails?id=${schoolId}`);
-			const data = res.data;
-
-			// Transform videos if they are strings
-			const videos: Video[] = data.videos
-				? data.videos.map((video: string) => ({
-						src: video,
-						title: "Video Title", // Replace this with actual titles if available
-				  }))
-				: [];
-
-			setDetails({
-				...data,
-				videos,
-			});
-		} catch (error) {
-			console.error("Error fetching school details:", error);
-		}
-	}
-
-	useEffect(() => {
-		getDetails(schoolId);
-	}, [schoolId]);
-
-	if (!details) return <div>Loading...</div>;
+	const { isLoading, details, failed } = useSchoolDetails(schoolId);
+	const router = useRouter();
+	if (failed) router.back();
+	if (isLoading)
+		return (
+			<div className="flex justify-center items-center h-screen">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-10 w-auto text-blue-300"
+					viewBox="0 0 24 24">
+					<g stroke="currentColor">
+						<circle
+							cx="12"
+							cy="12"
+							r="9.5"
+							fill="none"
+							stroke-linecap="round"
+							stroke-width="3">
+							<animate
+								attributeName="stroke-dasharray"
+								calcMode="spline"
+								dur="1.5s"
+								keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+								keyTimes="0;0.475;0.95;1"
+								repeatCount="indefinite"
+								values="0 150;42 150;42 150;42 150"
+							/>
+							<animate
+								attributeName="stroke-dashoffset"
+								calcMode="spline"
+								dur="1.5s"
+								keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+								keyTimes="0;0.475;0.95;1"
+								repeatCount="indefinite"
+								values="0;-16;-59;-59"
+							/>
+						</circle>
+						<animateTransform
+							attributeName="transform"
+							dur="2s"
+							repeatCount="indefinite"
+							type="rotate"
+							values="0 12 12;360 12 12"
+						/>
+					</g>
+				</svg>
+			</div>
+		);
+	if (!details)
+		return (
+			<div className="flex justify-center items-center h-screen">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-10 w-auto text-blue-300"
+					viewBox="0 0 24 24">
+					<g stroke="currentColor">
+						<circle
+							cx="12"
+							cy="12"
+							r="9.5"
+							fill="none"
+							stroke-linecap="round"
+							stroke-width="3">
+							<animate
+								attributeName="stroke-dasharray"
+								calcMode="spline"
+								dur="1.5s"
+								keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+								keyTimes="0;0.475;0.95;1"
+								repeatCount="indefinite"
+								values="0 150;42 150;42 150;42 150"
+							/>
+							<animate
+								attributeName="stroke-dashoffset"
+								calcMode="spline"
+								dur="1.5s"
+								keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+								keyTimes="0;0.475;0.95;1"
+								repeatCount="indefinite"
+								values="0;-16;-59;-59"
+							/>
+						</circle>
+						<animateTransform
+							attributeName="transform"
+							dur="2s"
+							repeatCount="indefinite"
+							type="rotate"
+							values="0 12 12;360 12 12"
+						/>
+					</g>
+				</svg>
+			</div>
+		);
 
 	return (
-		<div className="sm:px-4 md:px-10 lg:px-40 xl:px-60 pt-4 lg:pt-8">
+		<div className="sm:px-4 md:px-10 lg:px-20 xl:px-52 pt-4 lg:pt-8">
 			<p className="text-center pb-3 font-bold text-muted-foreground text-lg md:text-xl">
 				{details.name}
 			</p>
@@ -156,7 +220,7 @@ export default function Page({ searchParams }: any) {
 							</div>
 
 							<div className="text-muted-foreground text-sm pt-3 border-y">
-								<div className="flex flex-col gap-2">
+								<div className="flex flex-col gap-2 pl-4">
 									{details.reviews.map(
 										(
 											{ message, name, date, rating },
