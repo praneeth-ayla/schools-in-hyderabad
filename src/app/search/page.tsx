@@ -34,12 +34,6 @@ export default function page({ searchParams }: any) {
 					schoolDetail={school}
 				/>
 			))}
-			{details.map((school, i) => (
-				<SchoolCard
-					key={i}
-					schoolDetail={school}
-				/>
-			))}
 		</div>
 	);
 }

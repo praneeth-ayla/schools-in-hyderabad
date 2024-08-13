@@ -10,6 +10,7 @@ import {
 	SchoolPartialData,
 } from "@/lib/types";
 import Link from "next/link";
+import StarRating from "./StarRating";
 
 export default function SchoolCard({
 	schoolDetail,
@@ -34,6 +35,10 @@ export default function SchoolCard({
 					{schoolDetail.name}
 				</CardTitle>
 				<CardDescription>
+					<div className="flex gap-1 pt-4">
+						<StarRating rating={schoolDetail.rating} />
+						{schoolDetail.rating}
+					</div>
 					<div className="text-xs">
 						{schoolDetail.aboutUs.length > 200 ? (
 							<>{schoolDetail.aboutUs.slice(0, 200)} ...</>

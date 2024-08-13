@@ -9,6 +9,7 @@ import { useSchoolDetails } from "../../lib/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "@/components/Loading";
+import DateTimeDisplay from "@/components/TimeConverter";
 
 export default function page({ searchParams }: any) {
 	const schoolId = searchParams.id;
@@ -154,10 +155,14 @@ export default function page({ searchParams }: any) {
 																	.toUpperCase()}
 															</div>
 														</Avatar>
-														<div>{name}</div>
+														<div className="text-xs md:text-base">
+															{name}
+														</div>
 													</div>
 													<div className="text-muted-foreground text-xs md:text-sm">
-														{date}
+														{DateTimeDisplay(
+															date
+														).slice(0, 17)}
 													</div>
 												</CardTitle>
 												<StarRating rating={rating} />
@@ -169,7 +174,7 @@ export default function page({ searchParams }: any) {
 									)}
 								</div>
 							</div>
-							<ReviewForm />
+							<ReviewForm schoolId={schoolId} />
 						</div>
 					</div>
 				</div>
