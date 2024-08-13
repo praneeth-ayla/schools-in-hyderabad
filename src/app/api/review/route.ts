@@ -49,7 +49,7 @@ export async function POST(request: Request) {
 		});
 
 		const totalRating = reviews.reduce(
-			(sum, review) => sum + review.rating,
+			(sum: number, review: { rating: number }) => sum + review.rating,
 			0
 		);
 		const newAverageRating = (totalRating / reviews.length).toFixed(1);
