@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 	const name = searchParams.get("name");
 
 	// Build the 'where' clause dynamically based on provided parameters
-	const whereClause: any = {};
+	const whereClause: { [key: string]: any } = {};
 
 	if (name) {
 		whereClause.name = {
@@ -27,11 +27,24 @@ export async function GET(request: Request) {
 
 	// Fetch schools based on the constructed where clause
 	try {
-		const res = await prisma.school.findMany({
+		const schools = await prisma.school.findMany({
 			where: Object.keys(whereClause).length ? whereClause : undefined, // If no filters are provided, return all schools
 		});
-		return Response.json(res);
-	} catch (error: any) {
-		return Response.json({ error: error.message });
+		return new Response(JSON.stringify(schools), {
+			status: 200,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+	} catch (error) {
+		return new Response(
+			JSON.stringify({ error: (error as Error).message }),
+			{
+				status: 500,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
 	}
 }

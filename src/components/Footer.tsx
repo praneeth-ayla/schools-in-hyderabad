@@ -2,7 +2,7 @@ export default function Footer() {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<>
+		<div>
 			<div className="mt-10 flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-[#112B3C] text-gray-300 text-xs md:text-sm">
 				<a
 					className="hover:text-white"
@@ -102,6 +102,6 @@ export default function Footer() {
 					</a>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
