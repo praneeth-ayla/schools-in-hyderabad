@@ -139,6 +139,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 				<div className="flex gap-3">
 					<Button
 						variant="outline"
+						className="text-black "
 						onClick={() => {
 							setFormValues(defaultValues);
 						}}>
