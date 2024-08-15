@@ -1,6 +1,23 @@
 import AccordionHome from "./AccordionHome";
 
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 export default function HomeDetails() {
+	const words = [
+		{
+		  text: '"Swadese pujyate raja,',
+		},
+		{
+		  text: "Vidvan ",
+		},
+		{
+		  text: "sarvatra ",
+		},
+		{
+		  text: 'pujyate."',
+		  className: "text-blue-500 dark:text-blue-500",
+		},
+		
+	  ];
 	return (
 		<div className="pt-10 mx-4 lg:mx-14 xl:mx-28 sm:p-10  sm:text-left">
 			<div className="grid md:grid-cols-2 gap-8 sm:gap-10">
@@ -34,10 +51,13 @@ export default function HomeDetails() {
 					</p>
 				</div>
 			</div>
-			<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 text-center border-y-4">
-				<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl">
-					&quot;Swadese pujyate raja, Vidvan sarvatra pujyate&quot;
-				</p>
+			
+			<div className="py-8 sm:py-24 sm: my-16 sm:my-20 text-center border-y-4">
+			<div className="italic font-bold text-xs sm:text-xl md:text-2xl lg:text-5xl">
+				<TypewriterEffectSmooth words={words} />
+
+			</div>
+				{/* <Cover className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl">&quot;Swadese pujyate raja, Vidvan sarvatra pujyate&quot;</Cover> */}
 				<p className="text-sm sm:text-lg text-muted-foreground pt-4">
 					A scholarly person is revered everywhere in the world,
 					whereas a king is respected only in his own country.
