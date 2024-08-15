@@ -46,6 +46,9 @@ export type SchoolDetails = {
 		date: string;
 		rating: number;
 	}[];
+	area: Place;
+	category: SchoolCategory;
+	facilities: Facility[];
 };
 
 export enum Place {

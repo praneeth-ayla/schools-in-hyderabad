@@ -12,6 +12,7 @@ export default function InputDemo() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(true);
 	const { toast } = useToast();
+	const [page, setPage] = useState<"edit" | "create">("edit");
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -57,55 +58,18 @@ export default function InputDemo() {
 	if (status === "authenticated") {
 		return (
 			<div>
-				<div className="p-5">
-					<Label htmlFor="schoolName">School Name</Label>
-					<Input
-						type="text"
-						id="schoolName"
-						placeholder="School Name"
-					/>
-					<br />
-					<Button variant="outline">Add</Button>
-				</div>
-				<div className="p-5">
-					<Label htmlFor="contact">Contact</Label>
-					<Input
-						type="text"
-						id="contact"
-						placeholder="Contact"
-					/>
-					<br />
-					<Button variant="outline">Add</Button>
-					<br />
-					<Label htmlFor="email">Email</Label>
-					<Input
-						type="email"
-						id="email"
-						placeholder="Email"
-					/>
-					<br />
-					<Button variant="outline">Add</Button>
-				</div>
-				<div className="p-5">
-					<Label htmlFor="facilities">Facilities</Label>
-					<Input
-						type="text"
-						id="facilities"
-						placeholder="Facilities"
-					/>
-					<br />
-					<Button variant="outline">Add</Button>
-				</div>
-				<div className="p-5">
-					<Label htmlFor="place">Place</Label>
-					<Input
-						type="text"
-						id="place"
-						placeholder="Place"
-					/>
-					<br />
-					<Button variant="outline">Add</Button>
-				</div>
+				<Button
+					onClick={() => {
+						setPage("create");
+					}}>
+					Create
+				</Button>
+				<Button
+					onClick={() => {
+						setPage("edit");
+					}}>
+					Edit
+				</Button>
 			</div>
 		);
 	} else {
