@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Video from 'next-video';
+
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import SearchInputs from "./SearchInputs";
 
@@ -15,12 +17,24 @@ export default function HeroSection() {
 				alignItems: "center",
 				backgroundColor: "black",
 			}}>
-			<Image
-				src="/hero.webp"
-				alt="Home Img"
-				layout="fill"
-				objectFit="cover"
-				style={{ objectPosition: "center" }}
+			<Video
+				src="/video.mp4"
+				autoPlay
+				muted
+        		loop
+        		playsInline
+        		controls={false}
+				
+				
+				style={{ objectPosition: "cover",
+					position:"absolute",
+					top:"0",
+					right:"0",
+					left:"0",
+					bottom:"0",
+					
+				 }}
+				 className="object-cover"
 			/>
 			{/* Dark Overlay */}
 			<div className="text-white z-10 flex justify-center items-center flex-col">
