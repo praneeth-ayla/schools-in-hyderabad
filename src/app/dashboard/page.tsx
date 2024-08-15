@@ -1,74 +1,118 @@
 "use client";
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-
-
-import { FileUpload } from "@/components/ui/file-upload";
- 
-
-import { Input } from "@/components/ui/input"
-
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function InputDemo() {
-  const [files, setFiles] = useState<File[]>([]);
-    const handleFileUpload = (files: File[]) => {
-      setFiles(files);
-      console.log(files);
-    };
-  return (
-    <div>
-        
-        <div className="p-5">
-          <Label htmlFor="picture">School Name</Label>
-          <Input  type="text" placeholder="School Name" />
-          <br />
-          <center><Button variant="outline">Add</Button></center> 
+	const { data: session, status } = useSession();
+	const router = useRouter();
+	const [loading, setLoading] = useState(true);
+	const { toast } = useToast();
 
-        </div>
-        <div className="p-5">
-          <Label htmlFor="picture">Contact</Label>
-          <Input  type="text" placeholder="Contact" />
-          <br />
-          <center><Button variant="outline">Add</Button></center> 
-          <br />
-          <Label htmlFor="picture">Email</Label>
-          <Input  type="email" placeholder="Contact" />
-          <br />
-          <center><Button variant="outline">Add</Button></center> 
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 2000);
 
-        </div>
-        <div className="p-5">
-          <Label htmlFor="picture">Facilities</Label>
-          <Input  type="text" placeholder="Facilities" />
-          <br />
-          <center><Button variant="outline">Add</Button></center> 
+		return () => clearTimeout(timer);
+	}, []);
 
-        </div>
-        <div className="p-5">
-          <Label htmlFor="picture">Place</Label>
-          <Input  type="text" placeholder="Place" />
-          <br />
-          <center><Button variant="outline">Add</Button></center> 
+	if (loading) {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				Loading...
+			</div>
+		);
+	}
 
-        </div>
-        
-        <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
-            
-            <FileUpload onChange={handleFileUpload}  />
-            
-            
+	if (
+		status === "authenticated" &&
+		session?.user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL
+	) {
+		setTimeout(() => {
+			router.push("/");
+		}, 2000);
+		return (
+			<div className="flex flex-col justify-center items-center h-screen">
+				<p>You're not Authorized!</p>
+				<p className="text-sm text-muted-foreground">
+					Redirecting back to Home
+				</p>
+			</div>
+		);
+	}
 
-        </div>
-        <br />
-        <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
-            
-            <FileUpload onChange={handleFileUpload}  />
-            
+	if (status === "loading") {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				Loading session...
+			</div>
+		);
+	}
 
-        </div>
-    </div>
-    
-  
-  )
+	if (status === "authenticated") {
+		return (
+			<div>
+				<div className="p-5">
+					<Label htmlFor="schoolName">School Name</Label>
+					<Input
+						type="text"
+						id="schoolName"
+						placeholder="School Name"
+					/>
+					<br />
+					<Button variant="outline">Add</Button>
+				</div>
+				<div className="p-5">
+					<Label htmlFor="contact">Contact</Label>
+					<Input
+						type="text"
+						id="contact"
+						placeholder="Contact"
+					/>
+					<br />
+					<Button variant="outline">Add</Button>
+					<br />
+					<Label htmlFor="email">Email</Label>
+					<Input
+						type="email"
+						id="email"
+						placeholder="Email"
+					/>
+					<br />
+					<Button variant="outline">Add</Button>
+				</div>
+				<div className="p-5">
+					<Label htmlFor="facilities">Facilities</Label>
+					<Input
+						type="text"
+						id="facilities"
+						placeholder="Facilities"
+					/>
+					<br />
+					<Button variant="outline">Add</Button>
+				</div>
+				<div className="p-5">
+					<Label htmlFor="place">Place</Label>
+					<Input
+						type="text"
+						id="place"
+						placeholder="Place"
+					/>
+					<br />
+					<Button variant="outline">Add</Button>
+				</div>
+			</div>
+		);
+	} else {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				Please sign in
+			</div>
+		);
+	}
 }
