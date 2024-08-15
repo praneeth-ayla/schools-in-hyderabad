@@ -130,7 +130,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									Average Rating
 								</p>
 								<div className="font-light text-sm">
-									{details.rating} / 4
+									{details.rating} / 5
 								</div>
 								<StarRating rating={details.rating} />
 							</div>
