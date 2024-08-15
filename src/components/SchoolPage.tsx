@@ -20,6 +20,13 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	}, [failed]);
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
+	const iframeStyle = {
+		width: '250px',
+		height: '500px',
+		border: 'none',
+		margin: '0',
+		padding: '0',
+	  };
 
 	return (
 		<div className="sm:px-5 md:px-10 lg:px-20 xl:px-52 pt-4 lg:pt-8">
@@ -79,6 +86,12 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 						)}
 						<div>Social Profile</div>
 						{/* <div>Map</div> */}
+						<div style={{width: "100%"}}>
+							<iframe style={iframeStyle} src="https://maps.google.com/maps?width=250&amp;height=500&amp;hl=en&amp;q=Air%20Force%20Station,%20Turkapalli,%20Hakimpet,%20Secunderabad,%20Telangana%20500014+(KV%20AFS%20Hakimpet)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+							 <a href="https://www.gps.ie/">gps vehicle tracker</a>
+							</iframe>
+						
+						</div>
 					</div>
 				</div>
 				<div className="row-start-2 lg:col-start-4 lg:col-span-full">
