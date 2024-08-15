@@ -180,7 +180,7 @@ export default function Navbar() {
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel
 									onClick={() => {
-										signIn();
+										signIn("google");
 									}}
 									className="hover:bg-gray-100 hover:cursor-pointer">
 									Login

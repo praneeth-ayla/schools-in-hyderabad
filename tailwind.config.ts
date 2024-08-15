@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
 const config = {
 	darkMode: ["class"],
@@ -7,6 +8,7 @@ const config = {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+		"./src/**/*.{ts,tsx,mdx}",
 	],
 	prefix: "",
 	theme: {
@@ -16,15 +18,16 @@ const config = {
 			screens: {
 				"2xl": "1400px",
 			},
-		},fontSize: {
-			sm: '0.8rem',
-			base: '1rem',
-			xl: '1.25rem',
-			'2xl': '1.563rem',
-			'3xl': '1.953rem',
-			'4xl': '2.541rem',
-			'5xl': '3.052rem',
-		  },
+		},
+		fontSize: {
+			sm: "0.8rem",
+			base: "1rem",
+			xl: "1.25rem",
+			"2xl": "1.563rem",
+			"3xl": "1.953rem",
+			"4xl": "2.541rem",
+			"5xl": "3.052rem",
+		},
 		extend: {
 			colors: {
 				border: "hsl(var(--border))",
@@ -85,8 +88,8 @@ const config = {
 			},
 		},
 	},
-	
+
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 
-export default config;
+export default withUt(config);
