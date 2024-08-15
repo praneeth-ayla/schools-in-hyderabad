@@ -88,7 +88,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 						{/* <div>Map</div> */}
 						<div style={{width: "100%"}}>
 							<iframe style={iframeStyle} src="https://maps.google.com/maps?width=250&amp;height=500&amp;hl=en&amp;q=Air%20Force%20Station,%20Turkapalli,%20Hakimpet,%20Secunderabad,%20Telangana%20500014+(KV%20AFS%20Hakimpet)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-							 <a href="https://www.gps.ie/">gps vehicle tracker</a>
+							 
 							</iframe>
 						
 						</div>
