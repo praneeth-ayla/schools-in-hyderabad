@@ -1,8 +1,20 @@
 "use client";
+import { Input } from "@/components/Input";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import UploadImages from "@/components/UploadDroper";
+import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
 import { UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 
 function SchoolForm() {
 	const [formData, setFormData] = useState<any>({
@@ -10,8 +22,8 @@ function SchoolForm() {
 		aboutUs: "",
 		logo: "",
 		toppers: "",
-		area: "Gachibowli",
-		category: "HighCBSE",
+		area: "",
+		category: "",
 		contact: {
 			email: "",
 			location: "",
@@ -88,8 +100,8 @@ function SchoolForm() {
 			<h2 className="text-2xl font-semibold mb-6">School Information</h2>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Name</label>
-				<input
+				<Label className="block mb-2 font-semibold">Name</Label>
+				<Input
 					type="text"
 					name="name"
 					value={formData.name}
@@ -101,7 +113,7 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">About Us</label>
+				<Label className="block mb-2 font-semibold">About Us</Label>
 				<textarea
 					name="aboutUs"
 					value={formData.aboutUs}
@@ -112,7 +124,7 @@ function SchoolForm() {
 				/>
 			</div>
 
-			<div>
+			<div className="mb-4">
 				<UploadDropzone
 					endpoint="imageUploader"
 					onClientUploadComplete={(res: any) => {
@@ -137,8 +149,8 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Toppers</label>
-				<input
+				<Label className="block mb-2 font-semibold">Toppers</Label>
+				<Input
 					type="text"
 					name="toppers"
 					value={formData.toppers}
@@ -148,38 +160,66 @@ function SchoolForm() {
 				/>
 			</div>
 
+			{/* Area */}
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Area</label>
-				<select
+				<Label className="block mb-2 font-semibold">Area</Label>
+				<Select
+					required
 					name="area"
 					value={formData.area}
-					onChange={handleChange}
-					className="w-full p-2 border rounded-md">
-					<option value="Gachibowli">Gachibowli</option>
-					<option value="Madhapur">Madhapur</option>
-					<option value="Hitech_City">Hitech City</option>
-					{/* Add other options from the Place enum */}
-				</select>
+					onValueChange={(value) =>
+						handleChange({ target: { name: "area", value } })
+					}>
+					<SelectTrigger>
+						<SelectValue placeholder="Select an area" />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							{Object.values(Place).map((place) => (
+								<SelectItem
+									key={place}
+									value={place}>
+									{place.replace("_", " ")}{" "}
+									{/* Replace underscores with spaces */}
+								</SelectItem>
+							))}
+						</SelectGroup>
+					</SelectContent>
+				</Select>
 			</div>
 
+			{/* School Category */}
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Category</label>
-				<select
-					name="category"
+				<Label className="block mb-2 font-semibold">Category</Label>
+				<Select
+					required
 					value={formData.category}
-					onChange={handleChange}
-					className="w-full p-2 border rounded-md">
-					<option value="HighCBSE">High CBSE</option>
-					<option value="PrimaryCBSE">Primary CBSE</option>
-					{/* Add other options from the SchoolCategory enum */}
-				</select>
+					onValueChange={(value) =>
+						handleChange({ target: { name: "category", value } })
+					}>
+					<SelectTrigger>
+						<SelectValue placeholder="Select a category" />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							<SelectLabel>Categories</SelectLabel>
+							{Object.values(SchoolCategory).map((category) => (
+								<SelectItem
+									key={category}
+									value={category}>
+									{SchoolCategoryNames[category]}
+								</SelectItem>
+							))}
+						</SelectGroup>
+					</SelectContent>
+				</Select>
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">
+				<Label className="block mb-2 font-semibold">
 					Contact Email
-				</label>
-				<input
+				</Label>
+				<Input
 					type="email"
 					name="email"
 					value={formData.contact.email}
@@ -191,10 +231,10 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">
+				<Label className="block mb-2 font-semibold">
 					Contact Location
-				</label>
-				<input
+				</Label>
+				<Input
 					type="text"
 					name="location"
 					value={formData.contact.location}
@@ -206,10 +246,10 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">
+				<Label className="block mb-2 font-semibold">
 					Contact Number
-				</label>
-				<input
+				</Label>
+				<Input
 					type="text"
 					name="number"
 					value={formData.contact.number}
@@ -221,9 +261,9 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Facilities</label>
+				<Label className="block mb-2 font-semibold">Facilities</Label>
 				{formData.facilities.map((facility: any, index: any) => (
-					<input
+					<Input
 						key={index}
 						type="text"
 						name={`facility_${index}`}
@@ -235,15 +275,40 @@ function SchoolForm() {
 						placeholder="Facility Name"
 					/>
 				))}
+				<button
+					type="button"
+					onClick={() =>
+						setFormData({
+							...formData,
+							facilities: [...formData.facilities, ""],
+						})
+					}
+					className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+					Add Facility
+				</button>
+			</div>
+
+			{/* Map Location */}
+			<div className="mb-4">
+				<Label className="block mb-2 font-semibold">Map Location</Label>
+				<Input
+					type="text"
+					name="mapLocation"
+					value={formData.mapLocation}
+					onChange={handleChange}
+					className="w-full p-2 border rounded-md"
+					placeholder="Paste the Google Maps embeded link here"
+					required
+				/>
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Events</label>
+				<Label className="block mb-2 font-semibold">Events</Label>
 				{formData.events.map((event: any, index: any) => (
 					<div
 						key={index}
 						className="mb-2">
-						<input
+						<Input
 							type="text"
 							name="title"
 							value={event.title}
@@ -253,7 +318,7 @@ function SchoolForm() {
 							className="w-full p-2 mb-2 border rounded-md"
 							placeholder="Event Title"
 						/>
-						<input
+						<Input
 							type="text"
 							name="description"
 							value={event.description}
@@ -282,7 +347,7 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Images</label>
+				<Label className="block mb-2 font-semibold">Images</Label>
 				<UploadImages
 					setImage={(urls: string[]) =>
 						setFormData({ ...formData, images: urls })
@@ -291,12 +356,12 @@ function SchoolForm() {
 			</div>
 
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">Videos</label>
+				<Label className="block mb-2 font-semibold">Videos</Label>
 				{formData.videos.map((video: any, index: any) => (
 					<div
 						key={index}
 						className="mb-2">
-						<input
+						<Input
 							type="text"
 							name="src"
 							value={video.src}
@@ -306,7 +371,7 @@ function SchoolForm() {
 							className="w-full p-2 mb-2 border rounded-md"
 							placeholder="Video Source URL"
 						/>
-						<input
+						<Input
 							type="text"
 							name="title"
 							value={video.title}

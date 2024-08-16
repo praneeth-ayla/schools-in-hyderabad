@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "@/components/Loading";
 import DateTimeDisplay from "@/components/TimeConverter";
+import { Badge } from "./ui/badge";
 
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
@@ -20,23 +21,16 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	}, [failed]);
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
-	const iframeStyle = {
-		width: '250px',
-		height: '500px',
-		border: 'none',
-		margin: '0',
-		padding: '0',
-	  };
 
 	return (
-		<div className="sm:px-5 md:px-10 lg:px-20 xl:px-52 pt-4 lg:pt-8">
+		<div className="sm:px-5 md:px-10 lg:px-20 xl:px-36 pt-4 lg:pt-8">
 			<p className="text-center pb-4 px-2 font-bold text-muted-foreground text-lg md:text-xl">
 				{details.name}
 			</p>
-			<div className="grid lg:flex lg:flex-row">
-				<div className="lg:row-start-2 lg:col-span-3 mt-10 lg:mt-0 px-5">
+			<div className="flex flex-col-reverse lg:flex-row">
+				<div className="mt-10 lg:mt-0 px-5 row-start-2">
 					<div className="flex justify-center items-center">
-						<div className="h-auto w-[349px] lg:w-[200px]">
+						<div className="h-auto  w-[300px] lg:w-[200px]">
 							<img
 								alt="school logo"
 								src={details.logo}
@@ -47,7 +41,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 						{details.contact && (
 							<div className="pt-6">
 								<p className="text-lg">Contact Info</p>
-								<div className="flex text-muted-foreground flex-col gap-3 text-xs">
+								<div className="flex text-muted-foreground flex-col gap-3 text-sm">
 									<div className="flex items-center gap-2">
 										<svg
 											className="h-6"
@@ -84,17 +78,18 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								</div>
 							</div>
 						)}
-						<div>Social Profile</div>
-						{/* <div>Map</div> */}
-						<div style={{width: "100%"}}>
-							<iframe style={iframeStyle} src="https://maps.google.com/maps?width=250&amp;height=500&amp;hl=en&amp;q=Air%20Force%20Station,%20Turkapalli,%20Hakimpet,%20Secunderabad,%20Telangana%20500014+(KV%20AFS%20Hakimpet)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-							 
-							</iframe>
-						
+						{/* <div>Social Profile</div> */}
+						<div>
+							<div>Map</div>
+							<div
+								className="flex justify-center items-center"
+								dangerouslySetInnerHTML={{
+									__html: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3804.186001334633!2d78.51320453048395!3d17.546328898711444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb85189e5f7155%3A0xc67337b740849d21!2sKENDRIYA%20VIDYALAYA%20HAKIMPET!5e0!3m2!1sen!2sin!4v1723791916229!5m2!1sen!2sin" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
+								}}></div>
 						</div>
 					</div>
 				</div>
-				<div className="row-start-2 lg:col-start-4 lg:col-span-full">
+				<div className="lg:col-start-4 lg:col-span-full">
 					<CarouselSpacing images={details.images} />
 					<div className="px-3 pt-3 flex flex-col gap-6 md:gap-10">
 						<div className="pt-11">
@@ -109,26 +104,55 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								<CarouselYoutube videos={details.videos} />
 							</div>
 						)}
-						<div>
-							<p className="text-lg md:text-xl pb-3">Events</p>
-							{details.events && (
-								<div className="grid gap-3">
-									{details.events.map((event, i) => (
-										<div
-											key={i}
-											className="text-">
-											<p className="text-sm">
-												{event.title}
-											</p>
-											<p className="text-xs text-muted-foreground">
-												{event.description}
-											</p>
-										</div>
-									))}
+
+						{details.facilities && (
+							<div>
+								<p className="text-lg md:text-xl">Facilities</p>
+								<div className="text-sm flex gap-1 flex-wrap">
+									{details.facilities.map(
+										(facility, index) => (
+											<Badge
+												key={index}
+												className="text-xs">
+												{/* Didn't want to change the types so :)*/}
+												{/* @ts-ignore */}
+												{facility.name}
+											</Badge>
+										)
+									)}
 								</div>
-							)}
+							</div>
+						)}
+
+						<div>
+							{details?.events &&
+								details.events.length > 0 &&
+								details.events.some(
+									(event) => event.title.trim() !== ""
+								) && (
+									<>
+										<p className="text-lg md:text-xl pb-3">
+											Events
+										</p>
+										<div className="grid gap-3">
+											{details.events.map((event, i) => (
+												<div
+													key={i}
+													className="text-">
+													<p className="text-sm">
+														{event.title}
+													</p>
+													<p className="text-xs text-muted-foreground">
+														{event.description}
+													</p>
+												</div>
+											))}
+										</div>
+									</>
+								)}
 						</div>
-						{details.toppers && (
+
+						{details.toppers !== "" && (
 							<div>
 								<p className="text-lg md:text-xl">Toppers</p>
 								<div className="text-muted-foreground text-sm">
@@ -163,7 +187,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 														<Avatar className="border flex justify-center items-center">
 															<div>
 																{name
-																	.charAt(-1)
+																	.charAt(0)
 																	.toUpperCase()}
 															</div>
 														</Avatar>

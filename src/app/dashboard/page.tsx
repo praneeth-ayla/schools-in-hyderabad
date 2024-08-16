@@ -39,7 +39,7 @@ export default function InputDemo() {
 		}, 2000);
 		return (
 			<div className="flex flex-col justify-center items-center h-screen">
-				<p>You're not Authorized!</p>
+				<p>You&apos;re not Authorized!</p>
 				<p className="text-sm text-muted-foreground">
 					Redirecting back to Home
 				</p>

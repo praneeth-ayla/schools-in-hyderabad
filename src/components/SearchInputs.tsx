@@ -145,7 +145,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 						}}>
 						Reset
 					</Button>
-					<Button type="submit">Submit</Button>
+					<Button type="submit">Search</Button>
 				</div>
 			</div>
 		</form>

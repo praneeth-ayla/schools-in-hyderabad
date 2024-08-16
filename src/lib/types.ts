@@ -4,7 +4,7 @@ export type Contact = {
 	email: string;
 };
 
-export type Facility = string; // Assuming facilities are just strings
+export type Facility = string;
 
 export type EventSchool = {
 	title: string;
