@@ -6,6 +6,7 @@ import SelectStarRating from "./SelectStarRating";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
+import Loading from "./Loading";
 
 export default function ReviewForm({ schoolId }: { schoolId: number }) {
 	const { data: session } = useSession();
@@ -13,9 +14,11 @@ export default function ReviewForm({ schoolId }: { schoolId: number }) {
 	const [message, setMessage] = useState<string>();
 	const disable = !!session?.user;
 	const { toast } = useToast();
+	const [loading, setLoading] = useState(false);
 
 	async function handleSubmit(event: any) {
 		event.preventDefault();
+		setLoading(true);
 		try {
 			if (rating !== 0 && message !== "") {
 				const res = await axios.post("/api/review", {
@@ -35,11 +38,13 @@ export default function ReviewForm({ schoolId }: { schoolId: number }) {
 				setTimeout(() => {
 					window.location.reload();
 				}, 2000);
+				setLoading(false);
 			} else {
 				toast({
 					title: "Incomplete submission!",
 					description: "Please provide both a rating and a message.",
 				});
+				setLoading(false);
 			}
 		} catch (error: any) {
 			console.error("Error submitting review:", error.message);
@@ -48,6 +53,7 @@ export default function ReviewForm({ schoolId }: { schoolId: number }) {
 				description: "An error occurred. Please try again later.",
 				duration: 2000,
 			});
+			setLoading(false);
 		}
 	}
 
@@ -71,12 +77,20 @@ export default function ReviewForm({ schoolId }: { schoolId: number }) {
 						setMessage(e.target.value);
 					}}
 					className="text-sm"></Textarea>
-				<Button
-					onClick={handleSubmit}
-					disabled={!disable}
-					className="w-1/3 sm:w-1/5">
-					Submit
-				</Button>
+				{loading ? (
+					<Button
+						disabled={loading}
+						className="w-1/3 sm:w-1/5">
+						<Loading />
+					</Button>
+				) : (
+					<Button
+						onClick={handleSubmit}
+						disabled={!disable}
+						className="w-1/3 sm:w-1/5">
+						Submit
+					</Button>
+				)}
 			</form>
 		</div>
 	);

@@ -51,103 +51,128 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 		}));
 	}
 
-	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+	async function handleSubmitSchool(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		const values = formValues;
+		router.push(`/search?name=${encodeURIComponent(values.school)}`);
+	}
+	async function handleSubmitTwo(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const values = formValues;
 		router.push(
-			`/search?name=${encodeURIComponent(
-				values.school
-			)}&board=${encodeURIComponent(
+			`/search?board=${encodeURIComponent(
 				values.board
 			)}&area=${encodeURIComponent(values.where)}`
 		);
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className="flex flex-col gap-6 md:flex-row w-full justify-center items-start md:items-end">
-				<div className="grid w-full items-center gap-1.5 p-0">
-					<Label htmlFor="school">School</Label>
-					<Input
-						className="text-black h-8 sm:h-10"
-						type="text"
-						id="school"
-						name="school"
-						placeholder="Ex: KV AFS Hakimpet"
-						value={formValues.school}
-						onChange={handleChange}
-					/>
+		<div>
+			<form onSubmit={handleSubmitTwo}>
+				<div className="flex flex-col gap-3 md:flex-row w-full justify-center items-start md:items-end">
+					<div className="grid w-full items-center gap-1.5">
+						<Label htmlFor="board">Board</Label>
+						<Select
+							name="board"
+							value={formValues.board}
+							onValueChange={(value) =>
+								handleSelectChange("board", value)
+							}>
+							<SelectTrigger className="text-black h-8 sm:h-10">
+								<SelectValue
+									placeholder="Select Board"
+									className="text-black"
+								/>
+							</SelectTrigger>
+							<SelectContent>
+								<SelectGroup>
+									{Object.entries(SchoolCategoryNames).map(
+										([key, value]) => (
+											<SelectItem
+												key={key}
+												value={key}>
+												{/* Replaces underscore with space */}
+												{value.replace(/_/g, " ")}
+											</SelectItem>
+										)
+									)}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+					</div>
+					<div className="grid w-full items-center gap-1.5">
+						<Label htmlFor="where">Where</Label>
+						<Select
+							name="where"
+							value={formValues.where}
+							onValueChange={(value) =>
+								handleSelectChange("where", value)
+							}>
+							<SelectTrigger className="w-full text-black h-8 sm:h-10">
+								<SelectValue
+									placeholder="Select Area"
+									className="text-black"
+								/>
+							</SelectTrigger>
+							<SelectContent>
+								<SelectGroup>
+									{Object.entries(Place).map(
+										([key, value]) => (
+											<SelectItem
+												key={key}
+												value={key}>
+												{/* Replaces underscore with space */}
+												{value.replace(/_/g, " ")}
+											</SelectItem>
+										)
+									)}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+					</div>
+					<div className="flex gap-3">
+						<Button
+							variant="outline"
+							className="text-black "
+							onClick={() => {
+								setFormValues(defaultValues);
+							}}>
+							Reset
+						</Button>
+						<Button type="submit">Search</Button>
+					</div>
 				</div>
-				<div className="grid w-full items-center gap-1.5">
-					<Label htmlFor="board">Board</Label>
-					<Select
-						name="board"
-						value={formValues.board}
-						onValueChange={(value) =>
-							handleSelectChange("board", value)
-						}>
-						<SelectTrigger className="text-black h-8 sm:h-10">
-							<SelectValue
-								placeholder="Select Board"
-								className="text-black"
-							/>
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								{Object.entries(SchoolCategoryNames).map(
-									([key, value]) => (
-										<SelectItem
-											key={key}
-											value={key}>
-											{/* Replaces underscore with space */}
-											{value.replace(/_/g, " ")}
-										</SelectItem>
-									)
-								)}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
+			</form>
+
+			<form
+				onSubmit={handleSubmitSchool}
+				className="pt-2">
+				<div className="flex flex-col gap-6 md:flex-row w-full justify-center items-start md:items-end">
+					<div className="grid w-full items-center gap-1.5 p-0">
+						<Label htmlFor="school">School</Label>
+						<Input
+							className="text-black h-8 sm:h-10"
+							type="text"
+							id="school"
+							name="school"
+							placeholder="Search by school name"
+							value={formValues.school}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="flex gap-3">
+						{formValues.school.length > 0 ? (
+							<Button type="submit">Search</Button>
+						) : (
+							<Button
+								type="submit"
+								disabled>
+								Search
+							</Button>
+						)}{" "}
+					</div>
 				</div>
-				<div className="grid w-full items-center gap-1.5">
-					<Label htmlFor="where">Where</Label>
-					<Select
-						name="where"
-						value={formValues.where}
-						onValueChange={(value) =>
-							handleSelectChange("where", value)
-						}>
-						<SelectTrigger className="w-full text-black h-8 sm:h-10">
-							<SelectValue
-								placeholder="Select Area"
-								className="text-black"
-							/>
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								{Object.entries(Place).map(([key, value]) => (
-									<SelectItem
-										key={key}
-										value={key}>
-										{/* Replaces underscore with space */}
-										{value.replace(/_/g, " ")}
-									</SelectItem>
-								))}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
-				<div className="flex gap-3">
-					<Button
-						variant="outline"
-						className="text-black "
-						onClick={() => {
-							setFormValues(defaultValues);
-						}}>
-						Reset
-					</Button>
-					<Button type="submit">Search</Button>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	);
 }

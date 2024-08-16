@@ -1,17 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
 
 export default function InputDemo() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const [loading, setLoading] = useState(true);
-	const { toast } = useToast();
 	const [page, setPage] = useState<"edit" | "create">("edit");
 
 	useEffect(() => {
