@@ -288,20 +288,6 @@ function SchoolForm() {
 				</button>
 			</div>
 
-			{/* Map Location */}
-			<div className="mb-4">
-				<Label className="block mb-2 font-semibold">Map Location</Label>
-				<Input
-					type="text"
-					name="mapLocation"
-					value={formData.mapLocation}
-					onChange={handleChange}
-					className="w-full p-2 border rounded-md"
-					placeholder="Paste the Google Maps embeded link here"
-					required
-				/>
-			</div>
-
 			<div className="mb-4">
 				<Label className="block mb-2 font-semibold">Events</Label>
 				{formData.events.map((event: any, index: any) => (

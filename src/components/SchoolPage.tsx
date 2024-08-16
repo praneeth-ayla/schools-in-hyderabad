@@ -79,14 +79,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 							</div>
 						)}
 						{/* <div>Social Profile</div> */}
-						<div>
-							<div>Map</div>
-							<div
-								className="flex justify-center items-center"
-								dangerouslySetInnerHTML={{
-									__html: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3804.186001334633!2d78.51320453048395!3d17.546328898711444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb85189e5f7155%3A0xc67337b740849d21!2sKENDRIYA%20VIDYALAYA%20HAKIMPET!5e0!3m2!1sen!2sin!4v1723791916229!5m2!1sen!2sin" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
-								}}></div>
-						</div>
 					</div>
 				</div>
 				<div className="lg:col-start-4 lg:col-span-full">
