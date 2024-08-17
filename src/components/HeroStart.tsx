@@ -4,7 +4,7 @@ import BreadCrumbLink from "./BreadCrumbLink";
 export default function HeroStart({ text }: { text: string }) {
 	return (
 		<div
-			className="h-[150px] sm:h-[300px]"
+			className="h-[150px] sm:h-[300px] bg-gradient-to-r from-slate-50 to-indigo-100"
 			style={{
 				position: "relative",
 				width: "100%",
