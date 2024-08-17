@@ -22,6 +22,8 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
 
+	console.log(details.videos?.length);
+
 	return (
 		<div className="sm:px-5 md:px-10 lg:px-20 xl:px-36 pt-4 lg:pt-8">
 			<p className="text-center pb-4 px-2 font-bold text-muted-foreground text-lg md:text-xl">
@@ -90,31 +92,33 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								{details.aboutUs}
 							</div>
 						</div>
-
-						{details.videos && (
+						{details.videos && details.videos?.length > 0 && (
 							<div>
 								<CarouselYoutube videos={details.videos} />
 							</div>
 						)}
 
-						{details.facilities && (
-							<div>
-								<p className="text-lg md:text-xl">Facilities</p>
-								<div className="text-sm flex gap-1 flex-wrap">
-									{details.facilities.map(
-										(facility, index) => (
-											<Badge
-												key={index}
-												className="text-xs">
-												{/* Didn't want to change the types so :)*/}
-												{/* @ts-ignore */}
-												{facility.name}
-											</Badge>
-										)
-									)}
+						{details.facilities &&
+							details.facilities?.length > 0 && (
+								<div>
+									<p className="text-lg md:text-xl">
+										Facilities
+									</p>
+									<div className="text-sm flex gap-1 flex-wrap">
+										{details.facilities.map(
+											(facility, index) => (
+												<Badge
+													key={index}
+													className="text-xs">
+													{/* Didn't want to change the types so :)*/}
+													{/* @ts-ignore */}
+													{facility.name}
+												</Badge>
+											)
+										)}
+									</div>
 								</div>
-							</div>
-						)}
+							)}
 
 						<div>
 							{details?.events &&
@@ -166,39 +170,54 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 
 							<div className="text-muted-foreground text-sm pt-4 border-y">
 								<div className="flex flex-col gap-3 pl-4">
-									{details.reviews.map(
-										(
-											{ message, name, date, rating },
-											i
-										) => (
-											<div
-												className="p-2"
-												key={i}>
-												<CardTitle className="font-normal text-base flex justify-between items-center">
-													<div className="flex gap-3 items-center">
-														<Avatar className="border flex justify-center items-center">
-															<div>
-																{name
-																	.charAt(0)
-																	.toUpperCase()}
+									{details.reviews.length > 0 ? (
+										<div>
+											{details.reviews.map(
+												(
+													{
+														message,
+														name,
+														date,
+														rating,
+													},
+													i
+												) => (
+													<div
+														className="p-2"
+														key={i}>
+														<CardTitle className="font-normal text-base flex justify-between items-center">
+															<div className="flex gap-3 items-center">
+																<Avatar className="border flex justify-center items-center">
+																	<div>
+																		{name
+																			.charAt(
+																				0
+																			)
+																			.toUpperCase()}
+																	</div>
+																</Avatar>
+																<div className="text-xs md:text-base">
+																	{name}
+																</div>
 															</div>
-														</Avatar>
-														<div className="text-xs md:text-base">
-															{name}
-														</div>
+															<div className="text-muted-foreground text-xs md:text-sm">
+																{DateTimeDisplay(
+																	date
+																).slice(-1, 17)}
+															</div>
+														</CardTitle>
+														<StarRating
+															rating={rating}
+														/>
+														<CardDescription className="py-3 text-xs">
+															{message}
+														</CardDescription>
 													</div>
-													<div className="text-muted-foreground text-xs md:text-sm">
-														{DateTimeDisplay(
-															date
-														).slice(-1, 17)}
-													</div>
-												</CardTitle>
-												<StarRating rating={rating} />
-												<CardDescription className="py-3 text-xs">
-													{message}
-												</CardDescription>
-											</div>
-										)
+												)
+											)}
+										</div>
+									) : (
+										<div className="pb-3">No reviews</div>
 									)}
 								</div>
 							</div>

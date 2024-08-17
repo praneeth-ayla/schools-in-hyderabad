@@ -78,7 +78,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							onValueChange={(value) =>
 								handleSelectChange("board", value)
 							}>
-							<SelectTrigger className="text-black h-8 sm:h-10">
+							<SelectTrigger className="text-black h-6 sm:h-10">
 								<SelectValue
 									placeholder="Select Board"
 									className="text-black"
@@ -108,7 +108,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							onValueChange={(value) =>
 								handleSelectChange("where", value)
 							}>
-							<SelectTrigger className="w-full text-black h-8 sm:h-10">
+							<SelectTrigger className="w-full text-black h-6 sm:h-10">
 								<SelectValue
 									placeholder="Select Area"
 									className="text-black"
@@ -133,13 +133,17 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					<div className="flex gap-3">
 						<Button
 							variant="outline"
-							className="text-black "
+							className="text-black h-7 sm:h-10"
 							onClick={() => {
 								setFormValues(defaultValues);
 							}}>
 							Reset
 						</Button>
-						<Button type="submit">Search</Button>
+						<Button
+							type="submit"
+							className="sm:h-10 h-7">
+							Search
+						</Button>
 					</div>
 				</div>
 			</form>
@@ -151,7 +155,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					<div className="grid w-full items-center gap-1.5 p-0">
 						<Label htmlFor="school">School</Label>
 						<Input
-							className="text-black h-8 sm:h-10"
+							className="text-black h-6 sm:h-10"
 							type="text"
 							id="school"
 							name="school"

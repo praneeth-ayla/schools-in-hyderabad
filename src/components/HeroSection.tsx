@@ -26,17 +26,11 @@ export default function HeroSection() {
 
 			{/* Dark Overlay */}
 			<div className="text-white z-10 flex justify-center items-center flex-col">
-				<Image
-					src="/logo.png"
-					alt="logo"
-					width={150}
-					height={150}
-				/>
 				<div className="flex justify-center items-center flex-col gap-8">
 					<span className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
 						<TextGenerateEffect
 							className="z-10 text-white"
-							words="Explore Schools in Your Area"
+							words="Explore Schools in Hyderabad"
 						/>
 					</span>
 					<SearchInputs />

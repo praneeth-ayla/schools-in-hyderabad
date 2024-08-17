@@ -1,12 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import { UploadDropzone } from "../utils/uploadthing";
-import { Button } from "./ui/button";
 import axios from "axios";
+import { Trash } from "lucide-react";
+import { extractPngName } from "@/utils/extractPngName";
 
 export default function UploadImages({
+	image,
 	setImage,
 }: {
+	image: any;
 	setImage: (images: string[]) => void;
 }) {
 	const [images, setImages] = useState<{ url: string; key: string }[]>([]);
@@ -22,6 +25,7 @@ export default function UploadImages({
 				endpoint="imageUploader"
 				onClientUploadComplete={(res: any) => {
 					console.log("Files: ", res);
+					console.log(image);
 					// Add new image to the images array
 					setImages((prevImages) => [...prevImages, ...res]);
 				}}
@@ -30,27 +34,32 @@ export default function UploadImages({
 				}}
 			/>
 			<div className="flex gap-2">
-				{images.map((img, i) => (
+				{image.map((img: any, i: number) => (
 					<div key={i}>
 						<img
-							src={img.url}
+							src={img}
 							alt={`img${i + 1}`}
 							style={{ width: "100px", height: "100px" }}
 						/>
-						<Button
-							onClick={async () => {
-								// Delete image from server and update state
-								await axios.get(
-									`/api/deleteImage?img=${img.key}`
-								);
-								setImages((prevImages) =>
-									prevImages.filter(
-										(image) => image.key !== img.key
-									)
-								);
-							}}>
-							Delete
-						</Button>
+						<div className="flex justify-center items-center pt-2 hover:cursor-pointer">
+							<Trash
+								onClick={async () => {
+									// Delete image from server and update state
+									console.log("before", images);
+									await axios.get(
+										`/api/deleteImage?img=${extractPngName(
+											img
+										)}`
+									);
+									console.log("tes", img, "tes");
+									setImages((prevImages) =>
+										prevImages.filter(
+											(image) => image.url !== img
+										)
+									);
+									console.log("after", images);
+								}}></Trash>
+						</div>
 					</div>
 				))}
 			</div>

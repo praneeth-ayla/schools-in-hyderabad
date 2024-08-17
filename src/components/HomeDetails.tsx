@@ -1,24 +1,24 @@
 import AccordionHome from "./AccordionHome";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect"
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 export default function HomeDetails() {
 	const words = [
 		{
-		  text: "Swadese",
+			text: "Swadese",
 		},
 		{
-		  text: "Pujyate",
+			text: "Pujyate",
 		},
 		{
-		  text: "Raja",
+			text: "Raja",
 		},
 		{
-		  text: "Vidvan Sarvatra",
+			text: "Vidvan Sarvatra",
 		},
 		{
-		  text: "Pujyate.",
-		  className: "text-blue-500 dark:text-blue-500",
+			text: "Pujyate.",
+			className: "text-blue-500 dark:text-blue-500",
 		},
-	  ];
+	];
 	return (
 		<div className="pt-10 mx-4 lg:mx-14 xl:mx-28 sm:p-10  sm:text-left">
 			<div className="grid md:grid-cols-2 gap-8 sm:gap-10">
@@ -53,8 +53,11 @@ export default function HomeDetails() {
 				</div>
 			</div>
 			<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 text-center border-y-4">
-			   <TypewriterEffectSmooth words={words} className="justify-center items-center italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl hidden lg:block" />
-			   <p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:hidden  lg:text-5xl">
+				<TypewriterEffectSmooth
+					words={words}
+					className="lg:flex justify-center items-center italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl hidden"
+				/>
+				<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:hidden  lg:text-5xl">
 					&quot;Swadese pujyate raja, Vidvan sarvatra pujyate&quot;
 				</p>
 				<p className="text-sm sm:text-lg text-muted-foreground pt-4">
