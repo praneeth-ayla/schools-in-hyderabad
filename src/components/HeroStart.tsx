@@ -15,7 +15,7 @@ export default function HeroStart({ text }: { text: string }) {
 				backgroundColor: "black",
 			}}>
 			<Image
-				src="/hero.webp"
+				src="/school2.jpeg"
 				alt="Home Img"
 				layout="fill"
 				objectFit="cover"
