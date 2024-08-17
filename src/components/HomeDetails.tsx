@@ -57,7 +57,7 @@ export default function HomeDetails() {
 				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 text-center border-y-4">
 					<TypewriterEffectSmooth
 						words={words}
-						className="justify-center items-center italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl hidden lg:block"
+						className="lg:flex justify-center items-center italic font-bold text-xl sm:text-xl md:text-2xl lg:text-5xl hidden"
 					/>
 					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:hidden  lg:text-5xl">
 						&quot;Swadese pujyate raja, Vidvan sarvatra
