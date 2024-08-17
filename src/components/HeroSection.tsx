@@ -17,7 +17,7 @@ export default function HeroSection() {
 				backgroundColor: "black",
 			}}>
 			<Image
-				src="/school2.jpeg"
+				src="/school2.jpg"
 				alt="Home Img"
 				layout="fill"
 				objectFit="cover"
