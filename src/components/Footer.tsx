@@ -3,7 +3,7 @@ export default function Footer() {
 
 	return (
 		<div>
-			<div className="mt-10 flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-[#112B3C] text-gray-300 text-xs md:text-sm">
+			<div className="mt-1 flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-[#112B3C] text-gray-300 text-xs md:text-sm">
 				<a
 					className="hover:text-white"
 					href="/about-us">
