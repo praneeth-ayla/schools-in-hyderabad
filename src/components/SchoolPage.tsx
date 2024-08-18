@@ -4,7 +4,7 @@ import { CarouselYoutube } from "@/components/CarouselYoutube";
 import ReviewForm from "@/components/ReviewForm";
 import StarRating from "@/components/StarRating";
 import { Avatar } from "@/components/ui/avatar";
-import { CardDescription, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { useSchoolDetails } from "../lib/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -26,12 +26,12 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 
 	return (
 		<div className="sm:px-5 md:px-10 lg:px-20 xl:px-36 pt-4 lg:pt-8">
-			<p className="text-center pb-4 px-2 font-bold text-muted-foreground text-lg md:text-xl">
+			<p className="text-center pb-4 px-2 font-bold text-lg md:text-4xl">
 				{details.name}
 			</p>
-			<div className="flex flex-col-reverse lg:flex-row">
-				<div className="mt-10 lg:mt-0 px-5 row-start-2">
-					<div className="flex justify-center items-center">
+			<div className="flex flex-col-reverse lg:flex-row gap-3 pb-10">
+				<Card className="mt-10 lg:mt-0 row-start-2 shadow-lg px-4">
+					<div className="flex justify-center items-center pt-10 px-10">
 						<div className="h-auto  w-[300px] lg:w-[200px]">
 							<img
 								alt="school logo"
@@ -82,10 +82,12 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 						)}
 						{/* <div>Social Profile</div> */}
 					</div>
-				</div>
-				<div className="lg:col-start-4 lg:col-span-full">
-					<CarouselSpacing images={details.images} />
-					<div className="px-3 pt-3 flex flex-col gap-6 md:gap-10">
+				</Card>
+				<Card className="lg:col-start-4 py-10 lg:col-span-full shadow-lg">
+					<div className="px-4 rounded-lg">
+						<CarouselSpacing images={details.images} />
+					</div>
+					<div className="px-10 pt-3 flex flex-col gap-6 md:gap-10">
 						<div className="pt-11">
 							<p className="text-lg md:text-xl">About</p>
 							<div className="text-muted-foreground text-sm">
@@ -224,7 +226,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 							<ReviewForm schoolId={Number(schoolId)} />
 						</div>
 					</div>
-				</div>
+				</Card>
 			</div>
 		</div>
 	);

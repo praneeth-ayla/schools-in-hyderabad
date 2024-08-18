@@ -78,7 +78,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							onValueChange={(value) =>
 								handleSelectChange("board", value)
 							}>
-							<SelectTrigger className="text-black h-6 sm:h-10">
+							<SelectTrigger className="text-black h-10">
 								<SelectValue
 									placeholder="Select Board"
 									className="text-black"
@@ -108,7 +108,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							onValueChange={(value) =>
 								handleSelectChange("where", value)
 							}>
-							<SelectTrigger className="w-full text-black h-6 sm:h-10">
+							<SelectTrigger className="w-full text-black h-10">
 								<SelectValue
 									placeholder="Select Area"
 									className="text-black"
@@ -133,7 +133,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					<div className="flex gap-3">
 						<Button
 							variant="outline"
-							className="text-black h-7 sm:h-10"
+							className="text-black h-10"
 							onClick={() => {
 								setFormValues(defaultValues);
 							}}>
@@ -141,7 +141,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 						</Button>
 						<Button
 							type="submit"
-							className="sm:h-10 h-7">
+							className="h-10">
 							Search
 						</Button>
 					</div>
@@ -155,7 +155,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					<div className="grid w-full items-center gap-1.5 p-0">
 						<Label htmlFor="school">School</Label>
 						<Input
-							className="text-black h-6 sm:h-10"
+							className="text-black h-10"
 							type="text"
 							id="school"
 							name="school"
@@ -165,15 +165,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 						/>
 					</div>
 					<div className="flex gap-3">
-						{formValues.school.length > 0 ? (
-							<Button type="submit">Search</Button>
-						) : (
-							<Button
-								type="submit"
-								disabled>
-								Search
-							</Button>
-						)}{" "}
+						<Button type="submit">Search</Button>
 					</div>
 				</div>
 			</form>
