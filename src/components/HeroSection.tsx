@@ -5,7 +5,7 @@ import { BackgroundBeams } from "./ui/background-beams";
 
 export default function HeroSection() {
 	return (
-		<div className="py-10 w-full bg-slate-900 relative flex flex-col items-center justify-center antialiased">
+		<div className="py-10 w-full bg-blue-950 relative flex flex-col items-center justify-center antialiased">
 			<div className="text-white max-w-2xl mx-auto p-4">
 				<div className="flex justify-center items-center flex-col gap-8 z-10">
 					<Image

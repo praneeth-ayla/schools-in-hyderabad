@@ -23,7 +23,7 @@ export default function SchoolCard({
 
 	return (
 		<Link href={`/school?id=${schoolDetail.id}`}>
-			<Card className="p-2 hover:shadow-lg h-96">
+			<Card className="p-2 hover:shadow-lg h-96 bg-blue-900 border-0 text-white">
 				<div className="object-cover flex justify-center items-center">
 					<img
 						className="rounded-t-lg h-32 w-auto object-cover"

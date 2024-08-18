@@ -21,11 +21,11 @@ export default function HomeDetails() {
 		},
 	];
 	return (
-		<div className="py-10 md:py-20 w-full bg-slate-900 relative flex flex-col items-center justify-center antialiased">
+		<div className="py-10 md:py-20 w-full bg-blue-950 relative flex flex-col items-center justify-center antialiased">
 			<div className="text-white p-4 z-20">
 				<div className="pt-10 mx-4 lg:mx-14 xl:mx-28 sm:p-10 sm:pt-0 sm:text-left z-20">
 					<div className="grid md:grid-cols-2 gap-8 sm:gap-10 bg-gradient-to-r  ">
-						<div>
+						<div className="bg-blue-900  p-10 rounded-lg shadow-lg">
 							<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 								Heritage of Hyderabad
 							</h1>
@@ -40,7 +40,7 @@ export default function HomeDetails() {
 								raise and educate children.
 							</p>
 						</div>
-						<div>
+						<div className="bg-blue-900  p-10 rounded-lg shadow-lg">
 							<h1 className="text-lg sm:text-2xl font-bold pb-3 sm:pb-5">
 								Education in Hyderabad
 							</h1>

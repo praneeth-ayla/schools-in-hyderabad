@@ -73,6 +73,7 @@ const config = {
 				},
 				blue: {
 					primary: "#112B3C",
+					900: "#121E43",
 				},
 			},
 			borderRadius: {

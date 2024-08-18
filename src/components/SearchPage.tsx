@@ -6,6 +6,7 @@ import { useSchoolList } from "@/lib/hooks";
 import { Place, SchoolCategory } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { BackgroundBeams } from "./ui/background-beams";
 
 interface Props {
 	name: string;
@@ -31,13 +32,13 @@ export default function SearchPage({ name, area, board }: Props) {
 	console.log(details);
 
 	return (
-		<div>
-			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20">
+		<div className="py-10 w-full h-[50rem] bg-blue-950 relative flex flex-col antialiased">
+			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
 				<SearchInputs
 					initialValues={{ board, where: area, school: name }}
 				/>
 				{details.length !== 0 ? (
-					<div className="mt-10 grid md:grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+					<div className="mt-10 grid md:grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 ">
 						{details.map((school, i) => (
 							<SchoolCard
 								key={i}
@@ -51,6 +52,7 @@ export default function SearchPage({ name, area, board }: Props) {
 					</div>
 				)}
 			</div>
+			<BackgroundBeams />
 		</div>
 	);
 }
