@@ -12,7 +12,7 @@ import React from "react";
 export default function BreadCrumbLink({ text }: { text: string }) {
 	return (
 		<Breadcrumb>
-			<BreadcrumbList className="text-white">
+			<BreadcrumbList className="">
 				<BreadcrumbItem>
 					<BreadcrumbLink
 						href="/"
@@ -22,7 +22,7 @@ export default function BreadCrumbLink({ text }: { text: string }) {
 				</BreadcrumbItem>
 				<BreadcrumbSeparator></BreadcrumbSeparator>
 				<BreadcrumbItem>
-					<BreadcrumbPage className="text-blue-400">
+					<BreadcrumbPage className="text-blue-600">
 						{text}
 					</BreadcrumbPage>
 				</BreadcrumbItem>

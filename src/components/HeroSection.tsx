@@ -29,7 +29,7 @@ export default function HeroSection() {
 				<div className="flex justify-center items-center flex-col gap-8">
 					<span className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
 						<p className="text-center font-semibold text-base">
-							Connecting Parents to school
+							Connecting Parents to schools of choice
 						</p>
 						<TextGenerateEffect
 							className="z-10"

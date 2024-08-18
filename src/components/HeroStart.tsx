@@ -12,17 +12,17 @@ export default function HeroStart({ text }: { text: string }) {
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				backgroundColor: "black",
+				// backgroundColor: "white",
 			}}>
 			<Image
-				src="/school2.jpg"
+				src="/white-gradient.png"
 				alt="Home Img"
 				layout="fill"
 				objectFit="cover"
 				style={{ objectPosition: "center" }}
 			/>
 			{/* Dark Overlay */}
-			<div className="text-white text-center flex justify-center items-center sm:gap-4 flex-col z-10 relative ">
+			<div className="text-center flex justify-center items-center sm:gap-4 flex-col z-10 relative ">
 				<div className="flex justify-center items-center flex-col">
 					<Image
 						src="/logo.png"
@@ -41,7 +41,7 @@ export default function HeroStart({ text }: { text: string }) {
 					left: 0,
 					width: "100%",
 					height: "100%",
-					backgroundColor: "rgba(0, 0, 0, 0.7)",
+					// backgroundColor: "rgba(0, 0, 0, 0.7)",
 					zIndex: 1,
 				}}
 			/>
