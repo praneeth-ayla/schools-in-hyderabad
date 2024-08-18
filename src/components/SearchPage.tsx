@@ -32,8 +32,8 @@ export default function SearchPage({ name, area, board }: Props) {
 	console.log(details);
 
 	return (
-		<div className="py-10 w-full h-[50rem] bg-blue-950 relative flex flex-col antialiased">
-			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
+		<div className="py-10 pt-14 w-full min-h-[50rem] flex flex-col antialiased">
+			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white">
 				<SearchInputs
 					initialValues={{ board, where: area, school: name }}
 				/>
@@ -47,12 +47,11 @@ export default function SearchPage({ name, area, board }: Props) {
 						))}
 					</div>
 				) : (
-					<div className="flex justify-center items-center pt-10 text-3xl text-muted-foreground">
-						No Results Found
+					<div className="flex justify-center items-center pt-10  md:pt-40 text-3xl text-muted-foreground">
+						Unable to fetch any results
 					</div>
 				)}
 			</div>
-			<BackgroundBeams />
 		</div>
 	);
 }

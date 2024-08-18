@@ -155,7 +155,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					<div className="grid w-full items-center gap-1.5 p-0">
 						<Label htmlFor="school">School</Label>
 						<Input
-							className="text-black h-10"
+							className="text-black h-10 placeholder:text-gray-500"
 							type="text"
 							id="school"
 							name="school"

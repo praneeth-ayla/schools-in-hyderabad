@@ -2,12 +2,17 @@ export default function Footer() {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<div>
-			<div className="border border-y-gray-700 border-x-0  flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-gray-900 text-gray-300 text-xs md:text-sm">
+		<div className="bg-parallax">
+			<div className="border border-y-gray-700 border-x-0  flex gap-3 sm:gap-4 justify-evenly sm:px-20 py-4 flex-wrap text-center bg-opacity-40 bg-black text-gray-300 text-xs md:text-sm">
 				<a
 					className="hover:text-white"
 					href="/about-us">
 					About Us
+				</a>
+				<a
+					className="hover:text-white"
+					href="merchandise">
+					Merchandise
 				</a>
 				<a
 					className="hover:text-white"
@@ -25,7 +30,7 @@ export default function Footer() {
 					Terms & Conditions
 				</a>
 			</div>
-			<div className="py-4 sm:px-20  px-4 flex gap-5 flex-col text-center bg-blue-900 text-muted-foreground text-xs">
+			<div className="py-4 sm:px-20  px-4 flex gap-5 flex-col text-center bg-black bg-opacity-40 text-muted-foreground text-xs">
 				<div className="flex gap-2 sm:gap-4 flex-col sm:flex-row justify-center">
 					<span>Copyright © {currentYear} Edu Infonence</span>
 					<span className="hidden sm:block">&#x2022;</span>

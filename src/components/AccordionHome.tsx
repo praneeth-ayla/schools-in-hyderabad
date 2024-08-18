@@ -19,42 +19,40 @@ export default function AccordionHome() {
 					including:
 				</p>
 			</div>
-			<div className="text-sm md:text-lg md:w-3/4 lg:w-2/3">
-				<Accordion
-					type="single"
-					collapsible
-					className="w-full ">
-					<AccordionItem value="item-1">
-						<AccordionTrigger>Extensive Listings</AccordionTrigger>
-						<AccordionContent className="text-sm text-muted-foreground">
-							Detailed school profiles with photos, videos, and
-							reviews.
-						</AccordionContent>
-					</AccordionItem>
-					<AccordionItem value="item-2">
-						<AccordionTrigger>Comparison Tools</AccordionTrigger>
-						<AccordionContent className="text-sm text-muted-foreground">
-							Easily compare schools based on curriculum,
-							facilities, and location.
-						</AccordionContent>
-					</AccordionItem>
-					<AccordionItem value="item-3">
-						<AccordionTrigger>Updates</AccordionTrigger>
-						<AccordionContent className="text-sm text-muted-foreground">
-							Stay informed about the latest education sector news
-							in Hyderabad.
-						</AccordionContent>
-					</AccordionItem>
-					<AccordionItem value="item-4">
-						<AccordionTrigger>
-							Personalized Assistance
-						</AccordionTrigger>
-						<AccordionContent className="text-sm text-muted-foreground">
-							Get guidance and support in choosing the right
-							school.
-						</AccordionContent>
-					</AccordionItem>
-				</Accordion>
+			<div className="text-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
+					<p className="font-semibold text-lg pb-2">
+						Extensive Listings
+					</p>
+					<p className="text-muted-foreground">
+						Detailed school profiles with photos, videos, and
+						reviews.
+					</p>
+				</div>
+				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
+					<p className="font-semibold text-lg pb-2">
+						Comparison Tools
+					</p>
+					<p className="text-muted-foreground">
+						Easily compare schools based on curriculum, facilities,
+						and location.
+					</p>
+				</div>
+				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
+					<p className="font-semibold text-lg pb-2">Updates</p>
+					<p className="text-muted-foreground">
+						Stay informed about the latest education sector news in
+						Hyderabad.
+					</p>
+				</div>
+				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
+					<p className="font-semibold text-lg pb-2">
+						Personalized Assistance
+					</p>
+					<p className="text-muted-foreground">
+						Get guidance and support in choosing the right school.
+					</p>
+				</div>
 			</div>
 			<div className="pt-4 text-left text-sm md:text-lg text-muted-foreground pb-4 sm:pb-0">
 				Explore{" "}

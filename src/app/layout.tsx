@@ -30,7 +30,9 @@ export default function RootLayout({
 					<div className="flex flex-col min-h-screen">
 						<Navbar />
 						{/* <FloatingNavDemo /> */}
-						<main className="flex-grow">{children}</main>
+						<div className=" bg-parallax bg-cover bg-fixed">
+							<main className="flex-grow">{children}</main>
+						</div>
 						<Footer />
 					</div>
 					<Toaster />

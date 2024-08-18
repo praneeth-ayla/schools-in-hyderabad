@@ -26,7 +26,7 @@ const config = {
 			},
 		},
 		fontSize: {
-			xs: "0.6rem",
+			xs: "0.75rem",
 			sm: "0.9rem",
 			base: "1rem",
 			lg: "1.1rem",
@@ -37,6 +37,10 @@ const config = {
 			"5xl": "3.052rem",
 		},
 		extend: {
+			backgroundImage: {
+				parallax:
+					'url("https://utfs.io/f/a09b62f5-2664-4b9c-9df1-30fcd2dd560e-k6szsx.png")',
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
@@ -57,7 +61,7 @@ const config = {
 				},
 				muted: {
 					DEFAULT: "hsl(var(--muted))",
-					foreground: "hsl(var(--muted-foreground))",
+					foreground: "#ffffff",
 				},
 				accent: {
 					DEFAULT: "hsl(var(--accent))",
