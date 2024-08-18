@@ -6,7 +6,7 @@ import { useSchoolList } from "@/lib/hooks";
 import { Place, SchoolCategory } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { BackgroundBeams } from "./ui/background-beams";
+import { useToast } from "./ui/use-toast";
 
 interface Props {
 	name: string;
@@ -15,6 +15,7 @@ interface Props {
 }
 
 export default function SearchPage({ name, area, board }: Props) {
+	const { toast } = useToast();
 	const { details, isLoading, failed } = useSchoolList({
 		board,
 		area,
@@ -24,12 +25,21 @@ export default function SearchPage({ name, area, board }: Props) {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (failed) router.back();
-	}, [failed]);
+		if (!isLoading) {
+			if (failed) router.back();
+			if (details && details.length === 0) {
+				toast({
+					title: "Redirecting back to home",
+				});
+				setTimeout(() => {
+					router.push("/");
+				}, 2000);
+			}
+		}
+	}, [failed, details]);
 
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
-	console.log(details);
 
 	return (
 		<div className="py-10 pt-14 w-full min-h-[50rem] flex flex-col antialiased">
