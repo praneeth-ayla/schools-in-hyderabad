@@ -6,18 +6,18 @@ import SearchInputs from "./SearchInputs";
 export default function HeroSection() {
 	return (
 		<div
+			className="h-[40rem] bg-slate-200"
 			style={{
 				position: "relative",
 				width: "100%",
-				height: "600px",
+				// height: "600px",
 				overflow: "hidden",
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				backgroundColor: "black",
 			}}>
 			<Image
-				src="/school2.jpg"
+				src="/white-gradient.png"
 				alt="Home Img"
 				layout="fill"
 				objectFit="cover"
@@ -25,18 +25,21 @@ export default function HeroSection() {
 			/>
 
 			{/* Dark Overlay */}
-			<div className="text-white z-10 flex justify-center items-center flex-col">
+			<div className="z-10 flex justify-center items-center flex-col">
 				<div className="flex justify-center items-center flex-col gap-8">
 					<span className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
+						<p className="text-center font-semibold text-base">
+							Connecting Parents to school
+						</p>
 						<TextGenerateEffect
-							className="z-10 text-white"
+							className="z-10"
 							words="Explore Schools in Hyderabad"
 						/>
 					</span>
 					<SearchInputs />
 				</div>
 			</div>
-			<div
+			{/* <div
 				style={{
 					position: "absolute",
 					top: 0,
@@ -45,7 +48,7 @@ export default function HeroSection() {
 					height: "100%",
 					backgroundColor: "rgba(0, 0, 0, 0.7)",
 					zIndex: 1,
-				}}></div>
+				}}></div> */}
 		</div>
 	);
 }
