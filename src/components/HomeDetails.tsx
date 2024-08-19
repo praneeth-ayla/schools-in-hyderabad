@@ -1,5 +1,6 @@
 import AccordionHome from "./AccordionHome";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { BackgroundBeams } from "./ui/background-beams";
 export default function HomeDetails() {
 	const words = [
 		{
@@ -67,9 +68,8 @@ export default function HomeDetails() {
 							&quot;
 						</p>
 						<p className="text-xs sm:text-lg text-muted-foreground pt-4">
-							A scholarly person is revered everywhere in the
-							world, whereas a king is respected only in his own
-							country.
+							A king is regarded within his nation, whereas a
+							Scholar is revered throughout.
 						</p>
 					</div>
 					<div className="relative z-10">

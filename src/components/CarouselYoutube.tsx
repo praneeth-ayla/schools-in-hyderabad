@@ -51,7 +51,7 @@ export function CarouselYoutube({
 						)
 					)}
 				</CarouselContent>
-				<div className="flex gap-3 pt-3 justify-end pr-14">
+				<div className="flex gap-3 pt-3 justify-center pr-14 text-black">
 					<CarouselPrevious />
 					<CarouselNext />
 				</div>
