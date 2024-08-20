@@ -76,7 +76,7 @@ export default function ReviewForm({ schoolId }: { schoolId: number }) {
 					onChange={(e) => {
 						setMessage(e.target.value);
 					}}
-					className="text-sm bg-slate-950 placeholder:text-gray-500"></Textarea>
+					className="text-sm  placeholder:text-gray-500"></Textarea>
 				{loading ? (
 					<Button
 						disabled={loading}

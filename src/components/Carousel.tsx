@@ -22,9 +22,9 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 	return (
 		<div>
 			<Dialog>
-				<DialogTrigger>
+				<DialogTrigger className="border-black">
 					<Carousel
-						className="rounded-lg"
+						className="rounded-lg border-black"
 						plugins={[
 							Autoplay({
 								delay: 2000,

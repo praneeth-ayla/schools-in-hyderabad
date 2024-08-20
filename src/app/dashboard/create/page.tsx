@@ -15,22 +15,32 @@ import { useToast } from "@/components/ui/use-toast";
 import UploadImages from "@/components/UploadImages";
 import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
 import { UploadDropzone } from "@/utils/uploadthing";
+import { Block } from "@blocknote/core";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function SchoolForm() {
+	const Editor = useMemo(
+		() =>
+			dynamic(() => import("../../../components/Editor"), {
+				ssr: false,
+			}),
+		[]
+	);
+
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const { toast } = useToast();
 	const [loading, setLoading] = useState(false);
 
 	// Separate states for each section of the form
+	const [aboutUs, setAboutUs] = useState<Block[]>();
 	const [basicInfo, setBasicInfo] = useState({
 		name: "",
-		aboutUs: "",
 		logo: "",
 		toppers: "",
 		area: "",
@@ -118,6 +128,7 @@ function SchoolForm() {
 
 		const formData = {
 			...basicInfo,
+			aboutUs,
 			contact,
 			facilities,
 			events,
@@ -194,14 +205,15 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							About Us
 						</Label>
-						<textarea
+						<Editor blockTextHandler={setAboutUs} />
+						{/* <textarea
 							name="aboutUs"
 							value={basicInfo.aboutUs}
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="About the School"
 							required
-						/>
+						/> */}
 					</div>
 
 					<div className="mb-4">
