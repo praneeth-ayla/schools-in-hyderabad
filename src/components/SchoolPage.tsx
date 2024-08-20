@@ -96,6 +96,11 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									</p>
 									<div className="text- text-sm">
 										{details.aboutUs}
+										{/* <Editor
+											blockTextHandler={() => {}}
+											editable={false}
+											initialContent={details.aboutUs}
+										/> */}
 									</div>
 								</div>
 								{details.videos &&
