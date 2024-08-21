@@ -35,6 +35,7 @@ const config = {
 			"3xl": "1.953rem",
 			"4xl": "2.541rem",
 			"5xl": "3.052rem",
+			"6xl": "4.052rem",
 		},
 		extend: {
 			backgroundImage: {

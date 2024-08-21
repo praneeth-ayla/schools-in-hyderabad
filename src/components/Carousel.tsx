@@ -59,7 +59,7 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 						</CarouselContent>
 					</Carousel>
 				</DialogTrigger>
-				<DialogContent className="bg-opacity-60  text-white bg-black border-slate-950 p-4 m-1 md:p-10 flex justify-center ">
+				<DialogContent className="bg-opacity-60  text-white bg-blue-200 p-4 m-1 md:p-10 flex justify-center ">
 					<Carousel
 						className="rounded-lg"
 						plugins={[
@@ -68,7 +68,7 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 							}),
 						]}>
 						{/* <CarouselContent className="w-full h-[150px] sm:h-[250px] md:h-[350px] lg:h-[500px] rounded-lg"> */}
-						<CarouselContent className="">
+						<CarouselContent className="h-96 w-full">
 							{images.map((e: any, i) => (
 								<CarouselItem
 									key={i}

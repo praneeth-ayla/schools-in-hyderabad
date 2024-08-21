@@ -30,7 +30,14 @@ export type SchoolDetails = {
 		location: string;
 		number: string;
 		email: string;
+		website: string;
+		instagram: string;
+		twitter: string;
+		linkedin: string;
+		youtube: string;
+		facebook: string;
 	};
+	locationMap: string;
 	images: string[];
 	aboutUs: string;
 	videos?: Video[];

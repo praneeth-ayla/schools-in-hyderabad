@@ -11,46 +11,44 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import UploadImages from "@/components/UploadImages";
 import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
 import { UploadDropzone } from "@/utils/uploadthing";
-import { Block } from "@blocknote/core";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 function SchoolForm() {
-	const Editor = useMemo(
-		() =>
-			dynamic(() => import("../../../components/Editor"), {
-				ssr: false,
-			}),
-		[]
-	);
-
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const { toast } = useToast();
 	const [loading, setLoading] = useState(false);
 
 	// Separate states for each section of the form
-	const [aboutUs, setAboutUs] = useState<Block[]>();
 	const [basicInfo, setBasicInfo] = useState({
 		name: "",
+		aboutUs: "",
 		logo: "",
 		toppers: "",
 		area: "",
 		category: "",
+		locationMap: "",
 	});
 
 	const [contact, setContact] = useState({
 		email: "",
 		location: "",
 		number: "",
+		website: "",
+		facebook: "",
+		youtube: "",
+		instagram: "",
+		twitter: "",
+		linkedin: "",
 	});
 
 	// Initially empty arrays for facilities and videos
@@ -128,7 +126,6 @@ function SchoolForm() {
 
 		const formData = {
 			...basicInfo,
-			aboutUs,
 			contact,
 			facilities,
 			events,
@@ -181,7 +178,7 @@ function SchoolForm() {
 	) {
 		return (
 			<>
-				<h2 className="text-2xl font-semibold mb-6 text-center">
+				<h2 className="text-2xl font-semibold my-6 text-center text-white">
 					School Information
 				</h2>
 				<form
@@ -205,15 +202,26 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							About Us
 						</Label>
-						<Editor blockTextHandler={setAboutUs} />
-						{/* <textarea
+						<textarea
 							name="aboutUs"
 							value={basicInfo.aboutUs}
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="About the School"
 							required
-						/> */}
+						/>
+					</div>
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Map Location
+						</Label>
+						<Input
+							name="locationMap"
+							value={basicInfo.locationMap}
+							onChange={handleBasicInfoChange}
+							className="w-full p-2 border rounded-md"
+							required
+						/>
 					</div>
 
 					<div className="mb-4">
@@ -244,8 +252,7 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							Toppers
 						</Label>
-						<Input
-							type="text"
+						<Textarea
 							name="toppers"
 							value={basicInfo.toppers}
 							onChange={handleBasicInfoChange}
@@ -320,8 +327,7 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							Contact Email
 						</Label>
-						<Input
-							type="email"
+						<Textarea
 							name="email"
 							value={contact.email}
 							onChange={handleContactChange}
@@ -334,8 +340,7 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							Location
 						</Label>
-						<Input
-							type="text"
+						<Textarea
 							name="location"
 							value={contact.location}
 							onChange={handleContactChange}
@@ -348,10 +353,98 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							Contact Number
 						</Label>
-						<Input
-							type="text"
+						<Textarea
 							name="number"
 							value={contact.number}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Youtube
+						</Label>
+						<Input
+							name="youtube"
+							value={contact.youtube}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Instagram
+						</Label>
+						<Input
+							name="instagram"
+							value={contact.instagram}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							twitter
+						</Label>
+						<Input
+							name="twitter"
+							value={contact.twitter}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							linkedin
+						</Label>
+						<Input
+							name="linkedin"
+							value={contact.linkedin}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Facebook
+						</Label>
+						<Input
+							name="facebook"
+							value={contact.facebook}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Twitter
+						</Label>
+						<Input
+							name="twitter"
+							value={contact.twitter}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="91-9999999999"
+						/>
+					</div>
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							website
+						</Label>
+						<Input
+							name="website"
+							value={contact.website}
 							onChange={handleContactChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="91-9999999999"

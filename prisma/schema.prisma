@@ -20,6 +20,8 @@ model School {
   logo      String
   rating    Float     @default(0)    
   toppers   String
+  awards    String?
+  locationMap  String?
   contact   Contact?  
   facilities Facility[]
   events     Event[]
@@ -35,9 +37,16 @@ model Contact {
   email     String
   location  String
   number    String
-  schoolId  Int     @unique
-  school    School  @relation(fields: [schoolId], references: [id])
+  website   String?
+  facebook  String?
+  youtube   String?
+  instagram String?
+  twitter   String?
+  linkedin  String?
+  school    School   @relation(fields: [schoolId], references: [id])
+  schoolId  Int      @unique
 }
+
 
 model Image {
   id       Int     @id @default(autoincrement())

@@ -32,7 +32,7 @@ export default function SearchPage({ name, area, board }: Props) {
 	console.log(details);
 
 	return (
-		<div className="py-10 w-full h-[50rem] bg-blue-950 relative flex flex-col antialiased">
+		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
 			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
 				<SearchInputs
 					initialValues={{ board, where: area, school: name }}
