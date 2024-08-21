@@ -38,6 +38,7 @@ export async function GET(request: Request) {
 				contact: true,
 				videos: true,
 				aboutUs: true,
+				awards: true,
 				logo: true,
 				name: true,
 				rating: true,

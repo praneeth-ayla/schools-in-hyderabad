@@ -12,6 +12,7 @@ import Loading from "@/components/Loading";
 import DateTimeDisplay from "@/components/TimeConverter";
 import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
+import PhotoCard from "./PhotoCard";
 
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
@@ -30,13 +31,15 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 						{details.name}
 					</p>
 					<div className="flex flex-col-reverse lg:flex-row gap-3 pb-10">
-						<Card className="px-6 mt-10 lg:mt-0 row-start-2 shadow-2xl pb-10  bg-blue-300 bg-opacity-50 border">
-							<div className="flex justify-center items-center pt-10 h-auto">
-								<img
-									className="rounded-md "
-									alt="school logo"
-									src={details.logo}
-								/>
+						<Card className="px-6 mt-10 lg:mt-0 row-start-2 shadow-2xl pb-10 bg-blue-300 bg-opacity-50 border">
+							<div className="lg:w-[200px]">
+								<div className="flex justify-center items-center pt-10 ">
+									<img
+										className="rounded-md "
+										alt="school logo"
+										src={details.logo}
+									/>
+								</div>
 							</div>
 							<pre className="font-sans grid gap-6">
 								{details.contact && (
@@ -206,19 +209,18 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 												<div className="grid gap-3">
 													{details.events.map(
 														(event, i) => (
-															<div
-																key={i}
-																className="">
-																<p className="font-bold text-lg">
-																	{
-																		event.title
-																	}
-																</p>
-																<pre className="text-wrap font-sans">
-																	{
-																		event.description
-																	}
-																</pre>
+															<div key={i}>
+																<a href="">
+																	<PhotoCard
+																		description={
+																			event.description
+																		}
+																		title={
+																			event.title
+																		}
+																		img="http://institution.eplug-ins.com/wp-content/uploads/2017/01/5072587676_b4f4f18b8a_b.jpg"
+																	/>
+																</a>
 															</div>
 														)
 													)}
@@ -237,6 +239,18 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 										</pre>
 									</div>
 								)}
+
+								{details.awards !== "" && (
+									<div>
+										<p className="text-lg md:text-2xl pb-3 font-bold">
+											Awards
+										</p>
+										<pre className=" font-sans text-wrap">
+											{details.awards}
+										</pre>
+									</div>
+								)}
+
 								{details.videos &&
 									details.videos?.length > 0 && (
 										<CarouselYoutube

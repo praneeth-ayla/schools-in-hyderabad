@@ -57,6 +57,7 @@ export default function InputDemo() {
 				<Button
 					onClick={() => {
 						setPage("create");
+						router.push("/dashboard/create");
 					}}>
 					Create
 				</Button>

@@ -34,6 +34,7 @@ function SchoolForm() {
 		aboutUs: "",
 		logo: "",
 		toppers: "",
+		awards: "",
 		area: "",
 		category: "",
 		locationMap: "",
@@ -258,6 +259,18 @@ function SchoolForm() {
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="John Doe, Jane Smith"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Awards{" "}
+						</Label>
+						<Textarea
+							name="awards"
+							value={basicInfo.awards}
+							onChange={handleBasicInfoChange}
+							className="w-full p-2 border rounded-md"
 						/>
 					</div>
 

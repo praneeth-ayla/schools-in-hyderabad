@@ -37,6 +37,7 @@ export type SchoolDetails = {
 		youtube: string;
 		facebook: string;
 	};
+	awards: string;
 	locationMap: string;
 	images: string[];
 	aboutUs: string;
