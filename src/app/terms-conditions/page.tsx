@@ -4,7 +4,7 @@ export default function page() {
 	return (
 		<div>
 			<HeroStart text="Terms & Conditions" />
-			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6 text-sm ">
+			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6 text-sm text-white">
 				<div>
 					<div className="text-xl md:text-2xl lg:text-3xl font-bold">
 						Terms and Conditions
@@ -46,7 +46,7 @@ export default function page() {
 					</div>
 				</div>
 				<div className="grid gap-2 text-muted-foreground">
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Cookies
 					</h2>
 					<p>
@@ -63,7 +63,7 @@ export default function page() {
 						cookies.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						License
 					</h2>
 					<p>
@@ -139,7 +139,7 @@ export default function page() {
 						forms, formats or media.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Hyperlinking to our Content
 					</h2>
 					<p>
@@ -240,7 +240,7 @@ export default function page() {
 						agreement.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						iFrames
 					</h2>
 					<p>
@@ -250,7 +250,7 @@ export default function page() {
 						Website.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Content Liability
 					</h2>
 					<p>
@@ -264,7 +264,7 @@ export default function page() {
 						rights.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Reservation of Rights
 					</h2>
 					<p>
@@ -277,7 +277,7 @@ export default function page() {
 						bound to and follow these linking terms and conditions.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Removal of links from our website
 					</h2>
 					<p>
@@ -295,7 +295,7 @@ export default function page() {
 						to date.
 					</p>
 
-					<h2 className="text-sm md:text-base lg:text-xl font-bold text-black">
+					<h2 className="text-sm md:text-base lg:text-xl font-bold">
 						Disclaimer
 					</h2>
 					<p>

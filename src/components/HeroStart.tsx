@@ -4,7 +4,7 @@ import BreadCrumbLink from "./BreadCrumbLink";
 export default function HeroStart({ text }: { text: string }) {
 	return (
 		<div
-			className="h-[150px] sm:h-[300px] bg-gradient-to-r from-slate-50 to-indigo-100"
+			className="h-[150px] sm:h-[300px] bg-gradient-to-r from-purple-900 to-purple-950"
 			style={{
 				position: "relative",
 				width: "100%",
@@ -15,7 +15,7 @@ export default function HeroStart({ text }: { text: string }) {
 				// backgroundColor: "white",
 			}}>
 			<Image
-				src="/white-gradient.png"
+				src="/herobg.png"
 				alt="Home Img"
 				layout="fill"
 				objectFit="cover"
@@ -30,7 +30,9 @@ export default function HeroStart({ text }: { text: string }) {
 						width={80}
 						height={80}
 					/>
-					<span className="text-2xl font-semibold">{text}</span>
+					<span className="text-2xl font-semibold text-white">
+						{text}
+					</span>
 				</div>
 				<BreadCrumbLink text={text} />
 			</div>

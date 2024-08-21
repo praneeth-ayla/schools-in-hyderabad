@@ -5,7 +5,7 @@ export default function page() {
 		<>
 			<HeroStart text="Privacy Policy" />
 
-			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6 text-sm ">
+			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6 text-sm text-white">
 				<div>
 					<div className="text-sm md:text-base lg:text-xl font-bold">
 						Last Updated: July 09, 2024

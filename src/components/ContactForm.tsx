@@ -78,6 +78,7 @@ export default function ContactForm() {
 							<div className="flex flex-col space-y-1.5">
 								<Label htmlFor="name">Name</Label>
 								<Input
+									className=" text-black"
 									required
 									name="name"
 									id="name"
@@ -95,6 +96,7 @@ export default function ContactForm() {
 							<div className="flex flex-col space-y-1.5">
 								<Label htmlFor="email">Email</Label>
 								<Input
+									className=" text-black"
 									name="email"
 									type="email"
 									required
@@ -116,6 +118,7 @@ export default function ContactForm() {
 							<div className="flex flex-col space-y-1.5">
 								<Label htmlFor="name">Name</Label>
 								<Input
+									className=" text-black"
 									required
 									name="name"
 									id="name"
@@ -151,6 +154,7 @@ export default function ContactForm() {
 					<div className="flex flex-col space-y-1.5">
 						<Label htmlFor="message">Message</Label>
 						<Textarea
+							className="placeholder:text-gray-500 text-black"
 							required
 							name="message"
 							id="message"

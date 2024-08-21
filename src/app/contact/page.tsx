@@ -6,7 +6,7 @@ export default function page() {
 		<div>
 			<HeroStart text="Contact" />
 
-			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6">
+			<div className="pt-10 mx-4 lg:mx-14 xl:mx-40 sm:p-10 sm:text-left flex flex-col gap-3 md:gap-6 text-white">
 				<div className="text-xl md:text-2xl lg:text-3xl font-bold">
 					Address
 				</div>

@@ -2,9 +2,9 @@ import HeroStart from "@/components/HeroStart";
 
 export default function page() {
 	return (
-		<div className="bg-gradient-to-r from-neutral-50 to-sky-50">
+		<div className="bg-gradient-to-r">
 			<HeroStart text="About Us" />
-			<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left  ">
+			<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left text-white">
 				<div className="flex flex-col gap-6 md:gap-10 ">
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1">
@@ -64,7 +64,7 @@ export default function page() {
 						</div>
 					</div>
 					<span className="text-base md:text-lg text-muted-foreground font-medium">
-						<b className="text-black">Please Note:</b> As we strive
+						<b className="text-white">Please Note:</b> As we strive
 						to provide detailed information school by school, it may
 						take us a few months to fully populate our database. We
 						appreciate your patience as we work diligently to ensure
