@@ -36,8 +36,6 @@ export default function SchoolForm({ searchParams }: any) {
 		name: "",
 		aboutUs: "",
 		logo: "",
-		toppers: "",
-		awards: "",
 		area: "",
 		category: "",
 		locationMap: "",
@@ -56,7 +54,15 @@ export default function SchoolForm({ searchParams }: any) {
 	});
 
 	const [facilities, setFacilities] = useState([""]);
-	const [events, setEvents] = useState([{ title: "", description: "" }]);
+	const [events, setEvents] = useState([
+		{ title: "", description: "", image: "" },
+	]);
+	const [awards, setAwards] = useState([
+		{ title: "", description: "", image: "" },
+	]);
+	const [Toppers, setToppers] = useState([
+		{ title: "", description: "", image: "" },
+	]);
 	const [images, setImages] = useState([""]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
@@ -67,8 +73,6 @@ export default function SchoolForm({ searchParams }: any) {
 				name: details.name || "",
 				aboutUs: details.aboutUs || "",
 				logo: details.logo || "",
-				toppers: details.toppers || "",
-				awards: details.awards || "",
 				area: details.area || "",
 				category: details.category || "",
 				locationMap: details.locationMap || "",
@@ -85,7 +89,15 @@ export default function SchoolForm({ searchParams }: any) {
 				linkedin: details.contact?.linkedin || "",
 			});
 			setFacilities(details.facilities || [""]);
-			setEvents(details.events || [{ title: "", description: "" }]);
+			setEvents(
+				details.events || [{ title: "", description: "", image: "" }]
+			);
+			setAwards(
+				details.awards || [{ title: "", description: "", image: "" }]
+			);
+			setToppers(
+				details.toppers || [{ title: "", description: "", image: "" }]
+			);
 			setImages(details.images || [""]);
 			setVideos(details.videos || [{ src: "", title: "" }]);
 		}
@@ -128,7 +140,7 @@ export default function SchoolForm({ searchParams }: any) {
 
 	// Function to handle adding new event input
 	const addEvent = () => {
-		setEvents([...events, { title: "", description: "" }]);
+		setEvents([...events, { title: "", description: "", image: "" }]);
 	};
 
 	// Function to handle removing an event input
@@ -269,31 +281,6 @@ export default function SchoolForm({ searchParams }: any) {
 								style={{ width: "100px", height: "100px" }}
 							/>
 						)}
-					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							Toppers
-						</Label>
-						<Textarea
-							name="toppers"
-							value={basicInfo.toppers}
-							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
-							placeholder="John Doe, Jane Smith"
-						/>
-					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							Awards{" "}
-						</Label>
-						<Textarea
-							name="awards"
-							value={basicInfo.awards}
-							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
-						/>
 					</div>
 
 					{/* Area */}
