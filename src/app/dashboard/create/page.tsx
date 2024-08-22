@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import UploadImages from "@/components/UploadImages";
 import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
-import { UploadDropzone } from "@/utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -33,12 +33,9 @@ function SchoolForm() {
 		name: "",
 		aboutUs: "",
 		logo: "",
-		toppers: "",
-		awards: "",
 		area: "",
 		category: "",
 		locationMap: "",
-		opening: "",
 	});
 
 	const [contact, setContact] = useState({
@@ -51,11 +48,20 @@ function SchoolForm() {
 		instagram: "",
 		twitter: "",
 		linkedin: "",
+		opening: "",
 	});
 
 	// Initially empty arrays for facilities and videos
 	const [facilities, setFacilities] = useState([""]);
-	const [events, setEvents] = useState([{ title: "", description: "" }]);
+	const [events, setEvents] = useState([
+		{ title: "", description: "", image: "" },
+	]);
+	const [toppers, setToppers] = useState([
+		{ title: "", description: "", image: "" },
+	]);
+	const [awards, setAwards] = useState([
+		{ title: "", description: "", image: "" },
+	]);
 	const [images, setImages] = useState([""]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
@@ -88,20 +94,76 @@ function SchoolForm() {
 
 	// Function to handle adding new event input
 	const addEvent = () => {
-		setEvents([...events, { title: "", description: "" }]);
+		setEvents([...events, { title: "", description: "", image: "" }]);
+	};
+	const addToppers = () => {
+		setToppers([...toppers, { title: "", description: "", image: "" }]);
+	};
+	const addAwards = () => {
+		setAwards([...awards, { title: "", description: "", image: "" }]);
 	};
 
 	// Function to handle removing an event input
 	const removeEvent = (index: number) => {
 		setEvents(events.filter((_, i) => i !== index));
 	};
-
+	// Function to handle removing a topper input
+	const removeToppers = (index: number) => {
+		setToppers(toppers.filter((_, i) => i !== index));
+	};
+	// Function to handle removing an award input
+	const removeAward = (index: number) => {
+		setAwards(awards.filter((_, i) => i !== index));
+	};
 	// Function to handle changes in event inputs
 	const handleEventsChange = (e: any, index: number) => {
 		const { name, value } = e.target;
 		const updatedEvents = [...events];
 		updatedEvents[index] = { ...updatedEvents[index], [name]: value };
 		setEvents(updatedEvents);
+	};
+	// Function to handle changes in topper inputs
+	const handleToppersChange = (e: any, index: number) => {
+		const { name, value } = e.target;
+		const updatedToppers = [...toppers];
+		updatedToppers[index] = { ...updatedToppers[index], [name]: value };
+		setToppers(updatedToppers);
+	};
+	// Function to handle changes in award inputs
+	const handleAwardsChange = (e: any, index: number) => {
+		const { name, value } = e.target;
+		const updatedAwards = [...awards];
+		updatedAwards[index] = { ...updatedAwards[index], [name]: value };
+		setAwards(updatedAwards);
+	};
+
+	// Function to handle event image upload
+	const handleEventImageUpload = (res: any, index: number) => {
+		const updatedEvents = [...events];
+		updatedEvents[index] = {
+			...updatedEvents[index],
+			image: res[0]?.url,
+		};
+		setEvents(updatedEvents);
+	};
+	// Function to handle topper image upload
+	const handleTopperImageUpload = (res: any, index: number) => {
+		const updatedToppers = [...toppers];
+		updatedToppers[index] = {
+			...updatedToppers[index],
+			image: res[0]?.url,
+		};
+		setToppers(updatedToppers);
+	};
+
+	// Function to handle award image upload
+	const handleAwardImageUpload = (res: any, index: number) => {
+		const updatedAwards = [...awards];
+		updatedAwards[index] = {
+			...updatedAwards[index],
+			image: res[0]?.url,
+		};
+		setAwards(updatedAwards);
 	};
 
 	// Function to handle adding new video input
@@ -131,6 +193,8 @@ function SchoolForm() {
 			contact,
 			facilities,
 			events,
+			awards,
+			toppers,
 			images,
 			videos,
 		};
@@ -142,9 +206,9 @@ function SchoolForm() {
 			toast({
 				title: "Added Successfully",
 			});
-			setTimeout(() => {
-				window.location.reload();
-			}, 2000);
+			// setTimeout(() => {
+			// 	// window.location.reload();
+			// }, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
@@ -168,7 +232,7 @@ function SchoolForm() {
 
 	if (status === "loading") {
 		return (
-			<div className="flex justify-center items-center h-screen">
+			<div className="flex justify-center items-center h-screen w-3/4">
 				<p>Loading...</p>
 			</div>
 		);
@@ -204,11 +268,11 @@ function SchoolForm() {
 						<Label className="block mb-2 font-semibold">
 							About Us
 						</Label>
-						<textarea
+						<Textarea
 							name="aboutUs"
 							value={basicInfo.aboutUs}
 							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="About the School"
 							required
 						/>
@@ -248,31 +312,6 @@ function SchoolForm() {
 								style={{ width: "100px", height: "100px" }}
 							/>
 						)}
-					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							Toppers
-						</Label>
-						<Textarea
-							name="toppers"
-							value={basicInfo.toppers}
-							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
-							placeholder="John Doe, Jane Smith"
-						/>
-					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							Awards{" "}
-						</Label>
-						<Textarea
-							name="awards"
-							value={basicInfo.awards}
-							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
-						/>
 					</div>
 
 					{/* Area */}
@@ -345,7 +384,7 @@ function SchoolForm() {
 							name="email"
 							value={contact.email}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="school@example.com"
 						/>
 					</div>
@@ -358,7 +397,7 @@ function SchoolForm() {
 							name="location"
 							value={contact.location}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="Hyderabad"
 						/>
 					</div>
@@ -371,7 +410,7 @@ function SchoolForm() {
 							name="number"
 							value={contact.number}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="91-9999999999"
 						/>
 					</div>
@@ -471,9 +510,9 @@ function SchoolForm() {
 						</Label>
 						<Textarea
 							name="opening"
-							value={basicInfo.opening}
-							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
+							value={contact.opening}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="John Doe, Jane Smith"
 						/>
 					</div>
@@ -508,6 +547,140 @@ function SchoolForm() {
 						</Plus>
 					</div>
 
+					{/* Toppers */}
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Toppers
+						</Label>
+						{toppers.map((topper, index) => (
+							<div
+								key={index}
+								className="mb-2 flex gap-6 items-center">
+								<div className="w-full">
+									<Input
+										type="text"
+										name="title"
+										value={topper.title}
+										onChange={(e) =>
+											handleToppersChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2"
+										placeholder={`Topper ${
+											index + 1
+										} Title`}
+									/>
+									<Textarea
+										name="description"
+										value={topper.description}
+										onChange={(e) =>
+											handleToppersChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2 h-40"
+										placeholder={`Topper ${
+											index + 1
+										} Description`}
+									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={toppers[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleTopperImageUpload(
+													res,
+													index
+												);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
+								</div>
+								<Trash
+									onClick={() => removeToppers(index)}
+									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
+							</div>
+						))}
+						<Plus
+							onClick={addToppers}
+							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+							+
+						</Plus>
+					</div>
+
+					{/* Awards */}
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Awards
+						</Label>
+						{awards.map((award, index) => (
+							<div
+								key={index}
+								className="mb-2 flex gap-6 items-center">
+								<div className="w-full">
+									<Input
+										type="text"
+										name="title"
+										value={award.title}
+										onChange={(e) =>
+											handleAwardsChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2"
+										placeholder={`Award ${index + 1} Title`}
+									/>
+									<Textarea
+										name="description"
+										value={award.description}
+										onChange={(e) =>
+											handleAwardsChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2 h-40"
+										placeholder={`Award ${
+											index + 1
+										} Description`}
+									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={awards[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleAwardImageUpload(
+													res,
+													index
+												);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
+								</div>
+								<Trash
+									onClick={() => removeAward(index)}
+									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
+							</div>
+						))}
+						<Plus
+							onClick={addAwards}
+							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+							+
+						</Plus>
+					</div>
+
 					{/* Events */}
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
@@ -528,18 +701,42 @@ function SchoolForm() {
 										className="w-full p-2 border rounded-md mb-2"
 										placeholder={`Event ${index + 1} Title`}
 									/>
-									<Input
-										type="text"
+									<Textarea
 										name="description"
 										value={event.description}
 										onChange={(e) =>
 											handleEventsChange(e, index)
 										}
-										className="w-full p-2 border rounded-md mb-2"
+										className="w-full p-2 border rounded-md mb-2 h-40"
 										placeholder={`Event ${
 											index + 1
 										} Description`}
 									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={events[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleEventImageUpload(
+													res,
+													index
+												);
+												console.log("test", events);
+												console.log("awards", awards);
+												console.log("toppers", toppers);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
 								</div>
 								<Trash
 									onClick={() => removeEvent(index)}

@@ -25,20 +25,22 @@ export async function POST(request: Request) {
 	const images = body.images.map((imageUrl: string) => ({
 		url: imageUrl,
 	}));
-	const aboutUs = JSON.stringify(body.aboutUs);
 	try {
 		const res = await prisma.school.create({
 			data: {
 				name: body.name,
-				// aboutUs: body.aboutUs,
-				aboutUs,
+				aboutUs: body.aboutUs,
 				logo: body.logo,
 				rating: body.rating || 0,
-				toppers: body.toppers || "",
+				toppers: {
+					create: body.toppers,
+				},
 				area: body.area,
 				category: body.category,
 				locationMap: body.locationMap,
-				awards: body.awards,
+				awards: {
+					create: body.awards,
+				},
 				contact: {
 					create: body.contact,
 				},

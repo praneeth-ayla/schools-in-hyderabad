@@ -45,7 +45,6 @@ export default function SearchPage({ name, area, board }: Props) {
 						initialValues={{ board, where: area, school: name }}
 					/>
 
-					{/* Remove padding here only */}
 					{events === null ? (
 						<div>No events</div>
 					) : (
@@ -54,8 +53,6 @@ export default function SearchPage({ name, area, board }: Props) {
 								{!area ? "Events" : `Events in ${area}`}
 							</p>
 							<div className="m-0 pt-4 px-0">
-								{" "}
-								{/* Remove padding here */}
 								<CarouselEvents events={events} />
 							</div>
 						</div>

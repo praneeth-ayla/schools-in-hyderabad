@@ -36,9 +36,14 @@ export type SchoolDetails = {
 		linkedin: string;
 		youtube: string;
 		facebook: string;
+		opening: string;
 	};
-	opening: string;
-	awards: string;
+	awards: {
+		title: string;
+		description: string;
+		id: string;
+		image: string;
+	}[];
 	locationMap: string;
 	images: string[];
 	aboutUs: string;
@@ -46,8 +51,15 @@ export type SchoolDetails = {
 	events?: {
 		title: string;
 		description: string;
+		id: string;
+		image: string;
 	}[];
-	toppers?: string;
+	toppers?: {
+		title: string;
+		description: string;
+		id: string;
+		image: string;
+	}[];
 	rating: number;
 	reviews: {
 		message: string;

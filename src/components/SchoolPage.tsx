@@ -13,6 +13,7 @@ import DateTimeDisplay from "@/components/TimeConverter";
 import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
+import EventsSchoolPage from "./EventsSchoolPage";
 
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
@@ -49,7 +50,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 										</p>
 										<div className="flex flex-col gap-3 ">
 											<div className="flex gap-2 flex-col">
-												<p className="border-b text-xs border-gray-400 font-semibold">
+												<p className="border-b  border-gray-400 font-semibold">
 													Location
 												</p>
 												<p>
@@ -58,7 +59,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											</div>
 
 											<div className="flex gap-2 flex-col">
-												<p className="border-b text-xs border-gray-400 font-semibold">
+												<p className="border-b  border-gray-400 font-semibold">
 													Email
 												</p>
 												<p>
@@ -68,7 +69,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 												</p>
 											</div>
 											<div className="flex gap-2 flex-col">
-												<p className="border-b text-xs border-gray-400 font-semibold">
+												<p className="border-b  border-gray-400 font-semibold">
 													Number
 												</p>
 												<p>
@@ -78,7 +79,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 												</p>
 											</div>
 											<div className="flex gap-2 flex-col">
-												<p className="border-b text-xs border-gray-400 font-semibold">
+												<p className="border-b  border-gray-400 font-semibold">
 													Website
 												</p>
 												<p>
@@ -145,12 +146,29 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 										</a>
 									</div>
 								</div>
-								<div className="flex justify-center items-center">
-									<div
-										dangerouslySetInnerHTML={{
-											__html: details.locationMap,
-										}}
-									/>
+								<div>
+									<div className="text-2xl font-bold">
+										Map
+									</div>
+									<div className="flex justify-center items-center">
+										<div
+											dangerouslySetInnerHTML={{
+												__html: details.locationMap,
+											}}
+										/>
+									</div>
+								</div>
+								<div>
+									{details.contact?.opening && (
+										<>
+											<div className="text-2xl font-bold">
+												Opening
+											</div>
+											<pre className="font-sans">
+												{details.contact.opening}
+											</pre>
+										</>
+									)}
 								</div>
 							</pre>
 						</Card>
@@ -161,31 +179,27 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 							</div>
 							<div className="px-4 md:px-10 pt-3 flex flex-col gap-6 md:gap-10">
 								<div className="pt-11">
-									<p className="text-lg md:text-2xl pb-3 font-bold">
+									<p className="text-2xl pb-3 font-bold">
 										About
 									</p>
 									<div className="">
 										<pre className="text-wrap font-sans">
-											{details.aboutUs.slice(1, -1)}
+											{details.aboutUs}
 										</pre>
-										{/* <Editor
-											blockTextHandler={() => {}}
-											initialContent={details.aboutUs}
-										/> */}
 									</div>
 								</div>
 								{details.facilities &&
 									details.facilities?.length > 0 && (
 										<div>
-											<p className="text-lg md:text-2xl pb-3 font-bold">
+											<p className="text-2xl pb-3 font-bold">
 												Facilities
 											</p>
-											<div className="flex gap-1 flex-wrap">
+											<div className="flex gap-3 flex-wrap">
 												{details.facilities.map(
 													(facility, index) => (
 														<Badge
 															key={index}
-															className="text-xs">
+															className="text-lg p-2 px-4 text-black bg-blue-400">
 															{/* Didn't want to change the types so :)*/}
 															{/* @ts-ignore */}
 															{facility.name}
@@ -196,70 +210,91 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 										</div>
 									)}
 
-								<div>
+								{details.toppers &&
+									details.toppers.length > 0 && (
+										<div>
+											<p className="text-2xl pb-3 font-bold">
+												Toppers
+											</p>
+											<pre className=" font-sans text-wrap">
+												<div className="grid gap-3">
+													{details.toppers.map(
+														(
+															topper: any,
+															i: number
+														) => (
+															<PhotoCard
+																key={i}
+																event={topper}
+															/>
+														)
+													)}
+												</div>
+											</pre>
+										</div>
+									)}
+
+								{details.awards &&
+									details.awards.length > 0 && (
+										<div>
+											<p className="text-2xl pb-3 font-bold">
+												Awards
+											</p>
+											<pre className=" font-sans text-wrap">
+												<div className="grid gap-3">
+													{details.awards.map(
+														(
+															award: any,
+															i: number
+														) => (
+															<PhotoCard
+																key={i}
+																event={award}
+															/>
+														)
+													)}
+												</div>
+											</pre>
+										</div>
+									)}
+
+								{details.videos &&
+									details.videos?.length > 0 && (
+										<div>
+											<p className="text-2xl pb-3 font-bold">
+												Videos
+											</p>
+
+											<CarouselYoutube
+												videos={details.videos}
+											/>
+										</div>
+									)}
+
+								<div className="px-0 m-0">
 									{details?.events &&
 										details.events.length > 0 &&
 										details.events.some(
 											(event) => event.title.trim() !== ""
 										) && (
 											<>
-												<p className="text-lg md:text-2xl pb-3 font-bold">
+												<p className="text-2xl pb-3 font-bold">
 													Events
 												</p>
-												<div className="grid gap-3">
-													{details.events.map(
-														(event, i) => (
-															<div key={i}>
-																<a href="">
-																	<PhotoCard
-																		description={
-																			event.description
-																		}
-																		title={
-																			event.title
-																		}
-																		img="http://institution.eplug-ins.com/wp-content/uploads/2017/01/5072587676_b4f4f18b8a_b.jpg"
-																	/>
-																</a>
-															</div>
-														)
-													)}
+												{/* <FlowbiteCarousel
+													events={details.events}
+												/> */}
+												<div>
+													<EventsSchoolPage
+														events={details.events}
+													/>
 												</div>
 											</>
 										)}
 								</div>
 
-								{details.toppers !== "" && (
-									<div>
-										<p className="text-lg md:text-2xl pb-3 font-bold">
-											Toppers
-										</p>
-										<pre className=" font-sans text-wrap">
-											{details.toppers}
-										</pre>
-									</div>
-								)}
-
-								{details.awards !== "" && (
-									<div>
-										<p className="text-lg md:text-2xl pb-3 font-bold">
-											Awards
-										</p>
-										<pre className=" font-sans text-wrap">
-											{details.awards}
-										</pre>
-									</div>
-								)}
-
-								{details.videos &&
-									details.videos?.length > 0 && (
-										<CarouselYoutube
-											videos={details.videos}
-										/>
-									)}
-
 								<div>
-									<p className="text-lg md:text-2xl font-bold">
+									<p className="text-2xl font-bold">
 										Reviews
 									</p>
 									<div className="py-3 grid gap-1">
@@ -300,13 +335,13 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 																					.toUpperCase()}
 																			</div>
 																		</Avatar>
-																		<div className="text-xs md:text-base">
+																		<div className=" md:text-base">
 																			{
 																				name
 																			}
 																		</div>
 																	</div>
-																	<div className="text-xs md:">
+																	<div className=" md:">
 																		{DateTimeDisplay(
 																			date
 																		).slice(
@@ -320,7 +355,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 																		rating
 																	}
 																/>
-																<CardDescription className="py-3 text-xs text-black">
+																<CardDescription className="py-3  text-black">
 																	{message}
 																</CardDescription>
 															</div>
@@ -341,7 +376,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 					</div>
 				</div>
 			</div>
-			{details.opening}
 			<BackgroundBeams />
 		</div>
 	);

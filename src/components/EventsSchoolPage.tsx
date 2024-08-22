@@ -2,20 +2,18 @@
 import {
 	Carousel,
 	CarouselContent,
-	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
-import { AvatarImage } from "@radix-ui/react-avatar";
 import DateTimeDisplay from "./TimeConverter";
-import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Card, CardDescription, CardTitle } from "./ui/card";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 
-export default function CarouselEvents({ events }: any) {
+export default function EventsSchoolPage({ events }: any) {
+	console.log(events);
 	return (
-		<div>
+		<div className="w-[89vw] md:w-auto">
 			<Carousel
 				plugins={[
 					Autoplay({
@@ -27,39 +25,11 @@ export default function CarouselEvents({ events }: any) {
 						<div key={i}>
 							{
 								<Link href={`/events?id=${event.id}`}>
-									<Card className="h-[440px] p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex w-80 lg:w-96 gap-3 flex-col">
-										<div className="flex-grow">
-											<div className="flex gap-3 items-center">
-												{event.school && (
-													<>
-														<Avatar className="border border-gray-600 flex justify-center items-center">
-															<AvatarImage
-																src={
-																	event.school
-																		.logo
-																}
-																alt={`${event.school.name} logo`}
-															/>
-															<AvatarFallback>
-																{event.school.name
-																	.charAt(0)
-																	.toUpperCase()}
-															</AvatarFallback>
-														</Avatar>
-														<div className="text-xs md:text-base">
-															{event.school.name}
-														</div>
-													</>
-												)}
-											</div>
-										</div>
+									<Card className="h-[400px] p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex w-80 lg:w-96 gap-3 flex-col">
 										<div className="flex justify-center items-center">
 											<img
-												className="object-cover h-44 w-full"
-												src={
-													event.img ||
-													"https://utfs.io/f/a32a0397-1b5c-42a9-af5c-d24e7e7b71da-tpk6wk.com_wallpaper.jpg"
-												}
+												className="object-cover h-48 w-full"
+												src={event.image}
 												alt="event img"
 											/>
 										</div>

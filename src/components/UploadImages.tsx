@@ -19,9 +19,6 @@ export default function UploadImages({
 		setImage(images.map((img) => img.url));
 	}, [images]); // No need to include setImage in the dependency array
 
-	console.log("'''''''''im'''''''''''''''''''''''");
-	console.log(image);
-	console.log("'''''''''im'''''''''''''''''''''''");
 	return (
 		<div>
 			<UploadDropzone

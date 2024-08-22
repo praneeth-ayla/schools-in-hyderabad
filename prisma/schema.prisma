@@ -19,8 +19,8 @@ model School {
   aboutUs   String
   logo      String
   rating    Float     @default(0)    
-  toppers   String
-  awards    String?
+  toppers   Toppers[]
+  awards    Awards[]
   locationMap  String?
   contact   Contact?  
   facilities Facility[]
@@ -91,6 +91,25 @@ model Facility {
   school   School  @relation(fields: [schoolId], references: [id])
 }
 
+model Awards {
+  id       Int     @id @default(autoincrement())
+  title    String
+  description String
+  image     String?
+  schoolId Int
+  date     DateTime   @default(now())
+  school   School  @relation(fields: [schoolId], references: [id])
+}
+
+model Toppers {
+  id       Int     @id @default(autoincrement())
+  title    String
+  description String
+  image     String?
+  schoolId Int
+  date     DateTime   @default(now())
+  school   School  @relation(fields: [schoolId], references: [id])
+}
 enum Place {
   Abids
   Ameerpet

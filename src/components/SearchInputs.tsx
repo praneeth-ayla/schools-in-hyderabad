@@ -169,6 +169,11 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					</div>
 				</div>
 			</form>
+			<div className="text-center pt-3 font-bold">
+				<span className="">Please note: </span>
+				We are continuously updating profiles of schools, your patience
+				is appreciated.
+			</div>
 		</div>
 	);
 }
