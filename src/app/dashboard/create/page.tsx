@@ -38,6 +38,7 @@ function SchoolForm() {
 		area: "",
 		category: "",
 		locationMap: "",
+		opening: "",
 	});
 
 	const [contact, setContact] = useState({
@@ -461,6 +462,19 @@ function SchoolForm() {
 							onChange={handleContactChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="91-9999999999"
+						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							opening
+						</Label>
+						<Textarea
+							name="opening"
+							value={basicInfo.opening}
+							onChange={handleBasicInfoChange}
+							className="w-full p-2 border rounded-md"
+							placeholder="John Doe, Jane Smith"
 						/>
 					</div>
 

@@ -19,13 +19,14 @@ export default function UploadImages({
 		setImage(images.map((img) => img.url));
 	}, [images]); // No need to include setImage in the dependency array
 
+	console.log("'''''''''im'''''''''''''''''''''''");
+	console.log(image);
+	console.log("'''''''''im'''''''''''''''''''''''");
 	return (
 		<div>
 			<UploadDropzone
 				endpoint="imageUploader"
 				onClientUploadComplete={(res: any) => {
-					console.log("Files: ", res);
-					console.log(image);
 					// Add new image to the images array
 					setImages((prevImages) => [...prevImages, ...res]);
 				}}
@@ -33,11 +34,15 @@ export default function UploadImages({
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2">
-				{image.map((img: any, i: number) => (
+			<div className="flex gap-2 h-20 bg-green-300">
+				{images.map((img: any, i: number) => (
 					<div key={i}>
 						<img
-							src={img}
+							className="bg-green-500"
+							src={img.url}
+							onClick={() => {
+								console.log(img);
+							}}
 							alt={`img${i + 1}`}
 							style={{ width: "100px", height: "100px" }}
 						/>
@@ -45,16 +50,14 @@ export default function UploadImages({
 							<Trash
 								onClick={async () => {
 									// Delete image from server and update state
-									console.log("before", images);
 									await axios.get(
 										`/api/deleteImage?img=${extractPngName(
 											img
 										)}`
 									);
-									console.log("tes", img, "tes");
 									setImages((prevImages) =>
 										prevImages.filter(
-											(image) => image.url !== img
+											(image) => image.url !== img.url
 										)
 									);
 									console.log("after", images);

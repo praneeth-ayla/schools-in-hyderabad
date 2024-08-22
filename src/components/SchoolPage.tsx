@@ -166,7 +166,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									</p>
 									<div className="">
 										<pre className="text-wrap font-sans">
-											{details.aboutUs}
+											{details.aboutUs.slice(1, -1)}
 										</pre>
 										{/* <Editor
 											blockTextHandler={() => {}}
@@ -341,6 +341,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 					</div>
 				</div>
 			</div>
+			{details.opening}
 			<BackgroundBeams />
 		</div>
 	);

@@ -19,7 +19,7 @@ export default function PhotoCard({
 						className="object-cover w-full h-full rounded-md"
 					/>
 				</div>
-				<div className="flex flex-col justify-center">
+				<div className="flex flex-col">
 					<CardTitle className="text-base md:text-lg">
 						{title}
 					</CardTitle>

@@ -24,10 +24,17 @@ export default function page() {
 							Our Mission
 						</h1>
 						<p className="text-base md:text-lg text-muted-foreground font-medium">
-							Our mission is to empower parents with reliable and
-							detailed resource for school information, enhancing
-							their decision-making process with high-quality
-							images and up-to-date data.
+							Our mission is to offer parents a reliable and
+							comprehensive resource for school information,
+							aiding their decision-making by providing up-to-date
+							details and high-quality images.
+							SchoolsInHyderabad.co.in is designed to simplify the
+							search for the best schools in Hyderabad for both
+							parents and children. Our portal offers complete
+							information, including detailed school profiles,
+							photos, curriculum specifics, and extracurricular
+							activities, ensuring you have everything you need to
+							make an informed choice.
 						</p>
 					</div>
 					<div>
@@ -35,11 +42,14 @@ export default function page() {
 							Our Story
 						</h1>
 						<p className="text-base md:text-lg text-muted-foreground font-medium">
-							Edu Infonence was born from our own frustrations as
-							parents searching for the best schools. We realized
-							that finding quality visuals and accurate data was a
-							challenge, which inspired us to create a platform
-							that bridges this gap.
+							Edu Infonence was founded out of a desire to improve
+							the way parents find professional and reliable
+							information about schools. We noticed a gap in the
+							availability of quality visuals and accurate data,
+							which inspired us to create a platform that combines
+							both. Since our inception, we have grown steadily,
+							building a reputation for excellence and
+							trustworthiness.
 						</p>
 					</div>
 					<div>
@@ -50,11 +60,10 @@ export default function page() {
 							<li>
 								<b>High-Quality Images: </b> Our advanced camera
 								ensures every school is showcased beautifully.
-								Comprehensive
 							</li>
 							<li>
-								<b>Information: </b> We cover all aspects of
-								schools, from facilities to reviews.
+								<b>Comprehensive Information: </b> We cover all
+								aspects of schools, from facilities to reviews.
 							</li>
 							<li>
 								<b>User-Friendly Interface: </b>Our website is
@@ -63,13 +72,7 @@ export default function page() {
 							</li>
 						</div>
 					</div>
-					<span className="text-base md:text-lg text-muted-foreground font-medium">
-						<b className="text-white">Please Note:</b> As we strive
-						to provide detailed information school by school, it may
-						take us a few months to fully populate our database. We
-						appreciate your patience as we work diligently to ensure
-						every school profile is accurate and up-to-date.
-					</span>
+
 					<div>
 						<h1 className="text-lg sm:text-2xl font-bold pb-1 ">
 							Join Our Launch Promotion!
@@ -94,6 +97,13 @@ export default function page() {
 							@schoolsinhyderabad.
 						</p>
 					</div>
+					<span className="text-base md:text-lg text-yellow-300 font-medium">
+						<b className="text-white">Please Note: </b>As we strive
+						to provide detailed information school by school, it may
+						take us a few months to fully populate our database. We
+						appreciate your patience as we work diligently to ensure
+						every school profile is accurate and up-to-date.
+					</span>
 				</div>
 				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 md:text-center border-y-4">
 					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">

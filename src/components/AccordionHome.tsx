@@ -1,9 +1,3 @@
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
 import React from "react";
 
 export default function AccordionHome() {
@@ -41,8 +35,8 @@ export default function AccordionHome() {
 				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
 					<p className="font-semibold text-lg pb-2">Updates</p>
 					<p className="text-muted-foreground">
-						Stay informed about the latest education sector news in
-						Hyderabad.
+						Stay informed about the schools and education sector
+						news in Hyderabad.
 					</p>
 				</div>
 				<div className="bg-purple-950 p-4 rounded-sm bg-opacity-70">
@@ -54,7 +48,7 @@ export default function AccordionHome() {
 					</p>
 				</div>
 			</div>
-			<div className="pt-4 text-left text-sm md:text-lg text-muted-foreground pb-4 sm:pb-0">
+			<div className="text-left text-sm md:text-lg text-muted-foreground pb-4 sm:pb-0 pt-10">
 				Explore{" "}
 				<a
 					className="text-blue-400 hover:text-blue-500"

@@ -95,3 +95,66 @@ export function useSchoolList({ name, area, board }: UseSchoolListParams) {
 
 	return { details, isLoading, failed };
 }
+
+// Correct usage in a custom hook
+export function useGetEvent(id: string) {
+	const [event, setEvent] = useState<any>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<any>(`/api/event?id=${id}`);
+				setEvent(data);
+			} catch (error: any) {
+				console.error("Error fetching events", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [toast]);
+
+	return { event, isLoading, failed };
+}
+
+export function useGetEventsList(area: Place) {
+	const [events, setEvents] = useState<any>(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<any>(
+					`/api/eventList?area=${area}`
+				);
+				setEvents(data);
+			} catch (error: any) {
+				console.error("Error fetching events", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [area]);
+
+	return { events, isLoading, failed };
+}

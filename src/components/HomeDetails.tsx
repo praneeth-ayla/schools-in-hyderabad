@@ -21,7 +21,7 @@ export default function HomeDetails() {
 		},
 	];
 	return (
-		<div className="py-10 md:py-20 w-full flex flex-col items-center justify-center antialiased">
+		<div className="py-10 md:py-10 w-full flex flex-col items-center justify-center antialiased">
 			<div className="text-white p-4 z-20">
 				<div className="pt-10 mx-4 lg:mx-14 xl:mx-28 sm:p-10 sm:pt-0 sm:text-left z-20">
 					<div className="grid md:grid-cols-2 gap-8 sm:gap-10 bg-gradient-to-r">
@@ -30,14 +30,19 @@ export default function HomeDetails() {
 								Heritage of Hyderabad
 							</h1>
 							<p className="text-base md:text-lg text-muted-foreground">
-								Hyderabad, the “City of Pearls,” blends
-								modernity with its rich cultural heritage. With
-								landmarks like Birla Mandir and Golconda Fort,
-								the city&apos;s historical depth inspires
-								students to embrace their cultural roots while
-								looking towards the future. This unique
-								environment makes Hyderabad an ideal place to
-								raise and educate children.
+								Heritage of Hyderabad, also known as the “City
+								of Pearls,” is a metropolis that skillfully
+								combines modern developments with its rich
+								ancient legacy. Hyderabad is a city rich in
+								history and culture with iconic sites such as
+								the Birla Mandir, Golconda Fort, Cyber Towers,
+								and many more. This rich legacy creates an
+								environment where students are inspired to
+								embrace the future and recognize and comprehend
+								their cultural origins. Hyderabad is a great
+								area to raise children because of its rich
+								historical background, which enhances the
+								educational experience.
 							</p>
 						</div>
 						<div className="bg-purple-950 bg-opacity-70 p-4 sm:p-10 rounded-lg shadow-lg">
@@ -45,15 +50,20 @@ export default function HomeDetails() {
 								Education in Hyderabad
 							</h1>
 							<p className="text-base md:text-lg text-muted-foreground">
-								Hyderabad is home to some of India&apos;s top
-								educational institutions. The city offers a
-								range of schools from state and central boards
-								to international institutions. Schools here
-								provide cutting-edge facilities, expert
-								educators, and a curriculum that balances
-								academics with extracurricular activities,
-								ensuring holistic development and preparing
-								students to become globally-ready individuals.
+								Hyderabad is home to some of India’s most
+								esteemed educational institutions, renowned for
+								their high standards. The city offers a wide
+								range of options, from prestigious state and
+								central board schools to exclusive international
+								schools. Hyderabad schools feature cutting-edge
+								facilities, highly skilled teachers, and a
+								balanced curriculum that integrates academics
+								with extracurricular activities. This focus on
+								holistic development ensures that students
+								become well-rounded, globally-ready individuals.
+								Additionally, Hyderabad’s emphasis on research,
+								technology, and innovation makes it a hub for
+								future leaders in various fields.
 							</p>
 						</div>
 					</div>
