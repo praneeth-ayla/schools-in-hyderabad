@@ -3,21 +3,16 @@ import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Carousel as ReactCarousel } from "flowbite-react";
 
-export function CarouselSpacing({ images }: { images: string[] }) {
+export function CarouselSpacing({
+	images,
+}: {
+	images: { url: string; id?: string; schoolId: string }[];
+}) {
 	console.log(images);
 	return (
 		<div>
@@ -60,46 +55,20 @@ export function CarouselSpacing({ images }: { images: string[] }) {
 					</Carousel>
 				</DialogTrigger>
 				<DialogContent className="bg-opacity-60  text-white bg-blue-200 p-4 m-1 md:p-10 flex justify-center ">
-					<Carousel
-						className="rounded-lg"
-						plugins={[
-							Autoplay({
-								delay: 2000,
-							}),
-						]}>
-						{/* <CarouselContent className="w-full h-[150px] sm:h-[250px] md:h-[350px] lg:h-[500px] rounded-lg"> */}
-						<CarouselContent className="h-96 w-full">
-							{images.map((e: any, i) => (
-								<CarouselItem
+					<div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+						<ReactCarousel slideInterval={5000}>
+							{images.map((img: any, i: number) => (
+								<img
 									key={i}
-									className="w-full h-full rounded-lg">
-									<div
-										className="flex justify-center items-center rounded-lg"
-										style={{
-											overflow: "hidden",
-											display: "flex",
-											justifyContent: "center",
-											alignItems: "center",
-											width: "100%",
-											height: "100%", // Set height to 100%
-										}}>
-										<img
-											className="w-full h-full object-cover rounded-lg"
-											src={e.url}
-											alt={`image ${i + 1}`}
-											style={{
-												objectPosition: "center",
-											}}
-										/>
-									</div>
-								</CarouselItem>
+									src={img.url}
+								/>
 							))}
-						</CarouselContent>
-						<div className="flex gap-3 pt-3 justify-center text-black">
-							<CarouselPrevious />
-							<CarouselNext />
-						</div>
-					</Carousel>
+							<img
+								src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
+								alt="..."
+							/>
+						</ReactCarousel>
+					</div>
 				</DialogContent>
 			</Dialog>
 		</div>

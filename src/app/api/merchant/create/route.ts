@@ -1,9 +1,9 @@
-import { SchoolDetails } from "@/lib/types";
+import { MerchantDetails } from "@/lib/types"; // Assuming you have a MerchantDetails type defined
 import { getServerSession } from "next-auth";
 import prisma from "../../../../../prisma";
 
 export async function POST(request: Request) {
-	const body: SchoolDetails = await request.json();
+	const body: MerchantDetails = await request.json();
 	const user = await getServerSession();
 
 	if (user?.user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
@@ -17,15 +17,17 @@ export async function POST(request: Request) {
 	}
 
 	// Transform the data for Prisma
-	const facilities =
-		body.facilities?.map((facility: string) => ({
-			name: facility,
-		})) || [];
-
 	const images =
 		// @ts-ignore
 		body.images?.map((url: string) => ({
 			url,
+		})) || [];
+
+	const videos =
+		// @ts-ignore
+		body.videos?.map((video) => ({
+			src: video.src,
+			title: video.title,
 		})) || [];
 
 	const contactData = body.contact
@@ -44,36 +46,19 @@ export async function POST(request: Request) {
 		: undefined;
 
 	try {
-		const res = await prisma.school.create({
+		const res = await prisma.merchant.create({
 			data: {
 				name: body.name,
 				aboutUs: body.aboutUs,
 				logo: body.logo,
-				rating: 0, // Assuming default rating is 0
-				area: body.area,
-				category: body.category,
+				rating: 0,
 				locationMap: body.locationMap,
 				contact: contactData ? { create: contactData } : undefined,
-				facilities: {
-					create: facilities,
-				},
-				events: {
-					create: body.events || [],
-				},
-				awards: {
-					create: body.awards || [],
-				},
-				toppers: {
-					create: body.toppers || [],
-				},
 				images: {
 					create: images,
 				},
 				videos: {
-					create: body.videos || [],
-				},
-				reviews: {
-					create: body.reviews || [],
+					create: videos,
 				},
 			},
 		});
@@ -84,7 +69,7 @@ export async function POST(request: Request) {
 		return new Response(
 			JSON.stringify({
 				success: false,
-				message: "Failed to create school",
+				message: "Failed to create merchant",
 			}),
 			{ status: 500 }
 		);

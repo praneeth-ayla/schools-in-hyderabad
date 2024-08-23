@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma";
+import prisma from "../../../../../prisma";
 
 export async function GET(request: Request) {
 	try {
@@ -28,35 +28,32 @@ export async function GET(request: Request) {
 			);
 		}
 
-		const wholeDetails = await prisma.school.findFirst({
+		const merchantDetails = await prisma.merchant.findFirst({
 			where: { id },
 			select: {
 				reviews: true,
-				area: true,
-				category: true,
-				facilities: true,
-				events: true,
 				images: true,
 				contact: true,
 				videos: true,
 				aboutUs: true,
-				awards: true,
 				logo: true,
 				name: true,
 				rating: true,
-				toppers: true,
 				locationMap: true,
 			},
 		});
 
-		if (!wholeDetails) {
-			return new Response(JSON.stringify({ error: "School not found" }), {
-				status: 404,
-				headers: { "Content-Type": "application/json" },
-			});
+		if (!merchantDetails) {
+			return new Response(
+				JSON.stringify({ error: "Merchant not found" }),
+				{
+					status: 404,
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 		}
 
-		return new Response(JSON.stringify(wholeDetails), {
+		return new Response(JSON.stringify(merchantDetails), {
 			status: 200,
 			headers: { "Content-Type": "application/json" },
 		});

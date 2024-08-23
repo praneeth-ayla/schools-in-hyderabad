@@ -23,18 +23,22 @@ export default function EventPage({ id }: { id: string }) {
 			{event.description !== null && (
 				<Card className="bg-blue-200">
 					<div className="flex justify-center items-center flex-col px-60 py-10">
-						<div className="text-5xl font-bold flex gap-3 justify-center items-center">
-							<Avatar className=" border border-blue-300 flex justify-center items-center">
-								<AvatarImage
-									src={event.school.logo}
-									alt={`${event.school.name} logo`}
-								/>
-								<AvatarFallback>
-									{event.school.name.charAt(0).toUpperCase()}
-								</AvatarFallback>
-							</Avatar>
-							{event.school.name}
-						</div>
+						{event.school && (
+							<div className="text-5xl font-bold flex gap-3 justify-center items-center">
+								<Avatar className=" border border-blue-300 flex justify-center items-center">
+									<AvatarImage
+										src={event.school.logo}
+										alt={`${event.school.name} logo`}
+									/>
+									<AvatarFallback>
+										{event.school.name
+											.charAt(0)
+											.toUpperCase()}
+									</AvatarFallback>
+								</Avatar>
+								{event.school.name}
+							</div>
+						)}
 						<div className="flex justify-center items-center pb-10">
 							<img
 								className="h-[500px] w-auto"

@@ -13,103 +13,105 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import UploadImages from "@/components/UploadImages";
+import UploadImagesEdit from "@/components/UploadImagesEdit";
 import { useSchoolDetails } from "@/lib/hooks";
 import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
-import { UploadDropzone } from "@/utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function SchoolForm({ searchParams }: any) {
-	const schoolId = searchParams.id;
-	const { details, isLoading } = useSchoolDetails(schoolId);
+function SchoolForm({ searchParams }: any) {
+	const id = searchParams.id;
+	const { isLoading, details, failed } = useSchoolDetails(id);
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const { toast } = useToast();
 	const [loading, setLoading] = useState(false);
 
-	// State for form fields
+	// Separate states for each section of the form
 	const [basicInfo, setBasicInfo] = useState({
-		name: "",
-		aboutUs: "",
-		logo: "",
-		area: "",
-		category: "",
-		locationMap: "",
+		name: details?.name || "",
+		aboutUs: details?.aboutUs || "",
+		logo: details?.logo || "",
+		area: details?.area || "",
+		category: details?.category || "",
+		locationMap: details?.locationMap || "",
 	});
 
 	const [contact, setContact] = useState({
-		email: "",
-		location: "",
-		number: "",
-		website: "",
-		facebook: "",
-		youtube: "",
-		instagram: "",
-		twitter: "",
-		linkedin: "",
+		email: details?.contact?.email || "",
+		location: details?.contact?.location || "",
+		number: details?.contact?.number || "",
+		website: details?.contact?.website || "",
+		facebook: details?.contact?.facebook || "",
+		youtube: details?.contact?.youtube || "",
+		instagram: details?.contact?.instagram || "",
+		twitter: details?.contact?.twitter || "",
+		linkedin: details?.contact?.linkedin || "",
+		opening: details?.contact?.opening || "",
 	});
 
+	// Initially empty arrays for facilities and videos
 	const [facilities, setFacilities] = useState([""]);
 	const [events, setEvents] = useState([
+		{ title: "", description: "", image: "" },
+	]);
+	const [toppers, setToppers] = useState([
 		{ title: "", description: "", image: "" },
 	]);
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
 	]);
-	const [Toppers, setToppers] = useState([
-		{ title: "", description: "", image: "" },
-	]);
-	const [images, setImages] = useState([""]);
+	const [images, setImages] = useState<
+		{ url: string; id?: string; schoolId: string }[]
+	>([]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
-	// Synchronize state with details only after data has been loaded
 	useEffect(() => {
-		if (details) {
-			setBasicInfo({
-				name: details.name || "",
-				aboutUs: details.aboutUs || "",
-				logo: details.logo || "",
-				area: details.area || "",
-				category: details.category || "",
-				locationMap: details.locationMap || "",
-			});
-			setContact({
-				email: details.contact?.email || "",
-				location: details.contact?.location || "",
-				number: details.contact?.number || "",
-				website: details.contact?.website || "",
-				facebook: details.contact?.facebook || "",
-				youtube: details.contact?.youtube || "",
-				instagram: details.contact?.instagram || "",
-				twitter: details.contact?.twitter || "",
-				linkedin: details.contact?.linkedin || "",
-			});
-			setFacilities(details.facilities || [""]);
-			setEvents(
-				details.events || [{ title: "", description: "", image: "" }]
-			);
-			setAwards(
-				details.awards || [{ title: "", description: "", image: "" }]
-			);
-			setToppers(
-				details.toppers || [{ title: "", description: "", image: "" }]
-			);
-			setImages(details.images || [""]);
-			setVideos(details.videos || [{ src: "", title: "" }]);
-		}
+		setBasicInfo({
+			name: details?.name || "",
+			aboutUs: details?.aboutUs || "",
+			logo: details?.logo || "",
+			area: details?.area || "",
+			category: details?.category || "",
+			locationMap: details?.locationMap || "",
+		});
 	}, [details]);
 
-	if (isLoading || status === "loading") {
-		return (
-			<div className="flex justify-center items-center h-screen">
-				<p>Loading...</p>
-			</div>
+	useEffect(() => {
+		setContact({
+			email: details?.contact?.email || "",
+			location: details?.contact?.location || "",
+			number: details?.contact?.number || "",
+			website: details?.contact?.website || "",
+			facebook: details?.contact?.facebook || "",
+			youtube: details?.contact?.youtube || "",
+			instagram: details?.contact?.instagram || "",
+			twitter: details?.contact?.twitter || "",
+			linkedin: details?.contact?.linkedin || "",
+			opening: details?.contact?.opening || "",
+		});
+		console.log(details);
+	}, [details]);
+
+	useEffect(() => {
+		setFacilities(details?.facilities || [""]);
+		setToppers(
+			details?.toppers || [{ title: "", description: "", image: "" }]
 		);
-	}
+		setAwards(
+			details?.awards || [{ title: "", description: "", image: "" }]
+		);
+		setEvents(
+			details?.events || [{ title: "", description: "", image: "" }]
+		);
+		setVideos(details?.videos || [{ title: "", src: "" }]);
+		setImages(details?.images || [{ url: "", id: "", schoolId: "" }]);
+		console.log("djska", details?.images);
+	}, [details]);
 
 	const handleBasicInfoChange = (e: any) => {
 		const { name, value } = e.target;
@@ -142,18 +144,74 @@ export default function SchoolForm({ searchParams }: any) {
 	const addEvent = () => {
 		setEvents([...events, { title: "", description: "", image: "" }]);
 	};
+	const addToppers = () => {
+		setToppers([...toppers, { title: "", description: "", image: "" }]);
+	};
+	const addAwards = () => {
+		setAwards([...awards, { title: "", description: "", image: "" }]);
+	};
 
 	// Function to handle removing an event input
 	const removeEvent = (index: number) => {
 		setEvents(events.filter((_, i) => i !== index));
 	};
-
+	// Function to handle removing a topper input
+	const removeToppers = (index: number) => {
+		setToppers(toppers.filter((_, i) => i !== index));
+	};
+	// Function to handle removing an award input
+	const removeAward = (index: number) => {
+		setAwards(awards.filter((_, i) => i !== index));
+	};
 	// Function to handle changes in event inputs
 	const handleEventsChange = (e: any, index: number) => {
 		const { name, value } = e.target;
 		const updatedEvents = [...events];
 		updatedEvents[index] = { ...updatedEvents[index], [name]: value };
 		setEvents(updatedEvents);
+	};
+	// Function to handle changes in topper inputs
+	const handleToppersChange = (e: any, index: number) => {
+		const { name, value } = e.target;
+		const updatedToppers = [...toppers];
+		updatedToppers[index] = { ...updatedToppers[index], [name]: value };
+		setToppers(updatedToppers);
+	};
+	// Function to handle changes in award inputs
+	const handleAwardsChange = (e: any, index: number) => {
+		const { name, value } = e.target;
+		const updatedAwards = [...awards];
+		updatedAwards[index] = { ...updatedAwards[index], [name]: value };
+		setAwards(updatedAwards);
+	};
+
+	// Function to handle event image upload
+	const handleEventImageUpload = (res: any, index: number) => {
+		const updatedEvents = [...events];
+		updatedEvents[index] = {
+			...updatedEvents[index],
+			image: res[0]?.url,
+		};
+		setEvents(updatedEvents);
+	};
+	// Function to handle topper image upload
+	const handleTopperImageUpload = (res: any, index: number) => {
+		const updatedToppers = [...toppers];
+		updatedToppers[index] = {
+			...updatedToppers[index],
+			image: res[0]?.url,
+		};
+		setToppers(updatedToppers);
+	};
+
+	// Function to handle award image upload
+	const handleAwardImageUpload = (res: any, index: number) => {
+		const updatedAwards = [...awards];
+		updatedAwards[index] = {
+			...updatedAwards[index],
+			image: res[0]?.url,
+		};
+		setAwards(updatedAwards);
 	};
 
 	// Function to handle adding new video input
@@ -183,6 +241,8 @@ export default function SchoolForm({ searchParams }: any) {
 			contact,
 			facilities,
 			events,
+			awards,
+			toppers,
 			images,
 			videos,
 		};
@@ -194,9 +254,9 @@ export default function SchoolForm({ searchParams }: any) {
 			toast({
 				title: "Added Successfully",
 			});
-			setTimeout(() => {
-				window.location.reload();
-			}, 2000);
+			// setTimeout(() => {
+			// 	// window.location.reload();
+			// }, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
@@ -206,6 +266,25 @@ export default function SchoolForm({ searchParams }: any) {
 			});
 		}
 	};
+
+	useEffect(() => {
+		if (status === "unauthenticated") {
+			router.push("/");
+		} else if (
+			status === "authenticated" &&
+			session?.user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL
+		) {
+			router.push("/");
+		}
+	}, [status, session, router]);
+
+	if (status === "loading") {
+		return (
+			<div className="flex justify-center items-center h-screen w-3/4">
+				<p>Loading...</p>
+			</div>
+		);
+	}
 
 	if (
 		status === "authenticated" &&
@@ -237,11 +316,11 @@ export default function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							About Us
 						</Label>
-						<textarea
+						<Textarea
 							name="aboutUs"
 							value={basicInfo.aboutUs}
 							onChange={handleBasicInfoChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="About the School"
 							required
 						/>
@@ -353,7 +432,7 @@ export default function SchoolForm({ searchParams }: any) {
 							name="email"
 							value={contact.email}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="school@example.com"
 						/>
 					</div>
@@ -366,7 +445,7 @@ export default function SchoolForm({ searchParams }: any) {
 							name="location"
 							value={contact.location}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="Hyderabad"
 						/>
 					</div>
@@ -379,7 +458,7 @@ export default function SchoolForm({ searchParams }: any) {
 							name="number"
 							value={contact.number}
 							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
+							className="w-full p-2 border rounded-md h-96"
 							placeholder="91-9999999999"
 						/>
 					</div>
@@ -404,19 +483,6 @@ export default function SchoolForm({ searchParams }: any) {
 						<Input
 							name="instagram"
 							value={contact.instagram}
-							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
-							placeholder="91-9999999999"
-						/>
-					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							twitter
-						</Label>
-						<Input
-							name="twitter"
-							value={contact.twitter}
 							onChange={handleContactChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="91-9999999999"
@@ -473,22 +539,34 @@ export default function SchoolForm({ searchParams }: any) {
 						/>
 					</div>
 
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							opening
+						</Label>
+						<Textarea
+							name="opening"
+							value={contact.opening}
+							onChange={handleContactChange}
+							className="w-full p-2 border rounded-md h-96"
+							placeholder="John Doe, Jane Smith"
+						/>
+					</div>
+
 					{/* Facilities */}
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							Facilities
 						</Label>
-						{facilities.map((facility: any, index) => (
+						{facilities.map((facility, index) => (
 							<div
 								key={index}
 								className="flex gap-6 items-center mb-2">
 								<Input
 									type="text"
-									value={facility.name}
-									onChange={(e) => {
-										handleFacilitiesChange(e, index);
-										console.log(facilities);
-									}}
+									value={facility}
+									onChange={(e) =>
+										handleFacilitiesChange(e, index)
+									}
 									className="w-full p-2 border rounded-md"
 									placeholder={`Facility ${index + 1}`}
 								/>
@@ -499,6 +577,140 @@ export default function SchoolForm({ searchParams }: any) {
 						))}
 						<Plus
 							onClick={addFacility}
+							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+							+
+						</Plus>
+					</div>
+
+					{/* Toppers */}
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Toppers
+						</Label>
+						{toppers.map((topper, index) => (
+							<div
+								key={index}
+								className="mb-2 flex gap-6 items-center">
+								<div className="w-full">
+									<Input
+										type="text"
+										name="title"
+										value={topper.title}
+										onChange={(e) =>
+											handleToppersChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2"
+										placeholder={`Topper ${
+											index + 1
+										} Title`}
+									/>
+									<Textarea
+										name="description"
+										value={topper.description}
+										onChange={(e) =>
+											handleToppersChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2 h-40"
+										placeholder={`Topper ${
+											index + 1
+										} Description`}
+									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={toppers[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleTopperImageUpload(
+													res,
+													index
+												);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
+								</div>
+								<Trash
+									onClick={() => removeToppers(index)}
+									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
+							</div>
+						))}
+						<Plus
+							onClick={addToppers}
+							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+							+
+						</Plus>
+					</div>
+
+					{/* Awards */}
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Awards
+						</Label>
+						{awards.map((award, index) => (
+							<div
+								key={index}
+								className="mb-2 flex gap-6 items-center">
+								<div className="w-full">
+									<Input
+										type="text"
+										name="title"
+										value={award.title}
+										onChange={(e) =>
+											handleAwardsChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2"
+										placeholder={`Award ${index + 1} Title`}
+									/>
+									<Textarea
+										name="description"
+										value={award.description}
+										onChange={(e) =>
+											handleAwardsChange(e, index)
+										}
+										className="w-full p-2 border rounded-md mb-2 h-40"
+										placeholder={`Award ${
+											index + 1
+										} Description`}
+									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={awards[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleAwardImageUpload(
+													res,
+													index
+												);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
+								</div>
+								<Trash
+									onClick={() => removeAward(index)}
+									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
+							</div>
+						))}
+						<Plus
+							onClick={addAwards}
 							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
 							+
 						</Plus>
@@ -524,18 +736,42 @@ export default function SchoolForm({ searchParams }: any) {
 										className="w-full p-2 border rounded-md mb-2"
 										placeholder={`Event ${index + 1} Title`}
 									/>
-									<Input
-										type="text"
+									<Textarea
 										name="description"
 										value={event.description}
 										onChange={(e) =>
 											handleEventsChange(e, index)
 										}
-										className="w-full p-2 border rounded-md mb-2"
+										className="w-full p-2 border rounded-md mb-2 h-40"
 										placeholder={`Event ${
 											index + 1
 										} Description`}
 									/>
+									<div>
+										<img
+											className="w-20 h-20"
+											src={events[index].image}
+										/>
+										<UploadButton
+											endpoint="imageUploader"
+											onClientUploadComplete={(
+												res: any
+											) => {
+												handleEventImageUpload(
+													res,
+													index
+												);
+												console.log("test", events);
+												console.log("awards", awards);
+												console.log("toppers", toppers);
+											}}
+											onUploadError={(error: Error) => {
+												alert(
+													`ERROR! ${error.message}`
+												);
+											}}
+										/>
+									</div>
 								</div>
 								<Trash
 									onClick={() => removeEvent(index)}
@@ -554,7 +790,8 @@ export default function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							Images
 						</Label>
-						<UploadImages
+
+						<UploadImagesEdit
 							image={images}
 							setImage={setImages}
 						/>
@@ -565,7 +802,7 @@ export default function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							Videos
 						</Label>
-						{videos.map((video: any, index) => (
+						{videos.map((video, index) => (
 							<div
 								key={index}
 								className="flex gap-6 items-center mb-2">
@@ -573,7 +810,7 @@ export default function SchoolForm({ searchParams }: any) {
 									<Input
 										type="text"
 										name="src"
-										value={video.src.src}
+										value={video.src}
 										onChange={(e) =>
 											handleVideosChange(e, index)
 										}
@@ -617,3 +854,5 @@ export default function SchoolForm({ searchParams }: any) {
 	}
 	return null;
 }
+
+export default SchoolForm;

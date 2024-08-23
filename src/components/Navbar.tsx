@@ -42,7 +42,7 @@ export default function Navbar() {
 
 	return (
 		<div className="flex w-full flex-col relative z-30">
-			<header className="sticky bg-purple-950 bg-opacity-80 text-primary-foreground top-0 flex h-16 items-center gap-4  px-4 md:px-6">
+			<header className="sticky bg-purple-950  bg-glassmorphism text-primary-foreground top-0 flex h-16 items-center gap-4  px-4 md:px-6">
 				<Sheet>
 					<SheetTrigger asChild>
 						<Button

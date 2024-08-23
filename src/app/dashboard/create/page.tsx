@@ -199,6 +199,8 @@ function SchoolForm() {
 			videos,
 		};
 
+		console.log(formData);
+
 		try {
 			const res = await axios.post("/api/school/create", formData);
 			console.log(res);

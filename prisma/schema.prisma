@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
@@ -9,107 +8,129 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model School {
-  id        Int       @id @default(autoincrement())
-  name      String
-  aboutUs   String
-  logo      String
-  rating    Float     @default(0)    
-  toppers   Toppers[]
-  awards    Awards[]
-  locationMap  String?
-  contact   Contact?  
-  facilities Facility[]
-  events     Event[]
-  images     Image[]
-  videos     Video[]
-  reviews    Review[]
-  area       Place    
-  category   SchoolCategory 
+  id          Int       @id @default(autoincrement())
+  name        String    @db.LongText
+  aboutUs     String    @db.LongText
+  logo        String    @db.LongText
+  rating      Float     @default(0)    
+  toppers     Toppers[]
+  awards      Awards[]
+  locationMap String?    @db.LongText
+  contact     Contact?  
+  facilities  Facility[]
+  events      Event[]
+  images      Image[]
+  videos      Video[]
+  reviews     Review[]
+  area        Place    
+  category    SchoolCategory 
+}
+
+model Merchant {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.LongText
+  aboutUs     String    @db.LongText
+  logo        String    @db.LongText
+  rating      Float     @default(0)    
+  locationMap String?    @db.LongText
+  contact     Contact?  
+  images      Image[]
+  videos      Video[]
+  reviews     Review[]
 }
 
 model Contact {
-  id        Int     @id @default(autoincrement())
-  email     String
-  location  String
-  number    String
-  website   String?
-  facebook  String?
-  youtube   String?
-  instagram String?
-  twitter   String?
-  linkedin  String?
-  opening   String?
-  school    School   @relation(fields: [schoolId], references: [id])
-  schoolId  Int      @unique
+  id        Int       @id @default(autoincrement())
+  email     String    @db.LongText
+  location  String    @db.LongText
+  number    String    @db.LongText
+  website   String?    @db.LongText
+  facebook  String?    @db.LongText
+  youtube   String?    @db.LongText
+  instagram String?    @db.LongText
+  twitter   String?    @db.LongText
+  linkedin  String?    @db.LongText
+  opening   String?    @db.LongText
+  school    School?   @relation(fields: [schoolId], references: [id])
+  schoolId  Int?      @unique
+  merchant  Merchant? @relation(fields: [merchantId], references: [id])
+  merchantId Int?     @unique
 }
 
-
 model Image {
-  id       Int     @id @default(autoincrement())
-  url      String
-  schoolId Int
-  school   School  @relation(fields: [schoolId], references: [id])
+  id         Int       @id @default(autoincrement())
+  url        String    @db.LongText
+  schoolId   Int?
+  merchantId Int?
+  school     School?   @relation(fields: [schoolId], references: [id])
+  merchant   Merchant? @relation(fields: [merchantId], references: [id])
 }
 
 model Video {
-  id       Int     @id @default(autoincrement())
-  src      String
-  title    String
-  schoolId Int
-  school   School  @relation(fields: [schoolId], references: [id])
+  id         Int       @id @default(autoincrement())
+  src        String    @db.LongText
+  title      String    @db.LongText
+  schoolId   Int?
+  merchantId Int?
+  school     School?   @relation(fields: [schoolId], references: [id])
+  merchant   Merchant? @relation(fields: [merchantId], references: [id])
 }
 
 model Review {
-  id       Int     @id @default(autoincrement())
-  name     String
-  message  String
-  date     DateTime
-  rating   Int    
-  schoolId Int
-  school   School  @relation(fields: [schoolId], references: [id])
+  id         Int       @id @default(autoincrement())
+  name       String    @db.LongText
+  message    String    @db.LongText
+  date       DateTime
+  rating     Int    
+  schoolId   Int?
+  merchantId Int?
+  school     School?   @relation(fields: [schoolId], references: [id])
+  merchant   Merchant? @relation(fields: [merchantId], references: [id])
 }
 
 model Event {
-  id       Int     @id @default(autoincrement())
-  title    String
-  description String
-  image     String?
-  schoolId Int
-  date     DateTime   @default(now())
-  school   School  @relation(fields: [schoolId], references: [id])
+  id          Int      @id @default(autoincrement())
+  title       String    @db.LongText
+  description String    @db.LongText
+  image       String?    @db.LongText
+  schoolId    Int
+  date        DateTime @default(now())
+  school      School   @relation(fields: [schoolId], references: [id])
 }
 
 model Facility {
-  id       Int     @id @default(autoincrement())
-  name     String
-  schoolId Int
-  school   School  @relation(fields: [schoolId], references: [id])
+  id         Int       @id @default(autoincrement())
+  name       String    @db.LongText
+  schoolId   Int?
+  merchantId Int?
+  school     School?   @relation(fields: [schoolId], references: [id])
 }
 
 model Awards {
-  id       Int     @id @default(autoincrement())
-  title    String
-  description String
-  image     String?
-  schoolId Int
-  date     DateTime   @default(now())
-  school   School  @relation(fields: [schoolId], references: [id])
+  id          Int      @id @default(autoincrement())
+  title       String    @db.LongText
+  description String    @db.LongText
+  image       String?    @db.LongText
+  schoolId    Int
+  date        DateTime @default(now())
+  school      School   @relation(fields: [schoolId], references: [id])
 }
 
 model Toppers {
-  id       Int     @id @default(autoincrement())
-  title    String
-  description String
-  image     String?
-  schoolId Int
-  date     DateTime   @default(now())
-  school   School  @relation(fields: [schoolId], references: [id])
+  id          Int      @id @default(autoincrement())
+  title       String    @db.LongText
+  description String    @db.LongText
+  image       String?    @db.LongText
+  schoolId    Int
+  date        DateTime @default(now())
+  school      School   @relation(fields: [schoolId], references: [id])
 }
+
 enum Place {
   Abids
   Ameerpet

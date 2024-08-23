@@ -158,3 +158,82 @@ export function useGetEventsList(area: Place) {
 
 	return { events, isLoading, failed };
 }
+
+export function useMerchantDetails(merchantId: string) {
+	const [details, setDetails] = useState<SchoolDetails | undefined>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	async function getDetails(merchantId: string) {
+		try {
+			const res = await axios.get(
+				`/api/merchant/details?id=${merchantId}`
+			);
+			const data = res.data;
+
+			const videos: Video[] = data.videos
+				? data.videos.map((video: string) => ({
+						src: video,
+						title: "Video", // Replace this with actual titles if available
+				  }))
+				: [];
+
+			setDetails({
+				...data,
+				videos,
+			});
+			setIsLoading(false);
+		} catch (error: any) {
+			console.error("Error fetching school details:", error.message);
+			setIsLoading(false);
+			toast({
+				title: "Something went wrong!",
+				description: "Redirecting back",
+				duration: 1000,
+			});
+			setTimeout(() => {
+				setFailed(true);
+			}, 1000);
+		}
+	}
+
+	useEffect(() => {
+		getDetails(merchantId);
+	}, [merchantId]);
+
+	return { isLoading, details, failed };
+}
+
+export function useMerchantList() {
+	const [details, setDetails] = useState<SchoolPartialData[] | undefined>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	async function getDetails() {
+		try {
+			const res = await axios.get(`/api/merchant/list`);
+			const data = res.data;
+			setDetails(data);
+			setIsLoading(false);
+		} catch (error: any) {
+			console.error("Error fetching school details:", error.message);
+			setIsLoading(false);
+			toast({
+				title: "Something went wrong!",
+				description: "Redirecting back",
+				duration: 1000,
+			});
+			setTimeout(() => {
+				setFailed(true);
+			}, 1000);
+		}
+	}
+
+	useEffect(() => {
+		getDetails();
+	}, []);
+
+	return { isLoading, details, failed };
+}

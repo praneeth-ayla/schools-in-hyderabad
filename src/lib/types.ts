@@ -41,23 +41,23 @@ export type SchoolDetails = {
 	awards: {
 		title: string;
 		description: string;
-		id: string;
+		id?: string;
 		image: string;
 	}[];
 	locationMap: string;
-	images: string[];
+	images: { url: string; id?: string; schoolId: string }[];
 	aboutUs: string;
 	videos?: Video[];
 	events?: {
 		title: string;
 		description: string;
-		id: string;
+		id?: string;
 		image: string;
 	}[];
 	toppers?: {
 		title: string;
 		description: string;
-		id: string;
+		id?: string;
 		image: string;
 	}[];
 	rating: number;
@@ -140,4 +140,27 @@ export const SchoolCategoryNames: { [key in SchoolCategory]: string } = {
 	[SchoolCategory.ResidentialICSE]: "Residential School - ICSE",
 	[SchoolCategory.ResidentialIGCSE]: "Residential School - IGCSE",
 	[SchoolCategory.ResidentialStateBoard]: "Residential School - State Board",
+};
+
+export type MerchantDetails = {
+	name: string;
+	aboutUs: string;
+	logo: string;
+	rating?: number; // Optional field
+	locationMap?: string; // Optional field
+	contact?: {
+		location: string;
+		number: string;
+		email: string;
+		website: string;
+		instagram: string;
+		twitter: string;
+		linkedin: string;
+		youtube: string;
+		facebook: string;
+		opening: string;
+	};
+	images?: { url: string; id?: string; schoolId: string }[];
+	videos?: Video[];
+	reviews?: Review[];
 };

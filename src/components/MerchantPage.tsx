@@ -5,19 +5,15 @@ import ReviewForm from "@/components/ReviewForm";
 import StarRating from "@/components/StarRating";
 import { Avatar } from "@/components/ui/avatar";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { useSchoolDetails } from "../lib/hooks";
+import { useMerchantDetails, useSchoolDetails } from "../lib/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "@/components/Loading";
 import DateTimeDisplay from "@/components/TimeConverter";
-import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
-import PhotoCard from "./PhotoCard";
-import EventsSchoolPage from "./EventsSchoolPage";
-import Link from "next/link";
 
-export default function SchoolPage({ schoolId }: { schoolId: string }) {
-	const { isLoading, details, failed } = useSchoolDetails(schoolId);
+export default function MerchantPage({ merchantId }: { merchantId: string }) {
+	const { isLoading, details, failed } = useMerchantDetails(merchantId);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -38,7 +34,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								<div className="flex justify-center items-center pt-10 ">
 									<img
 										className="rounded-md "
-										alt="school logo"
+										alt="Merchant logo"
 										src={details.logo}
 									/>
 								</div>
@@ -215,68 +211,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 										</pre>
 									</div>
 								</div>
-								{details.facilities &&
-									details.facilities?.length > 0 && (
-										<div>
-											<p className="text-2xl pb-3 font-bold">
-												Facilities
-											</p>
-											<div className="flex gap-3 flex-wrap">
-												{details.facilities.map(
-													(facility, index) => (
-														<Badge
-															key={index}
-															className="text-lg p-2 px-4 text-black bg-[#FFA500]">
-															{/* Didn't want to change the types so :)*/}
-															{/* @ts-ignore */}
-															{facility.name}
-														</Badge>
-													)
-												)}
-											</div>
-										</div>
-									)}
-
-								{details.toppers &&
-									details.toppers.length > 0 && (
-										<div>
-											<p className="text-2xl pb-3 font-bold">
-												Toppers
-											</p>
-											<pre className=" font-sans text-wrap">
-												<div className="grid gap-3">
-													<EventsSchoolPage
-														desBoo={true}
-														events={details.toppers}
-													/>
-												</div>
-											</pre>
-										</div>
-									)}
-
-								{details.awards &&
-									details.awards.length > 0 && (
-										<div>
-											<p className="text-2xl pb-3 font-bold">
-												Awards
-											</p>
-											<pre className=" font-sans text-wrap">
-												<div className="grid gap-3">
-													{details.awards.map(
-														(
-															award: any,
-															i: number
-														) => (
-															<PhotoCard
-																key={i}
-																event={award}
-															/>
-														)
-													)}
-												</div>
-											</pre>
-										</div>
-									)}
 
 								{details.videos &&
 									details.videos?.length > 0 && (
@@ -290,26 +224,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											/>
 										</div>
 									)}
-
-								<div className="px-0 m-0">
-									{details?.events &&
-										details.events.length > 0 &&
-										details.events.some(
-											(event) => event.title.trim() !== ""
-										) && (
-											<>
-												<p className="text-2xl pb-3 font-bold">
-													Events
-												</p>
-												<div>
-													<EventsSchoolPage
-														desBoo={false}
-														events={details.events}
-													/>
-												</div>
-											</>
-										)}
-								</div>
 
 								<div>
 									<p className="text-2xl font-bold">
@@ -387,7 +301,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											)}
 										</div>
 									</div>
-									<ReviewForm schoolId={Number(schoolId)} />
+									<ReviewForm schoolId={Number(merchantId)} />
 								</div>
 							</div>
 						</Card>

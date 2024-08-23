@@ -7,7 +7,7 @@ export default function PhotoCard({
 		title: string;
 		description: string;
 		image: string;
-		id: string;
+		id?: string;
 	};
 }) {
 	return (

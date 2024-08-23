@@ -21,39 +21,42 @@ export default function CarouselEvents({ events }: any) {
 					Autoplay({
 						delay: 2000,
 					}),
-				]}>
-				<CarouselContent className="flex gap-5 p-3">
+				]}
+				className="w-full">
+				<CarouselContent className="-ml-2 md:-ml-4">
 					{events.map((event: any, i: number) => (
-						<div key={i}>
-							{
-								<Link href={`/events?id=${event.id}`}>
-									<Card className="h-[440px] p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex w-80 lg:w-96 gap-3 flex-col">
-										<div className="flex-grow">
-											<div className="flex gap-3 items-center">
-												{event.school && (
-													<>
-														<Avatar className="border border-gray-600 flex justify-center items-center">
-															<AvatarImage
-																src={
-																	event.school
-																		.logo
-																}
-																alt={`${event.school.name} logo`}
-															/>
-															<AvatarFallback>
-																{event.school.name
-																	.charAt(0)
-																	.toUpperCase()}
-															</AvatarFallback>
-														</Avatar>
-														<div className="text-xs md:text-base">
-															{event.school.name}
-														</div>
-													</>
-												)}
-											</div>
+						<CarouselItem
+							key={i}
+							className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+							<div className="h-full">
+								<Link
+									href={`/events?id=${event.id}`}
+									className="block h-full">
+									<Card className="h-full p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex flex-col">
+										<div className="flex gap-3 items-center mb-3">
+											{event.school && (
+												<>
+													<Avatar className="border border-gray-600 flex justify-center items-center">
+														<AvatarImage
+															src={
+																event.school
+																	.logo
+															}
+															alt={`${event.school.name} logo`}
+														/>
+														<AvatarFallback>
+															{event.school.name
+																.charAt(0)
+																.toUpperCase()}
+														</AvatarFallback>
+													</Avatar>
+													<div className="text-xs md:text-base">
+														{event.school.name}
+													</div>
+												</>
+											)}
 										</div>
-										<div className="flex justify-center items-center">
+										<div className="flex justify-center items-center flex-grow">
 											<img
 												className="object-cover h-44 w-full"
 												src={
@@ -63,7 +66,7 @@ export default function CarouselEvents({ events }: any) {
 												alt="event img"
 											/>
 										</div>
-										<div className="flex-grow">
+										<div className="mt-auto">
 											<CardTitle className="flex flex-col gap-3 pb-3">
 												<p className="text-sm font-normal">
 													{DateTimeDisplay(
@@ -76,8 +79,8 @@ export default function CarouselEvents({ events }: any) {
 										</div>
 									</Card>
 								</Link>
-							}
-						</div>
+							</div>
+						</CarouselItem>
 					))}
 				</CarouselContent>
 				<div className="flex gap-3 pt-3 justify-center pr-14 text-black">
