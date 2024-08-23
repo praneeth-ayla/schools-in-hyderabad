@@ -15,6 +15,7 @@ export function CarouselYoutube({
 		title: string;
 	}[];
 }) {
+	console.log(videos);
 	// Youtube normal link to embeded link
 	function convertYouTubeLinkToEmbed(url: string): string {
 		url;
@@ -38,9 +39,7 @@ export function CarouselYoutube({
 									<CarouselItem key={i}>
 										<iframe
 											className="w-11/12 h-full"
-											src={convertYouTubeLinkToEmbed(
-												src.src
-											)}
+											src={convertYouTubeLinkToEmbed(src)}
 											title={title}
 											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 											referrerPolicy="strict-origin-when-cross-origin"

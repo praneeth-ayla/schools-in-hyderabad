@@ -21,16 +21,8 @@ export function useSchoolDetails(schoolId: string) {
 			const res = await axios.get(`/api/schoolDetails?id=${schoolId}`);
 			const data = res.data;
 
-			const videos: Video[] = data.videos
-				? data.videos.map((video: string) => ({
-						src: video,
-						title: "Video", // Replace this with actual titles if available
-				  }))
-				: [];
-
 			setDetails({
 				...data,
-				videos,
 			});
 			setIsLoading(false);
 		} catch (error: any) {
@@ -171,17 +163,8 @@ export function useMerchantDetails(merchantId: string) {
 				`/api/merchant/details?id=${merchantId}`
 			);
 			const data = res.data;
-
-			const videos: Video[] = data.videos
-				? data.videos.map((video: string) => ({
-						src: video,
-						title: "Video", // Replace this with actual titles if available
-				  }))
-				: [];
-
 			setDetails({
 				...data,
-				videos,
 			});
 			setIsLoading(false);
 		} catch (error: any) {
