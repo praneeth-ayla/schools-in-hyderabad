@@ -133,7 +133,13 @@ export default function InputDemo() {
 						<CardTitle>Merchant Create</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center"></CardContent>
 						<CardFooter className="flex items-center justify-center">
-							<Button className="mt-4">Create</Button>
+							<Button
+								onClick={() => {
+									router.push("/dashboard/merchant/create");
+								}}
+								className="mt-4">
+								Create
+							</Button>
 						</CardFooter>
 					</Card>
 					<Card className="p-4">
