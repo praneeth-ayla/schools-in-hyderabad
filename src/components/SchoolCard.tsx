@@ -36,10 +36,10 @@ export default function SchoolCard({
 							{schoolDetail.name}
 						</CardTitle>
 						<CardDescription className="flex-grow">
-							<div className="flex gap-1 pt-4">
+							{/* <div className="flex gap-1 pt-4">
 								<StarRating rating={schoolDetail.rating} />
 								{schoolDetail.rating}
-							</div>
+							</div> */}
 							<div className="text-xs">
 								{schoolDetail.aboutUs.length > 200 ? (
 									<>

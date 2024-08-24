@@ -148,10 +148,8 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 				</div>
 			</form>
 
-			<div className="text-white text-center font-bold pt-3">OR</div>
-			<form
-				onSubmit={handleSubmitSchool}
-				className="pt-2">
+			<div className="text-white text-center font-bold pt-3">or</div>
+			<form onSubmit={handleSubmitSchool}>
 				<div className="flex flex-col gap-6 md:flex-row w-full justify-center items-start md:items-end">
 					<div className="grid w-full items-center gap-1.5 p-0">
 						<Label htmlFor="school">School</Label>

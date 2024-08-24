@@ -56,7 +56,7 @@ export default function SearchPage({ name, area, board }: Props) {
 
 					{events.length > 0 ? (
 						<div className="py-8">
-							<p className="font-bold text-2xl">
+							<p className="font-bold text-xl italic">
 								{!area ? (
 									"Noteworthy Highlights"
 								) : (
@@ -69,8 +69,8 @@ export default function SearchPage({ name, area, board }: Props) {
 						</div>
 					) : (
 						area && (
-							<div className="font-semibold text-2xl py-8">
-								No Noteworthy Highlights
+							<div className="font-semibold text-xl py-8 italic">
+								Noteworthy Highlights
 							</div>
 						)
 					)}
