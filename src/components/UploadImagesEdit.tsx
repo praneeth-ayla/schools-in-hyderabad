@@ -1,37 +1,20 @@
-"use client";
 import { useState, useEffect } from "react";
 import { UploadDropzone } from "../utils/uploadthing";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { extractPngName } from "@/utils/extractPngName";
 
-export default function UploadImages({
+export default function UploadImagesEdit({
 	image,
 	setImage,
 }: {
-	image: {
-		url: string;
-		id?: string;
-		schoolId: string;
-	}[];
+	image: { url: string; id?: string; schoolId: string }[];
 	setImage: (
-		images: {
-			url: string;
-			id?: string;
-			schoolId: string;
-		}[]
+		images: { url: string; id?: string; schoolId: string }[]
 	) => void;
 }) {
-	// Initialize images state with the provided image prop, including schoolId
-	const [images, setImages] = useState<
-		{ url: string; id?: string; schoolId: string }[]
-	>(
-		image.map((img) => ({
-			url: img.url,
-			id: img.id,
-			schoolId: img.schoolId,
-		}))
-	);
+	const [images, setImages] =
+		useState<{ url: string; id?: string; schoolId: string }[]>(image);
 
 	// Update form data when images change
 	useEffect(() => {
@@ -44,14 +27,15 @@ export default function UploadImages({
 		schoolId: string;
 	}) => {
 		try {
-			// Delete image from the server
+			// Delete image from server
 			await axios.get(`/api/deleteImage?img=${extractPngName(img.url)}`);
-			// Update state
+			// Remove image from local state
 			setImages((prevImages) =>
 				prevImages.filter((image) => image.url !== img.url)
 			);
-		} catch (error) {
-			console.error("Failed to delete the image", error);
+		} catch (error: any) {
+			console.error("Error deleting image:", error);
+			alert(`ERROR! ${error.message}`);
 		}
 	};
 
@@ -60,29 +44,28 @@ export default function UploadImages({
 			<UploadDropzone
 				endpoint="imageUploader"
 				onClientUploadComplete={(res: any) => {
-					// Add new image to the images array with schoolId
-					const newImages = res.map((img: any) => ({
-						...img,
-						schoolId: images[0].schoolId, // assuming all images have the same schoolId
-					}));
-					setImages((prevImages) => [...prevImages, ...newImages]);
+					// Add new image to the images array
+					setImages((prevImages) => [...prevImages, ...res]);
 				}}
 				onUploadError={(error: Error) => {
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2 h-20 bg-green-300">
-				{images.map((img, i: number) => (
-					<div key={i}>
+			<div className="flex gap-2 h-20 overflow-x-auto">
+				{images.map((img, i) => (
+					<div
+						key={i}
+						className="relative">
 						<img
-							className="bg-green-500"
 							src={img.url}
-							onClick={() => console.log(img)}
 							alt={`img${i + 1}`}
 							style={{ width: "100px", height: "100px" }}
 						/>
-						<div className="flex justify-center items-center pt-2 hover:cursor-pointer">
-							<Trash onClick={() => handleDelete(img)} />
+						<div className="absolute top-0 right-0 flex gap-1 p-1">
+							<Trash
+								className="cursor-pointer text-red-600 hover:text-red-800"
+								onClick={() => handleDelete(img)}
+							/>
 						</div>
 					</div>
 				))}

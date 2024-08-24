@@ -10,10 +10,9 @@ export async function GET(request: Request) {
 	// Build the 'where' clause dynamically based on provided parameters
 	const whereClause: { [key: string]: any } = {};
 
-	if (name) {
+	if (name && name.trim()) {
 		whereClause.name = {
-			contains: name,
-			mode: "insensitive",
+			contains: name.trim(),
 		};
 	}
 

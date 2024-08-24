@@ -761,9 +761,6 @@ function SchoolForm({ searchParams }: any) {
 													res,
 													index
 												);
-												console.log("test", events);
-												console.log("awards", awards);
-												console.log("toppers", toppers);
 											}}
 											onUploadError={(error: Error) => {
 												alert(

@@ -3,12 +3,46 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/Input";
 
 export default function InputDemo() {
 	const { data: session, status } = useSession();
-	const router = useRouter();
 	const [loading, setLoading] = useState(true);
-	const [page, setPage] = useState<"edit" | "create">("edit");
+	const [schoolId, setSchoolId] = useState<number>();
+	const [merchantId, setMerchantId] = useState<number>();
+	const [advertiseTime, setAdvertiseTime] = useState<number | "">("");
+
+	const router = useRouter();
+
+	const handleUpdate = async () => {
+		if (advertiseTime === "" || isNaN(advertiseTime)) {
+			// Handle invalid input
+			alert("Please enter a valid number for advertiseTime.");
+			return;
+		}
+
+		try {
+			// Send the update request to your API
+			const response = await fetch(
+				`/api/advertiseTime?advertiseTime=${advertiseTime}`,
+				{
+					method: "GET",
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error("Failed to update advertise time");
+			}
+
+			// Optionally handle success, like showing a success message or redirecting
+			alert("Advertise time updated successfully");
+			router.push("/dashboard"); // Redirect or navigate to a different page
+		} catch (error) {
+			console.error("Update failed:", error);
+			alert("An error occurred while updating the advertise time.");
+		}
+	};
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -53,20 +87,108 @@ export default function InputDemo() {
 
 	if (status === "authenticated") {
 		return (
-			<div>
-				<Button
-					onClick={() => {
-						setPage("create");
-						router.push("/dashboard/create");
-					}}>
-					Create
-				</Button>
-				<Button
-					onClick={() => {
-						setPage("edit");
-					}}>
-					Edit
-				</Button>
+			<div className="min-h-screen text-white">
+				<div className="flex gap-3 flex-wrap lg:px-40 py-32 justify-evenly">
+					<Card className="p-4">
+						<CardTitle>School Create</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center"></CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								className="mt-4"
+								onClick={() => {
+									router.push("/dashboard/create");
+								}}>
+								Create
+							</Button>
+						</CardFooter>
+					</Card>
+					<Card className="p-4">
+						<CardTitle>School Edit</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={schoolId}
+								type="number"
+								onChange={(e) => {
+									setSchoolId(Number(e.target.value));
+								}}
+								placeholder="School Id"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								className="mt-4"
+								onClick={() => {
+									schoolId;
+									router.push(
+										"/dashboard/edit?id=" + schoolId
+									);
+								}}>
+								Edit
+							</Button>
+						</CardFooter>
+					</Card>
+					<Card className="p-4">
+						<CardTitle>Merchant Create</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center"></CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button className="mt-4">Create</Button>
+						</CardFooter>
+					</Card>
+					<Card className="p-4">
+						<CardTitle>Merchant Edit</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={merchantId}
+								type="number"
+								onChange={(e) => {
+									setMerchantId(Number(e.target.value));
+								}}
+								placeholder="Merchant Id"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								onClick={() => {
+									merchantId &&
+										router.push(
+											"/dashboard/merchant/edit?id=" +
+												merchantId
+										);
+								}}
+								className="mt-4">
+								Edit
+							</Button>
+						</CardFooter>
+					</Card>
+					<Card className="p-4">
+						<CardTitle>Global Settings Edit</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={advertiseTime}
+								type="number"
+								onChange={(e) => {
+									setAdvertiseTime(
+										Number(e.target.value) || ""
+									);
+								}}
+								placeholder="Advertise Time"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								onClick={handleUpdate}
+								className="mt-4">
+								Update
+							</Button>
+						</CardFooter>
+					</Card>
+				</div>
 			</div>
 		);
 	} else {

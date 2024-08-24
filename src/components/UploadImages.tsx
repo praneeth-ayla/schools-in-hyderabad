@@ -45,13 +45,12 @@ export default function UploadImages({
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2 h-20 bg-green-300 overflow-x-auto">
+			<div className="flex gap-2 h-20 overflow-x-auto">
 				{images.map((img, i) => (
 					<div
 						key={i}
 						className="relative">
 						<img
-							className="bg-green-500"
 							src={img.url}
 							onClick={() => {
 								console.log(img); // For debugging
@@ -59,11 +58,8 @@ export default function UploadImages({
 							alt={`img${i + 1}`}
 							style={{ width: "100px", height: "100px" }}
 						/>
-						<div className="absolute top-0 right-0 p-1">
-							<Trash
-								onClick={() => handleDelete(img)}
-								className="cursor-pointer"
-							/>
+						<div className="flex justify-center items-center pt-2 hover:cursor-pointer">
+							<Trash onClick={() => handleDelete(img)} />
 						</div>
 					</div>
 				))}

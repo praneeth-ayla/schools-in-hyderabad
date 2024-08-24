@@ -1,9 +1,4 @@
-import {
-	Card,
-	CardDescription,
-	CardFooter,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import {
 	SchoolCategory,
 	SchoolCategoryNames,
@@ -60,9 +55,9 @@ export default function SchoolCard({
 								{schoolDetail.category &&
 									getFullName(schoolDetail.category)}
 							</p>
-							<div className="flex gap-1 items-center">
+							<div>
 								{schoolDetail.area && (
-									<div>
+									<div className="flex gap-1 items-center">
 										<svg
 											className="h-3"
 											fill="currentColor"

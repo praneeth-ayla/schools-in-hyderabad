@@ -75,49 +75,51 @@ export default function EventsSchoolPage({
 									</Card>
 								</Link>
 							) : (
-								<Card className="h-[400px] p-5 border-purple-950 bg-slate-950 bg-opacity-50 text-white flex w-80 lg:w-96 gap-3 flex-col">
-									<div className="flex justify-center items-center">
-										<img
-											className="object-cover h-48 w-full"
-											src={event.image}
-											alt="event img"
-										/>
-									</div>
-									<div className="flex-grow">
-										<CardTitle className="flex flex-col gap-3 pb-3">
-											<p className="text-sm font-normal">
-												{!desBoo &&
-													DateTimeDisplay(
-														event.date
-													).slice(0, 17)}
-											</p>
-											<span>{event.title}</span>
-										</CardTitle>
-										<CardDescription>
-											{desBoo && (
-												<>
-													{event.description.length >
-													130 ? (
-														<>
-															{event.description.slice(
-																0,
-																130
-															)}{" "}
-															...
-														</>
-													) : (
-														<>
-															{event.description.slice(
-																0,
-																130
-															)}{" "}
-														</>
-													)}
-												</>
-											)}
-										</CardDescription>
-									</div>
-								</Card>
+								<Link href={`/topper?id=${event.id}`}>
+									<Card className="h-[400px] p-5 border-purple-950 bg-slate-950 bg-opacity-50 text-white flex w-80 lg:w-96 gap-3 flex-col hover:scale-105">
+										<div className="flex justify-center items-center">
+											<img
+												className="object-cover h-48 w-full"
+												src={event.image}
+												alt="event img"
+											/>
+										</div>
+										<div className="flex-grow">
+											<CardTitle className="flex flex-col gap-3 pb-3">
+												<p className="text-sm font-normal">
+													{!desBoo &&
+														DateTimeDisplay(
+															event.date
+														).slice(0, 17)}
+												</p>
+												<span>{event.title}</span>
+											</CardTitle>
+											<CardDescription>
+												{desBoo && (
+													<>
+														{event.description
+															.length > 130 ? (
+															<>
+																{event.description.slice(
+																	0,
+																	130
+																)}{" "}
+																...
+															</>
+														) : (
+															<>
+																{event.description.slice(
+																	0,
+																	130
+																)}{" "}
+															</>
+														)}
+													</>
+												)}
+											</CardDescription>
+										</div>
+									</Card>
+								</Link>
 							)}
 						</div>
 					))}

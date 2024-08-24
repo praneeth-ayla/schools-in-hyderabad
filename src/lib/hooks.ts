@@ -6,7 +6,6 @@ import {
 	SchoolCategory,
 	SchoolDetails,
 	SchoolPartialData,
-	Video,
 } from "./types";
 import axios from "axios";
 
@@ -99,6 +98,7 @@ export function useGetEvent(id: string) {
 		async function getDetails() {
 			try {
 				const { data } = await axios.get<any>(`/api/event?id=${id}`);
+
 				setEvent(data);
 			} catch (error: any) {
 				console.error("Error fetching events", error.message);
@@ -119,8 +119,8 @@ export function useGetEvent(id: string) {
 	return { event, isLoading, failed };
 }
 
-export function useGetEventsList(area: Place) {
-	const [events, setEvents] = useState<any>(null);
+export function useGetEventsList({ area }: UseSchoolListParams) {
+	const [events, setEvents] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 	const { toast } = useToast();
@@ -131,7 +131,10 @@ export function useGetEventsList(area: Place) {
 				const { data } = await axios.get<any>(
 					`/api/eventList?area=${area}`
 				);
-				setEvents(data);
+
+				// Reverse the order of events here
+				const reversedEvents = data.reverse();
+				setEvents(reversedEvents);
 			} catch (error: any) {
 				console.error("Error fetching events", error.message);
 				toast({
@@ -163,12 +166,12 @@ export function useMerchantDetails(merchantId: string) {
 				`/api/merchant/details?id=${merchantId}`
 			);
 			const data = res.data;
-			setDetails({
-				...data,
-			});
+
+			// Assuming the data structure matches MerchantDetails
+			setDetails(data);
 			setIsLoading(false);
 		} catch (error: any) {
-			console.error("Error fetching school details:", error.message);
+			console.error("Error fetching merchant details:", error.message);
 			setIsLoading(false);
 			toast({
 				title: "Something went wrong!",
@@ -182,7 +185,9 @@ export function useMerchantDetails(merchantId: string) {
 	}
 
 	useEffect(() => {
-		getDetails(merchantId);
+		if (merchantId) {
+			getDetails(merchantId);
+		}
 	}, [merchantId]);
 
 	return { isLoading, details, failed };
@@ -219,4 +224,34 @@ export function useMerchantList() {
 	}, []);
 
 	return { isLoading, details, failed };
+}
+
+export function useGetTopper(id: string) {
+	const [event, setEvent] = useState<any>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<any>(`/api/topper?id=${id}`);
+				setEvent(data);
+			} catch (error: any) {
+				console.error("Error fetching events", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [toast]);
+
+	return { event, isLoading, failed };
 }

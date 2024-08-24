@@ -13,13 +13,6 @@ export function CarouselSpacing({
 }: {
 	images: { url: string; id?: string; schoolId: string }[];
 }) {
-	const slides = [
-		"https://utfs.io/f/e21b21a1-48f9-4f45-accd-bb31dc47a589-tpk6wk.com_wallpaper.jpg",
-		"https://utfs.io/f/e21b21a1-48f9-4f45-accd-bb31dc47a589-tpk6wk.com_wallpaper.jpg",
-		"https://utfs.io/f/e21b21a1-48f9-4f45-accd-bb31dc47a589-tpk6wk.com_wallpaper.jpg",
-		"https://utfs.io/f/e21b21a1-48f9-4f45-accd-bb31dc47a589-tpk6wk.com_wallpaper.jpg",
-		"https://utfs.io/f/e21b21a1-48f9-4f45-accd-bb31dc47a589-tpk6wk.com_wallpaper.jpg",
-	];
 	return (
 		<div>
 			<Dialog>
@@ -64,11 +57,11 @@ export function CarouselSpacing({
 					</Carousel>
 				</DialogTrigger>
 				<DialogContent className="bg-opacity-60  text-white bg-blue-200 p-4 m-1 md:p-10 flex justify-center">
-					<CarouselDialog height="h-screen lg:h-[40rem]">
-						{slides.map((s, index) => (
+					<CarouselDialog height="h-auto lg:h-[40rem] w-auto">
+						{images.map((s, index) => (
 							<img
 								key={index}
-								src={s}
+								src={s.url}
 								className="w-full h-full object-cover"
 							/>
 						))}

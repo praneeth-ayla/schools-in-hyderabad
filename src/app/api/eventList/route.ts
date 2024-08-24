@@ -6,15 +6,33 @@ export async function GET(request: Request) {
 		const { searchParams } = new URL(request.url);
 		const area = searchParams.get("area") as Place;
 
-		// Fetch schools with their events, filtering by area if provided
+		// Fetch global settings to get the advertise time
+		const advertiseSettings = await prisma.globalSettings.findFirst();
+		const advertiseTime = advertiseSettings?.advertiseTime ?? 3; // Default to 3 if not found
+
+		// Calculate the date for the threshold based on advertiseTime
+		const dateThreshold = new Date();
+		dateThreshold.setDate(dateThreshold.getDate() - advertiseTime);
+
+		// Fetch schools with their events, filtering by area and date
 		const schools = await prisma.school.findMany({
-			where: area
-				? {
-						area,
-				  }
-				: {}, // No filtering by area if area is not provided
+			where: {
+				area: area || undefined, // Filter by area if provided
+				events: {
+					some: {
+						date: {
+							gte: dateThreshold, // Only include events from the past 'advertiseTime' days
+						},
+					},
+				},
+			},
 			select: {
 				events: {
+					where: {
+						date: {
+							gte: dateThreshold, // Only include events from the past 'advertiseTime' days
+						},
+					},
 					select: {
 						id: true,
 						description: true,
@@ -34,17 +52,10 @@ export async function GET(request: Request) {
 		});
 
 		if (!schools || schools.length === 0) {
-			return new Response(
-				JSON.stringify({
-					error: area
-						? "No events found in the specified area"
-						: "No events found",
-				}),
-				{
-					status: 404,
-					headers: { "Content-Type": "application/json" },
-				}
-			);
+			return new Response(JSON.stringify([]), {
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			});
 		}
 
 		// Flatten the events into a single list

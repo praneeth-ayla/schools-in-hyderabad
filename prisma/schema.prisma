@@ -29,7 +29,14 @@ model School {
   reviews     Review[]
   area        Place    
   category    SchoolCategory 
+  advertise   Boolean    @default(false)
 }
+
+model GlobalSettings {
+  id             Int     @id @default(autoincrement())
+  advertiseTime  Int     @default(3)
+}
+
 
 model Merchant {
   id          Int       @id @default(autoincrement())
