@@ -14,11 +14,12 @@ import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
+import { TextGenerateEffect } from "./ui/text-badge";
 
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
 	const router = useRouter();
-	
+
 	useEffect(() => {
 		if (failed) router.back();
 	}, [failed]);
@@ -228,17 +229,14 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 												Facilities
 											</p>
 											<div className="flex gap-3 flex-wrap">
-												{details.facilities.map(
-													(facility, index) => (
-														<Badge
-															key={index}
-															className="text-lg p-2 px-4 text-black bg-[#FFA500] head">
-															{/* Didn't want to change the types so :)*/}
-															{/* @ts-ignore */}
-															{facility.name}
-														</Badge>
-													)
-												)}
+												<TextGenerateEffect
+													words={details.facilities
+														.map(
+															// @ts-ignore
+															(faci) => faci.name
+														)
+														.join(" ")}
+												/>
 											</div>
 										</div>
 									)}
