@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "School" ALTER COLUMN "area" DROP DEFAULT,
-ALTER COLUMN "category" DROP DEFAULT;

@@ -100,6 +100,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectContent>
 						</Select>
 					</div>
+					<span className="text-white">OR</span>
 					<div className="grid w-full items-center gap-1.5">
 						<Label htmlFor="where">Where</Label>
 						<Select

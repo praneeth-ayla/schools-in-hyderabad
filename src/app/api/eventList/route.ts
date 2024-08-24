@@ -6,15 +6,29 @@ export async function GET(request: Request) {
 		const { searchParams } = new URL(request.url);
 		const area = searchParams.get("area") as Place;
 
-		// Fetch schools with their events, filtering by area if provided
+		// Calculate the date for 2 days ago
+		const twoDaysAgo = new Date();
+		twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+		// Fetch schools with their events, filtering by area and date
 		const schools = await prisma.school.findMany({
-			where: area
-				? {
-						area,
-				  }
-				: {}, // No filtering by area if area is not provided
+			where: {
+				area: area || undefined, // Filter by area if provided
+				events: {
+					some: {
+						date: {
+							gte: twoDaysAgo, // Only include events from the past 2 days
+						},
+					},
+				},
+			},
 			select: {
 				events: {
+					where: {
+						date: {
+							gte: twoDaysAgo, // Only include events from the past 2 days
+						},
+					},
 					select: {
 						id: true,
 						description: true,
@@ -34,17 +48,7 @@ export async function GET(request: Request) {
 		});
 
 		if (!schools || schools.length === 0) {
-			return new Response(
-				JSON.stringify({
-					error: area
-						? "No events found in the specified area"
-						: "No events found",
-				}),
-				{
-					status: 404,
-					headers: { "Content-Type": "application/json" },
-				}
-			);
+			return new Response(JSON.stringify([]));
 		}
 
 		// Flatten the events into a single list

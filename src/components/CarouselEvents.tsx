@@ -59,15 +59,12 @@ export default function CarouselEvents({ events }: any) {
 										<div className="flex justify-center items-center flex-grow">
 											<img
 												className="object-cover h-44 w-full"
-												src={
-													event.img ||
-													"https://utfs.io/f/a32a0397-1b5c-42a9-af5c-d24e7e7b71da-tpk6wk.com_wallpaper.jpg"
-												}
+												src={event.image}
 												alt="event img"
 											/>
 										</div>
 										<div className="mt-auto">
-											<CardTitle className="flex flex-col gap-3 pb-3">
+											<CardTitle className="flex flex-col gap-3 pb-3 pt-1">
 												<p className="text-sm font-normal">
 													{DateTimeDisplay(
 														event.date

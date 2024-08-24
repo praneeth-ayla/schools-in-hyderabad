@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useGetEvent } from "../lib/hooks";
+import { useGetTopper } from "../lib/hooks";
 import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 import { Card, CardDescription, CardTitle } from "./ui/card";
@@ -8,8 +8,8 @@ import DateTimeDisplay from "./TimeConverter";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 
-export default function EventPage({ id }: { id: string }) {
-	const { event, failed, isLoading } = useGetEvent(id);
+export default function TopperPage({ id }: { id: string }) {
+	const { event, failed, isLoading } = useGetTopper(id);
 	const router = useRouter();
 	useEffect(() => {
 		if (failed) router.back();
