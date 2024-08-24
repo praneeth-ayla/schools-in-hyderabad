@@ -5,15 +5,22 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/Input";
+import axios from "axios";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function InputDemo() {
 	const { data: session, status } = useSession();
 	const [loading, setLoading] = useState(true);
+	const [board, setBoard] = useState("");
+	const [area, setArea] = useState("");
 	const [schoolId, setSchoolId] = useState<number>();
 	const [merchantId, setMerchantId] = useState<number>();
 	const [advertiseTime, setAdvertiseTime] = useState<number | "">("");
+	const [schoolDeleteId, setSchoolDeleteId] = useState<number | "">("");
+	const [merchantDeleteId, setMerchantDeleteId] = useState<number | "">();
 
 	const router = useRouter();
+	const { toast } = useToast();
 
 	const handleUpdate = async () => {
 		if (advertiseTime === "" || isNaN(advertiseTime)) {
@@ -89,6 +96,33 @@ export default function InputDemo() {
 		return (
 			<div className="min-h-screen text-white">
 				<div className="flex gap-3 flex-wrap lg:px-40 py-32 justify-evenly">
+					<Card className="p-4">
+						<CardTitle>Add Area</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={area}
+								type="number"
+								onChange={(e) => {
+									setArea(e.target.value);
+								}}
+								placeholder="Area"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								className="mt-4"
+								onClick={() => {
+									schoolId;
+									router.push(
+										"/dashboard/edit?id=" + schoolId
+									);
+								}}>
+								Add
+							</Button>
+						</CardFooter>
+					</Card>
 					<Card className="p-4">
 						<CardTitle>School Create</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center"></CardContent>
@@ -171,7 +205,7 @@ export default function InputDemo() {
 						</CardFooter>
 					</Card>
 					<Card className="p-4">
-						<CardTitle>Global Settings Edit</CardTitle>
+						<CardTitle>Event Time</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center">
 							<Input
 								className="mt-5 placeholder:text-gray-600"
@@ -191,6 +225,107 @@ export default function InputDemo() {
 								onClick={handleUpdate}
 								className="mt-4">
 								Update
+							</Button>
+						</CardFooter>
+					</Card>
+					<Card className="p-4">
+						<CardTitle>Delete Merchant</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={merchantDeleteId}
+								type="number"
+								onChange={(e) => {
+									setMerchantDeleteId(
+										Number(e.target.value) || ""
+									);
+								}}
+								placeholder="Merchant Id"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								onClick={async () => {
+									if (merchantDeleteId) {
+										try {
+											const res = await axios.get(
+												`/api/delete/merchant?id=${merchantDeleteId}`
+											);
+											toast({
+												title: "Merchant Deleted",
+												description: res.data.message,
+											});
+										} catch (error) {
+											toast({
+												title: "Error",
+												description:
+													"Failed to delete merchant",
+												variant: "destructive",
+											});
+										}
+									} else {
+										toast({
+											title: "Invalid ID",
+											description:
+												"Please enter a valid merchant ID",
+											variant: "destructive",
+										});
+									}
+								}}
+								className="mt-4">
+								Delete
+							</Button>
+						</CardFooter>
+					</Card>
+
+					<Card className="p-4">
+						<CardTitle>Delete School</CardTitle>
+						<CardContent className="flex flex-col items-center justify-center">
+							<Input
+								className="mt-5 placeholder:text-gray-600"
+								min={1}
+								value={schoolDeleteId}
+								type="number"
+								onChange={(e) => {
+									setSchoolDeleteId(
+										Number(e.target.value) || ""
+									);
+								}}
+								placeholder="School Id"
+							/>
+						</CardContent>
+						<CardFooter className="flex items-center justify-center">
+							<Button
+								onClick={async () => {
+									if (schoolDeleteId) {
+										try {
+											const res = await axios.get(
+												`/api/delete/school?id=${schoolDeleteId}`
+											);
+											toast({
+												title: "School Deleted",
+												description: res.data.message,
+											});
+										} catch (error) {
+											toast({
+												title: "Error",
+												description:
+													"Failed to delete school",
+												variant: "destructive",
+											});
+										}
+									} else {
+										toast({
+											title: "Invalid ID",
+											description:
+												"Please enter a valid school ID",
+											variant: "destructive",
+										});
+									}
+								}}
+								className="mt-4">
+								Delete
 							</Button>
 						</CardFooter>
 					</Card>

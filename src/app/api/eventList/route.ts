@@ -38,11 +38,12 @@ export async function GET(request: Request) {
 			select: {
 				id: true,
 				name: true,
+				logo: true, // Include the logo in the selection
 				area: true,
 				events: {
 					where: {
 						date: {
-							gte: dateThreshold, // Only include events from the past 'advertiseTime' days
+							gte: dateThreshold,
 						},
 					},
 					select: {
@@ -56,15 +57,24 @@ export async function GET(request: Request) {
 			},
 		});
 
-		if (!schools || schools.length === 0) {
+		// Flatten the events into a single list with associated school information
+		const allEvents = schools.flatMap((school) =>
+			school.events.map((event) => ({
+				...event,
+				school: {
+					id: school.id,
+					name: school.name,
+					logo: school.logo,
+				},
+			}))
+		);
+
+		if (allEvents.length === 0) {
 			return new Response(JSON.stringify([]), {
 				status: 200,
 				headers: { "Content-Type": "application/json" },
 			});
 		}
-
-		// Flatten the events into a single list
-		const allEvents = schools.flatMap((school) => school.events);
 
 		return new Response(JSON.stringify(allEvents), {
 			status: 200,
