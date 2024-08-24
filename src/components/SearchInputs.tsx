@@ -100,7 +100,6 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectContent>
 						</Select>
 					</div>
-					<span className="text-white">OR</span>
 					<div className="grid w-full items-center gap-1.5">
 						<Label htmlFor="where">Where</Label>
 						<Select
@@ -149,6 +148,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 				</div>
 			</form>
 
+			<div className="text-white text-center font-bold pt-3">OR</div>
 			<form
 				onSubmit={handleSubmitSchool}
 				className="pt-2">
@@ -170,7 +170,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					</div>
 				</div>
 			</form>
-			<div className="text-center pt-3 font-bold">
+			<div className="text-center pt-3 font-bold italic">
 				<span className="">Please note: </span>
 				We are continuously updating profiles of schools, your patience
 				is appreciated.

@@ -31,6 +31,11 @@ export default function MerchantsPage() {
 			<div className="text-3xl text-white text-center font-bold">
 				Merchandise
 			</div>
+			<div className="text-center pt-3 font-bold italic text-white">
+				<span>Please note: </span>
+				Please contact merchandise@schoolsinhyderabad.co.in for any
+				advertisement
+			</div>
 			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
 				{details.length !== 0 ? (
 					<div className="pt-10">

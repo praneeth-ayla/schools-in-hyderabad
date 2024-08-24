@@ -119,7 +119,7 @@ export function useGetEvent(id: string) {
 	return { event, isLoading, failed };
 }
 
-export function useGetEventsList({ area }: UseSchoolListParams) {
+export function useGetEventsList({ area, name }: UseSchoolListParams) {
 	const [events, setEvents] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
@@ -128,8 +128,8 @@ export function useGetEventsList({ area }: UseSchoolListParams) {
 	useEffect(() => {
 		async function getDetails() {
 			try {
-				const { data } = await axios.get<any>(
-					`/api/eventList?area=${area}`
+				const { data } = await axios.get<SchoolPartialData[]>(
+					"/api/eventList?area=" + area + "&name=" + name
 				);
 
 				// Reverse the order of events here
@@ -149,7 +149,7 @@ export function useGetEventsList({ area }: UseSchoolListParams) {
 		}
 
 		getDetails();
-	}, [area]);
+	}, [area, name]);
 
 	return { events, isLoading, failed };
 }

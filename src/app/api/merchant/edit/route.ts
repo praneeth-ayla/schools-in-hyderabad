@@ -18,17 +18,15 @@ export async function PUT(request: Request) {
 		);
 	}
 
-	const images =
-		// @ts-ignore
-		body.images?.map((url: string) => ({
-			url,
-		})) || [];
-
-	const videos =
-		body.videos?.map((video) => ({
-			src: video.src,
-			title: video.title,
-		})) || [];
+	if (!id) {
+		return new Response(
+			JSON.stringify({
+				success: false,
+				message: "ID is required!",
+			}),
+			{ status: 400 }
+		);
+	}
 
 	const contactData = body.contact
 		? {
@@ -48,23 +46,28 @@ export async function PUT(request: Request) {
 	try {
 		const res = await prisma.merchant.update({
 			where: {
-				// @ts-ignore
 				id: parseInt(id, 10), // Convert id to number
 			},
 			data: {
 				name: body.name,
 				aboutUs: body.aboutUs,
 				logo: body.logo,
-				rating: body.rating,
 				locationMap: body.locationMap,
 				contact: contactData ? { update: contactData } : undefined,
 				images: {
-					deleteMany: {}, // Optional: if you want to clear existing images
-					create: images,
+					deleteMany: {}, // Clear existing images
+					create:
+						body.images?.map((image) => ({
+							url: image.url,
+						})) || [],
 				},
 				videos: {
-					deleteMany: {}, // Optional: if you want to clear existing videos
-					create: videos,
+					deleteMany: {}, // Clear existing videos
+					create:
+						body.videos?.map((video) => ({
+							src: video.src,
+							title: video.title,
+						})) || [],
 				},
 			},
 		});

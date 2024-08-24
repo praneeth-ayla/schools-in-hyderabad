@@ -60,12 +60,7 @@ export default function SearchPage({ name, area, board }: Props) {
 								{!area ? (
 									"Noteworthy Highlights"
 								) : (
-									<>
-										Noteworthy Highlights in{" "}
-										<span className="text-purple-600">
-											{area.replace(/_/g, " ")}
-										</span>
-									</>
+									<>Noteworthy Highlights </>
 								)}
 							</p>
 							<div className="m-0 pt-4 px-0">
@@ -75,7 +70,7 @@ export default function SearchPage({ name, area, board }: Props) {
 					) : (
 						area && (
 							<div className="font-semibold text-2xl py-8">
-								No events
+								No Noteworthy Highlights
 							</div>
 						)
 					)}
