@@ -98,6 +98,7 @@ export function useGetEvent(id: string) {
 		async function getDetails() {
 			try {
 				const { data } = await axios.get<any>(`/api/event?id=${id}`);
+
 				setEvent(data);
 			} catch (error: any) {
 				console.error("Error fetching events", error.message);
@@ -118,7 +119,7 @@ export function useGetEvent(id: string) {
 	return { event, isLoading, failed };
 }
 
-export function useGetEventsList(area: Place) {
+export function useGetEventsList({ area }: UseSchoolListParams) {
 	const [events, setEvents] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
@@ -130,6 +131,7 @@ export function useGetEventsList(area: Place) {
 				const { data } = await axios.get<any>(
 					`/api/eventList?area=${area}`
 				);
+
 				// Reverse the order of events here
 				const reversedEvents = data.reverse();
 				setEvents(reversedEvents);
