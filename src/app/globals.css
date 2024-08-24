@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @layer base {
 	:root {
@@ -80,3 +81,10 @@
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 }
+
+.head{
+	font-family: "Playfair Display", serif;
+	font-optical-sizing: auto;
+	font-weight: 800;
+	font-style: normal;
+  }

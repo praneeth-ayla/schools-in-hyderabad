@@ -18,7 +18,7 @@ import EventsSchoolPage from "./EventsSchoolPage";
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
 	const router = useRouter();
-
+	
 	useEffect(() => {
 		if (failed) router.back();
 	}, [failed]);
@@ -224,7 +224,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								{details.facilities &&
 									details.facilities?.length > 0 && (
 										<div>
-											<p className="text-2xl pb-3 font-bold">
+											<p className="text-2xl pb-3 font-bold head">
 												Facilities
 											</p>
 											<div className="flex gap-3 flex-wrap">
