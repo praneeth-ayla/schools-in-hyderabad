@@ -248,7 +248,7 @@ function SchoolForm({ searchParams }: any) {
 		};
 
 		try {
-			const res = await axios.post("/api/school/create", formData);
+			const res = await axios.put("/api/school/edit?id=" + id, formData);
 			console.log(res);
 			setLoading(false);
 			toast({

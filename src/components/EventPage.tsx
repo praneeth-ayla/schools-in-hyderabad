@@ -64,7 +64,7 @@ export default function EventPage({ id }: { id: string }) {
 							<CardTitle className="text-center text-wrap text-3xl font-bold">
 								<div>{event.title}</div>
 							</CardTitle>
-							<CardDescription className="text-black ">
+							<CardDescription className="text-black text-lg">
 								<div className="flex gap-2">
 									<div className="font-semibold">
 										Published Date:

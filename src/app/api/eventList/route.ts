@@ -2,10 +2,24 @@ import { Place } from "@/lib/types";
 import prisma from "../../../../prisma";
 
 export async function GET(request: Request) {
-	try {
-		const { searchParams } = new URL(request.url);
-		const area = searchParams.get("area") as Place;
+	const { searchParams } = new URL(request.url);
+	const area = searchParams.get("area");
+	const name = searchParams.get("name");
 
+	// Build the 'where' clause dynamically based on provided parameters
+	const whereClause: { [key: string]: any } = {};
+
+	if (name && name.trim()) {
+		whereClause.name = {
+			contains: name.trim(),
+		};
+	}
+
+	if (area) {
+		whereClause.area = area as Place;
+	}
+
+	try {
 		// Fetch global settings to get the advertise time
 		const advertiseSettings = await prisma.globalSettings.findFirst();
 		const advertiseTime = advertiseSettings?.advertiseTime ?? 3; // Default to 3 if not found
@@ -14,18 +28,9 @@ export async function GET(request: Request) {
 		const dateThreshold = new Date();
 		dateThreshold.setDate(dateThreshold.getDate() - advertiseTime);
 
-		// Fetch schools with their events, filtering by area and date
+		// Fetch schools based on the constructed where clause and filter events by date
 		const schools = await prisma.school.findMany({
-			where: {
-				area: area || undefined, // Filter by area if provided
-				events: {
-					some: {
-						date: {
-							gte: dateThreshold, // Only include events from the past 'advertiseTime' days
-						},
-					},
-				},
-			},
+			where: Object.keys(whereClause).length ? whereClause : undefined,
 			select: {
 				events: {
 					where: {
@@ -67,10 +72,12 @@ export async function GET(request: Request) {
 		});
 	} catch (error) {
 		return new Response(
-			JSON.stringify({ error: "Internal server error" }),
+			JSON.stringify({ error: (error as Error).message }),
 			{
 				status: 500,
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+				},
 			}
 		);
 	}

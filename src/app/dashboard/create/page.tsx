@@ -442,20 +442,6 @@ function SchoolForm() {
 							placeholder="91-9999999999"
 						/>
 					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							twitter
-						</Label>
-						<Input
-							name="twitter"
-							value={contact.twitter}
-							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
-							placeholder="91-9999999999"
-						/>
-					</div>
-
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							linkedin

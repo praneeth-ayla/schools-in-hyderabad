@@ -230,7 +230,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											</p>
 											<div className="flex gap-3 flex-wrap">
 												<TextGenerateEffect
-												
+												className="head font-bold"
 													words={details.facilities
 														.map(
 															// @ts-ignore
@@ -246,7 +246,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									details.toppers.length > 0 && (
 										<div>
 											<p className="text-2xl pb-3 font-bold">
-												Toppers
+												Our Toppers
 											</p>
 											<pre className=" font-sans text-wrap">
 												<div className="grid gap-3">

@@ -100,7 +100,6 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectContent>
 						</Select>
 					</div>
-					<span className="text-white">OR</span>
 					<div className="grid w-full items-center gap-1.5">
 						<Label htmlFor="where">Where</Label>
 						<Select
@@ -149,9 +148,8 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 				</div>
 			</form>
 
-			<form
-				onSubmit={handleSubmitSchool}
-				className="pt-2">
+			<div className="text-white text-center font-bold pt-3">or</div>
+			<form onSubmit={handleSubmitSchool}>
 				<div className="flex flex-col gap-6 md:flex-row w-full justify-center items-start md:items-end">
 					<div className="grid w-full items-center gap-1.5 p-0">
 						<Label htmlFor="school">School</Label>
@@ -170,7 +168,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 					</div>
 				</div>
 			</form>
-			<div className="text-center pt-3 font-bold">
+			<div className="text-center pt-3 font-bold italic">
 				<span className="">Please note: </span>
 				We are continuously updating profiles of schools, your patience
 				is appreciated.
