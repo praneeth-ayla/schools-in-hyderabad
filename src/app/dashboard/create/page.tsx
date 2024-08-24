@@ -14,7 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import UploadImages from "@/components/UploadImages";
-import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
+import { useAreaList, useBoardList } from "@/lib/hooks";
 import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
@@ -34,7 +34,7 @@ function SchoolForm() {
 		aboutUs: "",
 		logo: "",
 		area: "",
-		category: "",
+		board: "",
 		locationMap: "",
 	});
 
@@ -50,6 +50,13 @@ function SchoolForm() {
 		linkedin: "",
 		opening: "",
 	});
+
+	const { areas, failed, isLoading: isLoadingAreas } = useAreaList();
+	const {
+		boards,
+		failed: failedBoards,
+		isLoading: isLoadingBoards,
+	} = useBoardList();
 
 	// Initially empty arrays for facilities and videos
 	const [facilities, setFacilities] = useState([""]);
@@ -190,12 +197,22 @@ function SchoolForm() {
 
 		const formData = {
 			...basicInfo,
+			area: {
+				name: basicInfo.area,
+			},
+			category: {
+				name: basicInfo.board,
+			},
 			contact,
-			facilities,
+			facilities: facilities.map((facility) => ({
+				name: facility,
+			})),
 			events,
 			awards,
 			toppers,
-			images,
+			images: images.map((img) => ({
+				url: img,
+			})),
 			videos,
 		};
 
@@ -333,13 +350,24 @@ function SchoolForm() {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.values(Place).map((place) => (
+									{!isLoadingAreas &&
+									areas &&
+									Array.isArray(areas) &&
+									areas.length > 0 ? (
+										areas.map((place) => (
+											<SelectItem
+												key={place.name}
+												value={place.name}>
+												{place.name}
+											</SelectItem>
+										))
+									) : (
 										<SelectItem
-											key={place}
-											value={place}>
-											{place.replace("_", " ")}
+											disabled
+											value="t">
+											No areas available
 										</SelectItem>
-									))}
+									)}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -348,30 +376,30 @@ function SchoolForm() {
 					{/* School Category */}
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
-							Category
+							Board
 						</Label>
 						<Select
 							required
-							value={basicInfo.category}
+							name="board"
 							onValueChange={(value) =>
 								handleBasicInfoChange({
-									target: { name: "category", value },
+									target: { name: "board", value },
 								})
 							}>
 							<SelectTrigger>
-								<SelectValue placeholder="Select a category" />
+								<SelectValue placeholder="Select a board" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.values(SchoolCategory).map(
-										(category) => (
+									{!isLoadingBoards &&
+										boards &&
+										boards.map((board) => (
 											<SelectItem
-												key={category}
-												value={category}>
-												{SchoolCategoryNames[category]}
+												key={board.id}
+												value={board.name}>
+												{board.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>

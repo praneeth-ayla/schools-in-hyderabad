@@ -11,7 +11,7 @@ export default function Footer() {
 				</a>
 				<a
 					className="hover:text-white"
-					href="merchants">
+					href="merchandise">
 					Merchandise
 				</a>
 				<a

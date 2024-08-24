@@ -1,4 +1,3 @@
-import { Place } from "@/lib/types";
 import prisma from "../../../../prisma";
 
 export async function GET(request: Request) {
@@ -7,7 +6,10 @@ export async function GET(request: Request) {
 	const name = searchParams.get("name");
 
 	// Build the 'where' clause dynamically based on provided parameters
-	const whereClause: { [key: string]: any } = {};
+	const whereClause: {
+		name?: { contains: string };
+		area?: { name: string };
+	} = {};
 
 	if (name && name.trim()) {
 		whereClause.name = {
@@ -16,22 +18,27 @@ export async function GET(request: Request) {
 	}
 
 	if (area) {
-		whereClause.area = area as Place;
+		whereClause.area = {
+			name: area,
+		};
 	}
 
 	try {
 		// Fetch global settings to get the advertise time
 		const advertiseSettings = await prisma.globalSettings.findFirst();
-		const advertiseTime = advertiseSettings?.advertiseTime ?? 3; // Default to 3 if not found
+		const advertiseTime = advertiseSettings?.advertiseTime ?? 3; // Default to 3 days if not found
 
 		// Calculate the date for the threshold based on advertiseTime
 		const dateThreshold = new Date();
 		dateThreshold.setDate(dateThreshold.getDate() - advertiseTime);
 
-		// Fetch schools based on the constructed where clause and filter events by date
+		// Fetch schools based on the constructed where clause
 		const schools = await prisma.school.findMany({
-			where: Object.keys(whereClause).length ? whereClause : undefined,
+			where: whereClause,
 			select: {
+				id: true,
+				name: true,
+				area: true,
 				events: {
 					where: {
 						date: {
@@ -44,13 +51,6 @@ export async function GET(request: Request) {
 						title: true,
 						date: true,
 						image: true,
-						school: {
-							select: {
-								area: true,
-								name: true,
-								logo: true,
-							},
-						},
 					},
 				},
 			},
@@ -71,6 +71,7 @@ export async function GET(request: Request) {
 			headers: { "Content-Type": "application/json" },
 		});
 	} catch (error) {
+		console.error("Error fetching schools and events:", error);
 		return new Response(
 			JSON.stringify({ error: (error as Error).message }),
 			{

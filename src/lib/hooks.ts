@@ -129,7 +129,10 @@ export function useGetEventsList({ area, name }: UseSchoolListParams) {
 		async function getDetails() {
 			try {
 				const { data } = await axios.get<SchoolPartialData[]>(
-					"/api/eventList?area=" + area + "&name=" + name
+					"/api/eventList",
+					{
+						params: { name, area },
+					}
 				);
 
 				// Reverse the order of events here
@@ -254,4 +257,74 @@ export function useGetTopper(id: string) {
 	}, [toast]);
 
 	return { event, isLoading, failed };
+}
+
+export function useAreaList() {
+	const [areas, setAreas] = useState<
+		{ id: string; name: string }[] | undefined
+	>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	async function getAreas() {
+		try {
+			const res = await axios.get(`/api/areas`);
+			const data = res.data;
+			setAreas(data.areas); // Extract the `areas` array from the response
+			setIsLoading(false);
+		} catch (error: any) {
+			console.error("Error fetching area list:", error.message);
+			setIsLoading(false);
+			toast({
+				title: "Something went wrong!",
+				description: "Redirecting back",
+				duration: 1000,
+			});
+			setTimeout(() => {
+				setFailed(true);
+			}, 1000);
+		}
+	}
+
+	useEffect(() => {
+		getAreas();
+	}, []);
+
+	return { isLoading, areas, failed };
+}
+
+export function useBoardList() {
+	const [boards, setBoards] = useState<
+		{ id: string; name: string }[] | undefined
+	>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	async function getBoards() {
+		try {
+			const res = await axios.get(`/api/boards`);
+			const data = res.data;
+			setBoards(data.boards); // Extract the `boards` array from the response
+			setIsLoading(false);
+		} catch (error: any) {
+			console.error("Error fetching board list:", error.message);
+			setIsLoading(false);
+			toast({
+				title: "Something went wrong!",
+				description: "Redirecting back",
+				duration: 1000,
+			});
+			setTimeout(() => {
+				setFailed(true);
+			}, 1000);
+		}
+	}
+
+	useEffect(() => {
+		getBoards();
+	}, []);
+
+	return { isLoading, boards, failed };
 }

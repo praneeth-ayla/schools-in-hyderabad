@@ -11,8 +11,9 @@ import {
 	SelectValue,
 } from "./ui/select";
 import { Button } from "./ui/button";
-import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
+import { Place, SchoolCategory } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { useAreaList, useBoardList } from "@/lib/hooks";
 
 interface SearchInputsProps {
 	initialValues?: {
@@ -22,30 +23,36 @@ interface SearchInputsProps {
 	};
 }
 
-export default function SearchInputs({ initialValues }: SearchInputsProps) {
+export default function SearchInputs({ initialValues }: any) {
 	const router = useRouter();
 
 	const defaultValues = {
 		school: "",
 		board: "",
-		where: "",
+		area: "",
 	};
 
 	const [formValues, setFormValues] = useState({
 		...defaultValues,
 		...initialValues,
 	});
+	const { areas, failed, isLoading: isLoadingAreas } = useAreaList();
+	const {
+		boards,
+		failed: failedBoards,
+		isLoading: isLoadingBoards,
+	} = useBoardList();
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const { name, value } = event.target;
-		setFormValues((prevValues) => ({
+		setFormValues((prevValues: any) => ({
 			...prevValues,
 			[name]: value,
 		}));
 	}
 
 	function handleSelectChange(name: string, value: string) {
-		setFormValues((prevValues) => ({
+		setFormValues((prevValues: any) => ({
 			...prevValues,
 			[name]: value,
 		}));
@@ -62,7 +69,7 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 		router.push(
 			`/search?board=${encodeURIComponent(
 				values.board
-			)}&area=${encodeURIComponent(values.where)}`
+			)}&area=${encodeURIComponent(values.area)}`
 		);
 	}
 
@@ -86,27 +93,25 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.entries(SchoolCategoryNames).map(
-										([key, value]) => (
+									{boards &&
+										boards.map((board, id) => (
 											<SelectItem
-												key={key}
-												value={key}>
-												{/* Replaces underscore with space */}
-												{value.replace(/_/g, " ")}
+												key={id}
+												value={board.name}>
+												{board.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
 					</div>
 					<div className="grid w-full items-center gap-1.5">
-						<Label htmlFor="where">Where</Label>
+						<Label htmlFor="area">Area</Label>
 						<Select
-							name="where"
-							value={formValues.where}
+							name="area"
+							value={formValues.area}
 							onValueChange={(value) =>
-								handleSelectChange("where", value)
+								handleSelectChange("area", value)
 							}>
 							<SelectTrigger className="w-full text-black h-10">
 								<SelectValue
@@ -116,16 +121,15 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.entries(Place).map(
-										([key, value]) => (
+									{!isLoadingAreas &&
+										areas &&
+										areas.map((area) => (
 											<SelectItem
-												key={key}
-												value={key}>
-												{/* Replaces underscore with space */}
-												{value.replace(/_/g, " ")}
+												key={area.id}
+												value={area.name}>
+												{area.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>

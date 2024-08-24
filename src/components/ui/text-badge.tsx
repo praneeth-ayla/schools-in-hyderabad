@@ -34,7 +34,7 @@ export const TextGenerateEffect = ({
 		return (
 			<motion.div
 				ref={scope}
-				className="flex gap-3">
+				className="flex gap-3 flex-wrap">
 				{wordsArray.map((word, idx) => {
 					return (
 						<motion.span

@@ -88,6 +88,13 @@ export default function Navbar() {
 								)}`}>
 								About Us
 							</Link>
+							<Link
+								href="/contact"
+								className={`transition-colors  hover:text-blue-400 ${isActive(
+									"/contact"
+								)}`}>
+								Contact
+							</Link>
 						</nav>
 					</SheetContent>
 				</Sheet>

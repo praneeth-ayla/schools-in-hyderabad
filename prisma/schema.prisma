@@ -12,24 +12,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Place {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  School School[]
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  School School[]
+}
+
 model School {
   id          Int       @id @default(autoincrement())
   name        String    @db.LongText
   aboutUs     String    @db.LongText
   logo        String    @db.LongText
-  rating      Float     @default(0)    
+  rating      Float     @default(0)
   toppers     Toppers[]
   awards      Awards[]
-  locationMap String?    @db.LongText
-  contact     Contact?  
+  locationMap String?   @db.LongText
+  contact     Contact?
   facilities  Facility[]
   events      Event[]
   images      Image[]
   videos      Video[]
   reviews     Review[]
-  area        Place    
-  category    SchoolCategory 
-  advertise   Boolean    @default(false)
+  area        Place     @relation(fields: [areaId], references: [id])
+  areaId      Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  advertise   Boolean   @default(false)
 }
 
 model GlobalSettings {
@@ -138,39 +153,3 @@ model Toppers {
   school      School   @relation(fields: [schoolId], references: [id])
 }
 
-enum Place {
-  Abids
-  Ameerpet
-  Bachupally
-  Banjara_Hills
-  Begumpet
-  Charminar
-  Gachibowli
-  Hitech_City
-  Kondapur
-  Madhapur
-  Mehdipatnam
-  Miyapur
-  Somajiguda
-}
-
-enum SchoolCategory {
-  PlaySchool
-  PrimaryStateBoard
-  HighStateBoard
-  InternationalStateBoard
-  ResidentialStateBoard
-  PrimaryCBSE
-  HighCBSE
-  InternationalCBSE
-  ResidentialCBSE
-  PrimaryICSE
-  HighICSE
-  InternationalICSE
-  ResidentialICSE
-  PrimaryIGCSE
-  HighIGCSE
-  InternationalIGCSE
-  ResidentialIGCSE
-  PreSchoolDayCare
-}

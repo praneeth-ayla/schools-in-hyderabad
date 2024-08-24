@@ -15,6 +15,7 @@ import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
 import { TextGenerateEffect } from "./ui/text-badge";
+import CarouselEvents from "./CarouselEvents";
 
 export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	const { isLoading, details, failed } = useSchoolDetails(schoolId);
@@ -25,6 +26,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	}, [failed]);
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
+	console.log(details);
 	return (
 		<div className="py-10 w-full bg-blue-200 flex flex-col items-center justify-center antialiased">
 			<div>
@@ -228,9 +230,9 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											<p className="text-2xl pb-3 font-bold">
 												Facilities
 											</p>
-											<div className="flex gap-3 flex-wrap">
+											<div>
 												<TextGenerateEffect
-												className="head font-bold"
+													className="head font-bold flex flex-wrap"
 													words={details.facilities
 														.map(
 															// @ts-ignore
@@ -315,7 +317,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											</>
 										)}
 								</div>
-
 								{/* <div>
 									<p className="text-2xl font-bold">
 										Reviews

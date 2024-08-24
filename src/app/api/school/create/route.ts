@@ -1,92 +1,78 @@
-import { SchoolDetails } from "@/lib/types";
-import { getServerSession } from "next-auth";
 import prisma from "../../../../../prisma";
 
 export async function POST(request: Request) {
-	const body: SchoolDetails = await request.json();
-	const user = await getServerSession();
-
-	if (user?.user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-		return new Response(
-			JSON.stringify({
-				success: false,
-				message: "You're not authorized!",
-			}),
-			{ status: 403 }
-		);
-	}
-
-	// Transform the data for Prisma
-	const facilities =
-		body.facilities?.map((facility: string) => ({
-			name: facility,
-		})) || [];
-
-	const images =
-		// @ts-ignore
-		body.images?.map((url: string) => ({
-			url,
-		})) || [];
-
-	const contactData = body.contact
-		? {
-				location: body.contact.location,
-				number: body.contact.number,
-				email: body.contact.email,
-				website: body.contact.website,
-				instagram: body.contact.instagram,
-				twitter: body.contact.twitter,
-				linkedin: body.contact.linkedin,
-				youtube: body.contact.youtube,
-				facebook: body.contact.facebook,
-				opening: body.contact.opening,
-		  }
-		: undefined;
+	const data = await request.json();
 
 	try {
-		const res = await prisma.school.create({
+		const school = await prisma.school.create({
 			data: {
-				name: body.name,
-				aboutUs: body.aboutUs,
-				logo: body.logo,
-				rating: 0, // Assuming default rating is 0
-				area: body.area,
-				category: body.category,
-				locationMap: body.locationMap,
-				contact: contactData ? { create: contactData } : undefined,
+				name: data.name,
+				aboutUs: data.aboutUs,
+				logo: data.logo,
+				rating: data.rating,
+				locationMap: data.locationMap,
+				area: {
+					connectOrCreate: {
+						where: {
+							name: data.area.name, // Check for existing area by name
+						},
+						create: {
+							name: data.area.name, // Create new area if not exists
+						},
+					},
+				},
+				category: {
+					connectOrCreate: {
+						where: {
+							name: data.category.name, // Check for existing category by name
+						},
+						create: {
+							name: data.category.name, // Create new category if not exists
+						},
+					},
+				},
+				contact: {
+					create: data.contact,
+				},
 				facilities: {
-					create: facilities,
+					create: data.facilities,
 				},
 				events: {
-					create: body.events || [],
+					create: data.events,
 				},
 				awards: {
-					create: body.awards || [],
+					create: data.awards,
 				},
 				toppers: {
-					create: body.toppers || [],
+					create: data.toppers,
 				},
 				images: {
-					create: images,
+					create: data.images,
 				},
 				videos: {
-					create: body.videos || [],
+					create: data.videos,
 				},
 				reviews: {
-					create: body.reviews || [],
+					create: data.reviews,
 				},
 			},
 		});
-
-		return new Response(JSON.stringify(res), { status: 201 });
+		return new Response(JSON.stringify(school), {
+			status: 201,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 	} catch (error) {
-		console.error(error);
+		console.error("Error creating school:", error);
 		return new Response(
-			JSON.stringify({
-				success: false,
-				message: "Failed to create school",
-			}),
-			{ status: 500 }
+			JSON.stringify({ error: (error as Error).message }),
+			{
+				status: 500,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
 		);
 	}
 }

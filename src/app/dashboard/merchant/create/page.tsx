@@ -92,9 +92,10 @@ export default function MerchantForm() {
 			toast({
 				title: "Added Successfully",
 			});
-			// setTimeout(() => {
-			// 	// window.location.reload();
-			// }, 2000);
+			setTimeout(() => {
+				// window.location.reload();
+				// setLoading(false);
+			}, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
