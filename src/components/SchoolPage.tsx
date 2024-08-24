@@ -226,7 +226,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 													(facility, index) => (
 														<Badge
 															key={index}
-															className="text-lg p-2 px-4 text-black bg-[#FFA500] hover:bg-gradient-to-r from-from-yellow-300 hover:to-amber-500 ">
+															className="text-lg p-2 px-4 text-black bg-[#FFA500] ">
 															{/* Didn't want to change the types so :)*/}
 															{/* @ts-ignore */}
 															{facility.name}
