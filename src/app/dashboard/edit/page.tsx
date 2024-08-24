@@ -258,12 +258,12 @@ function SchoolForm({ searchParams }: any) {
 
 		try {
 			console.log(formData);
-			// const res = await axios.put("/api/school/edit?id=" + id, formData);
-			// console.log(res);
-			// setLoading(false);
-			// toast({
-			// 	title: "Added Successfully",
-			// });
+			const res = await axios.put("/api/school/edit?id=" + id, formData);
+			console.log(res);
+			setLoading(false);
+			toast({
+				title: "Added Successfully",
+			});
 			setTimeout(() => {
 				// window.location.reload();
 				setLoading(false);
