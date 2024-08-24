@@ -30,15 +30,22 @@ export default function MerchantPage({ merchantId }: { merchantId: string }) {
 					</p>
 					<div className="flex flex-col-reverse lg:flex-row gap-3 pb-10">
 						<Card className="px-6 mt-10 lg:mt-0 row-start-2 shadow-2xl pb-10 bg-blue-300 bg-opacity-50 border">
-							<div className="lg:w-[200px]">
-								<div className="flex justify-center items-center pt-10 ">
+							<div className="flex justify-center items-center  relative rounded-lg z-10">
+								<img
+									className="rounded-md lg:w-[300px] pt-2"
+									alt="school logo"
+									src={details.logo}
+								/>
+							</div>
+							{/* <div className="lg:w-[200px]">
+								<div className="flex justify-center items-center pt- ">
 									<img
 										className="rounded-md "
-										alt="Merchant logo"
+										alt="school logo"
 										src={details.logo}
 									/>
 								</div>
-							</div>
+							</div> */}
 							<pre className="font-sans grid gap-6">
 								{details.contact && (
 									<div className="py-6">
@@ -196,8 +203,8 @@ export default function MerchantPage({ merchantId }: { merchantId: string }) {
 							</pre>
 						</Card>
 
-						<Card className=" py-10 lg:col-span-full shadow-2xl bg-blue-300 bg-opacity-50 border">
-							<div className="flex justify-center items-center md:px-4 relative rounded-lg z-10">
+						<Card className=" py-2 lg:col-span-full shadow-2xl bg-blue-300 bg-opacity-50 border">
+							<div className="flex justify-center items-center  relative rounded-lg z-10">
 								<CarouselSpacing images={details.images} />
 							</div>
 							<div className="px-4 md:px-10 pt-3 flex flex-col gap-6 md:gap-10">
@@ -225,7 +232,7 @@ export default function MerchantPage({ merchantId }: { merchantId: string }) {
 										</div>
 									)}
 
-								<div>
+								{/* <div>
 									<p className="text-2xl font-bold">
 										Reviews
 									</p>
@@ -301,8 +308,8 @@ export default function MerchantPage({ merchantId }: { merchantId: string }) {
 											)}
 										</div>
 									</div>
-									<ReviewForm schoolId={Number(merchantId)} />
-								</div>
+									<ReviewForm schoolId={Number(schoolId)} />
+								</div> */}
 							</div>
 						</Card>
 					</div>

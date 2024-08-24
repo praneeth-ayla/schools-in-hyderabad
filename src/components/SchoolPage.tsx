@@ -33,9 +33,9 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 					</p>
 					<div className="flex flex-col-reverse lg:flex-row gap-3 pb-10">
 						<Card className="px-6 mt-10 lg:mt-0 row-start-2 shadow-2xl pb-10 bg-blue-300 bg-opacity-50 border">
-							<div className="flex justify-center items-center  relative rounded-lg z-10">
+							<div className="flex justify-center items-center  relative rounded-lg z-10 pt-2">
 								<img
-									className="rounded-md"
+									className="rounded-md lg:w-[300px]"
 									alt="school logo"
 									src={details.logo}
 								/>
