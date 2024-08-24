@@ -29,6 +29,19 @@ export async function POST(request: Request) {
 			);
 		}
 
+		// Check if the area already exists
+		const existingArea = await prisma.place.findUnique({
+			where: { name },
+		});
+
+		if (existingArea) {
+			return new Response(
+				JSON.stringify({ error: "Area with this name already exists" }),
+				{ status: 400, headers: { "Content-Type": "application/json" } }
+			);
+		}
+
+		// Create the new area
 		const area = await prisma.place.create({
 			data: { name },
 		});

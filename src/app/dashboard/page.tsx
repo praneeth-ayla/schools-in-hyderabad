@@ -22,6 +22,78 @@ export default function InputDemo() {
 	const router = useRouter();
 	const { toast } = useToast();
 
+	const handleAddBoard = async () => {
+		if (!board || board.trim() === "") {
+			toast({
+				title: "Invalid Input",
+				description: "Please enter a valid board name.",
+				variant: "destructive",
+			});
+			return;
+		}
+
+		try {
+			const res = await axios.post("/api/boards", { name: board });
+
+			if (res.status === 201) {
+				toast({
+					title: "Board Added",
+					description: "The board was added successfully.",
+				});
+				setBoard(""); // Clear the input field
+			} else {
+				toast({
+					title: "Error",
+					description: res.data.error || "Failed to add the board.",
+					variant: "destructive",
+				});
+			}
+		} catch (error) {
+			toast({
+				title: "Error",
+				description: "An error occurred while adding the board.",
+				variant: "destructive",
+			});
+		}
+	};
+
+	const handleAddArea = async () => {
+		if (!area || area.trim() === "") {
+			toast({
+				title: "Invalid Input",
+				description: "Please enter a valid area name.",
+				variant: "destructive",
+			});
+			return;
+		}
+
+		try {
+			const res = await axios.post("/api/areas", {
+				name: area,
+			});
+
+			if (res.status === 201) {
+				toast({
+					title: "Area Added",
+					description: "The area was added successfully.",
+				});
+				setArea(""); // Clear the input field
+			} else {
+				toast({
+					title: "Error",
+					description: "Failed to add the area.",
+					variant: "destructive",
+				});
+			}
+		} catch (error) {
+			toast({
+				title: "Error",
+				description: "An error occurred while adding the area.",
+				variant: "destructive",
+			});
+		}
+	};
+
 	const handleUpdate = async () => {
 		if (advertiseTime === "" || isNaN(advertiseTime)) {
 			// Handle invalid input
@@ -94,35 +166,54 @@ export default function InputDemo() {
 
 	if (status === "authenticated") {
 		return (
-			<div className="min-h-screen text-white">
+			<div className="min-h-screen text-black">
 				<div className="flex gap-3 flex-wrap lg:px-40 py-32 justify-evenly">
+					<div className="p-4">
+						<div className="bg-white shadow-md rounded-lg p-6">
+							<CardTitle className=" font-semibold">
+								Add Board
+							</CardTitle>
+							<CardContent className="mt-4">
+								<Input
+									type="text"
+									className="mt-5 placeholder:text-gray-600"
+									value={board}
+									onChange={(e) => setBoard(e.target.value)}
+									placeholder="Board Name"
+								/>
+							</CardContent>
+							<CardFooter>
+								<Button
+									onClick={handleAddBoard}
+									className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+									Add
+								</Button>
+							</CardFooter>
+						</div>
+					</div>
+
 					<Card className="p-4">
 						<CardTitle>Add Area</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center">
 							<Input
 								className="mt-5 placeholder:text-gray-600"
-								min={1}
 								value={area}
-								type="number"
-								onChange={(e) => {
-									setArea(e.target.value);
-								}}
-								placeholder="Area"
+								type="text"
+								onChange={(e) => setArea(e.target.value)}
+								placeholder="Area Name"
 							/>
 						</CardContent>
 						<CardFooter className="flex items-center justify-center">
 							<Button
 								className="mt-4"
 								onClick={() => {
-									schoolId;
-									router.push(
-										"/dashboard/edit?id=" + schoolId
-									);
+									handleAddArea();
 								}}>
 								Add
 							</Button>
 						</CardFooter>
 					</Card>
+
 					<Card className="p-4">
 						<CardTitle>School Create</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center"></CardContent>

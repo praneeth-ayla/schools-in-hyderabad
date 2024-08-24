@@ -21,6 +21,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
 	try {
 		const { name } = await request.json();
+
 		if (!name) {
 			return new Response(
 				JSON.stringify({ error: "Missing 'name' parameter" }),
@@ -28,6 +29,21 @@ export async function POST(request: Request) {
 			);
 		}
 
+		// Check if the board already exists
+		const existingBoard = await prisma.category.findUnique({
+			where: { name },
+		});
+
+		if (existingBoard) {
+			return new Response(
+				JSON.stringify({
+					error: "Board with this name already exists",
+				}),
+				{ status: 400, headers: { "Content-Type": "application/json" } }
+			);
+		}
+
+		// Create the new board
 		const board = await prisma.category.create({
 			data: { name },
 		});
