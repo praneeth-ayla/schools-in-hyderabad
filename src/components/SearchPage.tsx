@@ -48,7 +48,7 @@ export default function SearchPage({ name, area, board }: Props) {
 
 	return (
 		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
-			<div className="pt-10 px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
+			<div className=" px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
 				<div className="m-0">
 					<SearchInputs
 						initialValues={{ board, where: area, school: name }}
@@ -56,7 +56,7 @@ export default function SearchPage({ name, area, board }: Props) {
 
 					{events.length > 0 ? (
 						<div className="py-8">
-							<p className="font-bold text-xl italic">
+							<p className="font-bold text-xl italic text-amber-300">
 								{!area ? (
 									"Noteworthy Highlights"
 								) : (
@@ -69,7 +69,7 @@ export default function SearchPage({ name, area, board }: Props) {
 						</div>
 					) : (
 						area && (
-							<div className="font-semibold text-xl py-8 italic">
+							<div className="font-semibold text-xl py-8 italic text-amber-300">
 								Noteworthy Highlights
 							</div>
 						)
