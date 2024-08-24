@@ -45,8 +45,9 @@ export default function SchoolCard({
 						</CardDescription>
 						<div className="mt-4 pb-2 p-0 text-muted-foreground text-xs">
 							<p>
-								{/* {schoolDetail.category.name &&
-									schoolDetail.category.name} */}
+								{type === "school" &&
+									schoolDetail.category.name &&
+									schoolDetail.category.name}
 							</p>
 							<div>
 								{schoolDetail.area && (

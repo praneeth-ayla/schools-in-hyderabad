@@ -70,9 +70,7 @@ function SchoolForm({ searchParams }: any) {
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
 	]);
-	const [images, setImages] = useState<
-		{ url: string; id?: string; schoolId: string }[]
-	>([]);
+	const [images, setImages] = useState([""]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	useEffect(() => {
@@ -101,12 +99,16 @@ function SchoolForm({ searchParams }: any) {
 				linkedin: details.contact?.linkedin || "",
 				opening: details.contact?.opening || "",
 			});
-			setFacilities(details.facilities || []);
+			setFacilities(
+				// @ts-ignore
+				details.facilities.map((facility) => facility.name) || []
+			);
 			setToppers(details.toppers || []);
 			setAwards(details.awards || []);
 			setEvents(details.events || []);
 			setVideos(details.videos || []);
-			setImages(details.images || []);
+			// setImages(details.images || []);
+			setImages(details.images.map((img) => img.url) || []);
 		}
 	}, [details]);
 
@@ -262,9 +264,10 @@ function SchoolForm({ searchParams }: any) {
 			// toast({
 			// 	title: "Added Successfully",
 			// });
-			// setTimeout(() => {
-			// 	// window.location.reload();
-			// }, 2000);
+			setTimeout(() => {
+				// window.location.reload();
+				setLoading(false);
+			}, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);

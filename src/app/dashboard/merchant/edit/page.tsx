@@ -3,21 +3,12 @@ import { Input } from "@/components/Input";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import UploadImages from "@/components/UploadImages";
 import UploadImagesEdit from "@/components/UploadImagesEdit";
-import { useMerchantDetails, useSchoolDetails } from "@/lib/hooks";
-import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
-import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
+import { useMerchantDetails } from "@/lib/hooks";
+import { UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -53,9 +44,7 @@ function SchoolForm({ searchParams }: any) {
 		opening: details?.contact?.opening || "",
 	});
 
-	const [images, setImages] = useState<
-		{ url: string; id?: string; schoolId: string }[]
-	>([]);
+	const [images, setImages] = useState<any>([]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	useEffect(() => {
@@ -85,7 +74,7 @@ function SchoolForm({ searchParams }: any) {
 
 	useEffect(() => {
 		setVideos(details?.videos || [{ title: "", src: "" }]);
-		setImages(details?.images || [{ url: "", id: "", schoolId: "" }]);
+		setImages(details?.images.map((img) => img.url) || []);
 	}, [details]);
 
 	const handleBasicInfoChange = (e: any) => {
@@ -134,6 +123,7 @@ function SchoolForm({ searchParams }: any) {
 				formData
 			);
 			console.log(res);
+			console.log(formData);
 			setLoading(false);
 			toast({
 				title: "Edited Successfully",

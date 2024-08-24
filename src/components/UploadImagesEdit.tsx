@@ -1,38 +1,37 @@
+"use client";
 import { useState, useEffect } from "react";
 import { UploadDropzone } from "../utils/uploadthing";
-import axios from "axios";
 import { Trash } from "lucide-react";
-import { extractPngName } from "@/utils/extractPngName";
 
-export default function UploadImagesEdit({
+export default function UploadImages({
 	image,
 	setImage,
 }: {
-	image: { url: string; id?: string; schoolId: string }[];
-	setImage: (
-		images: { url: string; id?: string; schoolId: string }[]
-	) => void;
+	image: any;
+	setImage: any;
 }) {
-	const [images, setImages] =
-		useState<{ url: string; id?: string; schoolId: string }[]>(image);
+	const [images, setImages] = useState<{ url: string; key: string }[]>([]);
 
-	// Update form data when images change
+	// Synchronize images state with the incoming image prop
 	useEffect(() => {
-		setImage(images);
-	}, [images, setImage]);
+		setImages(
+			image.map((img: any) => ({
+				url: img,
+				key: img + "1",
+			}))
+		);
+	}, [image]); // `image` is sufficient in the dependency array
 
-	const handleDelete = async (img: {
-		url: string;
-		id?: string;
-		schoolId: string;
-	}) => {
+	const handleDelete = async (img: { url: string }) => {
 		try {
-			// Delete image from server
-			await axios.get(`/api/deleteImage?img=${extractPngName(img.url)}`);
 			// Remove image from local state
-			setImages((prevImages) =>
-				prevImages.filter((image) => image.url !== img.url)
+			const updatedImages = images.filter(
+				(images) => images.url !== img.url
 			);
+			setImages(updatedImages);
+
+			// Update the parent component's image state
+			setImage(updatedImages.map((img) => img.url));
 		} catch (error: any) {
 			console.error("Error deleting image:", error);
 			alert(`ERROR! ${error.message}`);
@@ -45,27 +44,31 @@ export default function UploadImagesEdit({
 				endpoint="imageUploader"
 				onClientUploadComplete={(res: any) => {
 					// Add new image to the images array
-					setImages((prevImages) => [...prevImages, ...res]);
+					const updatedImages = [...images, ...res];
+					setImages(updatedImages);
+
+					// Update the parent component's image state
+					setImage(updatedImages.map((img) => img.url));
 				}}
 				onUploadError={(error: Error) => {
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2 h-20 overflow-x-auto">
+			<div className="flex gap-2 bg-green-400 flex-wrap">
 				{images.map((img, i) => (
 					<div
 						key={i}
 						className="relative">
 						<img
 							src={img.url}
+							onClick={() => {
+								console.log(img); // For debugging
+							}}
 							alt={`img${i + 1}`}
 							style={{ width: "100px", height: "100px" }}
 						/>
-						<div className="absolute top-0 right-0 flex gap-1 p-1">
-							<Trash
-								className="cursor-pointer text-red-600 hover:text-red-800"
-								onClick={() => handleDelete(img)}
-							/>
+						<div className="flex justify-center items-center pt-2 hover:cursor-pointer">
+							<Trash onClick={() => handleDelete(img)} />
 						</div>
 					</div>
 				))}
