@@ -81,11 +81,3 @@
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 }
-
-.head{
-	font-family: "Playfair Display", serif;
-	font-optical-sizing: auto;
-	font-weight: 500;
-	font-style: normal;
-	
-  }

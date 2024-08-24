@@ -225,12 +225,12 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								{details.facilities &&
 									details.facilities?.length > 0 && (
 										<div>
-											<p className="text-2xl pb-3 font-bold ">
+											<p className="text-2xl pb-3 font-bold">
 												Facilities
 											</p>
 											<div className="flex gap-3 flex-wrap">
 												<TextGenerateEffect
-												className="head font-bold"
+												
 													words={details.facilities
 														.map(
 															// @ts-ignore
