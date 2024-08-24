@@ -224,7 +224,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 								{details.facilities &&
 									details.facilities?.length > 0 && (
 										<div>
-											<p className="text-2xl pb-3 font-bold head">
+											<p className="text-2xl pb-3 font-bold ">
 												Facilities
 											</p>
 											<div className="flex gap-3 flex-wrap">
@@ -232,7 +232,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 													(facility, index) => (
 														<Badge
 															key={index}
-															className="text-lg p-2 px-4 text-black bg-[#FFA500] ">
+															className="text-lg p-2 px-4 text-black bg-[#FFA500] head">
 															{/* Didn't want to change the types so :)*/}
 															{/* @ts-ignore */}
 															{facility.name}
