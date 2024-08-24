@@ -15,10 +15,7 @@ export default function PhotoCard({
 			<Card className="flex p-2 gap-2 bg-blue-200">
 				<div className="flex items-center w-40 h-32">
 					<img
-						src={
-							event.image ||
-							"https://utfs.io/f/a32a0397-1b5c-42a9-af5c-d24e7e7b71da-tpk6wk.com_wallpaper.jpg"
-						}
+						src={event.image}
 						alt={`${event.title} img`}
 						className="object-cover w-full h-full rounded-md"
 					/>
