@@ -74,6 +74,7 @@ export async function PUT(request: Request) {
 					create:
 						body.events?.map((event) => ({
 							description: event.description,
+							image: event.image,
 							title: event.title,
 							// @ts-ignore
 							date: event.date,
@@ -83,6 +84,28 @@ export async function PUT(request: Request) {
 					deleteMany: {},
 					// @ts-ignore
 					create: body.facilities || [],
+				},
+				toppers: {
+					deleteMany: {},
+					create:
+						body.toppers?.map((topper) => ({
+							description: topper.description,
+							image: topper.image,
+							title: topper.title,
+							// @ts-ignore
+							date: topper.date,
+						})) || [],
+				},
+				awards: {
+					deleteMany: {},
+					create:
+						body.awards?.map((award) => ({
+							description: award.description,
+							image: award.image,
+							title: award.title,
+							// @ts-ignore
+							date: award.date,
+						})) || [],
 				},
 
 				// reviews: {

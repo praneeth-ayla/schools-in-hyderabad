@@ -112,8 +112,9 @@ function SchoolForm({ searchParams }: any) {
 		const formData = {
 			...basicInfo,
 			contact,
-
-			images,
+			images: images.map((img: any) => ({
+				url: img,
+			})),
 			videos,
 		};
 

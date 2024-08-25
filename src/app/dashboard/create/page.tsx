@@ -223,7 +223,7 @@ function SchoolForm() {
 			console.log(res);
 			setLoading(false);
 			toast({
-				title: "Added Successfully",
+				title: "Edited Successfully",
 			});
 			// setTimeout(() => {
 			// 	// window.location.reload();

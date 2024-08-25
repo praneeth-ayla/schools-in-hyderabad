@@ -52,6 +52,9 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									/>
 								</div>
 							</div> */}
+							<div className="animate-pulse text-center text-xl font-bold text-amber-700 text-wrap">
+								Admissions are open now
+							</div>
 							<pre className="font-sans grid gap-6">
 								{details.contact && (
 									<div className="py-6">
@@ -230,8 +233,8 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											<p className="text-2xl pb-3 font-bold">
 												Facilities
 											</p>
-											<div>
-												<TextGenerateEffect
+											<div className="gap-3 flex flex-wrap">
+												{/* <TextGenerateEffect
 													className="head font-bold flex flex-wrap"
 													words={details.facilities
 														.map(
@@ -239,7 +242,16 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 															(faci) => faci.name
 														)
 														.join(" ")}
-												/>
+												/> */}
+												{details.facilities.map(
+													(facility) => (
+														<Badge className="bg-amber-500 font-bold text-lg p-2 text-black px-4">
+															{/* @ts-ignore */}
+															{facility.name}
+															dfsja
+														</Badge>
+													)
+												)}
 											</div>
 										</div>
 									)}
