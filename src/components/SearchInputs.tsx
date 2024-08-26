@@ -11,20 +11,13 @@ import {
 	SelectValue,
 } from "./ui/select";
 import { Button } from "./ui/button";
-import { Place, SchoolCategory } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useAreaList, useBoardList } from "@/lib/hooks";
-
-interface SearchInputsProps {
-	initialValues?: {
-		school?: string;
-		board?: SchoolCategory;
-		where?: Place;
-	};
-}
+import { useToast } from "./ui/use-toast";
 
 export default function SearchInputs({ initialValues }: any) {
 	const router = useRouter();
+	const { toast } = useToast();
 
 	const defaultValues = {
 		school: "",
@@ -36,6 +29,7 @@ export default function SearchInputs({ initialValues }: any) {
 		...defaultValues,
 		...initialValues,
 	});
+
 	const { areas, failed, isLoading: isLoadingAreas } = useAreaList();
 	const {
 		boards,
@@ -61,16 +55,35 @@ export default function SearchInputs({ initialValues }: any) {
 	async function handleSubmitSchool(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const values = formValues;
-		router.push(`/search?name=${encodeURIComponent(values.school)}`);
+		if (values.school !== "") {
+			router.push(`/search?name=${encodeURIComponent(values.school)}`);
+		} else {
+			toast({
+				title: "Please enter a school name before searching.",
+			});
+		}
 	}
+
 	async function handleSubmitTwo(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const values = formValues;
-		router.push(
-			`/search?board=${encodeURIComponent(
-				values.board
-			)}&area=${encodeURIComponent(values.area)}`
-		);
+
+		if (values.area !== "" && values.board === "") {
+			// Case 1: Only area is provided
+			router.push(`/search?area=${encodeURIComponent(values.area)}`);
+		} else if (values.board !== "" && values.area !== "") {
+			// Case 2: Both area and board are provided
+			router.push(
+				`/search?board=${encodeURIComponent(
+					values.board
+				)}&area=${encodeURIComponent(values.area)}`
+			);
+		} else {
+			// Case 3: None of the fields are provided
+			toast({
+				title: "Please select an area or both area and board before searching.",
+			});
+		}
 	}
 
 	return (

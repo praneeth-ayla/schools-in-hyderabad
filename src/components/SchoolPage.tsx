@@ -201,7 +201,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									{details.contact?.opening && (
 										<>
 											<div className="text-2xl font-bold">
-												Opening
+												Timings
 											</div>
 											<pre className="font-sans">
 												{details.contact.opening}
@@ -244,11 +244,12 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 														.join(" ")}
 												/> */}
 												{details.facilities.map(
-													(facility) => (
-														<Badge className="bg-amber-500 font-bold text-lg p-2 text-black px-4">
+													(facility, i) => (
+														<Badge
+															key={i}
+															className="bg-amber-500 font-bold text-lg p-2 text-black px-4">
 															{/* @ts-ignore */}
 															{facility.name}
-															dfsja
 														</Badge>
 													)
 												)}
