@@ -21,6 +21,11 @@ export default function Footer() {
 				</a>
 				<a
 					className="hover:text-white"
+					href="blogs">
+					Blogs
+				</a>
+				<a
+					className="hover:text-white"
 					href="privacy-policy">
 					Privacy Policy
 				</a>

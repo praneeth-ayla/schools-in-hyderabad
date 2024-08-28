@@ -28,7 +28,7 @@ export default function SearchPage({ name, area, board }: Props) {
 		events: fetchedEvents,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
-	} = useGetEventsList({ area });
+	} = useGetEventsList({ area, name });
 
 	const router = useRouter();
 
