@@ -9,7 +9,7 @@ export default function page() {
 				<center className="lg:flex">
 				<Image
 						alt="logo"
-						src={"/ProfilePic.jfif"}
+						src={"/Profile.jpg"}
 						height={300}
 						width={300}
 						className="rounded-full transition duration-500 hover:scale-110"
