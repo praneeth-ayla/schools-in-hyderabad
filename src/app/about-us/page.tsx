@@ -1,12 +1,30 @@
 import HeroStart from "@/components/HeroStart";
-
+import Image from "next/image";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 export default function page() {
 	return (
 		<div className="bg-gradient-to-r">
 			<HeroStart text="About Us" />
 			<div className="pt-10 mx-4 lg:mx-28 sm:p-10  sm:text-left text-white">
+				<center className="lg:flex">
+				<Image
+						alt="logo"
+						src={"/ProfilePic.jfif"}
+						height={300}
+						width={300}
+						className="rounded-full transition duration-500 hover:scale-110"
+				    />
+					<TextGenerateEffect
+							className="z-10 mt-5 pt-5"
+							words="Y.Bhaskara Phani Kumar  (Founder)"
+						/>
+					
+				</center>
+			       <br />
 				<div className="flex flex-col gap-6 md:gap-10 ">
+				
 					<div>
+					
 						<h1 className="text-lg sm:text-2xl font-bold pb-1">
 							Welcome to Edu Infonence
 						</h1>
