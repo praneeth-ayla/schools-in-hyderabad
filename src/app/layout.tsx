@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Schools In Hyderabad",
-	description: "Find the best schools in Hyderabad",
+	description: "Connecting Parents to School of Choice",
 	icons: {
 		icon: ["/favicon.ico"],
 		apple: ["/apple-touch-icon.png?v=4"],
@@ -29,7 +29,6 @@ export default function RootLayout({
 				<SessionProvider>
 					<div className="flex flex-col min-h-screen">
 						<Navbar />
-						{/* <FloatingNavDemo /> */}
 						<div className=" bg-parallax bg-cover bg-fixed">
 							<main className="flex-grow">{children}</main>
 						</div>

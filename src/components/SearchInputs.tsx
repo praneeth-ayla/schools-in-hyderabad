@@ -11,24 +11,18 @@ import {
 	SelectValue,
 } from "./ui/select";
 import { Button } from "./ui/button";
-import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { useAreaList, useBoardList } from "@/lib/hooks";
+import { useToast } from "./ui/use-toast";
 
-interface SearchInputsProps {
-	initialValues?: {
-		school?: string;
-		board?: SchoolCategory;
-		where?: Place;
-	};
-}
-
-export default function SearchInputs({ initialValues }: SearchInputsProps) {
+export default function SearchInputs({ initialValues }: any) {
 	const router = useRouter();
+	const { toast } = useToast();
 
 	const defaultValues = {
 		school: "",
 		board: "",
-		where: "",
+		area: "",
 	};
 
 	const [formValues, setFormValues] = useState({
@@ -36,16 +30,23 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 		...initialValues,
 	});
 
+	const { areas, failed, isLoading: isLoadingAreas } = useAreaList();
+	const {
+		boards,
+		failed: failedBoards,
+		isLoading: isLoadingBoards,
+	} = useBoardList();
+
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const { name, value } = event.target;
-		setFormValues((prevValues) => ({
+		setFormValues((prevValues: any) => ({
 			...prevValues,
 			[name]: value,
 		}));
 	}
 
 	function handleSelectChange(name: string, value: string) {
-		setFormValues((prevValues) => ({
+		setFormValues((prevValues: any) => ({
 			...prevValues,
 			[name]: value,
 		}));
@@ -54,16 +55,35 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 	async function handleSubmitSchool(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const values = formValues;
-		router.push(`/search?name=${encodeURIComponent(values.school)}`);
+		if (values.school !== "") {
+			router.push(`/search?name=${encodeURIComponent(values.school)}`);
+		} else {
+			toast({
+				title: "Please enter a school name before searching.",
+			});
+		}
 	}
+
 	async function handleSubmitTwo(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const values = formValues;
-		router.push(
-			`/search?board=${encodeURIComponent(
-				values.board
-			)}&area=${encodeURIComponent(values.where)}`
-		);
+
+		if (values.area !== "" && values.board === "") {
+			// Case 1: Only area is provided
+			router.push(`/search?area=${encodeURIComponent(values.area)}`);
+		} else if (values.board !== "" && values.area !== "") {
+			// Case 2: Both area and board are provided
+			router.push(
+				`/search?board=${encodeURIComponent(
+					values.board
+				)}&area=${encodeURIComponent(values.area)}`
+			);
+		} else {
+			// Case 3: None of the fields are provided
+			toast({
+				title: "Please select an area or both area and board before searching.",
+			});
+		}
 	}
 
 	return (
@@ -86,27 +106,25 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.entries(SchoolCategoryNames).map(
-										([key, value]) => (
+									{boards &&
+										boards.map((board, id) => (
 											<SelectItem
-												key={key}
-												value={key}>
-												{/* Replaces underscore with space */}
-												{value.replace(/_/g, " ")}
+												key={id}
+												value={board.name}>
+												{board.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
 					</div>
 					<div className="grid w-full items-center gap-1.5">
-						<Label htmlFor="where">Where</Label>
+						<Label htmlFor="area">Area</Label>
 						<Select
-							name="where"
-							value={formValues.where}
+							name="area"
+							value={formValues.area}
 							onValueChange={(value) =>
-								handleSelectChange("where", value)
+								handleSelectChange("area", value)
 							}>
 							<SelectTrigger className="w-full text-black h-10">
 								<SelectValue
@@ -116,16 +134,15 @@ export default function SearchInputs({ initialValues }: SearchInputsProps) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.entries(Place).map(
-										([key, value]) => (
+									{!isLoadingAreas &&
+										areas &&
+										areas.map((area) => (
 											<SelectItem
-												key={key}
-												value={key}>
-												{/* Replaces underscore with space */}
-												{value.replace(/_/g, " ")}
+												key={area.id}
+												value={area.name}>
+												{area.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>

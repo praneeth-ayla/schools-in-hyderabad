@@ -1,9 +1,5 @@
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import {
-	SchoolCategory,
-	SchoolCategoryNames,
-	SchoolPartialData,
-} from "@/lib/types";
+import { SchoolCategory, SchoolPartialData } from "@/lib/types";
 import Link from "next/link";
 import StarRating from "./StarRating";
 
@@ -14,9 +10,6 @@ export default function SchoolCard({
 	schoolDetails: SchoolPartialData[];
 	type: "merchant" | "school";
 }) {
-	function getFullName(category: SchoolCategory): string {
-		return SchoolCategoryNames[category] || "Unknown Category";
-	}
 	return (
 		<div className="mt-4 grid md:grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
 			{schoolDetails.map((schoolDetail, i) => (
@@ -52,8 +45,9 @@ export default function SchoolCard({
 						</CardDescription>
 						<div className="mt-4 pb-2 p-0 text-muted-foreground text-xs">
 							<p>
-								{schoolDetail.category &&
-									getFullName(schoolDetail.category)}
+								{type === "school" &&
+									schoolDetail.category.name &&
+									schoolDetail.category.name}
 							</p>
 							<div>
 								{schoolDetail.area && (
@@ -66,12 +60,7 @@ export default function SchoolCard({
 											<title>map-marker</title>
 											<path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
 										</svg>
-										<span>
-											{schoolDetail.area.replace(
-												/_/g,
-												" "
-											)}
-										</span>
+										<span>{schoolDetail.area.name}</span>
 									</div>
 								)}
 							</div>

@@ -1,14 +1,17 @@
-import { Place, SchoolCategory } from "@/lib/types";
 import prisma from "../../../../prisma";
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const board = searchParams.get("board");
-	const area = searchParams.get("area");
+	const areaName = searchParams.get("area");
 	const name = searchParams.get("name");
 
 	// Build the 'where' clause dynamically based on provided parameters
-	const whereClause: { [key: string]: any } = {};
+	const whereClause: {
+		name?: { contains: string };
+		area?: { name: string };
+		category?: { name: string };
+	} = {};
 
 	if (name && name.trim()) {
 		whereClause.name = {
@@ -16,18 +19,26 @@ export async function GET(request: Request) {
 		};
 	}
 
-	if (area) {
-		whereClause.area = area as Place;
+	if (areaName) {
+		whereClause.area = {
+			name: areaName,
+		};
 	}
 
 	if (board) {
-		whereClause.category = board as SchoolCategory;
+		whereClause.category = {
+			name: board,
+		};
 	}
 
 	// Fetch schools based on the constructed where clause
 	try {
 		const schools = await prisma.school.findMany({
-			where: Object.keys(whereClause).length ? whereClause : undefined, // If no filters are provided, return all schools
+			where: whereClause,
+			include: {
+				area: true, // Include related area information
+				category: true, // Include related category information
+			},
 		});
 		return new Response(JSON.stringify(schools), {
 			status: 200,
@@ -36,6 +47,7 @@ export async function GET(request: Request) {
 			},
 		});
 	} catch (error) {
+		console.error("Error fetching schools:", error);
 		return new Response(
 			JSON.stringify({ error: (error as Error).message }),
 			{

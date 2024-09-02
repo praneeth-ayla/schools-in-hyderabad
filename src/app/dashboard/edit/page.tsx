@@ -14,8 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import UploadImagesEdit from "@/components/UploadImagesEdit";
-import { useSchoolDetails } from "@/lib/hooks";
-import { Place, SchoolCategory, SchoolCategoryNames } from "@/lib/types";
+import { useAreaList, useBoardList, useSchoolDetails } from "@/lib/hooks";
 import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
@@ -30,31 +29,37 @@ function SchoolForm({ searchParams }: any) {
 	const router = useRouter();
 	const { toast } = useToast();
 	const [loading, setLoading] = useState(false);
+	const { areas, isLoading: isLoadingAreas } = useAreaList();
+	const {
+		boards,
+		failed: failedBoards,
+		isLoading: isLoadingBoards,
+	} = useBoardList();
 
-	// Separate states for each section of the form
+	// Initialize state with default values
 	const [basicInfo, setBasicInfo] = useState({
-		name: details?.name || "",
-		aboutUs: details?.aboutUs || "",
-		logo: details?.logo || "",
-		area: details?.area || "",
-		category: details?.category || "",
-		locationMap: details?.locationMap || "",
+		name: "",
+		aboutUs: "",
+		logo: "",
+		area: "",
+		board: "",
+		locationMap: "",
 	});
 
 	const [contact, setContact] = useState({
-		email: details?.contact?.email || "",
-		location: details?.contact?.location || "",
-		number: details?.contact?.number || "",
-		website: details?.contact?.website || "",
-		facebook: details?.contact?.facebook || "",
-		youtube: details?.contact?.youtube || "",
-		instagram: details?.contact?.instagram || "",
-		twitter: details?.contact?.twitter || "",
-		linkedin: details?.contact?.linkedin || "",
-		opening: details?.contact?.opening || "",
+		email: "",
+		location: "",
+		number: "",
+		website: "",
+		facebook: "",
+		youtube: "",
+		instagram: "",
+		twitter: "",
+		linkedin: "",
+		opening: "",
 	});
 
-	// Initially empty arrays for facilities and videos
+	// Initialize state with empty arrays
 	const [facilities, setFacilities] = useState([""]);
 	const [events, setEvents] = useState([
 		{ title: "", description: "", image: "" },
@@ -65,52 +70,46 @@ function SchoolForm({ searchParams }: any) {
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
 	]);
-	const [images, setImages] = useState<
-		{ url: string; id?: string; schoolId: string }[]
-	>([]);
+	const [images, setImages] = useState([""]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	useEffect(() => {
-		setBasicInfo({
-			name: details?.name || "",
-			aboutUs: details?.aboutUs || "",
-			logo: details?.logo || "",
-			area: details?.area || "",
-			category: details?.category || "",
-			locationMap: details?.locationMap || "",
-		});
-	}, [details]);
+		if (details) {
+			console.log("Details:", details);
 
-	useEffect(() => {
-		setContact({
-			email: details?.contact?.email || "",
-			location: details?.contact?.location || "",
-			number: details?.contact?.number || "",
-			website: details?.contact?.website || "",
-			facebook: details?.contact?.facebook || "",
-			youtube: details?.contact?.youtube || "",
-			instagram: details?.contact?.instagram || "",
-			twitter: details?.contact?.twitter || "",
-			linkedin: details?.contact?.linkedin || "",
-			opening: details?.contact?.opening || "",
-		});
-		console.log(details);
-	}, [details]);
+			setBasicInfo({
+				name: details.name || "",
+				aboutUs: details.aboutUs || "",
+				logo: details.logo || "",
+				area: details.area?.name || "",
+				board: details.category?.name || "",
+				locationMap: details.locationMap || "",
+			});
+			console.log("basic", basicInfo.board);
 
-	useEffect(() => {
-		setFacilities(details?.facilities || [""]);
-		setToppers(
-			details?.toppers || [{ title: "", description: "", image: "" }]
-		);
-		setAwards(
-			details?.awards || [{ title: "", description: "", image: "" }]
-		);
-		setEvents(
-			details?.events || [{ title: "", description: "", image: "" }]
-		);
-		setVideos(details?.videos || [{ title: "", src: "" }]);
-		setImages(details?.images || [{ url: "", id: "", schoolId: "" }]);
-		console.log("djska", details?.images);
+			setContact({
+				email: details.contact?.email || "",
+				location: details.contact?.location || "",
+				number: details.contact?.number || "",
+				website: details.contact?.website || "",
+				facebook: details.contact?.facebook || "",
+				youtube: details.contact?.youtube || "",
+				instagram: details.contact?.instagram || "",
+				twitter: details.contact?.twitter || "",
+				linkedin: details.contact?.linkedin || "",
+				opening: details.contact?.opening || "",
+			});
+			setFacilities(
+				// @ts-ignore
+				details.facilities.map((facility) => facility.name) || []
+			);
+			setToppers(details.toppers || []);
+			setAwards(details.awards || []);
+			setEvents(details.events || []);
+			setVideos(details.videos || []);
+			// setImages(details.images || []);
+			setImages(details.images.map((img) => img.url) || []);
+		}
 	}, [details]);
 
 	const handleBasicInfoChange = (e: any) => {
@@ -238,25 +237,37 @@ function SchoolForm({ searchParams }: any) {
 
 		const formData = {
 			...basicInfo,
+			area: {
+				name: basicInfo.area,
+			},
+			category: {
+				name: basicInfo.board,
+			},
 			contact,
-			facilities,
+			facilities: facilities.map((facility) => ({
+				name: facility,
+			})),
 			events,
 			awards,
 			toppers,
-			images,
+			images: images.map((img) => ({
+				url: img,
+			})),
 			videos,
 		};
 
 		try {
+			console.log(formData);
 			const res = await axios.put("/api/school/edit?id=" + id, formData);
 			console.log(res);
 			setLoading(false);
 			toast({
 				title: "Added Successfully",
 			});
-			// setTimeout(() => {
-			// 	// window.location.reload();
-			// }, 2000);
+			setTimeout(() => {
+				// window.location.reload();
+				setLoading(false);
+			}, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
@@ -379,13 +390,24 @@ function SchoolForm({ searchParams }: any) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.values(Place).map((place) => (
+									{!isLoadingAreas &&
+									areas &&
+									Array.isArray(areas) &&
+									areas.length > 0 ? (
+										areas.map((place) => (
+											<SelectItem
+												key={place.name}
+												value={place.name}>
+												{place.name}
+											</SelectItem>
+										))
+									) : (
 										<SelectItem
-											key={place}
-											value={place}>
-											{place.replace("_", " ")}
+											disabled
+											value="t">
+											No areas available
 										</SelectItem>
-									))}
+									)}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -394,30 +416,31 @@ function SchoolForm({ searchParams }: any) {
 					{/* School Category */}
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
-							Category
+							Board
 						</Label>
 						<Select
 							required
-							value={basicInfo.category}
+							name="board"
+							value={basicInfo.board} // Ensure this matches the value set in state
 							onValueChange={(value) =>
 								handleBasicInfoChange({
-									target: { name: "category", value },
+									target: { name: "board", value },
 								})
 							}>
 							<SelectTrigger>
-								<SelectValue placeholder="Select a category" />
+								<SelectValue placeholder="Select a board" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{Object.values(SchoolCategory).map(
-										(category) => (
+									{!isLoadingBoards &&
+										boards &&
+										boards.map((board) => (
 											<SelectItem
-												key={category}
-												value={category}>
-												{SchoolCategoryNames[category]}
+												key={board.id} // Use a unique key if possible
+												value={board.name}>
+												{board.name}
 											</SelectItem>
-										)
-									)}
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>

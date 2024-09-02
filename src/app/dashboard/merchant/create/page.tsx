@@ -92,9 +92,10 @@ export default function MerchantForm() {
 			toast({
 				title: "Added Successfully",
 			});
-			// setTimeout(() => {
-			// 	// window.location.reload();
-			// }, 2000);
+			setTimeout(() => {
+				// window.location.reload();
+				// setLoading(false);
+			}, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
@@ -265,20 +266,6 @@ export default function MerchantForm() {
 							placeholder="91-9999999999"
 						/>
 					</div>
-
-					<div className="mb-4">
-						<Label className="block mb-2 font-semibold">
-							twitter
-						</Label>
-						<Input
-							name="twitter"
-							value={contact.twitter}
-							onChange={handleContactChange}
-							className="w-full p-2 border rounded-md"
-							placeholder="91-9999999999"
-						/>
-					</div>
-
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							linkedin

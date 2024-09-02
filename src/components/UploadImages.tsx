@@ -45,7 +45,7 @@ export default function UploadImages({
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2 h-20 overflow-x-auto">
+			<div className="flex gap-2">
 				{images.map((img, i) => (
 					<div
 						key={i}

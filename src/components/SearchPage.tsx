@@ -28,7 +28,7 @@ export default function SearchPage({ name, area, board }: Props) {
 		events: fetchedEvents,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
-	} = useGetEventsList({ area });
+	} = useGetEventsList({ area, name });
 
 	const router = useRouter();
 
@@ -45,6 +45,8 @@ export default function SearchPage({ name, area, board }: Props) {
 
 	if (isLoading && isLoadingEvent) return <Loading />;
 	if (!details) return <Loading />;
+	!isLoadingEvent && console.log(events);
+	console.log(fetchedEvents);
 
 	return (
 		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
@@ -77,9 +79,7 @@ export default function SearchPage({ name, area, board }: Props) {
 				</div>
 				{details.length !== 0 ? (
 					<div className="pt-10">
-						<p className="font-bold text-2xl">
-							Schools in {area.replace(/_/g, " ")}
-						</p>
+						<p className="font-bold text-2xl">Schools in {area}</p>
 
 						<SchoolCard
 							type="school"

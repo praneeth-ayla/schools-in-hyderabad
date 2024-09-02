@@ -1,9 +1,9 @@
-import { MerchantDetails } from "@/lib/types";
+import { MerchantDetails, SchoolDetails } from "@/lib/types";
 import { getServerSession } from "next-auth";
 import prisma from "../../../../../prisma";
 
 export async function PUT(request: Request) {
-	const body: MerchantDetails = await request.json();
+	const body: SchoolDetails = await request.json();
 	const user = await getServerSession();
 	const { searchParams } = new URL(request.url);
 	const id = searchParams.get("id");
@@ -44,7 +44,7 @@ export async function PUT(request: Request) {
 		: undefined;
 
 	try {
-		const res = await prisma.merchant.update({
+		const res = await prisma.school.update({
 			where: {
 				id: parseInt(id, 10), // Convert id to number
 			},
@@ -69,6 +69,45 @@ export async function PUT(request: Request) {
 							title: video.title,
 						})) || [],
 				},
+				events: {
+					deleteMany: {},
+					create:
+						body.events?.map((event) => ({
+							description: event.description,
+							image: event.image,
+							title: event.title,
+							// @ts-ignore
+							date: event.date,
+						})) || [],
+				},
+				facilities: {
+					deleteMany: {},
+					// @ts-ignore
+					create: body.facilities || [],
+				},
+				toppers: {
+					deleteMany: {},
+					create:
+						body.toppers?.map((topper) => ({
+							description: topper.description,
+							image: topper.image,
+							title: topper.title,
+							// @ts-ignore
+							date: topper.date,
+						})) || [],
+				},
+				awards: {
+					deleteMany: {},
+					create:
+						body.awards?.map((award) => ({
+							description: award.description,
+							image: award.image,
+							title: award.title,
+							// @ts-ignore
+							date: award.date,
+						})) || [],
+				},
+
 				// reviews: {
 				// 	deleteMany: {}, // Clear existing reviews
 				// 	create:
