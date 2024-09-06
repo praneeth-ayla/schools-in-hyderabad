@@ -19,13 +19,13 @@ export default function page() {
 					<main>
 						<p className="mb-6 text-white">
 							As students from className 1 to className 12 face
-							the rigorous demands of their academic journey,
-							it&apos;s crucial to address the stress and
-							competition they encounter. Balancing education with
-							mental and physical well-being is vital for optimal
-							performance and overall health. This blog explores
-							three essential strategies to help students manage
-							stress and enhance their well-being.
+							the rigorous demands of their academic journey, it's
+							crucial to address the stress and competition they
+							encounter. Balancing education with mental and
+							physical well-being is vital for optimal performance
+							and overall health. This blog explores three
+							essential strategies to help students manage stress
+							and enhance their well-being.
 						</p>
 
 						<section className="mb-12">
@@ -118,8 +118,8 @@ export default function page() {
 								Sports activities such as cricket, tennis,
 								volleyball, and table tennis are more than just
 								recreational; they play a significant role in a
-								student&apos;s overall development. For students
-								in schools in Hyderabad, participating in sports
+								student's overall development. For students in
+								schools in Hyderabad, participating in sports
 								can be highly beneficial.
 							</p>
 							<h3 className="text-2xl font-semibold text-white mb-2">
