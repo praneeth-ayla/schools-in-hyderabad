@@ -14,12 +14,23 @@ export default function page() {
 						width={300}
 						className="rounded-full transition duration-500 hover:scale-110"
 				    />
-					<TextGenerateEffect
-							className="z-10 mt-5 pt-5"
-							words="Y.Bhaskara Phani Kumar  (Founder)"
-						/>
+					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
+						&quot;The journey begins at school, where you gain
+						wisdom and knowledge to help the less fortunate and grow
+						wiser by leveling up, besides taking care of ourselves,
+						so that you might become the most resourceful person in
+						the country. &quot;
+						<p className="text-xs  sm:text-md md:text-lg text-muted-foreground pt-4 text-right font-medium">
+						  Y.Bhaskara Phani Kumar - Founder
+					    </p>
+					</p>
+					
 					
 				</center>
+				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 md:text-center border-y-4">
+					
+					
+				</div>
 			       <br />
 				<div className="flex flex-col gap-6 md:gap-10 ">
 				
@@ -123,18 +134,7 @@ export default function page() {
 						every school profile is accurate and up-to-date.
 					</span>
 				</div>
-				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 md:text-center border-y-4">
-					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
-						&quot;The journey begins at school, where you gain
-						wisdom and knowledge to help the less fortunate and grow
-						wiser by leveling up, besides taking care of ourselves,
-						so that you might become the most resourceful person in
-						the country. &quot;
-					</p>
-					<p className="text-xs  sm:text-md md:text-lg text-muted-foreground pt-4 text-right font-medium">
-						Y.Bhaskara Phani Kumar - Founder
-					</p>
-				</div>
+				
 			</div>
 		</div>
 	);
