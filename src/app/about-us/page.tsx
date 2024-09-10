@@ -1,6 +1,6 @@
 import HeroStart from "@/components/HeroStart";
 import Image from "next/image";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 export default function page() {
 	return (
 		<div className="bg-gradient-to-r">
@@ -14,7 +14,7 @@ export default function page() {
 						width={300}
 						className="rounded-full transition duration-500 hover:scale-110"
 				    />
-					<p className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
+					<div className="italic font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl">
 						&quot;The journey begins at school, where you gain
 						wisdom and knowledge to help the less fortunate and grow
 						wiser by leveling up, besides taking care of ourselves,
@@ -23,14 +23,11 @@ export default function page() {
 						<p className="text-xs  sm:text-md md:text-lg text-muted-foreground pt-4 text-right font-medium">
 						  Y.Bhaskara Phani Kumar - Founder
 					    </p>
-					</p>
+					</div>
 					
 					
 				</center>
-				<div className="py-8 sm:py-24 sm:mx-10 my-16 sm:my-20 md:text-center border-y-4">
-					
-					
-				</div>
+				   <br />
 			       <br />
 				<div className="flex flex-col gap-6 md:gap-10 ">
 				
