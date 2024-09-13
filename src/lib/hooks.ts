@@ -122,9 +122,14 @@ export function useGetEvent(id: string) {
 interface UseGetEventsListParams {
 	area?: string;
 	name?: string;
+	board?: string;
 }
 
-export function useGetEventsList({ area, name }: UseGetEventsListParams) {
+export function useGetEventsList({
+	area,
+	name,
+	board,
+}: UseGetEventsListParams) {
 	const [events, setEvents] = useState<any[]>([]);
 	const [toppers, setToppers] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -138,7 +143,7 @@ export function useGetEventsList({ area, name }: UseGetEventsListParams) {
 					events: SchoolPartialData[];
 					toppers: SchoolPartialData[];
 				}>("/api/eventList", {
-					params: { name, area },
+					params: { name, area, board },
 				});
 
 				// Reverse the order of events here
@@ -162,7 +167,7 @@ export function useGetEventsList({ area, name }: UseGetEventsListParams) {
 		}
 
 		getDetails();
-	}, [area, name]);
+	}, [area, name, board]);
 
 	return { events, toppers, isLoading, failed };
 }

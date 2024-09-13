@@ -30,7 +30,7 @@ export default function SearchPage({ name, area, board }: Props) {
 		toppers: fetchedToppers,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
-	} = useGetEventsList({ area, name }); // Update the hook to return toppers
+	} = useGetEventsList({ area, name, board }); // Update the hook to return toppers
 
 	const router = useRouter();
 
@@ -58,14 +58,10 @@ export default function SearchPage({ name, area, board }: Props) {
 						initialValues={{ board, where: area, school: name }}
 					/>
 
-					{events.length > 0 ? (
-						<div className="py-8">
+					{events.length > 0 && (
+						<div className="py-3">
 							<p className="font-bold text-xl italic text-amber-300">
-								{!area ? (
-									"Noteworthy Highlights"
-								) : (
-									<>Noteworthy Highlights </>
-								)}
+								School Events
 							</p>
 							<div className="m-0 pt-4 px-0">
 								<CarouselEvents
@@ -74,18 +70,12 @@ export default function SearchPage({ name, area, board }: Props) {
 								/>
 							</div>
 						</div>
-					) : (
-						area && (
-							<div className="font-semibold text-xl py-8 italic text-amber-300">
-								Noteworthy Highlights
-							</div>
-						)
 					)}
 
 					{toppers.length > 0 && (
-						<div className="py-8">
+						<div className="py-3">
 							<p className="font-bold text-xl italic text-amber-300">
-								Top Performers
+								School Toppers
 							</p>
 							<div className="m-0 pt-4 px-0">
 								<CarouselEvents

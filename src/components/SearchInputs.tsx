@@ -68,20 +68,17 @@ export default function SearchInputs({ initialValues }: any) {
 		event.preventDefault();
 		const values = formValues;
 
-		if (values.area !== "" && values.board === "") {
-			// Case 1: Only area is provided
-			router.push(`/search?area=${encodeURIComponent(values.area)}`);
-		} else if (values.board !== "" && values.area !== "") {
-			// Case 2: Both area and board are provided
+		if (values.area !== "" && values.board !== "") {
+			// Case: Both area and board are provided
 			router.push(
 				`/search?board=${encodeURIComponent(
 					values.board
 				)}&area=${encodeURIComponent(values.area)}`
 			);
 		} else {
-			// Case 3: None of the fields are provided
+			// Case: Both area and board need to be provided
 			toast({
-				title: "Please select an area or both area and board before searching.",
+				title: "Please select both area and board before searching.",
 			});
 		}
 	}
@@ -176,6 +173,7 @@ export default function SearchInputs({ initialValues }: any) {
 							type="text"
 							id="school"
 							name="school"
+							minLength={3}
 							placeholder="Search by school name"
 							value={formValues.school}
 							onChange={handleChange}

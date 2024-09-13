@@ -62,10 +62,10 @@ function SchoolForm({ searchParams }: any) {
 	// Initialize state with empty arrays
 	const [facilities, setFacilities] = useState([""]);
 	const [events, setEvents] = useState([
-		{ title: "", description: "", image: "" },
+		{ title: "", description: "", image: "", advertise: false },
 	]);
 	const [toppers, setToppers] = useState([
-		{ title: "", description: "", image: "" },
+		{ title: "", description: "", image: "", advertise: false },
 	]);
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
@@ -141,10 +141,16 @@ function SchoolForm({ searchParams }: any) {
 
 	// Function to handle adding new event input
 	const addEvent = () => {
-		setEvents([...events, { title: "", description: "", image: "" }]);
+		setEvents([
+			...events,
+			{ title: "", description: "", image: "", advertise: false },
+		]);
 	};
 	const addToppers = () => {
-		setToppers([...toppers, { title: "", description: "", image: "" }]);
+		setToppers([
+			...toppers,
+			{ title: "", description: "", image: "", advertise: false },
+		]);
 	};
 	const addAwards = () => {
 		setAwards([...awards, { title: "", description: "", image: "" }]);
@@ -163,19 +169,71 @@ function SchoolForm({ searchParams }: any) {
 		setAwards(awards.filter((_, i) => i !== index));
 	};
 	// Function to handle changes in event inputs
-	const handleEventsChange = (e: any, index: number) => {
-		const { name, value } = e.target;
-		const updatedEvents = [...events];
-		updatedEvents[index] = { ...updatedEvents[index], [name]: value };
-		setEvents(updatedEvents);
+	const handleEventsChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+		index: number,
+		field?: string
+	) => {
+		const target = e.target;
+		const name = target.name;
+		const value = target.value;
+
+		if (target instanceof HTMLInputElement) {
+			const { type, checked } = target;
+			setEvents((prevEvents) => {
+				const updatedEvents = [...prevEvents];
+				updatedEvents[index] = {
+					...updatedEvents[index],
+					[name]: type === "checkbox" ? checked : value,
+					...(field === "advertise" ? { advertise: checked } : {}),
+				};
+				return updatedEvents;
+			});
+		} else if (target instanceof HTMLTextAreaElement) {
+			setEvents((prevEvents) => {
+				const updatedEvents = [...prevEvents];
+				updatedEvents[index] = {
+					...updatedEvents[index],
+					[name]: value,
+				};
+				return updatedEvents;
+			});
+		}
 	};
+
 	// Function to handle changes in topper inputs
-	const handleToppersChange = (e: any, index: number) => {
-		const { name, value } = e.target;
-		const updatedToppers = [...toppers];
-		updatedToppers[index] = { ...updatedToppers[index], [name]: value };
-		setToppers(updatedToppers);
+	const handleToppersChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+		index: number,
+		field?: string
+	) => {
+		const target = e.target;
+		const name = target.name;
+		const value = target.value;
+
+		if (target instanceof HTMLInputElement) {
+			const { type, checked } = target;
+			setToppers((prevToppers) => {
+				const updatedToppers = [...prevToppers];
+				updatedToppers[index] = {
+					...updatedToppers[index],
+					[name]: type === "checkbox" ? checked : value,
+					...(field === "advertise" ? { advertise: checked } : {}),
+				};
+				return updatedToppers;
+			});
+		} else if (target instanceof HTMLTextAreaElement) {
+			setToppers((prevToppers) => {
+				const updatedToppers = [...prevToppers];
+				updatedToppers[index] = {
+					...updatedToppers[index],
+					[name]: value,
+				};
+				return updatedToppers;
+			});
+		}
 	};
+
 	// Function to handle changes in award inputs
 	const handleAwardsChange = (e: any, index: number) => {
 		const { name, value } = e.target;
@@ -262,7 +320,7 @@ function SchoolForm({ searchParams }: any) {
 			console.log(res);
 			setLoading(false);
 			toast({
-				title: "Added Successfully",
+				title: "Edited Successfully",
 			});
 			setTimeout(() => {
 				// window.location.reload();
@@ -610,67 +668,92 @@ function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							Toppers
 						</Label>
-						{toppers.map((topper, index) => (
-							<div
-								key={index}
-								className="mb-2 flex gap-6 items-center">
-								<div className="w-full">
-									<Input
-										type="text"
-										name="title"
-										value={topper.title}
-										onChange={(e) =>
-											handleToppersChange(e, index)
-										}
-										className="w-full p-2 border rounded-md mb-2"
-										placeholder={`Topper ${
-											index + 1
-										} Title`}
-									/>
-									<Textarea
-										name="description"
-										value={topper.description}
-										onChange={(e) =>
-											handleToppersChange(e, index)
-										}
-										className="w-full p-2 border rounded-md mb-2 h-40"
-										placeholder={`Topper ${
-											index + 1
-										} Description`}
-									/>
-									<div>
-										<img
-											className="w-20 h-20"
-											src={toppers[index].image}
+
+						<div className="grid gap-3 boarder border-black p-2">
+							{toppers.map((topper, index) => (
+								<div
+									key={index}
+									className="mb-2 flex gap-6 items-center border border-black p-2">
+									<div className="w-full">
+										<Input
+											type="text"
+											name="title"
+											value={topper.title}
+											onChange={(e) =>
+												handleToppersChange(e, index)
+											}
+											className="w-full p-2 border rounded-md mb-2"
+											placeholder={`Topper ${
+												index + 1
+											} Title`}
 										/>
-										<UploadButton
-											endpoint="imageUploader"
-											onClientUploadComplete={(
-												res: any
-											) => {
-												handleTopperImageUpload(
-													res,
-													index
-												);
-											}}
-											onUploadError={(error: Error) => {
-												alert(
-													`ERROR! ${error.message}`
-												);
-											}}
+										<Textarea
+											name="description"
+											value={topper.description}
+											onChange={(e) =>
+												handleToppersChange(e, index)
+											}
+											className="w-full p-2 border rounded-md mb-2 h-40"
+											placeholder={`Topper ${
+												index + 1
+											} Description`}
 										/>
+										<div className="mb-2">
+											<img
+												className="w-20 h-20"
+												src={topper.image}
+												alt={`Topper ${index + 1}`}
+											/>
+											<UploadButton
+												endpoint="imageUploader"
+												onClientUploadComplete={(
+													res: any
+												) =>
+													handleTopperImageUpload(
+														res,
+														index
+													)
+												}
+												onUploadError={(error: Error) =>
+													alert(
+														`ERROR! ${error.message}`
+													)
+												}
+											/>
+										</div>
+										{/* Advertise Option */}
+										<div className="flex items-center gap-2 mt-2">
+											<Label className="font-semibold">
+												Advertise
+											</Label>
+											<Input
+												type="checkbox"
+												name="advertise"
+												checked={
+													topper.advertise || false
+												}
+												onChange={(e) =>
+													handleToppersChange(
+														e,
+														index,
+														"advertise"
+													)
+												}
+											/>
+										</div>
 									</div>
+									<Trash
+										onClick={() => removeToppers(index)}
+										className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"
+									/>
 								</div>
-								<Trash
-									onClick={() => removeToppers(index)}
-									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
-							</div>
-						))}
-						<Plus
-							onClick={addToppers}
-							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
-							+
-						</Plus>
+							))}
+							<Plus
+								onClick={addToppers}
+								className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+								+
+							</Plus>
+						</div>
 					</div>
 
 					{/* Awards */}
@@ -744,65 +827,91 @@ function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							Events
 						</Label>
-						{events.map((event, index) => (
-							<div
-								key={index}
-								className="mb-2 flex gap-6 items-center">
-								<div className="w-full">
-									<Input
-										type="text"
-										name="title"
-										value={event.title}
-										onChange={(e) =>
-											handleEventsChange(e, index)
-										}
-										className="w-full p-2 border rounded-md mb-2"
-										placeholder={`Event ${index + 1} Title`}
-									/>
-									<Textarea
-										name="description"
-										value={event.description}
-										onChange={(e) =>
-											handleEventsChange(e, index)
-										}
-										className="w-full p-2 border rounded-md mb-2 h-40"
-										placeholder={`Event ${
-											index + 1
-										} Description`}
-									/>
-									<div>
-										<img
-											className="w-20 h-20"
-											src={events[index].image}
+						<div className="grid gap-3 boarder border-black p-2">
+							{events.map((event, index) => (
+								<div
+									key={index}
+									className="mb-2 flex gap-6 items-center border border-black p-2">
+									<div className="w-full">
+										<Input
+											type="text"
+											name="title"
+											value={event.title}
+											onChange={(e) =>
+												handleEventsChange(e, index)
+											}
+											className="w-full p-2 border rounded-md mb-2"
+											placeholder={`Event ${
+												index + 1
+											} Title`}
 										/>
-										<UploadButton
-											endpoint="imageUploader"
-											onClientUploadComplete={(
-												res: any
-											) => {
-												handleEventImageUpload(
-													res,
-													index
-												);
-											}}
-											onUploadError={(error: Error) => {
-												alert(
-													`ERROR! ${error.message}`
-												);
-											}}
+										<Textarea
+											name="description"
+											value={event.description}
+											onChange={(e) =>
+												handleEventsChange(e, index)
+											}
+											className="w-full p-2 border rounded-md mb-2 h-40"
+											placeholder={`Event ${
+												index + 1
+											} Description`}
 										/>
+										<div>
+											<img
+												className="w-20 h-20"
+												src={event.image}
+												alt={`Event ${index + 1}`}
+											/>
+											<UploadButton
+												endpoint="imageUploader"
+												onClientUploadComplete={(
+													res: any
+												) =>
+													handleEventImageUpload(
+														res,
+														index
+													)
+												}
+												onUploadError={(error: Error) =>
+													alert(
+														`ERROR! ${error.message}`
+													)
+												}
+											/>
+										</div>
+										{/* Advertise Option */}
+										<div className="flex items-center gap-2 mt-2">
+											<Label className="font-semibold">
+												Advertise
+											</Label>
+											<Input
+												type="checkbox"
+												name="advertise"
+												checked={
+													event.advertise || false
+												}
+												onChange={(e) =>
+													handleEventsChange(
+														e,
+														index,
+														"advertise"
+													)
+												}
+											/>
+										</div>
 									</div>
+									<Trash
+										onClick={() => removeEvent(index)}
+										className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"
+									/>
 								</div>
-								<Trash
-									onClick={() => removeEvent(index)}
-									className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"></Trash>
-							</div>
-						))}
-						<Plus
-							onClick={addEvent}
-							className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
-							+
-						</Plus>
+							))}
+							<Plus
+								onClick={addEvent}
+								className="text-center text-3xl font-bold w-full h-12 py-2 rounded-md cursor-pointer">
+								+
+							</Plus>
+						</div>
 					</div>
 
 					{/* Image Upload */}

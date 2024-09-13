@@ -49,12 +49,16 @@ export type SchoolDetails = {
 	aboutUs: string;
 	videos?: Video[];
 	events?: {
+		date: any;
+		advertise: boolean;
 		title: string;
 		description: string;
 		id?: string;
 		image: string;
 	}[];
 	toppers?: {
+		date: any;
+		advertise: any;
 		title: string;
 		description: string;
 		id?: string;

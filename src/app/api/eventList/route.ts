@@ -4,11 +4,13 @@ export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const area = searchParams.get("area");
 	const name = searchParams.get("name");
+	const board = searchParams.get("board");
 
 	// Build the 'where' clause dynamically based on provided parameters
 	const whereClause: {
 		name?: { contains: string };
 		area?: { name: string };
+		category?: { name: string };
 	} = {};
 
 	if (name && name.trim()) {
@@ -23,15 +25,13 @@ export async function GET(request: Request) {
 		};
 	}
 
+	if (board) {
+		whereClause.category = {
+			name: board,
+		};
+	}
+
 	try {
-		// Fetch global settings to get the advertise time
-		const advertiseSettings = await prisma.globalSettings.findFirst();
-		const advertiseTime = 10000; // Default to 10,000 days if not found
-
-		// Calculate the date for the threshold based on advertiseTime
-		const dateThreshold = new Date();
-		dateThreshold.setDate(dateThreshold.getDate() - advertiseTime);
-
 		// Fetch schools based on the constructed where clause
 		const schools = await prisma.school.findMany({
 			where: whereClause,
@@ -42,9 +42,7 @@ export async function GET(request: Request) {
 				area: true,
 				events: {
 					where: {
-						date: {
-							gte: dateThreshold,
-						},
+						advertise: true,
 					},
 					select: {
 						id: true,
@@ -56,9 +54,7 @@ export async function GET(request: Request) {
 				},
 				toppers: {
 					where: {
-						date: {
-							gte: dateThreshold,
-						},
+						advertise: true,
 					},
 					select: {
 						id: true,

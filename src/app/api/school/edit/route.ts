@@ -76,8 +76,8 @@ export async function PUT(request: Request) {
 							description: event.description,
 							image: event.image,
 							title: event.title,
-							// @ts-ignore
 							date: event.date,
+							advertise: event.advertise,
 						})) || [],
 				},
 				facilities: {
@@ -92,8 +92,8 @@ export async function PUT(request: Request) {
 							description: topper.description,
 							image: topper.image,
 							title: topper.title,
-							// @ts-ignore
 							date: topper.date,
+							advertise: topper.advertise,
 						})) || [],
 				},
 				awards: {
