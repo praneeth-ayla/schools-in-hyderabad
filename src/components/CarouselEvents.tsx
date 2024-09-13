@@ -13,7 +13,13 @@ import { Card, CardDescription, CardTitle } from "./ui/card";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 
-export default function CarouselEvents({ events }: any) {
+export default function CarouselEvents({
+	events,
+	type,
+}: {
+	events: any;
+	type: "topper" | "events";
+}) {
 	return (
 		<div>
 			<Carousel
@@ -30,7 +36,7 @@ export default function CarouselEvents({ events }: any) {
 							className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
 							<div className="h-full">
 								<Link
-									href={`/events?id=${event.id}`}
+									href={`/${type}?id=${event.id}`}
 									className="block h-full">
 									<Card className="h-full p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex flex-col">
 										<div className="flex gap-3 items-center mb-3">

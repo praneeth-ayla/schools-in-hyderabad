@@ -98,7 +98,7 @@ export default function SearchInputs({ initialValues }: any) {
 							onValueChange={(value) =>
 								handleSelectChange("board", value)
 							}>
-							<SelectTrigger className="text-black h-10">
+							<SelectTrigger className="w-full text-black h-10">
 								<SelectValue
 									placeholder="Select Board"
 									className="text-black"
@@ -106,10 +106,11 @@ export default function SearchInputs({ initialValues }: any) {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{boards &&
-										boards.map((board, id) => (
+									{!isLoadingBoards &&
+										boards &&
+										boards.map((board) => (
 											<SelectItem
-												key={id}
+												key={board.id}
 												value={board.name}>
 												{board.name}
 											</SelectItem>

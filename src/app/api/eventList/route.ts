@@ -26,7 +26,7 @@ export async function GET(request: Request) {
 	try {
 		// Fetch global settings to get the advertise time
 		const advertiseSettings = await prisma.globalSettings.findFirst();
-		const advertiseTime = advertiseSettings?.advertiseTime ?? 3; // Default to 3 days if not found
+		const advertiseTime = 10000; // Default to 10,000 days if not found
 
 		// Calculate the date for the threshold based on advertiseTime
 		const dateThreshold = new Date();
@@ -54,13 +54,28 @@ export async function GET(request: Request) {
 						image: true,
 					},
 				},
+				toppers: {
+					where: {
+						date: {
+							gte: dateThreshold,
+						},
+					},
+					select: {
+						id: true,
+						description: true,
+						title: true,
+						date: true,
+						image: true,
+					},
+				},
 			},
 		});
 
-		// Flatten the events into a single list with associated school information
-		const allEvents = schools.flatMap((school) =>
+		// Flatten the events and toppers into separate lists with associated school information
+		const events = schools.flatMap((school) =>
 			school.events.map((event) => ({
 				...event,
+				type: "event",
 				school: {
 					id: school.id,
 					name: school.name,
@@ -69,14 +84,25 @@ export async function GET(request: Request) {
 			}))
 		);
 
-		if (allEvents.length === 0) {
-			return new Response(JSON.stringify([]), {
-				status: 200,
-				headers: { "Content-Type": "application/json" },
-			});
-		}
+		const toppers = schools.flatMap((school) =>
+			school.toppers.map((topper) => ({
+				...topper,
+				type: "topper",
+				school: {
+					id: school.id,
+					name: school.name,
+					logo: school.logo,
+				},
+			}))
+		);
 
-		return new Response(JSON.stringify(allEvents), {
+		// Structure the response with separate arrays for events and toppers
+		const response = {
+			events,
+			toppers,
+		};
+
+		return new Response(JSON.stringify(response), {
 			status: 200,
 			headers: { "Content-Type": "application/json" },
 		});

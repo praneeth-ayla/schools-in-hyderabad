@@ -18,6 +18,7 @@ interface Props {
 
 export default function SearchPage({ name, area, board }: Props) {
 	const [events, setEvents] = useState<any[]>([]);
+	const [toppers, setToppers] = useState<any[]>([]);
 	const { details, isLoading, failed } = useSchoolList({
 		area,
 		name,
@@ -26,9 +27,10 @@ export default function SearchPage({ name, area, board }: Props) {
 
 	const {
 		events: fetchedEvents,
+		toppers: fetchedToppers,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
-	} = useGetEventsList({ area, name });
+	} = useGetEventsList({ area, name }); // Update the hook to return toppers
 
 	const router = useRouter();
 
@@ -38,19 +40,19 @@ export default function SearchPage({ name, area, board }: Props) {
 
 	useEffect(() => {
 		if (!isLoadingEvent) {
-			// Update events when area changes or fetching is complete
-			setEvents(fetchedEvents);
+			// Update events and toppers when fetching is complete
+			setEvents(fetchedEvents || []);
+			setToppers(fetchedToppers || []); // Assuming fetchedToppers is part of the hook response
 		}
-	}, [area, isLoadingEvent, fetchedEvents]);
+	}, [area, isLoadingEvent, fetchedEvents, fetchedToppers]);
 
 	if (isLoading && isLoadingEvent) return <Loading />;
 	if (!details) return <Loading />;
-	!isLoadingEvent && console.log(events);
-	console.log(fetchedEvents);
+	console.log(fetchedEvents, fetchedToppers);
 
 	return (
 		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
-			<div className=" px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
+			<div className="px-8 xl:grid-cols-4 sm:px-20 md:px-10 lg:px-20 text-white relative z-10">
 				<div className="m-0">
 					<SearchInputs
 						initialValues={{ board, where: area, school: name }}
@@ -66,7 +68,10 @@ export default function SearchPage({ name, area, board }: Props) {
 								)}
 							</p>
 							<div className="m-0 pt-4 px-0">
-								<CarouselEvents events={events} />
+								<CarouselEvents
+									events={events}
+									type="events"
+								/>
 							</div>
 						</div>
 					) : (
@@ -76,7 +81,22 @@ export default function SearchPage({ name, area, board }: Props) {
 							</div>
 						)
 					)}
+
+					{toppers.length > 0 && (
+						<div className="py-8">
+							<p className="font-bold text-xl italic text-amber-300">
+								Top Performers
+							</p>
+							<div className="m-0 pt-4 px-0">
+								<CarouselEvents
+									events={toppers}
+									type="topper"
+								/>
+							</div>
+						</div>
+					)}
 				</div>
+
 				{details.length !== 0 ? (
 					<div className="pt-10">
 						<p className="font-bold text-2xl">Schools in {area}</p>

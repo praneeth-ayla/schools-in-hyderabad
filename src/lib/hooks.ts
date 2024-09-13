@@ -119,8 +119,14 @@ export function useGetEvent(id: string) {
 	return { event, isLoading, failed };
 }
 
-export function useGetEventsList({ area, name }: UseSchoolListParams) {
+interface UseGetEventsListParams {
+	area?: string;
+	name?: string;
+}
+
+export function useGetEventsList({ area, name }: UseGetEventsListParams) {
 	const [events, setEvents] = useState<any[]>([]);
+	const [toppers, setToppers] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 	const { toast } = useToast();
@@ -128,18 +134,22 @@ export function useGetEventsList({ area, name }: UseSchoolListParams) {
 	useEffect(() => {
 		async function getDetails() {
 			try {
-				const { data } = await axios.get<SchoolPartialData[]>(
-					"/api/eventList",
-					{
-						params: { name, area },
-					}
-				);
+				const { data } = await axios.get<{
+					events: SchoolPartialData[];
+					toppers: SchoolPartialData[];
+				}>("/api/eventList", {
+					params: { name, area },
+				});
 
 				// Reverse the order of events here
-				const reversedEvents = data.reverse();
+				const reversedEvents = data.events.reverse();
 				setEvents(reversedEvents);
+				setToppers(data.toppers); // Set toppers from the response
 			} catch (error: any) {
-				console.error("Error fetching events", error.message);
+				console.error(
+					"Error fetching events and toppers",
+					error.message
+				);
 				toast({
 					title: "Something went wrong!",
 					description: "Redirecting back",
@@ -154,7 +164,7 @@ export function useGetEventsList({ area, name }: UseSchoolListParams) {
 		getDetails();
 	}, [area, name]);
 
-	return { events, isLoading, failed };
+	return { events, toppers, isLoading, failed };
 }
 
 export function useMerchantDetails(merchantId: string) {
@@ -313,7 +323,7 @@ export function useBoardList() {
 			setIsLoading(false);
 			toast({
 				title: "Something went wrong!",
-				description: "Redirecting back",
+				description: "Could not fetch boards",
 				duration: 1000,
 			});
 			setTimeout(() => {
