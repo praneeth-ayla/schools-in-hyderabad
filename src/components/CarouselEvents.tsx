@@ -71,11 +71,11 @@ export default function CarouselEvents({
 										</div>
 										<div className="mt-auto">
 											<CardTitle className="flex flex-col gap-3 pb-3 pt-1">
-												<p className="text-sm font-normal">
+												{/* <p className="text-sm font-normal">
 													{DateTimeDisplay(
 														event.date
 													).slice(0, 17)}
-												</p>
+												</p> */}
 												<span>{event.title}</span>
 											</CardTitle>
 											<CardDescription></CardDescription>

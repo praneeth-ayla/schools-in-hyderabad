@@ -66,7 +66,7 @@ export default function EventPage({ id }: { id: string }) {
 								<div>{event.title}</div>
 							</CardTitle>
 							<CardDescription className="text-black text-lg">
-								<div className="flex flex-col sm:flex-row gap-2">
+								{/* <div className="flex flex-col sm:flex-row gap-2">
 									<div className="font-semibold">
 										Published Date:
 									</div>
@@ -76,7 +76,7 @@ export default function EventPage({ id }: { id: string }) {
 											17
 										)}
 									</div>
-								</div>
+								</div> */}
 								<pre className="text-lg pt-4 text-wrap font-sans whitespace-pre-wrap">
 									{event.description}
 								</pre>

@@ -64,7 +64,7 @@ export default function TopperPage({ id }: { id: string }) {
 								<div>{event.title}</div>
 							</CardTitle>
 							<CardDescription className="text-black text-base sm:text-lg">
-								<div className="flex flex-col sm:flex-row gap-2">
+								{/* <div className="flex flex-col sm:flex-row gap-2">
 									<div className="font-semibold">
 										Published Date:
 									</div>
@@ -74,7 +74,7 @@ export default function TopperPage({ id }: { id: string }) {
 											17
 										)}
 									</div>
-								</div>
+								</div> */}
 								<pre className="text-base sm:text-lg pt-4 text-wrap font-sans whitespace-pre-wrap">
 									{event.description}
 								</pre>
