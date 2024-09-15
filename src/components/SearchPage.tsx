@@ -30,7 +30,7 @@ export default function SearchPage({ name, area, board }: Props) {
 		toppers: fetchedToppers,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
-	} = useGetEventsList({ area, name, board }); // Update the hook to return toppers
+	} = useGetEventsList({ area, name, board });
 
 	const router = useRouter();
 
@@ -40,15 +40,23 @@ export default function SearchPage({ name, area, board }: Props) {
 
 	useEffect(() => {
 		if (!isLoadingEvent) {
-			// Update events and toppers when fetching is complete
 			setEvents(fetchedEvents || []);
-			setToppers(fetchedToppers || []); // Assuming fetchedToppers is part of the hook response
+			setToppers(fetchedToppers || []);
 		}
 	}, [area, isLoadingEvent, fetchedEvents, fetchedToppers]);
 
 	if (isLoading && isLoadingEvent) return <Loading />;
 	if (!details) return <Loading />;
-	console.log(fetchedEvents, fetchedToppers);
+
+	// Dynamic heading based on search criteria
+	let heading = "Schools";
+	if (name && !area) {
+		heading = `Search Results for "${name}"`;
+	} else if (area && !name) {
+		heading = `Schools in ${area}`;
+	} else if (name && area) {
+		heading = `Search Results for "${name}" in ${area}`;
+	}
 
 	return (
 		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
@@ -57,21 +65,6 @@ export default function SearchPage({ name, area, board }: Props) {
 					<SearchInputs
 						initialValues={{ board, where: area, school: name }}
 					/>
-
-					{events.length > 0 && (
-						<div className="py-3">
-							<p className="font-bold text-xl italic text-amber-300">
-								School Events
-							</p>
-							<div className="m-0 pt-4 px-0">
-								<CarouselEvents
-									events={events}
-									type="events"
-								/>
-							</div>
-						</div>
-					)}
-
 					{toppers.length > 0 && (
 						<div className="py-3">
 							<p className="font-bold text-xl italic text-amber-300">
@@ -85,11 +78,24 @@ export default function SearchPage({ name, area, board }: Props) {
 							</div>
 						</div>
 					)}
+					{events.length > 0 && (
+						<div className="py-3">
+							<p className="font-bold text-xl italic text-amber-300">
+								School Events
+							</p>
+							<div className="m-0 pt-4 px-0">
+								<CarouselEvents
+									events={events}
+									type="events"
+								/>
+							</div>
+						</div>
+					)}
 				</div>
 
 				{details.length !== 0 ? (
 					<div className="pt-10">
-						<p className="font-bold text-2xl">Schools in {area}</p>
+						<p className="font-bold text-2xl">{heading}</p>
 
 						<SchoolCard
 							type="school"
