@@ -87,11 +87,13 @@ model Contact {
 model Image {
   id         Int       @id @default(autoincrement())
   url        String    @db.LongText
+  alt        String?    @db.LongText
   schoolId   Int?
   merchantId Int?
   school     School?   @relation(fields: [schoolId], references: [id])
   merchant   Merchant? @relation(fields: [merchantId], references: [id])
 }
+
 
 model Video {
   id         Int       @id @default(autoincrement())

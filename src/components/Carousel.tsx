@@ -11,8 +11,9 @@ import CarouselDialog from "@/components/CarouselDialog";
 export function CarouselSpacing({
 	images,
 }: {
-	images: { url: string; id?: string; schoolId: string }[];
+	images: { url: string; alt: string; id?: string; schoolId: string }[];
 }) {
+	console.log(images);
 	return (
 		<div>
 			<Dialog>
@@ -42,7 +43,7 @@ export function CarouselSpacing({
 										<img
 											className="w-full h-full object-cover rounded-lg"
 											src={e.url}
-											alt={`image ${i + 1}`}
+											alt={`image ${e.alt}`}
 											style={{
 												width: "100%", // Ensure the width is 100%
 												height: "100%", // Ensure the height is 100%

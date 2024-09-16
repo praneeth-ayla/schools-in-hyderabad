@@ -44,7 +44,7 @@ function SchoolForm({ searchParams }: any) {
 		opening: details?.contact?.opening || "",
 	});
 
-	const [images, setImages] = useState<any>([]);
+	const [images, setImages] = useState([{ url: "", alt: "" }]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	useEffect(() => {
@@ -74,7 +74,7 @@ function SchoolForm({ searchParams }: any) {
 
 	useEffect(() => {
 		setVideos(details?.videos || [{ title: "", src: "" }]);
-		setImages(details?.images.map((img) => img.url) || []);
+		setImages(details?.images || []);
 	}, [details]);
 
 	const handleBasicInfoChange = (e: any) => {
@@ -112,9 +112,7 @@ function SchoolForm({ searchParams }: any) {
 		const formData = {
 			...basicInfo,
 			contact,
-			images: images.map((img: any) => ({
-				url: img,
-			})),
+			images,
 			videos,
 		};
 

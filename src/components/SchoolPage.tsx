@@ -43,15 +43,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 									src={details.logo}
 								/>
 							</div>
-							{/* <div className="lg:w-[200px]">
-								<div className="flex justify-center items-center pt- ">
-									<img
-										className="rounded-md "
-										alt="school logo"
-										src={details.logo}
-									/>
-								</div>
-							</div> */}
 							<div className="animate-pulse text-center text-xl font-bold text-amber-700 text-wrap">
 								Admissions are open now
 							</div>

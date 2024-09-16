@@ -41,7 +41,7 @@ export default function MerchantForm() {
 	});
 
 	// Initially empty arrays for facilities and videos
-	const [images, setImages] = useState([""]);
+	const [images, setImages] = useState([{ url: "", alt: "" }]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	const handleBasicInfoChange = (e: any) => {
@@ -89,9 +89,7 @@ export default function MerchantForm() {
 			const res = await axios.post("/api/merchant/create", formData);
 			console.log(res);
 			setLoading(false);
-			toast({
-				title: "Added Successfully",
-			});
+			toast({ title: "Added Successfully" });
 			setTimeout(() => {
 				// window.location.reload();
 				// setLoading(false);

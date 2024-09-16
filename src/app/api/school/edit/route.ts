@@ -42,7 +42,7 @@ export async function PUT(request: Request) {
 				opening: body.contact.opening,
 		  }
 		: undefined;
-
+	// return Response.json(body);
 	try {
 		const res = await prisma.school.update({
 			where: {
@@ -59,6 +59,7 @@ export async function PUT(request: Request) {
 					create:
 						body.images?.map((image) => ({
 							url: image.url,
+							alt: image.alt,
 						})) || [],
 				},
 				videos: {
@@ -121,6 +122,9 @@ export async function PUT(request: Request) {
 				// },
 			},
 		});
+		console.log("----------------------------------------------");
+		console.log(res);
+		console.log("----------------------------------------------");
 
 		return new Response(JSON.stringify(res), { status: 200 });
 	} catch (error) {

@@ -17,11 +17,12 @@ export async function POST(request: Request) {
 	}
 
 	// Transform the data for Prisma
-	const images =
-		// @ts-ignore
-		body.images?.map((url: string) => ({
-			url,
-		})) || [];
+	// const images =
+	// 	// @ts-ignore
+	// 	body.images?.map((url: string) => ({
+	// 		url: url.url,
+	// 		alt: url.alt,
+	// 	})) || [];
 
 	const videos =
 		// @ts-ignore
@@ -55,7 +56,7 @@ export async function POST(request: Request) {
 				locationMap: body.locationMap,
 				contact: contactData ? { create: contactData } : undefined,
 				images: {
-					create: images,
+					create: body.images,
 				},
 				videos: {
 					create: videos,

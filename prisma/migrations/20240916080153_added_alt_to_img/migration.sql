@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Image` ADD COLUMN `alt` VARCHAR(191) NOT NULL DEFAULT '';

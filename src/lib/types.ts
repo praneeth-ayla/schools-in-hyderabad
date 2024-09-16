@@ -45,7 +45,7 @@ export type SchoolDetails = {
 		image: string;
 	}[];
 	locationMap: string;
-	images: { url: string; id?: string; schoolId: string }[];
+	images: { url: string; schoolId: string; alt: string }[];
 	aboutUs: string;
 	videos?: Video[];
 	events?: {
@@ -132,7 +132,12 @@ export type MerchantDetails = {
 		facebook: string;
 		opening: string;
 	};
-	images?: { url: string; id?: string; schoolId: string }[];
+	images?: {
+		alt: string;
+		url: string;
+		id?: string;
+		schoolId: string;
+	}[];
 	videos?: Video[];
 	reviews?: Review[];
 };

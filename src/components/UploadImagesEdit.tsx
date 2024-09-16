@@ -7,35 +7,30 @@ export default function UploadImages({
 	image,
 	setImage,
 }: {
-	image: any;
-	setImage: any;
+	image: { url: string; alt: string }[];
+	setImage: (images: { url: string; alt: string }[]) => void;
 }) {
-	const [images, setImages] = useState<{ url: string; key: string }[]>([]);
+	const [images, setImages] = useState<{ url: string; alt: string }[]>([]);
 
-	// Synchronize images state with the incoming image prop
+	// Update local images state when the parent image prop changes
 	useEffect(() => {
-		setImages(
-			image.map((img: any) => ({
-				url: img,
-				key: img + "1",
-			}))
+		setImages(image);
+	}, [image]); // Only update when `image` prop changes
+
+	// Handle image deletion
+	const handleDelete = (img: { url: string }) => {
+		const updatedImages = images.filter((image) => image.url !== img.url);
+		setImages(updatedImages); // Update local state
+		setImage(updatedImages); // Update parent state
+	};
+
+	// Handle alt text change
+	const handleAltChange = (index: number, newAlt: string) => {
+		const updatedImages = images.map((img, i) =>
+			i === index ? { ...img, alt: newAlt } : img
 		);
-	}, [image]); // `image` is sufficient in the dependency array
-
-	const handleDelete = async (img: { url: string }) => {
-		try {
-			// Remove image from local state
-			const updatedImages = images.filter(
-				(images) => images.url !== img.url
-			);
-			setImages(updatedImages);
-
-			// Update the parent component's image state
-			setImage(updatedImages.map((img) => img.url));
-		} catch (error: any) {
-			console.error("Error deleting image:", error);
-			alert(`ERROR! ${error.message}`);
-		}
+		setImages(updatedImages); // Update local state
+		setImage(updatedImages); // Update parent state
 	};
 
 	return (
@@ -43,33 +38,40 @@ export default function UploadImages({
 			<UploadDropzone
 				endpoint="imageUploader"
 				onClientUploadComplete={(res: any) => {
-					// Add new image to the images array
-					const updatedImages = [...images, ...res];
-					setImages(updatedImages);
-
-					// Update the parent component's image state
-					setImage(updatedImages.map((img) => img.url));
+					// Add new images to the images array with empty alt text
+					const newImages = res.map((img: any) => ({
+						url: img.url,
+						key: img.key || img.url, // Ensure key is present
+						alt: "", // Initialize alt as an empty string
+					}));
+					const updatedImages = [...images, ...newImages];
+					setImages(updatedImages); // Update local state
+					setImage(updatedImages); // Update parent state
 				}}
 				onUploadError={(error: Error) => {
 					alert(`ERROR! ${error.message}`);
 				}}
 			/>
-			<div className="flex gap-2 bg-green-400 flex-wrap">
+			<div className="flex gap-2 flex-wrap">
 				{images.map((img, i) => (
 					<div
 						key={i}
-						className="relative">
+						className="relative p-2 w-1/3 border border-gray-200 rounded-md">
 						<img
 							src={img.url}
-							onClick={() => {
-								console.log(img); // For debugging
-							}}
-							alt={`img${i + 1}`}
-							style={{ width: "100px", height: "100px" }}
+							alt={img.alt || `img${i + 1}`}
+							style={{ width: "auto", height: "100px" }}
 						/>
 						<div className="flex justify-center items-center pt-2 hover:cursor-pointer">
 							<Trash onClick={() => handleDelete(img)} />
 						</div>
+						<input
+							type="text"
+							placeholder="Enter alt text"
+							value={img.alt}
+							onChange={(e) => handleAltChange(i, e.target.value)}
+							className="mt-2 w-full border border-gray-300 rounded-md p-1"
+						/>
 					</div>
 				))}
 			</div>

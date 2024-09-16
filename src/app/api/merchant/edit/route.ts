@@ -59,6 +59,7 @@ export async function PUT(request: Request) {
 					create:
 						body.images?.map((image) => ({
 							url: image.url,
+							alt: image.alt,
 						})) || [],
 				},
 				videos: {

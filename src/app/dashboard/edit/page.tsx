@@ -70,7 +70,7 @@ function SchoolForm({ searchParams }: any) {
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
 	]);
-	const [images, setImages] = useState([""]);
+	const [images, setImages] = useState([{ url: "", alt: "" }]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	useEffect(() => {
@@ -107,8 +107,8 @@ function SchoolForm({ searchParams }: any) {
 			setAwards(details.awards || []);
 			setEvents(details.events || []);
 			setVideos(details.videos || []);
-			// setImages(details.images || []);
-			setImages(details.images.map((img) => img.url) || []);
+			setImages(details.images || []);
+			// setImages(details.images.map((img) => img.url) || []);
 		}
 	}, [details]);
 
@@ -290,7 +290,7 @@ function SchoolForm({ searchParams }: any) {
 	};
 
 	const handleSubmit = async (e: any) => {
-		setLoading(true);
+		// setLoading(true);
 		e.preventDefault();
 
 		const formData = {
@@ -308,14 +308,13 @@ function SchoolForm({ searchParams }: any) {
 			events,
 			awards,
 			toppers,
-			images: images.map((img) => ({
-				url: img,
-			})),
+			images,
 			videos,
 		};
 
+		console.log(formData);
+
 		try {
-			console.log(formData);
 			const res = await axios.put("/api/school/edit?id=" + id, formData);
 			console.log(res);
 			setLoading(false);

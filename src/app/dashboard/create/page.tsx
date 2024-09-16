@@ -69,7 +69,7 @@ function SchoolForm() {
 	const [awards, setAwards] = useState([
 		{ title: "", description: "", image: "" },
 	]);
-	const [images, setImages] = useState([""]);
+	const [images, setImages] = useState([{ url: "", alt: "" }]);
 	const [videos, setVideos] = useState([{ src: "", title: "" }]);
 
 	const handleBasicInfoChange = (e: any) => {
@@ -250,7 +250,7 @@ function SchoolForm() {
 	};
 
 	const handleSubmit = async (e: any) => {
-		setLoading(true);
+		// setLoading(true);
 		e.preventDefault();
 
 		const formData = {
@@ -268,9 +268,7 @@ function SchoolForm() {
 			events,
 			awards,
 			toppers,
-			images: images.map((img) => ({
-				url: img,
-			})),
+			images,
 			videos,
 		};
 
@@ -621,6 +619,7 @@ function SchoolForm() {
 						</Plus>
 					</div>
 
+					{/* Toppers */}
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							Toppers
@@ -698,6 +697,11 @@ function SchoolForm() {
 											/>
 										</div>
 									</div>
+									{/* Delete option */}
+									<Trash
+										onClick={() => removeToppers(index)}
+										className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"
+									/>
 								</div>
 							))}
 							<Plus
