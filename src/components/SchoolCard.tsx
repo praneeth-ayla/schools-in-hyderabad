@@ -22,7 +22,7 @@ export default function SchoolCard({
 							<img
 								className="rounded-t-lg h-32 w-auto object-cover"
 								src={schoolDetail.logo}
-								alt={schoolDetail.name + " logo"}
+								alt={schoolDetail.name + " logo image"}
 							/>
 						</div>
 						<CardTitle className="mb-2 text-lg font-bold text-wrap text-center text-white">

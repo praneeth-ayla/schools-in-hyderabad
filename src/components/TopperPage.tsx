@@ -46,7 +46,7 @@ export default function TopperPage({ id }: { id: string }) {
 									<img
 										className="md:h-[500px] w-auto"
 										src={event.image}
-										alt="event image"
+										alt={`${event.school.name} ${event.title} image`}
 									/>
 								</DialogTrigger>
 								<DialogContent className="p-3 md:p-5 rounded-lg">
@@ -54,6 +54,7 @@ export default function TopperPage({ id }: { id: string }) {
 										<img
 											src={event.image}
 											className="w-full h-full object-cover"
+											alt={`${event.school.name} ${event.title} image`}
 										/>
 									</div>
 								</DialogContent>

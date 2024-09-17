@@ -43,7 +43,7 @@ export function CarouselSpacing({
 										<img
 											className="w-full h-full object-cover rounded-lg"
 											src={e.url}
-											alt={`image ${e.alt}`}
+											alt={`${e.alt} image`}
 											style={{
 												width: "100%", // Ensure the width is 100%
 												height: "100%", // Ensure the height is 100%
@@ -63,6 +63,7 @@ export function CarouselSpacing({
 							<img
 								key={index}
 								src={s.url}
+								alt={`${s.alt} image`}
 								className="w-full h-full object-cover"
 							/>
 						))}

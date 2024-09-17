@@ -16,7 +16,7 @@ export default function PhotoCard({
 				<div className="flex items-center w-40 h-32">
 					<img
 						src={event.image}
-						alt={`${event.title} img`}
+						alt={`${event.title} image`}
 						className="object-cover w-full h-full rounded-md"
 					/>
 				</div>

@@ -295,7 +295,8 @@ export default function InputDemo() {
 							</Button>
 						</CardFooter>
 					</Card>
-					<Card className="p-4">
+
+					{/* <Card className="p-4">
 						<CardTitle>Event Time</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center">
 							<Input
@@ -318,7 +319,7 @@ export default function InputDemo() {
 								Update
 							</Button>
 						</CardFooter>
-					</Card>
+					</Card> */}
 					<Card className="p-4">
 						<CardTitle>Delete Merchant</CardTitle>
 						<CardContent className="flex flex-col items-center justify-center">

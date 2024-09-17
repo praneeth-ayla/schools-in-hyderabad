@@ -33,7 +33,7 @@ export default function MerchantPage({ merchantId }: { merchantId: string }) {
 							<div className="flex justify-center items-center  relative rounded-lg z-10">
 								<img
 									className="rounded-md lg:w-[300px] pt-2"
-									alt="school logo"
+									alt={`${details.name} logo image`}
 									src={details.logo}
 								/>
 							</div>

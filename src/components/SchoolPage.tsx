@@ -39,7 +39,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 							<div className="flex justify-center items-center  relative rounded-lg z-10 pt-2">
 								<img
 									className="rounded-md lg:w-[300px]"
-									alt="school logo"
+									alt={`${details.name} logo image`}
 									src={details.logo}
 								/>
 							</div>

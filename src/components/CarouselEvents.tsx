@@ -66,7 +66,7 @@ export default function CarouselEvents({
 											<img
 												className="object-cover h-44 w-full"
 												src={event.image}
-												alt="event img"
+												alt={`${event.school.name} ${event.title} image`}
 											/>
 										</div>
 										<div className="mt-auto">
