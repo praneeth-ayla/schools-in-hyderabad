@@ -18,6 +18,7 @@ export default function EventsSchoolPage({
 	events: any;
 	desBoo: boolean;
 }) {
+	console.log(events);
 	return (
 		<div className="w-[89vw] md:w-[80vw] lg:w-[50vw]">
 			<Carousel
@@ -43,7 +44,7 @@ export default function EventsSchoolPage({
 													<img
 														className="object-cover h-44 w-full"
 														src={event.image}
-														alt={`${event.school.name} ${event.title} image`}
+														alt={`${event.title} image`}
 													/>
 												</div>
 												<div className="mt-auto">
