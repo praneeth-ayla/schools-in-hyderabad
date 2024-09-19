@@ -11,6 +11,7 @@ export async function POST(request: Request) {
 				logo: data.logo,
 				rating: data.rating,
 				locationMap: data.locationMap,
+				showReviews: data.showReviews,
 				area: {
 					connectOrCreate: {
 						where: {

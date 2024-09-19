@@ -26,6 +26,7 @@ export type Video = {
 export type SchoolDetails = {
 	name: string;
 	logo: string;
+	showReviews: boolean;
 	contact?: {
 		location: string;
 		number: string;

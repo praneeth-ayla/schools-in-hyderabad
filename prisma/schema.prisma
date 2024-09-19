@@ -31,6 +31,7 @@ model School {
   aboutUs     String    @db.LongText
   logo        String    @db.LongText
   rating      Float     @default(0)
+  showReviews Boolean   @default(false)
   toppers     Toppers[]
   awards      Awards[]
   locationMap String?   @db.LongText

@@ -26,7 +26,6 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	}, [failed]);
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
-	console.log(details);
 	return (
 		<div className="py-10 w-full bg-blue-200 flex flex-col items-center justify-center antialiased">
 			<div>
@@ -321,84 +320,92 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											</>
 										)}
 								</div>
-								{/* <div>
-									<p className="text-2xl font-bold">
-										Reviews
-									</p>
-									<div className="py-3 grid gap-1">
-										<p className=" font-light">
-											Average Rating
+								{details.showReviews && (
+									<div>
+										<p className="text-2xl font-bold">
+											Reviews
 										</p>
-										<div className="font-light ">
-											{details.rating} / 5
+										<div className="py-3 grid gap-1">
+											<p className=" font-light">
+												Average Rating
+											</p>
+											<div className="font-light ">
+												{details.rating} / 5
+											</div>
+											<StarRating
+												rating={details.rating}
+											/>
 										</div>
-										<StarRating rating={details.rating} />
-									</div>
 
-									<div className=" pt-4 border-y border-gray-600">
-										<div className="flex flex-col gap-3 pl-4">
-											{details.reviews.length > 0 ? (
-												<div>
-													{details.reviews.map(
-														(
-															{
-																message,
-																name,
-																date,
-																rating,
-															},
-															i
-														) => (
-															<div
-																className="p-2"
-																key={i}>
-																<CardTitle className="font-normal text-base flex justify-between items-center">
-																	<div className="flex gap-3 items-center">
-																		<Avatar className="border border-gray-600 flex justify-center items-center">
-																			<div>
-																				{name
-																					.charAt(
-																						0
-																					)
-																					.toUpperCase()}
+										<div className=" pt-4 border-y border-gray-600">
+											<div className="flex flex-col gap-3 pl-4">
+												{details.reviews.length > 0 ? (
+													<div>
+														{details.reviews.map(
+															(
+																{
+																	message,
+																	name,
+																	date,
+																	rating,
+																},
+																i
+															) => (
+																<div
+																	className="p-2"
+																	key={i}>
+																	<CardTitle className="font-normal text-base flex justify-between items-center">
+																		<div className="flex gap-3 items-center">
+																			<Avatar className="border border-gray-600 flex justify-center items-center">
+																				<div>
+																					{name
+																						.charAt(
+																							0
+																						)
+																						.toUpperCase()}
+																				</div>
+																			</Avatar>
+																			<div className=" md:text-base">
+																				{
+																					name
+																				}
 																			</div>
-																		</Avatar>
-																		<div className=" md:text-base">
-																			{
-																				name
-																			}
 																		</div>
-																	</div>
-																	<div className=" md:">
-																		{DateTimeDisplay(
-																			date
-																		).slice(
-																			0,
-																			17
-																		)}
-																	</div>
-																</CardTitle>
-																<StarRating
-																	rating={
-																		rating
-																	}
-																/>
-																<CardDescription className="py-3  text-black">
-																	{message}
-																</CardDescription>
-															</div>
-														)
-													)}
-												</div>
-											) : (
-												<div className="pb-3">
-													No reviews
-												</div>
-											)}
+																		<div className=" md:">
+																			{DateTimeDisplay(
+																				date
+																			).slice(
+																				0,
+																				17
+																			)}
+																		</div>
+																	</CardTitle>
+																	<StarRating
+																		rating={
+																			rating
+																		}
+																	/>
+																	<CardDescription className="py-3  text-black">
+																		{
+																			message
+																		}
+																	</CardDescription>
+																</div>
+															)
+														)}
+													</div>
+												) : (
+													<div className="pb-3">
+														No reviews
+													</div>
+												)}
+											</div>
 										</div>
+										<ReviewForm
+											schoolId={Number(schoolId)}
+										/>
 									</div>
-									<ReviewForm schoolId={Number(schoolId)} />
-								</div> */}
+								)}
 							</div>
 						</Card>
 					</div>

@@ -274,6 +274,35 @@ export function useGetTopper(id: string) {
 	return { event, isLoading, failed };
 }
 
+export function useGetAward(id: string) {
+	const [event, setEvent] = useState<any>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<any>(`/api/award?id=${id}`);
+				setEvent(data);
+			} catch (error: any) {
+				console.error("Error fetching award", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [toast]);
+
+	return { event, isLoading, failed };
+}
 export function useAreaList() {
 	const [areas, setAreas] = useState<
 		{ id: string; name: string }[] | undefined

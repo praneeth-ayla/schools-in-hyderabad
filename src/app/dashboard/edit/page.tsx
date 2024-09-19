@@ -44,6 +44,7 @@ function SchoolForm({ searchParams }: any) {
 		area: "",
 		board: "",
 		locationMap: "",
+		showReviews: false,
 	});
 
 	const [contact, setContact] = useState({
@@ -84,6 +85,7 @@ function SchoolForm({ searchParams }: any) {
 				area: details.area?.name || "",
 				board: details.category?.name || "",
 				locationMap: details.locationMap || "",
+				showReviews: details.showReviews || false,
 			});
 			console.log("basic", basicInfo.board);
 
@@ -289,8 +291,12 @@ function SchoolForm({ searchParams }: any) {
 		setVideos(updatedVideos);
 	};
 
+	const handleCheckboxChange = (e: any) => {
+		setBasicInfo({ ...basicInfo, showReviews: e.target.checked });
+	};
+
 	const handleSubmit = async (e: any) => {
-		// setLoading(true);
+		setLoading(true);
 		e.preventDefault();
 
 		const formData = {
@@ -393,6 +399,16 @@ function SchoolForm({ searchParams }: any) {
 							required
 						/>
 					</div>
+
+					<Label>
+						Show Reviews
+						<Input
+							type="checkbox"
+							checked={basicInfo.showReviews}
+							onChange={handleCheckboxChange}
+						/>
+					</Label>
+
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							Map Location

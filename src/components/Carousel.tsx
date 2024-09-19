@@ -13,7 +13,6 @@ export function CarouselSpacing({
 }: {
 	images: { url: string; alt: string; id?: string; schoolId: string }[];
 }) {
-	console.log(images);
 	return (
 		<div>
 			<Dialog>

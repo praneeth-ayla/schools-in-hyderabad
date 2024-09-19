@@ -15,7 +15,6 @@ export function CarouselYoutube({
 		title: string;
 	}[];
 }) {
-	console.log(videos);
 	// Youtube normal link to embeded link
 	function convertYouTubeLinkToEmbed(url: string): string {
 		url;

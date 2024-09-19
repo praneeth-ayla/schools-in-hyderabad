@@ -54,6 +54,7 @@ export async function PUT(request: Request) {
 				logo: body.logo,
 				locationMap: body.locationMap,
 				contact: contactData ? { update: contactData } : undefined,
+				showReviews: body.showReviews,
 				images: {
 					deleteMany: {}, // Clear existing images
 					create:

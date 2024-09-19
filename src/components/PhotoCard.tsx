@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardDescription, CardTitle } from "./ui/card";
 
 export default function PhotoCard({
@@ -11,7 +12,7 @@ export default function PhotoCard({
 	};
 }) {
 	return (
-		<div>
+		<Link href={`/award?id=${event.id}`}>
 			<Card className="flex p-2 gap-2 bg-blue-200">
 				<div className="flex items-center w-40 h-32">
 					<img
@@ -33,6 +34,6 @@ export default function PhotoCard({
 					</CardDescription>
 				</div>
 			</Card>
-		</div>
+		</Link>
 	);
 }

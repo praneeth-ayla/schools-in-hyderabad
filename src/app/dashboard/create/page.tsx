@@ -36,6 +36,7 @@ function SchoolForm() {
 		area: "",
 		board: "",
 		locationMap: "",
+		showReviews: false,
 	});
 
 	const [contact, setContact] = useState({
@@ -250,7 +251,7 @@ function SchoolForm() {
 	};
 
 	const handleSubmit = async (e: any) => {
-		// setLoading(true);
+		setLoading(true);
 		e.preventDefault();
 
 		const formData = {
@@ -292,6 +293,10 @@ function SchoolForm() {
 				description: "Try again later!",
 			});
 		}
+	};
+
+	const handleCheckboxChange = (e: any) => {
+		setBasicInfo({ ...basicInfo, showReviews: e.target.checked });
 	};
 
 	useEffect(() => {
@@ -460,6 +465,15 @@ function SchoolForm() {
 							</SelectContent>
 						</Select>
 					</div>
+
+					<Label>
+						Show Reviews
+						<Input
+							type="checkbox"
+							checked={basicInfo.showReviews}
+							onChange={handleCheckboxChange}
+						/>
+					</Label>
 
 					{/* Contact Information */}
 					<div className="mb-4">

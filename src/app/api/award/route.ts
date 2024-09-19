@@ -28,30 +28,25 @@ export async function GET(request: Request) {
 			);
 		}
 
-		const wholeDetails = await prisma.school.findFirst({
+		const wholeDetails = await prisma.awards.findFirst({
 			where: { id },
 			select: {
-				reviews: true,
-				area: true,
-				category: true,
-				facilities: true,
-				events: true,
-				images: true,
-				contact: true,
-				videos: true,
-				aboutUs: true,
-				awards: true,
-				logo: true,
-				name: true,
-				rating: true,
-				toppers: true,
-				locationMap: true,
-				showReviews: true,
+				description: true,
+				title: true,
+				date: true,
+				image: true,
+				school: {
+					select: {
+						area: true,
+						name: true,
+						logo: true,
+					},
+				},
 			},
 		});
 
 		if (!wholeDetails) {
-			return new Response(JSON.stringify({ error: "School not found" }), {
+			return new Response(JSON.stringify({ error: "Topper not found" }), {
 				status: 404,
 				headers: { "Content-Type": "application/json" },
 			});
