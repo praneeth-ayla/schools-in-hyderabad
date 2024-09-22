@@ -12,7 +12,7 @@ export default function Loading() {
 							cy="12"
 							r="9.5"
 							fill="none"
-							stroke-linecap="round"
+							strokeLinecap="round"
 							stroke-width="3">
 							<animate
 								attributeName="stroke-dasharray"

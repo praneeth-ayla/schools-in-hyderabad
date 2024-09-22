@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import prisma from "../../../../prisma";
 
 export async function GET(request: Request) {
@@ -6,32 +7,36 @@ export async function GET(request: Request) {
 		const idParam = searchParams.get("id");
 
 		if (!idParam) {
-			return new Response(
-				JSON.stringify({ error: "ID parameter is missing" }),
-				{
-					status: 400,
-					headers: { "Content-Type": "application/json" },
-				}
+			return NextResponse.json(
+				{ error: "ID parameter is missing" },
+				{ status: 400 }
 			);
 		}
 
-		// Convert id to a number
 		const id = parseInt(idParam, 10);
-
 		if (isNaN(id)) {
-			return new Response(
-				JSON.stringify({ error: "Invalid ID parameter" }),
-				{
-					status: 400,
-					headers: { "Content-Type": "application/json" },
-				}
+			return NextResponse.json(
+				{ error: "Invalid ID parameter" },
+				{ status: 400 }
 			);
 		}
 
-		const wholeDetails = await prisma.school.findFirst({
+		const wholeDetails = await prisma.school.findUnique({
 			where: { id },
 			select: {
-				reviews: true,
+				reviews: {
+					take: 12,
+					orderBy: {
+						date: "desc", // Changed from createdAt to date
+					},
+					select: {
+						id: true,
+						name: true,
+						rating: true,
+						date: true, // Changed from createdAt to date
+						message: true, // Changed from content to message
+					},
+				},
 				area: true,
 				category: true,
 				facilities: true,
@@ -51,23 +56,18 @@ export async function GET(request: Request) {
 		});
 
 		if (!wholeDetails) {
-			return new Response(JSON.stringify({ error: "School not found" }), {
-				status: 404,
-				headers: { "Content-Type": "application/json" },
-			});
+			return NextResponse.json(
+				{ error: "School not found" },
+				{ status: 404 }
+			);
 		}
 
-		return new Response(JSON.stringify(wholeDetails), {
-			status: 200,
-			headers: { "Content-Type": "application/json" },
-		});
+		return NextResponse.json(wholeDetails);
 	} catch (error) {
-		return new Response(
-			JSON.stringify({ error: "Internal server error" }),
-			{
-				status: 500,
-				headers: { "Content-Type": "application/json" },
-			}
+		console.error("Error fetching school details:", error);
+		return NextResponse.json(
+			{ error: "Internal server error" },
+			{ status: 500 }
 		);
 	}
 }
