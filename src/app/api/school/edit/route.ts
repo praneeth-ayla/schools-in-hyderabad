@@ -49,6 +49,16 @@ export async function PUT(request: Request) {
 				id: parseInt(id, 10), // Convert id to number
 			},
 			data: {
+				category: {
+					connect: {
+						name: body.category.name,
+					},
+				},
+				area: {
+					connect: {
+						name: body.area.name,
+					},
+				},
 				name: body.name,
 				aboutUs: body.aboutUs,
 				logo: body.logo,
