@@ -5,6 +5,8 @@ import SessionProvider from "../components/SessionProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { Head } from "next/document";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,17 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<Script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-7VM3P88BDL"></Script>{" "}
+				<Script id="google-analytics">{`
+ 						window.dataLayer = window.dataLayer || []; 
+						function gtag(){dataLayer.push(arguments);} 
+						gtag('js', new Date());
+						gtag('config', 'G-7VM3P88BDL');
+				`}</Script>
+			</head>
 			<body className={inter.className + " bg-purple-950"}>
 				<SessionProvider>
 					<div className="flex flex-col min-h-screen">
