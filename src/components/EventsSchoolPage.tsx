@@ -10,12 +10,15 @@ import DateTimeDisplay from "./TimeConverter";
 import { Card, CardDescription, CardTitle } from "./ui/card";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
+import generateSlug from "@/utils/slugGenerator";
 
 export default function EventsSchoolPage({
 	events,
+	schoolName,
 	desBoo,
 }: {
 	events: any;
+	schoolName: any;
 	desBoo: boolean;
 }) {
 	return (
@@ -36,7 +39,11 @@ export default function EventsSchoolPage({
 									className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
 									<div className="h-full">
 										<Link
-											href={`/topper?id=${event.id}`}
+											href={`/topper/${generateSlug(
+												schoolName
+											)}-${generateSlug(event.title)}-${
+												event.id
+											}`}
 											className="block h-full">
 											<Card className="h-full p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex flex-col">
 												<div className="flex justify-center items-center flex-grow">
@@ -97,7 +104,11 @@ export default function EventsSchoolPage({
 									className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
 									<div className="h-full">
 										<Link
-											href={`/events?id=${event.id}`}
+											href={`/events/${generateSlug(
+												schoolName
+											)}-${generateSlug(event.title)}-${
+												event.id
+											}`}
 											className="block h-full">
 											<Card className="h-full p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex flex-col">
 												<div className="flex justify-center items-center flex-grow">

@@ -2,11 +2,11 @@
 import AwardPage from "@/components/AwardPage";
 import React from "react";
 
-export default function page({ searchParams }: any) {
-	const id = searchParams.id || "";
+export default function page({ params }: any) {
+	const id = params.id || "";
 	return (
 		<div>
-			<AwardPage id={id} />
+			<AwardPage award={id} />
 		</div>
 	);
 }

@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Card, CardDescription, CardTitle } from "./ui/card";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
+import generateSlug from "@/utils/slugGenerator";
 
 export default function CarouselEvents({
 	events,
@@ -22,21 +23,26 @@ export default function CarouselEvents({
 }) {
 	return (
 		<div>
+			{" "}
 			<Carousel
-				plugins={[
-					Autoplay({
-						delay: 2000,
-					}),
-				]}
+				plugins={[Autoplay({ delay: 2000 })]}
 				className="w-full">
+				{" "}
 				<CarouselContent className="-ml-2 md:-ml-4">
+					{" "}
 					{events.map((event: any, i: number) => (
 						<CarouselItem
 							key={i}
 							className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+							{" "}
 							<div className="h-full">
+								{" "}
 								<Link
-									href={`/${type}?id=${event.id}`}
+									href={`/${type}/${generateSlug(
+										event.school.name
+									)}-${generateSlug(event.title)}-${
+										event.id
+									}`}
 									className="block h-full">
 									<Card className="h-full p-5 border-purple-950 hover:scale-105 bg-slate-950 bg-opacity-50 text-white flex flex-col">
 										<div className="flex gap-3 items-center mb-3">

@@ -4,37 +4,37 @@ import prisma from "../../../../prisma";
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url);
-		const name = searchParams.get("name");
-		const area = searchParams.get("area");
+		const idParam = searchParams.get("id");
 
-		if (!name || !area) {
+		if (!idParam) {
 			return NextResponse.json(
-				{ error: "Name and area parameters are required" },
+				{ error: "ID parameter is missing" },
 				{ status: 400 }
 			);
 		}
 
-		// Fetch the school details using the provided name and area
-		const wholeDetails = await prisma.school.findFirst({
-			where: {
-				name: name.replace(/-/g, " "), // Assuming name is sent with hyphens instead of spaces
-				area: {
-					name: area.replace(/-/g, " "), // Same assumption for area
-				},
-			},
+		const id = parseInt(idParam, 10);
+		if (isNaN(id)) {
+			return NextResponse.json(
+				{ error: "Invalid ID parameter" },
+				{ status: 400 }
+			);
+		}
+
+		const wholeDetails = await prisma.school.findUnique({
+			where: { id },
 			select: {
-				id: true,
 				reviews: {
 					take: 12,
 					orderBy: {
-						date: "desc",
+						date: "desc", // Changed from createdAt to date
 					},
 					select: {
 						id: true,
 						name: true,
 						rating: true,
-						date: true,
-						message: true,
+						date: true, // Changed from createdAt to date
+						message: true, // Changed from content to message
 					},
 				},
 				area: true,

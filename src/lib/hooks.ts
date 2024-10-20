@@ -9,15 +9,23 @@ import {
 } from "./types";
 import axios from "axios";
 
-export function useSchoolDetails(schoolId: string) {
+export function useSchoolDetails({
+	name,
+	area,
+}: {
+	name: string;
+	area: string;
+}) {
 	const [details, setDetails] = useState<SchoolDetails | undefined>();
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 	const { toast } = useToast();
 
-	async function getDetails(schoolId: string) {
+	async function getDetails() {
 		try {
-			const res = await axios.get(`/api/schoolDetails?id=${schoolId}`);
+			const res = await axios.get(
+				`/api/schoolDetails?area=${area}&name=${name}`
+			);
 			const data = res.data;
 
 			setDetails({
@@ -39,8 +47,8 @@ export function useSchoolDetails(schoolId: string) {
 	}
 
 	useEffect(() => {
-		getDetails(schoolId);
-	}, [schoolId]);
+		getDetails();
+	}, [name, area]);
 
 	return { isLoading, details, failed };
 }
@@ -371,4 +379,40 @@ export function useBoardList() {
 	}, []);
 
 	return { isLoading, boards, failed };
+}
+
+export function useSchoolDetailsId(schoolId: string) {
+	const [details, setDetails] = useState<SchoolDetails | undefined>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	async function getDetails(schoolId: string) {
+		try {
+			const res = await axios.get(`/api/schoolDetailsId?id=${schoolId}`);
+			const data = res.data;
+
+			setDetails({
+				...data,
+			});
+			setIsLoading(false);
+		} catch (error: any) {
+			console.error("Error fetching school details:", error.message);
+			setIsLoading(false);
+			toast({
+				title: "Something went wrong!",
+				description: "Redirecting back",
+				duration: 1000,
+			});
+			setTimeout(() => {
+				setFailed(true);
+			}, 1000);
+		}
+	}
+
+	useEffect(() => {
+		getDetails(schoolId);
+	}, [schoolId]);
+
+	return { isLoading, details, failed };
 }

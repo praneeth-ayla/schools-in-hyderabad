@@ -11,8 +11,11 @@ import { useEffect } from "react";
 import Loading from "@/components/Loading";
 import DateTimeDisplay from "@/components/TimeConverter";
 import { BackgroundBeams } from "./ui/background-beams";
+import { getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function MerchantPage({ merchantId }: { merchantId: string }) {
+export default function MerchantPage({ merchant }: { merchant: string }) {
+	const merchantId = getIdFromSlug(merchant);
+
 	const { isLoading, details, failed } = useMerchantDetails(merchantId);
 	const router = useRouter();
 

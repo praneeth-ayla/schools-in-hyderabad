@@ -1,7 +1,7 @@
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { SchoolCategory, SchoolPartialData } from "@/lib/types";
+import { SchoolPartialData } from "@/lib/types";
+import generateSlug from "@/utils/slugGenerator";
 import Link from "next/link";
-import StarRating from "./StarRating";
 
 export default function SchoolCard({
 	schoolDetails,
@@ -12,10 +12,19 @@ export default function SchoolCard({
 }) {
 	return (
 		<div className="mt-4 grid md:grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
-			{schoolDetails.map((schoolDetail, i) => (
+			{schoolDetails.map((schoolDetail) => (
 				<Link
-					href={`/${type}?id=${schoolDetail.id}`}
-					key={i}
+					href={
+						type === "school"
+							? `/${type}/${generateSlug(
+									schoolDetail.name
+							  )}-in-${generateSlug(schoolDetail.area.name)}
+				`
+							: `/merchant/${generateSlug(schoolDetail.name)}-${
+									schoolDetail.id
+							  }`
+					}
+					key={schoolDetail.id} // Use ID as key for uniqueness
 					className="grid">
 					<Card className="border-purple-950 hover:shadow-2xl hover:scale-105 bg-slate-950 bg-opacity-50 p-4 flex flex-col h-full">
 						<div className="object-cover flex justify-center items-center">
@@ -29,10 +38,6 @@ export default function SchoolCard({
 							{schoolDetail.name}
 						</CardTitle>
 						<CardDescription className="flex-grow">
-							{/* <div className="flex gap-1 pt-4">
-								<StarRating rating={schoolDetail.rating} />
-								{schoolDetail.rating}
-							</div> */}
 							<div className="text-xs">
 								{schoolDetail.aboutUs.length > 200 ? (
 									<>

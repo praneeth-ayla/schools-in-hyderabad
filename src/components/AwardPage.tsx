@@ -7,8 +7,10 @@ import { Card, CardDescription, CardTitle } from "./ui/card";
 import DateTimeDisplay from "./TimeConverter";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
+import { getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function AwardPage({ id }: { id: string }) {
+export default function AwardPage({ award }: { award: string }) {
+	const id = getIdFromSlug(award);
 	const { event, failed, isLoading } = useGetAward(id);
 	const router = useRouter();
 

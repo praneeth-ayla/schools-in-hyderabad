@@ -24,6 +24,7 @@ export type Video = {
 };
 
 export type SchoolDetails = {
+	id: number;
 	name: string;
 	logo: string;
 	showReviews: boolean;

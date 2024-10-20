@@ -5,7 +5,6 @@ import SessionProvider from "../components/SessionProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
-import { Head } from "next/document";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });

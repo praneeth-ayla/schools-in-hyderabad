@@ -14,7 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import UploadImagesEdit from "@/components/UploadImagesEdit";
-import { useAreaList, useBoardList, useSchoolDetails } from "@/lib/hooks";
+import { useAreaList, useBoardList, useSchoolDetailsId } from "@/lib/hooks";
 import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { Plus, Trash } from "lucide-react";
@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 
 function SchoolForm({ searchParams }: any) {
 	const id = searchParams.id;
-	const { isLoading, details, failed } = useSchoolDetails(id);
+	const { isLoading, details, failed } = useSchoolDetailsId(id);
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const { toast } = useToast();

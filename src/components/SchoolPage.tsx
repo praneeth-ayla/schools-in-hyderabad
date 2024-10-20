@@ -14,11 +14,11 @@ import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
-import { TextGenerateEffect } from "./ui/text-badge";
-import CarouselEvents from "./CarouselEvents";
+import { extractNameAndArea, getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function SchoolPage({ schoolId }: { schoolId: string }) {
-	const { isLoading, details, failed } = useSchoolDetails(schoolId);
+export default function SchoolPage({ school }: { school: string }) {
+	const schoolNameAndArea = extractNameAndArea(school);
+	const { isLoading, details, failed } = useSchoolDetails(schoolNameAndArea);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -26,6 +26,8 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 	}, [failed]);
 	if (isLoading) return <Loading />;
 	if (!details) return <Loading />;
+
+	console.log("School Id:", details.id);
 	return (
 		<div className="py-10 w-full bg-blue-200 flex flex-col items-center justify-center antialiased">
 			<div>
@@ -256,6 +258,9 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											<pre className=" font-sans text-wrap">
 												<div className="grid gap-3">
 													<EventsSchoolPage
+														schoolName={
+															details.name
+														}
 														desBoo={true}
 														events={details.toppers}
 													/>
@@ -313,6 +318,9 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 												</p>
 												<div>
 													<EventsSchoolPage
+														schoolName={
+															details.name
+														}
 														desBoo={false}
 														events={details.events}
 													/>
@@ -402,7 +410,7 @@ export default function SchoolPage({ schoolId }: { schoolId: string }) {
 											</div>
 										</div>
 										<ReviewForm
-											schoolId={Number(schoolId)}
+											schoolId={Number(details.id)}
 										/>
 									</div>
 								)}

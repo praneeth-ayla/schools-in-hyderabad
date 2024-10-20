@@ -2,11 +2,11 @@
 import EventPage from "@/components/EventPage";
 import React from "react";
 
-export default function page({ searchParams }: any) {
-	const id = searchParams.id || "";
+export default function page({ params }: any) {
+	const id = params.id || "";
 	return (
 		<div>
-			<EventPage id={id} />
+			<EventPage eventN={id} />
 		</div>
 	);
 }

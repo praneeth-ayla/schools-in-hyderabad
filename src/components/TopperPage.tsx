@@ -7,8 +7,10 @@ import { Card, CardDescription, CardTitle } from "./ui/card";
 import DateTimeDisplay from "./TimeConverter";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
+import { getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function TopperPage({ id }: { id: string }) {
+export default function TopperPage({ topper }: { topper: string }) {
+	const id = getIdFromSlug(topper);
 	const { event, failed, isLoading } = useGetTopper(id);
 	const router = useRouter();
 

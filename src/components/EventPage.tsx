@@ -7,8 +7,10 @@ import { Card, CardDescription, CardTitle } from "./ui/card";
 import DateTimeDisplay from "./TimeConverter";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
+import { getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function EventPage({ id }: { id: string }) {
+export default function EventPage({ eventN }: { eventN: string }) {
+	const id = getIdFromSlug(eventN);
 	const { event, failed, isLoading } = useGetEvent(id);
 	const router = useRouter();
 
@@ -18,8 +20,6 @@ export default function EventPage({ id }: { id: string }) {
 
 	if (isLoading) return <Loading />;
 	if (!event) return <Loading />;
-
-	console.log(event);
 
 	return (
 		<div className="text-white bg-blue-300 min-h-screen">

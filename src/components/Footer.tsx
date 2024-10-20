@@ -11,27 +11,27 @@ export default function Footer() {
 				</a>
 				<a
 					className="hover:text-white"
-					href="merchandise">
+					href="/merchandise">
 					Merchandise
 				</a>
 				<a
 					className="hover:text-white"
-					href="contact">
+					href="/contact">
 					Contact
 				</a>
 				<a
 					className="hover:text-white"
-					href="blogs">
+					href="/blogs">
 					Blogs
 				</a>
 				<a
 					className="hover:text-white"
-					href="privacy-policy">
+					href="/privacy-policy">
 					Privacy Policy
 				</a>
 				<a
 					className="hover:text-white"
-					href="terms-conditions">
+					href="/terms-conditions">
 					Terms & Conditions
 				</a>
 			</div>
