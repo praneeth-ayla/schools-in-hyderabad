@@ -4,6 +4,7 @@ import generateSlug from "@/utils/slugGenerator";
 
 export default function PhotoCard({
 	event,
+	schoolName,
 }: {
 	event: {
 		title: string;
@@ -11,14 +12,18 @@ export default function PhotoCard({
 		image: string;
 		id?: string;
 	};
+	schoolName: string;
 }) {
 	return (
-		<Link href={`/award/${generateSlug(event.title)}-${event.id}`}>
+		<Link
+			href={`/award/${generateSlug(schoolName)}-${generateSlug(
+				event.title
+			)}-${event.id}`}>
 			<Card className="flex p-2 gap-2 bg-blue-200">
 				<div className="flex items-center w-40 h-32">
 					<img
 						src={event.image}
-						alt={`${event.title} image`}
+						alt={`${schoolName} ${event.title} image`}
 						className="object-cover w-full h-full rounded-md"
 					/>
 				</div>

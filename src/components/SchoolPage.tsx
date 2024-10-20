@@ -283,6 +283,9 @@ export default function SchoolPage({ school }: { school: string }) {
 															i: number
 														) => (
 															<PhotoCard
+																schoolName={
+																	details.name
+																}
 																key={i}
 																event={award}
 															/>

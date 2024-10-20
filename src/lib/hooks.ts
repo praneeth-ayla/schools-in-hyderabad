@@ -55,8 +55,8 @@ export function useSchoolDetails({
 
 interface UseSchoolListParams {
 	name?: string;
-	area?: Place;
-	board?: SchoolCategory;
+	area?: string;
+	board?: string;
 }
 
 export function useSchoolList({ name, area, board }: UseSchoolListParams) {
