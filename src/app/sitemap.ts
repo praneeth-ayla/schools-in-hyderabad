@@ -43,9 +43,8 @@ export default async function sitemap() {
 	});
 
 	const schoolSitemaps = schools.map((school) => {
-		const schoolNameSlug = generateSlug(school.name);
 		return {
-			url: `${url}/school/${schoolNameSlug}-in-${generateSlug(
+			url: `${url}/school/${generateSlug(school.name)}/${generateSlug(
 				school.area.name
 			)}`,
 			lastModified: new Date().toISOString(),
