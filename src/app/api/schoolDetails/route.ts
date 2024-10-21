@@ -4,8 +4,8 @@ import prisma from "../../../../prisma";
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url);
-		const name = searchParams.get("name");
-		const area = searchParams.get("area");
+		let name = searchParams.get("name")?.trim();
+		let area = searchParams.get("area")?.trim();
 
 		if (!name || !area) {
 			return NextResponse.json(
@@ -14,12 +14,26 @@ export async function GET(request: Request) {
 			);
 		}
 
-		// Fetch the school details using the provided name and area
+		// Normalize the search string: convert hyphens to spaces, remove extra spaces, and convert to lowercase
+		const normalizeString = (str: string) => {
+			return str
+				.replace(/-/g, " ") // Replace hyphens with spaces
+				.toLowerCase() // Convert to lowercase
+				.trim(); // Remove leading/trailing spaces
+		};
+
+		name = normalizeString(name);
+		area = normalizeString(area);
+
 		const wholeDetails = await prisma.school.findFirst({
 			where: {
-				name: name.replace(/-/g, " "), // Assuming name is sent with hyphens instead of spaces
+				name: {
+					contains: name,
+				},
 				area: {
-					name: area.replace(/-/g, " "), // Same assumption for area
+					name: {
+						contains: area,
+					},
 				},
 			},
 			select: {
@@ -54,6 +68,11 @@ export async function GET(request: Request) {
 				showReviews: true,
 			},
 		});
+
+		// Log the found school name for debugging
+		if (wholeDetails) {
+			console.log("Found school name:", wholeDetails.name);
+		}
 
 		if (!wholeDetails) {
 			return NextResponse.json(
