@@ -18,7 +18,7 @@ export default function SchoolCard({
 						type === "school"
 							? `/${type}/${generateSlug(
 									schoolDetail.name
-							  )}-in-${generateSlug(schoolDetail.area.name)}
+							  )}/${generateSlug(schoolDetail.area.name)}
 				`
 							: `/merchant/${generateSlug(schoolDetail.name)}-${
 									schoolDetail.id

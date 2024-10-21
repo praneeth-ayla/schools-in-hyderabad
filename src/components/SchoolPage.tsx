@@ -16,9 +16,15 @@ import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
 import { extractNameAndArea, getIdFromSlug } from "@/utils/slugGenerator";
 
-export default function SchoolPage({ school }: { school: string }) {
-	const schoolNameAndArea = extractNameAndArea(school);
-	const { isLoading, details, failed } = useSchoolDetails(schoolNameAndArea);
+export default function SchoolPage({
+	school,
+}: {
+	school: {
+		name: string;
+		area: string;
+	};
+}) {
+	const { isLoading, details, failed } = useSchoolDetails(school);
 	const router = useRouter();
 
 	useEffect(() => {
