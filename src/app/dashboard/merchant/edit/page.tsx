@@ -168,7 +168,7 @@ function SchoolForm({ searchParams }: any) {
 		return (
 			<>
 				<h2 className="text-2xl font-semibold my-6 text-center text-white">
-					School Information
+					Merchant Information
 				</h2>
 				<form
 					onSubmit={handleSubmit}
