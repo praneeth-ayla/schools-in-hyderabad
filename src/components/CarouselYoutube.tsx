@@ -33,9 +33,9 @@ export function CarouselYoutube({
 				<CarouselContent className="w-full h-[150px] sm:h-[250px] md:h-[250px] lg:h-[400px]">
 					{videos.map(
 						({ src, title }: { src: any; title: string }, i) => (
-							<>
+							<div key={i}>
 								{
-									<CarouselItem key={i}>
+									<CarouselItem>
 										<iframe
 											className="w-11/12 h-full"
 											src={convertYouTubeLinkToEmbed(src)}
@@ -45,7 +45,7 @@ export function CarouselYoutube({
 											allowFullScreen></iframe>
 									</CarouselItem>
 								}
-							</>
+							</div>
 						)
 					)}
 				</CarouselContent>

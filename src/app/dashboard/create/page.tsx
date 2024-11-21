@@ -39,6 +39,12 @@ function SchoolForm() {
 		showReviews: false,
 	});
 
+	const [newsletter, setNewsletter] = useState({
+		title: "",
+		description: "",
+		image: "",
+	});
+
 	const [contact, setContact] = useState({
 		email: "",
 		location: "",
@@ -262,7 +268,7 @@ function SchoolForm() {
 			category: {
 				name: basicInfo.board,
 			},
-			contact,
+			// contact,
 			facilities: facilities.map((facility) => ({
 				name: facility,
 			})),
@@ -271,6 +277,7 @@ function SchoolForm() {
 			toppers,
 			images,
 			videos,
+			newsletter,
 		};
 
 		console.log(formData);
@@ -282,9 +289,6 @@ function SchoolForm() {
 			toast({
 				title: "School Added",
 			});
-			// setTimeout(() => {
-			// 	// window.location.reload();
-			// }, 2000);
 		} catch (error) {
 			console.log(error);
 			setLoading(false);
@@ -340,7 +344,7 @@ function SchoolForm() {
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md"
 							placeholder="School Name"
-							required
+							// required
 						/>
 					</div>
 
@@ -354,9 +358,70 @@ function SchoolForm() {
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md h-96"
 							placeholder="About the School"
-							required
+							// required
 						/>
 					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Newsletter
+						</Label>
+						<div className="mb-2 flex gap-6 items-center border border-black p-2">
+							<div className="w-full">
+								<Input
+									type="text"
+									onChange={(e) => {
+										setNewsletter({
+											...newsletter,
+											title: e.target.value,
+										});
+									}}
+									placeholder="Title Newsletter"
+									name="title"
+									className="w-full p-2 border rounded-md mb-2"
+								/>
+								<Textarea
+									name="description"
+									onChange={(e) => {
+										setNewsletter({
+											...newsletter,
+											description: e.target.value,
+										});
+									}}
+									placeholder="Description Newsletter"
+									className="w-full p-2 border rounded-md mb-2 h-40"
+								/>
+								<div>
+									<img
+										className="w-20 h-20"
+										src={newsletter.image}
+									/>
+									<Trash
+										onClick={() => {
+											setNewsletter({
+												...newsletter,
+												image: "",
+											});
+										}}
+										className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"
+									/>
+									<UploadButton
+										endpoint="imageUploader"
+										onClientUploadComplete={(res: any) => {
+											setNewsletter({
+												...newsletter,
+												image: res[0].url,
+											});
+										}}
+										onUploadError={(error: Error) => {
+											alert(`ERROR! ${error.message}`);
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							Map Location
@@ -366,7 +431,7 @@ function SchoolForm() {
 							value={basicInfo.locationMap}
 							onChange={handleBasicInfoChange}
 							className="w-full p-2 border rounded-md"
-							required
+							// required
 						/>
 					</div>
 
@@ -398,7 +463,7 @@ function SchoolForm() {
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">Area</Label>
 						<Select
-							required
+							// required
 							name="area"
 							value={basicInfo.area}
 							onValueChange={(value) =>
@@ -440,7 +505,7 @@ function SchoolForm() {
 							Board
 						</Label>
 						<Select
-							required
+							// required
 							name="board"
 							onValueChange={(value) =>
 								handleBasicInfoChange({

@@ -41,7 +41,9 @@ export async function GET(request: Request) {
 			await prisma.review.deleteMany({
 				where: { schoolId: id },
 			});
-
+			await prisma.newsletter.deleteMany({
+				where: { schoolId: id },
+			});
 			return prisma.school.delete({
 				where: { id },
 			});

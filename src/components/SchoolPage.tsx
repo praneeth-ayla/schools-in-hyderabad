@@ -14,7 +14,9 @@ import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
-import { extractNameAndArea, getIdFromSlug } from "@/utils/slugGenerator";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import Link from "next/link";
+// import { extractNameAndArea, getIdFromSlug } from "@/utils/slugGenerator";
 
 export default function SchoolPage({
 	school,
@@ -106,10 +108,11 @@ export default function SchoolPage({
 									</div>
 								)}
 								<div>
-									<div className="text-2xl font-bold">
+									<div className="text-2xl font-bold pt-8">
 										Social Profile
 									</div>
-									<div className="flex gap-2 flex-wrap">
+
+									<div className="flex gap-2 flex-wrap z-50">
 										<a
 											href={
 												details.contact?.facebook || "#"
@@ -214,6 +217,7 @@ export default function SchoolPage({
 							<div className="flex justify-center items-center  relative rounded-lg z-10">
 								<CarouselSpacing images={details.images} />
 							</div>
+
 							<div className="px-4 md:px-10 pt-3 flex flex-col gap-6 md:gap-10">
 								<div className="pt-11">
 									<p className="text-2xl pb-3 font-bold">
@@ -225,6 +229,55 @@ export default function SchoolPage({
 										</pre>
 									</div>
 								</div>
+								{details.newsletter &&
+									details.newsletter.description !== "" && (
+										<div className="pt-11">
+											<p className="text-2xl pb-3 font-bold">
+												Newsletter
+											</p>
+											{details.newsletter.description !==
+												null && (
+												<Card className="bg-blue-200">
+													<Link
+														href={`/newsletter/${details.newsletter.uri}`}>
+														<div className="flex justify-center items-center flex-col px-4 sm:px-6 md:px-10 lg:px-60 py-6 sm:py-10">
+															<div className="flex justify-center items-center pb-6 sm:pb-10 w-full overflow-x-auto">
+																<img
+																	className="md:h-auto w-full"
+																	src={
+																		details
+																			.newsletter
+																			.image
+																	}
+																	alt="event image"
+																/>
+															</div>
+															<div className="gap-6 grid w-full">
+																<div className="text-center text-wrap text-3xl font-bold">
+																	<div>
+																		{
+																			details
+																				.newsletter
+																				.title
+																		}
+																	</div>
+																</div>
+																<div className="text-black text-lg">
+																	<pre className="text-lg pt-4 text-wrap font-sans whitespace-pre-wrap">
+																		{
+																			details
+																				.newsletter
+																				.description
+																		}
+																	</pre>
+																</div>
+															</div>
+														</div>
+													</Link>
+												</Card>
+											)}
+										</div>
+									)}
 								{details.facilities &&
 									details.facilities?.length > 0 && (
 										<div>
@@ -232,15 +285,6 @@ export default function SchoolPage({
 												Facilities
 											</p>
 											<div className="gap-3 flex flex-wrap">
-												{/* <TextGenerateEffect
-													className="head font-bold flex flex-wrap"
-													words={details.facilities
-														.map(
-															// @ts-ignore
-															(faci) => faci.name
-														)
-														.join(" ")}
-												/> */}
 												{details.facilities.map(
 													(facility, i) => (
 														<Badge

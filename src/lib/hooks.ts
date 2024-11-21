@@ -127,6 +127,39 @@ export function useGetEvent(id: string) {
 	return { event, isLoading, failed };
 }
 
+export function useGetNewsletter(id: string) {
+	const [newsletter, setNewsletter] = useState<any>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [failed, setFailed] = useState(false);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		async function getDetails() {
+			try {
+				const { data } = await axios.get<any>(
+					`/api/newsletter?id=${id}`
+				);
+
+				setNewsletter(data);
+			} catch (error: any) {
+				console.error("Error fetching newsletter", error.message);
+				toast({
+					title: "Something went wrong!",
+					description: "Redirecting back",
+					duration: 1000,
+				});
+				setFailed(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+
+		getDetails();
+	}, [toast]);
+
+	return { newsletter, isLoading, failed };
+}
+
 interface UseGetEventsListParams {
 	area?: string;
 	name?: string;

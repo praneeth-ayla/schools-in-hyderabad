@@ -26,32 +26,44 @@ model Category {
 }
 
 model School {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.LongText
-  aboutUs     String    @db.LongText
-  logo        String    @db.LongText
-  rating      Float     @default(0)
-  showReviews Boolean   @default(false)
-  toppers     Toppers[]
-  awards      Awards[]
-  locationMap String?   @db.LongText
-  contact     Contact?
-  facilities  Facility[]
-  events      Event[]
-  images      Image[]
-  videos      Video[]
-  reviews     Review[]
-  area        Place     @relation(fields: [areaId], references: [id])
-  areaId      Int
-  category    Category  @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  advertise   Boolean   @default(false)
+  id           Int        @id @default(autoincrement())
+  name         String     @db.LongText
+  aboutUs      String     @db.LongText
+  logo         String     @db.LongText
+  rating       Float      @default(0)
+  showReviews  Boolean    @default(false)
+  toppers      Toppers[]
+  awards       Awards[]
+  locationMap  String?    @db.LongText
+  contact      Contact?
+  facilities   Facility[]
+  events       Event[]
+  images       Image[]
+  videos       Video[]
+  reviews      Review[]
+  area         Place      @relation(fields: [areaId], references: [id])
+  areaId       Int
+  category     Category   @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  advertise    Boolean    @default(false)
+  newsletter   Newsletter?
+}
+
+model Newsletter {
+  id           Int        @id @default(autoincrement())
+  title        String     @db.LongText
+  description  String     @db.LongText
+  uri          String     @db.LongText
+  image        String     @db.LongText
+  school       School     @relation(fields: [schoolId], references: [id])
+  schoolId     Int        @unique
 }
 
 model GlobalSettings {
   id             Int     @id @default(autoincrement())
   advertiseTime  Int     @default(3)
 }
+
 
 
 model Merchant {

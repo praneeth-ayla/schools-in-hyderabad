@@ -1,8 +1,11 @@
+import generateSlug from "@/utils/slugGenerator";
 import prisma from "../../../../../prisma";
 
 export async function POST(request: Request) {
 	const data = await request.json();
-
+	const uriNewsletter = `${generateSlug(data.name)}-${generateSlug(
+		data.area.name
+	)}-newsletter`;
 	try {
 		const school = await prisma.school.create({
 			data: {
@@ -55,6 +58,14 @@ export async function POST(request: Request) {
 				},
 				reviews: {
 					create: data.reviews,
+				},
+				newsletter: {
+					create: {
+						image: data.newsletter.image,
+						title: data.newsletter.title,
+						description: data.newsletter.description,
+						uri: uriNewsletter,
+					},
 				},
 			},
 		});

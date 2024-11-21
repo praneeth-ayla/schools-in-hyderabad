@@ -23,11 +23,20 @@ export type Video = {
 	title: string;
 };
 
+type Newsletter = {
+	id: number;
+	title: string;
+	description: string;
+	uri: string;
+	image: string;
+};
+
 export type SchoolDetails = {
 	id: number;
 	name: string;
 	logo: string;
 	showReviews: boolean;
+	newsletter: Newsletter;
 	contact?: {
 		location: string;
 		number: string;

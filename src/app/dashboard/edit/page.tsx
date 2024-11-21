@@ -60,6 +60,12 @@ function SchoolForm({ searchParams }: any) {
 		opening: "",
 	});
 
+	const [newsletter, setNewsletter] = useState({
+		title: "",
+		description: "",
+		image: "",
+	});
+
 	// Initialize state with empty arrays
 	const [facilities, setFacilities] = useState([""]);
 	const [events, setEvents] = useState([
@@ -105,6 +111,13 @@ function SchoolForm({ searchParams }: any) {
 				// @ts-ignore
 				details.facilities.map((facility) => facility.name) || []
 			);
+
+			setNewsletter({
+				title: details.newsletter?.title || "",
+				description: details.newsletter?.description || "",
+				image: details.newsletter?.image || "",
+			});
+
 			setToppers(details.toppers || []);
 			setAwards(details.awards || []);
 			setEvents(details.events || []);
@@ -316,6 +329,7 @@ function SchoolForm({ searchParams }: any) {
 			toppers,
 			images,
 			videos,
+			newsletter,
 		};
 
 		console.log(formData);
@@ -398,6 +412,70 @@ function SchoolForm({ searchParams }: any) {
 							placeholder="About the School"
 							required
 						/>
+					</div>
+
+					<div className="mb-4">
+						<Label className="block mb-2 font-semibold">
+							Newsletter
+						</Label>
+						<div className="mb-2 flex gap-6 items-center border border-black p-2">
+							<div className="w-full">
+								<Input
+									type="text"
+									value={newsletter.title}
+									onChange={(e) => {
+										setNewsletter({
+											...newsletter,
+											title: e.target.value,
+										});
+									}}
+									placeholder="Title Newsletter"
+									name="title"
+									className="w-full p-2 border rounded-md mb-2"
+								/>
+								<Textarea
+									name="description"
+									value={newsletter.description}
+									onChange={(e) => {
+										setNewsletter({
+											...newsletter,
+											description: e.target.value,
+										});
+									}}
+									placeholder="Description Newsletter"
+									className="w-full p-2 border rounded-md mb-2 h-40"
+								/>
+								<div>
+									<div className="flex flex-col justify-center items-center gap-4 my-5">
+										<img
+											className="w-20 h-20"
+											src={newsletter.image}
+										/>
+										<Trash
+											onClick={() => {
+												setNewsletter({
+													...newsletter,
+													image: "",
+												});
+											}}
+											className="text-center text-3xl font-bold h-6 rounded-md cursor-pointer"
+										/>
+									</div>
+									<UploadButton
+										endpoint="imageUploader"
+										onClientUploadComplete={(res: any) => {
+											setNewsletter({
+												...newsletter,
+												image: res[0].url,
+											});
+										}}
+										onUploadError={(error: Error) => {
+											alert(`ERROR! ${error.message}`);
+										}}
+									/>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<Label>

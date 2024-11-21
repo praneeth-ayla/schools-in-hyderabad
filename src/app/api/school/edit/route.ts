@@ -1,4 +1,4 @@
-import { MerchantDetails, SchoolDetails } from "@/lib/types";
+import { SchoolDetails } from "@/lib/types";
 import { getServerSession } from "next-auth";
 import prisma from "../../../../../prisma";
 
@@ -63,7 +63,15 @@ export async function PUT(request: Request) {
 				aboutUs: body.aboutUs,
 				logo: body.logo,
 				locationMap: body.locationMap,
-				contact: contactData ? { update: contactData } : undefined,
+				// contact: contactData ? { update: contactData } : undefined,
+				contact: contactData
+					? {
+							upsert: {
+								create: contactData, // Create if no Contact exists
+								update: contactData, // Update if a Contact exists
+							},
+					  }
+					: undefined,
 				showReviews: body.showReviews,
 				images: {
 					deleteMany: {}, // Clear existing images
@@ -119,6 +127,13 @@ export async function PUT(request: Request) {
 							date: award.date,
 						})) || [],
 				},
+				newsletter: {
+					update: {
+						title: body.newsletter.title,
+						description: body.newsletter.description,
+						image: body.newsletter.image,
+					},
+				},
 
 				// reviews: {
 				// 	deleteMany: {}, // Clear existing reviews
@@ -143,7 +158,7 @@ export async function PUT(request: Request) {
 		return new Response(
 			JSON.stringify({
 				success: false,
-				message: "Failed to update merchant",
+				message: "Failed to update school",
 			}),
 			{ status: 500 }
 		);
