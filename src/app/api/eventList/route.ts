@@ -64,6 +64,14 @@ export async function GET(request: Request) {
 						image: true,
 					},
 				},
+				newsletter: {
+					select: {
+						id: true,
+						description: true,
+						title: true,
+						image: true,
+					},
+				},
 			},
 		});
 
@@ -92,10 +100,25 @@ export async function GET(request: Request) {
 			}))
 		);
 
+		const newsletters = await prisma.school.findMany({
+			where: {
+				showNewsletter: true,
+				...whereClause,
+			},
+			select: {
+				newsletter: true,
+				id: true,
+				name: true,
+				logo: true,
+				area: true,
+			},
+		});
+
 		// Structure the response with separate arrays for events and toppers
 		const response = {
 			events,
 			toppers,
+			newsletters,
 		};
 
 		return new Response(JSON.stringify(response), {

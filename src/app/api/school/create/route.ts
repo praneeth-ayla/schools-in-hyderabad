@@ -5,7 +5,7 @@ export async function POST(request: Request) {
 	const data = await request.json();
 	const uriNewsletter = `${generateSlug(data.name)}-${generateSlug(
 		data.area.name
-	)}-newsletter`;
+	)}`;
 	try {
 		const school = await prisma.school.create({
 			data: {
@@ -15,13 +15,14 @@ export async function POST(request: Request) {
 				rating: data.rating,
 				locationMap: data.locationMap,
 				showReviews: data.showReviews,
+				showNewsletter: data.showNewsletter,
 				area: {
 					connectOrCreate: {
 						where: {
 							name: data.area.name, // Check for existing area by name
 						},
 						create: {
-							name: data.area.name, // Create new area if not exists
+							name: "AREA", // Create new area if not exists
 						},
 					},
 				},
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
 							name: data.category.name, // Check for existing category by name
 						},
 						create: {
-							name: data.category.name, // Create new category if not exists
+							name: "BOARD", // Create new category if not exists
 						},
 					},
 				},

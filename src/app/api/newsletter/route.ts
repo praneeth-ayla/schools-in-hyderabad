@@ -26,16 +26,20 @@ export async function GET(request: Request) {
 						area: true,
 						name: true,
 						logo: true,
+						showNewsletter: true,
 					},
 				},
 			},
 		});
 
-		if (!wholeDetails) {
-			return new Response(JSON.stringify({ error: "School not found" }), {
-				status: 404,
-				headers: { "Content-Type": "application/json" },
-			});
+		if (!wholeDetails || wholeDetails.school.showNewsletter === false) {
+			return new Response(
+				JSON.stringify({ error: "Newsletter not found" }),
+				{
+					status: 404,
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 		}
 
 		return new Response(JSON.stringify(wholeDetails), {

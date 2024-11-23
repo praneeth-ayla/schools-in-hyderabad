@@ -45,6 +45,7 @@ function SchoolForm({ searchParams }: any) {
 		board: "",
 		locationMap: "",
 		showReviews: false,
+		showNewsletter: false,
 	});
 
 	const [contact, setContact] = useState({
@@ -64,6 +65,7 @@ function SchoolForm({ searchParams }: any) {
 		title: "",
 		description: "",
 		image: "",
+		uri: "",
 	});
 
 	// Initialize state with empty arrays
@@ -92,8 +94,8 @@ function SchoolForm({ searchParams }: any) {
 				board: details.category?.name || "",
 				locationMap: details.locationMap || "",
 				showReviews: details.showReviews || false,
+				showNewsletter: details.showNewsletter || false,
 			});
-			console.log("basic", basicInfo.board);
 
 			setContact({
 				email: details.contact?.email || "",
@@ -116,6 +118,7 @@ function SchoolForm({ searchParams }: any) {
 				title: details.newsletter?.title || "",
 				description: details.newsletter?.description || "",
 				image: details.newsletter?.image || "",
+				uri: details.newsletter?.uri || "",
 			});
 
 			setToppers(details.toppers || []);
@@ -304,8 +307,14 @@ function SchoolForm({ searchParams }: any) {
 		setVideos(updatedVideos);
 	};
 
-	const handleCheckboxChange = (e: any) => {
-		setBasicInfo({ ...basicInfo, showReviews: e.target.checked });
+	const handleCheckboxChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		type: "showNewsletter" | "showReviews"
+	) => {
+		setBasicInfo((prevBasicInfo) => ({
+			...prevBasicInfo,
+			[type]: e.target.checked,
+		}));
 	};
 
 	const handleSubmit = async (e: any) => {
@@ -418,6 +427,35 @@ function SchoolForm({ searchParams }: any) {
 						<Label className="block mb-2 font-semibold">
 							Newsletter
 						</Label>
+						<div className="flex justify-center items-center py-5">
+							<Label className="ml-3">Show Newsletter</Label>
+							<Input
+								type="checkbox"
+								checked={basicInfo.showNewsletter}
+								onChange={(e) =>
+									handleCheckboxChange(e, "showNewsletter")
+								}
+							/>
+						</div>
+
+						<div className="flex justify-center items-center py-5">
+							<Label className="ml-3">Newsletter link</Label>
+
+							<Input
+								type="text"
+								value={newsletter.uri}
+								onChange={(e) => {
+									setNewsletter({
+										...newsletter,
+										uri: e.target.value,
+									});
+								}}
+								placeholder="URI"
+								name="title"
+								className="w-full p-2 border rounded-md mb-2"
+							/>
+						</div>
+
 						<div className="mb-2 flex gap-6 items-center border border-black p-2">
 							<div className="w-full">
 								<Input
@@ -483,7 +521,9 @@ function SchoolForm({ searchParams }: any) {
 						<Input
 							type="checkbox"
 							checked={basicInfo.showReviews}
-							onChange={handleCheckboxChange}
+							onChange={(e) =>
+								handleCheckboxChange(e, "showReviews")
+							}
 						/>
 					</Label>
 

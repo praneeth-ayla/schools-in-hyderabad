@@ -73,6 +73,7 @@ export async function PUT(request: Request) {
 					  }
 					: undefined,
 				showReviews: body.showReviews,
+				showNewsletter: body.showNewsletter,
 				images: {
 					deleteMany: {}, // Clear existing images
 					create:
@@ -132,6 +133,7 @@ export async function PUT(request: Request) {
 						title: body.newsletter.title,
 						description: body.newsletter.description,
 						image: body.newsletter.image,
+						uri: body.newsletter.uri,
 					},
 				},
 

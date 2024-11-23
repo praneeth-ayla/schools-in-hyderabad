@@ -46,6 +46,7 @@ model School {
   category     Category   @relation(fields: [categoryId], references: [id])
   categoryId   Int
   advertise    Boolean    @default(false)
+  showNewsletter  Boolean @default(false)
   newsletter   Newsletter?
 }
 
@@ -63,8 +64,6 @@ model GlobalSettings {
   id             Int     @id @default(autoincrement())
   advertiseTime  Int     @default(3)
 }
-
-
 
 model Merchant {
   id          Int       @id @default(autoincrement())
@@ -106,7 +105,6 @@ model Image {
   school     School?   @relation(fields: [schoolId], references: [id])
   merchant   Merchant? @relation(fields: [merchantId], references: [id])
 }
-
 
 model Video {
   id         Int       @id @default(autoincrement())

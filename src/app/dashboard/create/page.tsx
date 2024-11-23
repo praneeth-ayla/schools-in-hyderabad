@@ -37,6 +37,7 @@ function SchoolForm() {
 		board: "",
 		locationMap: "",
 		showReviews: false,
+		showNewsletter: false,
 	});
 
 	const [newsletter, setNewsletter] = useState({
@@ -299,8 +300,14 @@ function SchoolForm() {
 		}
 	};
 
-	const handleCheckboxChange = (e: any) => {
-		setBasicInfo({ ...basicInfo, showReviews: e.target.checked });
+	const handleCheckboxChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		type: "showNewsletter" | "showReviews"
+	) => {
+		setBasicInfo((prevBasicInfo) => ({
+			...prevBasicInfo,
+			[type]: e.target.checked,
+		}));
 	};
 
 	useEffect(() => {
@@ -365,6 +372,16 @@ function SchoolForm() {
 					<div className="mb-4">
 						<Label className="block mb-2 font-semibold">
 							Newsletter
+						</Label>
+						<Label>
+							Show Newsletter
+							<Input
+								type="checkbox"
+								checked={basicInfo.showNewsletter}
+								onChange={(e) =>
+									handleCheckboxChange(e, "showNewsletter")
+								}
+							/>
 						</Label>
 						<div className="mb-2 flex gap-6 items-center border border-black p-2">
 							<div className="w-full">
@@ -536,7 +553,9 @@ function SchoolForm() {
 						<Input
 							type="checkbox"
 							checked={basicInfo.showReviews}
-							onChange={handleCheckboxChange}
+							onChange={(e) =>
+								handleCheckboxChange(e, "showReviews")
+							}
 						/>
 					</Label>
 

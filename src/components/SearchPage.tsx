@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BackgroundBeams } from "./ui/background-beams";
 import CarouselEvents from "./CarouselEvents";
+import CarouselNewsletter from "./CarouselNewsletter";
 
 interface Props {
 	name: string;
@@ -19,6 +20,7 @@ interface Props {
 export default function SearchPage({ name, area, board }: Props) {
 	const [events, setEvents] = useState<any[]>([]);
 	const [toppers, setToppers] = useState<any[]>([]);
+	const [newsletters, setNewsletters] = useState<any[]>([]);
 	const { details, isLoading, failed } = useSchoolList({
 		area,
 		name,
@@ -28,6 +30,7 @@ export default function SearchPage({ name, area, board }: Props) {
 	const {
 		events: fetchedEvents,
 		toppers: fetchedToppers,
+		newsletters: fetchedNewsletters,
 		isLoading: isLoadingEvent,
 		failed: failedEvent,
 	} = useGetEventsList({ area, name, board });
@@ -42,6 +45,7 @@ export default function SearchPage({ name, area, board }: Props) {
 		if (!isLoadingEvent) {
 			setEvents(fetchedEvents || []);
 			setToppers(fetchedToppers || []);
+			setNewsletters(fetchedNewsletters || []);
 		}
 	}, [area, isLoadingEvent, fetchedEvents, fetchedToppers]);
 
@@ -57,6 +61,8 @@ export default function SearchPage({ name, area, board }: Props) {
 	} else if (name && area) {
 		heading = `Search Results for "${name}" in ${area}`;
 	}
+	console.log("newsletter", newsletters);
+	console.log("events", events);
 
 	return (
 		<div className="py-10 w-full min-h-[50rem] bg-blue-950 relative flex flex-col antialiased">
@@ -88,6 +94,16 @@ export default function SearchPage({ name, area, board }: Props) {
 									events={events}
 									type="events"
 								/>
+							</div>
+						</div>
+					)}
+					{events.length > 0 && (
+						<div className="py-3">
+							<p className="font-bold text-xl italic text-amber-300">
+								School Newsletters
+							</p>
+							<div className="m-0 pt-4 px-0">
+								<CarouselNewsletter newsletter={newsletters} />
 							</div>
 						</div>
 					)}

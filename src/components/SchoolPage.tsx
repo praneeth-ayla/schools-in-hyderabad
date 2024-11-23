@@ -14,7 +14,6 @@ import { Badge } from "./ui/badge";
 import { BackgroundBeams } from "./ui/background-beams";
 import PhotoCard from "./PhotoCard";
 import EventsSchoolPage from "./EventsSchoolPage";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Link from "next/link";
 // import { extractNameAndArea, getIdFromSlug } from "@/utils/slugGenerator";
 
@@ -229,7 +228,7 @@ export default function SchoolPage({
 										</pre>
 									</div>
 								</div>
-								{details.newsletter &&
+								{details.showNewsletter === true &&
 									details.newsletter.description !== "" && (
 										<div className="pt-11">
 											<p className="text-2xl pb-3 font-bold">

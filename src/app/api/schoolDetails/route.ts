@@ -67,6 +67,7 @@ export async function GET(request: Request) {
 				locationMap: true,
 				showReviews: true,
 				newsletter: true,
+				showNewsletter: true,
 			},
 		});
 

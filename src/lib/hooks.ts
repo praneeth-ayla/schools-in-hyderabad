@@ -173,6 +173,7 @@ export function useGetEventsList({
 }: UseGetEventsListParams) {
 	const [events, setEvents] = useState<any[]>([]);
 	const [toppers, setToppers] = useState<any[]>([]);
+	const [newsletters, setNewsletters] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 	const { toast } = useToast();
@@ -183,6 +184,7 @@ export function useGetEventsList({
 				const { data } = await axios.get<{
 					events: SchoolPartialData[];
 					toppers: SchoolPartialData[];
+					newsletters: SchoolPartialData[];
 				}>("/api/eventList", {
 					params: { name, area, board },
 				});
@@ -191,6 +193,8 @@ export function useGetEventsList({
 				const reversedEvents = data.events.reverse();
 				setEvents(reversedEvents);
 				setToppers(data.toppers); // Set toppers from the response
+				setNewsletters(data.newsletters);
+				console.log("newsletter", newsletters);
 			} catch (error: any) {
 				console.error(
 					"Error fetching events and toppers",
@@ -210,7 +214,7 @@ export function useGetEventsList({
 		getDetails();
 	}, [area, name, board]);
 
-	return { events, toppers, isLoading, failed };
+	return { events, toppers, newsletters, isLoading, failed };
 }
 
 export function useMerchantDetails(merchantId: string) {

@@ -37,6 +37,7 @@ export type SchoolDetails = {
 	logo: string;
 	showReviews: boolean;
 	newsletter: Newsletter;
+	showNewsletter: boolean;
 	contact?: {
 		location: string;
 		number: string;
