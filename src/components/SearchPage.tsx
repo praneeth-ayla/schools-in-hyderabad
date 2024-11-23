@@ -97,7 +97,7 @@ export default function SearchPage({ name, area, board }: Props) {
 							</div>
 						</div>
 					)}
-					{events.length > 0 && (
+					{newsletters.length > 0 && (
 						<div className="py-3">
 							<p className="font-bold text-xl italic text-amber-300">
 								School Newsletters
