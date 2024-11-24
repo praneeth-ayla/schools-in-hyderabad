@@ -63,7 +63,7 @@ export default function CarouselNewsletter({
 											<img
 												className="object-cover h-44 w-full"
 												src={event.newsletter.image}
-												alt={`${event.newsletter.name} ${event.newsletter.title} image`}
+												alt={`${event.name} ${event.newsletter.title} image`}
 											/>
 										</div>
 										<div className="mt-auto">

@@ -489,6 +489,7 @@ function SchoolForm({ searchParams }: any) {
 											className="w-20 h-20"
 											src={newsletter.image}
 										/>
+										{JSON.stringify(newsletter)}
 										<Trash
 											onClick={() => {
 												setNewsletter({

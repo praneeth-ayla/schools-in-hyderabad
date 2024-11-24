@@ -6,6 +6,8 @@ export async function POST(request: Request) {
 	const uriNewsletter = `${generateSlug(data.name)}-${generateSlug(
 		data.area.name
 	)}`;
+	const newsletterImage =
+		data.newsletter.image !== "" ? data.newsletter.image : data.logo;
 	try {
 		const school = await prisma.school.create({
 			data: {
@@ -19,23 +21,38 @@ export async function POST(request: Request) {
 				area: {
 					connectOrCreate: {
 						where: {
-							name: data.area.name, // Check for existing area by name
+							name:
+								data.area.name && data.area.name.trim() !== ""
+									? data.area.name
+									: "AREA", // Use "AREA" if empty string
 						},
 						create: {
-							name: "AREA", // Create new area if not exists
+							name:
+								data.area.name && data.area.name.trim() !== ""
+									? data.area.name
+									: "AREA", // Default to "AREA" if empty string
 						},
 					},
 				},
 				category: {
 					connectOrCreate: {
 						where: {
-							name: data.category.name, // Check for existing category by name
+							name:
+								data.category.name &&
+								data.category.name.trim() !== ""
+									? data.category.name
+									: "BOARD", // Use "BOARD" if empty string
 						},
 						create: {
-							name: "BOARD", // Create new category if not exists
+							name:
+								data.category.name &&
+								data.category.name.trim() !== ""
+									? data.category.name
+									: "BOARD", // Default to "BOARD" if empty string
 						},
 					},
 				},
+
 				contact: {
 					create: data.contact,
 				},
@@ -62,7 +79,7 @@ export async function POST(request: Request) {
 				},
 				newsletter: {
 					create: {
-						image: data.newsletter.image,
+						image: newsletterImage,
 						title: data.newsletter.title,
 						description: data.newsletter.description,
 						uri: uriNewsletter,

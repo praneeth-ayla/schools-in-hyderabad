@@ -248,7 +248,10 @@ export default function SchoolPage({
 																			.newsletter
 																			.image
 																	}
-																	alt="event image"
+																	alt={
+																		details.name +
+																		" Newsletter Image"
+																	}
 																/>
 															</div>
 															<div className="gap-6 grid w-full">

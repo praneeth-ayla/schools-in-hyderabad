@@ -54,7 +54,10 @@ export default function NewsletterPage({
 									<img
 										className="md:h-[500px] w-auto"
 										src={event.image}
-										alt="event image"
+										alt={
+											event.school.name +
+											" Newsletter image"
+										}
 									/>
 								</DialogTrigger>
 								<DialogContent className="p-3 md:p-5 rounded-lg">
